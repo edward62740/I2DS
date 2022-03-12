@@ -1,2 +1,2 @@
-# i2ds
+# I2DS
 Internal Intruder Detection System
