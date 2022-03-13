@@ -1,2 +1,5 @@
-# I2DS
-Internal Intruder Detection System
+# Internal Intruder Detection System (I2DS)
+
+This is a sub-GHz proprietary security sensor system. 
+
+
