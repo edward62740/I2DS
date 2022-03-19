@@ -67,7 +67,7 @@ bool enable_sleep = false;
 /// report timing event control
 EmberEventControl *report_control;
 /// report timing period
-uint16_t sensor_report_period_ms =  (1 * MILLISECOND_TICKS_PER_SECOND);
+uint16_t sensor_report_period_ms =  (10 * MILLISECOND_TICKS_PER_SECOND);
 /// TX options set up for the network
 EmberMessageOptions tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SECURITY_ENABLED;
 
@@ -84,6 +84,15 @@ void sl_button_on_change(const sl_button_t *handle)
 {
   if (sl_button_get_state(handle) == SL_SIMPLE_BUTTON_PRESSED) {
     enable_sleep = !enable_sleep;
+    uint8_t buf[1];
+    buf[0] = 0x01;
+    emberMessageSend(sink_node_id,
+                                    SENSOR_SINK_ENDPOINT, // endpoint
+                                    0, // messageTag
+                                    sizeof(buf),
+                                    buf,
+                                    tx_options);
+
 #if defined(SL_CATALOG_KERNEL_PRESENT)
     if (enable_sleep) {
       sl_power_manager_remove_em_requirement(SL_POWER_MANAGER_EM1);

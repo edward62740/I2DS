@@ -61,7 +61,7 @@
         </input>
         <input>
           <key>BASE_FREQUENCY_HZ</key>
-          <value>long:863000000</value>
+          <value>long:915000000</value>
         </input>
         <input>
           <key>BAUDRATE_TOL_PPM</key>
@@ -85,7 +85,7 @@
         </input>
         <input>
           <key>BITRATE</key>
-          <value>int:100000</value>
+          <value>int:500000</value>
         </input>
         <input>
           <key>CHANNEL_SPACING_HZ</key>
@@ -105,7 +105,7 @@
         </input>
         <input>
           <key>DEVIATION</key>
-          <value>int:50000</value>
+          <value>int:175000</value>
         </input>
         <input>
           <key>DEVIATION_TOL_PPM</key>
@@ -221,7 +221,7 @@
         </input>
         <input>
           <key>PREAMBLE_LENGTH</key>
-          <value>int:32</value>
+          <value>int:40</value>
         </input>
         <input>
           <key>PREAMBLE_PATTERN</key>
@@ -332,13 +332,15 @@
           <value>int:39000000</value>
         </input>
       </profile_inputs>
-      <phy name="serializableObject:Efr32RadioConfiguratorPhy:OCELOT:Connect:PHY_Studio_Connect_863MHz_2GFSK_100kbps"/>
+      <phy name="serializableObject:Efr32RadioConfiguratorPhy:OCELOT:Connect:PHY_Studio_Connect_915MHz_2GFSK_500kbps"/>
+      <metadata>{&quot;errors&quot;:{},&quot;warnings&quot;:{},&quot;disabledGizmos&quot;:{}}</metadata>
       <channel_config_entries>
         <channel_config_entry name="Channel Group 1">
           <physical_channel_offset>SAME_AS_FIRST_CHANNEL</physical_channel_offset>
           <channel_number_start>0</channel_number_start>
           <channel_number_end>20</channel_number_end>
           <max_power>RAIL_TX_POWER_MAX</max_power>
+          <metadata>{&quot;customChannel&quot;:false,&quot;errors&quot;:{},&quot;warnings&quot;:{},&quot;disabledGizmos&quot;:{}}</metadata>
         </channel_config_entry>
       </channel_config_entries>
     </base_channel_configuration>
