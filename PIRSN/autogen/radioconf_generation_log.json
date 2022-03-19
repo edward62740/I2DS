@@ -7,7 +7,7 @@
     "cfg_logs": [
       {
         "name": "Preamble Binary Pattern",
-        "value": "01010101010101010101010101010101"
+        "value": "0101010101010101010101010101010101010101"
       },
       {
         "name": "Sync Word Binary Pattern",
@@ -15,11 +15,11 @@
       },
       {
         "name": "Actual Bandwidth",
-        "value": 200000
+        "value": 850000
       },
       {
         "name": "Desired baudrate",
-        "value": 100000
+        "value": 500000
       },
       {
         "name": "Actual sample frequency",
@@ -39,7 +39,7 @@
       },
       {
         "name": "Preamble Detection Length",
-        "value": 32
+        "value": 40
       },
       {
         "name": "Injection side",
@@ -51,11 +51,11 @@
       },
       {
         "name": "Acquisition Channel Bandwidth",
-        "value": 200000
+        "value": 850000
       },
       {
         "name": "IF Frequency",
-        "value": 150000
+        "value": 475000
       },
       {
         "name": "RSSI Update Period",
