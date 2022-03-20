@@ -67,7 +67,7 @@ bool enable_sleep = false;
 /// report timing event control
 EmberEventControl *report_control;
 /// report timing period
-uint16_t sensor_report_period_ms =  (10 * MILLISECOND_TICKS_PER_SECOND);
+uint16_t sensor_report_period_ms =  (2 * MILLISECOND_TICKS_PER_SECOND);
 /// TX options set up for the network
 EmberMessageOptions tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SECURITY_ENABLED;
 
@@ -114,44 +114,19 @@ void report_handler(void)
   if (!emberStackIsUp()) {
     emberEventControlSetInactive(*report_control);
   } else {
-    EmberStatus status;
-    EmberStatus sensor_status = EMBER_SUCCESS;
-    uint8_t buffer[SENSOR_SINK_DATA_LENGTH];
-    int32_t temp_data = 0;
-    uint32_t rh_data = 0;
-    uint8_t i;
-
-    // Sample temperature and humidity from sensors.
-    // Temperature is sampled in "millicelsius".
-    #ifndef UNIX_HOST
-    if (sl_si70xx_measure_rh_and_temp(sl_i2cspm_sensor,
-                                      SI7021_ADDR,
-                                      &rh_data,
-                                      &temp_data)) {
-      sensor_status = EMBER_ERR_FATAL;
-      app_log_info("Warning! Invalid Si7021 reading: %lu %ld\n", rh_data, temp_data);
-    }
-    #endif
-
-    if (sensor_status == EMBER_SUCCESS) {
-      emberStoreLowHighInt32u(buffer, temp_data);
-      emberStoreLowHighInt32u(buffer + 4, rh_data);
-
-      status = emberMessageSend(sink_node_id,
-                                SENSOR_SINK_ENDPOINT, // endpoint
-                                0, // messageTag
-                                SENSOR_SINK_DATA_LENGTH,
-                                buffer,
-                                tx_options);
-
-      app_log_info("TX: Data to 0x%04X:", sink_node_id);
-      for (i = 0; i < SENSOR_SINK_DATA_LENGTH; i++) {
-        app_log_info(" %02X", buffer[i]);
-      }
-      app_log_info(": 0x%02X\n", status);
+      EmberStatus status;
+       uint8_t buf[1];
+           buf[0] = 0xFF;
+         status = emberMessageSend(sink_node_id,
+                                         SENSOR_SINK_ENDPOINT, // endpoint
+                                         0, // messageTag
+                                         sizeof(buf),
+                                         buf,
+                                         tx_options);
       emberEventControlSetDelayMS(*report_control, sensor_report_period_ms);
-    }
+
   }
+  sl_power_manager_add_em_requirement(SL_POWER_MANAGER_EM2);
 }
 
 /**************************************************************************//**
@@ -217,8 +192,16 @@ void emberAfStackStatusCallback(EmberStatus status)
     case EMBER_JOIN_TIMEOUT:
       app_log_info("Join process timed out!\n");
       break;
-    default:
+    default:{
       app_log_info("Stack status: 0x%02X\n", status);
+      EmberNetworkParameters parameters;
+    MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
+    parameters.radioTxPower = 0;
+    parameters.radioChannel = 11;
+    parameters.panId = 0x01FF;
+    status = emberJoinNetwork(EMBER_STAR_SLEEPY_END_DEVICE, &parameters);
+    app_log_info("Network status 0x%02X\n", status);
+    }
       break;
   }
 }

@@ -79,10 +79,20 @@ void emberAfInitCallback(void)
   // CLI info message
   app_log_info("\nSensor\n");
 
-  emberSetSecurityKey(&security_key);
+
   status = emberNetworkInit();
   app_log_info("Network status 0x%02X\n", status);
+  emberResetNetworkState();
+  status = emberSetSecurityKey(&security_key);
+  app_log_info("Network status 0x%02X\n", status);
 
+  EmberNetworkParameters parameters;
+MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
+parameters.radioTxPower = 0;
+parameters.radioChannel = 11;
+parameters.panId = 0x01FF;
+status = emberJoinNetwork(EMBER_STAR_SLEEPY_END_DEVICE, &parameters);
+app_log_info("Network status 0x%02X\n", status);
 #if defined(EMBER_AF_PLUGIN_BLE)
   bleConnectionInfoTableInit();
 #endif
