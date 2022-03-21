@@ -65,15 +65,6 @@ void emberAfInitCallback(void)
   EmberStatus status;
   uint8_t device_id = 0;
   // init temperature sensor
-  if (!sl_si70xx_present(sl_i2cspm_sensor, SI7021_ADDR, &device_id)) {
-    // wait a bit before re-trying
-    // the si7021 sensor can take up to 80 ms (25 ms @25 deg C) to start up
-    sl_sleeptimer_delay_millisecond(80);
-    // init temperature sensor (2nd attempt)
-    if (!sl_si70xx_present(sl_i2cspm_sensor, SI7021_ADDR, &device_id)) {
-      app_log_error("Failed to initialize temperature sensor!\n");
-    }
-  }
 
   emberAfAllocateEvent(&report_control, &report_handler);
   // CLI info message

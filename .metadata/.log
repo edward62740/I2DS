@@ -2370,3 +2370,86 @@ java.lang.InterruptedException
 	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:207)
 	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:220)
 	at java.base/java.lang.Thread.run(Thread.java:834)
+!SESSION 2022-03-21 17:30:36.055 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.5
+java.vendor=Amazon.com Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.silabs.ss.platform.jetty.server 1 0 2022-03-21 17:30:38.711
+!MESSAGE ContentServer started at: 127.0.0.1, 54005
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-21 17:30:38.728
+!MESSAGE com.silabs.ss.tool.launcher.product found! Writing main studio shared file
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-03-21 17:30:56.004
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.tool.installer.core 2 0 2022-03-21 17:30:57.866
+!MESSAGE Problem getting package resources: changelog
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-03-21 17:30:59.099
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-21 17:31:15.162
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-21 17:31:45.451
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-21 17:31:55.643
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-21 17:31:56.421
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-21 17:31:56.421
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-21 17:32:16.925
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-21 17:32:37.545
+!MESSAGE Deleted Shared Daemon File: C:\Users\█████████\.uc\cli\mainstudio.running
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-21 17:32:37.546
+!MESSAGE Deleted Shared Daemon Version File: C:\Users\█████████\.uc\cli\mainstudio.running.version
+
+!ENTRY org.eclipse.tcf 4 0 2022-03-21 17:32:37.653
+!MESSAGE Failed to shutdown TCF event dispatch thread
+!STACK 0
+java.lang.InterruptedException
+	at java.base/java.lang.Object.wait(Native Method)
+	at java.base/java.lang.Thread.join(Thread.java:1305)
+	at java.base/java.lang.Thread.join(Thread.java:1379)
+	at org.eclipse.tcf.EventQueue.shutdown(EventQueue.java:76)
+	at org.eclipse.tcf.Activator.stop(Activator.java:154)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:899)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:1)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.stop(BundleContextImpl.java:891)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.stopWorker0(EquinoxBundle.java:1029)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.stopWorker(EquinoxBundle.java:370)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:658)
+	at org.eclipse.osgi.container.Module.stop(Module.java:520)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.decStartLevel(ModuleContainer.java:1885)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1760)
+	at org.eclipse.osgi.container.SystemModule.stopWorker(SystemModule.java:275)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule.stopWorker(EquinoxBundle.java:202)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:658)
+	at org.eclipse.osgi.container.Module.stop(Module.java:520)
+	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:207)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:220)
+	at java.base/java.lang.Thread.run(Thread.java:834)
