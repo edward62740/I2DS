@@ -93,15 +93,8 @@ void sl_button_on_change(const sl_button_t *handle)
                                     buf,
                                     tx_options);
 
-#if defined(SL_CATALOG_KERNEL_PRESENT)
-    if (enable_sleep) {
-      sl_power_manager_remove_em_requirement(SL_POWER_MANAGER_EM1);
-      sl_power_manager_add_em_requirement(SL_POWER_MANAGER_EM2);
-    } else {
-      sl_power_manager_remove_em_requirement(SL_POWER_MANAGER_EM2);
-      sl_power_manager_add_em_requirement(SL_POWER_MANAGER_EM1);
-    }
-#endif
+
+
   }
 }
 
@@ -115,18 +108,9 @@ void report_handler(void)
     emberEventControlSetInactive(*report_control);
   } else {
       EmberStatus status;
-       uint8_t buf[1];
-           buf[0] = 0xFF;
-         status = emberMessageSend(sink_node_id,
-                                         SENSOR_SINK_ENDPOINT, // endpoint
-                                         0, // messageTag
-                                         sizeof(buf),
-                                         buf,
-                                         tx_options);
-      emberEventControlSetDelayMS(*report_control, sensor_report_period_ms);
-
+       status = emberPollForData();
   }
-  sl_power_manager_add_em_requirement(SL_POWER_MANAGER_EM2);
+
 }
 
 /**************************************************************************//**
@@ -137,7 +121,7 @@ bool emberAfCommonOkToEnterLowPowerCallback(bool enter_em2, uint32_t duration_ms
 {
   (void) enter_em2;
   (void) duration_ms;
-  return enable_sleep;
+  return true;
 }
 
 /**************************************************************************//**
@@ -214,7 +198,7 @@ void emberAfTickCallback(void)
 {
 #if defined(SL_CATALOG_LED0_PRESENT)
   if (emberStackIsUp()) {
-    sl_led_turn_on(&sl_led_led0);
+   // sl_led_turn_on(&sl_led_led0);
   } else {
     sl_led_turn_off(&sl_led_led0);
   }

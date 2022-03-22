@@ -87,6 +87,9 @@ app_log_info("Network status 0x%02X\n", status);
 #if defined(EMBER_AF_PLUGIN_BLE)
   bleConnectionInfoTableInit();
 #endif
+  emberAfPluginPollEnableShortPolling(true);
+  sl_power_manager_remove_em_requirement(SL_POWER_MANAGER_EM1);
+       sl_power_manager_add_em_requirement(SL_POWER_MANAGER_EM2);
 }
 // -----------------------------------------------------------------------------
 //                          Static Function Definitions

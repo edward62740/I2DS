@@ -6,12 +6,13 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="leave"/>
+		<item key="selection" value="emberAfCommonOkToEnterLowPowerCallback"/>
 		<list key="findhistory">
+			<item value="emberAfCommonOkToEnterLowPowerCallback"/>
+			<item value="power"/>
 			<item value="leave"/>
 			<item value="reset"/>
 			<item value="tx_power"/>
-			<item value="power"/>
 			<item value="signal"/>
 			<item value="rssi"/>
 			<item value="rss"/>
