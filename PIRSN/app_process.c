@@ -92,9 +92,6 @@ void sl_button_on_change(const sl_button_t *handle)
                                     sizeof(buf),
                                     buf,
                                     tx_options);
-
-
-
   }
 }
 

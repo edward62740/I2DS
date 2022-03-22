@@ -38,6 +38,7 @@
 #include "sl_sleeptimer.h"
 #include "app_process.h"
 #include "app_framework_common.h"
+#include "em_cmu.h"
 // -----------------------------------------------------------------------------
 //                              Macros and Typedefs
 // -----------------------------------------------------------------------------
@@ -88,6 +89,7 @@ app_log_info("Network status 0x%02X\n", status);
   bleConnectionInfoTableInit();
 #endif
   emberAfPluginPollEnableShortPolling(true);
+
   sl_power_manager_remove_em_requirement(SL_POWER_MANAGER_EM1);
        sl_power_manager_add_em_requirement(SL_POWER_MANAGER_EM2);
 }
