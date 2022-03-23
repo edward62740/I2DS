@@ -35,6 +35,9 @@
 #include "stack/include/ember.h"
 #include "hal/hal.h"
 #include "em_chip.h"
+#include "em_cmu.h"
+#include "em_iadc.h"
+#include "em_prs.h"
 #include "app_log.h"
 #include "sl_si70xx.h"
 #include "sl_i2cspm_instances.h"
@@ -80,6 +83,36 @@ static EmberNodeId sink_node_id = EMBER_COORDINATOR_ADDRESS;
 // -----------------------------------------------------------------------------
 //                          Public Function Definitions
 // -----------------------------------------------------------------------------
+
+static volatile IADC_Result_t sample;
+
+// Result converted to volts
+static volatile double singleResult;
+
+// Helper functions for voltage mea
+
+void IADC_IRQHandler(void)
+{
+  sample = IADC_pullSingleFifoResult(IADC0);
+
+    /*
+     * Calculate the voltage converted as follows:
+     *
+     * For single-ended conversions, the result can range from 0 to
+     * +Vref, i.e., for Vref = AVDD = 3.30 V, 0xFFF represents the
+     * full scale value of 3.30 V.
+     */
+    singleResult = sample.data * 3.3 / 0xFFF;
+    app_log_info("Supply Voltage: %dmV", singleResult * 5000 / 4096);
+    /*
+     * Clear the single conversion complete interrupt.  Reading FIFO
+     * results does not do this automatically.
+     */
+    IADC_clearInt(IADC0, IADC_IF_SINGLEDONE);
+
+}
+
+
 void sl_button_on_change(const sl_button_t *handle)
 {
   if (sl_button_get_state(handle) == SL_SIMPLE_BUTTON_PRESSED) {
@@ -106,7 +139,9 @@ void report_handler(void)
   } else {
       EmberStatus status;
        status = emberPollForData();
+       app_log_info("poll");
   }
+
 
 }
 
