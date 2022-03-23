@@ -85,44 +85,23 @@ parameters.radioChannel = 11;
 parameters.panId = 0x01FF;
 status = emberJoinNetwork(EMBER_STAR_SLEEPY_END_DEVICE, &parameters);
 app_log_info("Network status 0x%02X\n", status);
-#if defined(EMBER_AF_PLUGIN_BLE)
-  bleConnectionInfoTableInit();
-#endif
+
   emberAfPluginPollEnableShortPolling(true);
 
   IADC_Init_t init = IADC_INIT_DEFAULT;
    IADC_AllConfigs_t initAllConfigs = IADC_ALLCONFIGS_DEFAULT;
    IADC_InitSingle_t initSingle = IADC_INITSINGLE_DEFAULT;
-
    // Single input structure
    IADC_SingleInput_t singleInput = IADC_SINGLEINPUT_DEFAULT;
 
-   /*
-    * Enable IADC0 and GPIO register clock.
-    *
-    * Note: On EFR32xG21 devices, CMU_ClockEnable() calls have no effect
-    * as clocks are enabled/disabled on-demand in response to peripheral
-    * requests.  Deleting such lines is safe on xG21 devices and will
-    * reduce provide a small reduction in code size.
-    */
-
    CMU_ClockEnable(cmuClock_PRS, true);
-
-    // Connect the specified PRS channel to the LETIMER producer
     PRS_SourceAsyncSignalSet(0,
                              PRS_ASYNC_CH_CTRL_SOURCESEL_MODEM,
                              PRS_MODEMH_PRESENT);
-
-    // Connect the specified PRS channel to the IADC as the consumer
     PRS_ConnectConsumer(0,
                         prsTypeAsync,
                         prsConsumerIADC0_SINGLETRIGGER);
-
    CMU_ClockEnable(cmuClock_IADC0, true);
-
-
-
-
    initAllConfigs.configs[0].reference = iadcCfgReferenceInt1V2;
    initAllConfigs.configs[0].vRef = 1200;
    initAllConfigs.configs[0].osrHighSpeed = iadcCfgOsrHighSpeed2x;
@@ -132,32 +111,17 @@ app_log_info("Network status 0x%02X\n", status);
                                                                       0,
                                                                       iadcCfgModeNormal,
                                                                       init.srcClkPrescale);
-
-
    initSingle.triggerSelect = iadcTriggerSelPrs0PosEdge;
    initSingle.dataValidLevel = iadcFifoCfgDvl4;
    initSingle.start = true;
-
-
    singleInput.posInput   = iadcPosInputAvdd;
    singleInput.negInput   = iadcNegInputGnd;
-
-   // Initialize IADC
    IADC_init(IADC0, &init, &initAllConfigs);
-   // Initialize a single-channel conversion
    IADC_initSingle(IADC0, &initSingle, &singleInput);
-
-   // Clear any previous interrupt flags
    IADC_clearInt(IADC0, _IADC_IF_MASK);
-
-   // Enable single-channel done interrupts
    IADC_enableInt(IADC0, IADC_IEN_SINGLEDONE);
-
-   // Enable IADC interrupts
    NVIC_ClearPendingIRQ(IADC_IRQn);
    NVIC_EnableIRQ(IADC_IRQn);
-
-
   sl_power_manager_remove_em_requirement(SL_POWER_MANAGER_EM1);
        sl_power_manager_add_em_requirement(SL_POWER_MANAGER_EM2);
 }

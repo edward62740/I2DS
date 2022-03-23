@@ -72,15 +72,6 @@ int main(void)
   // Note that if the kernel is present, processing task(s) will be created by
   // this call.
   sl_system_init();
-  EMU_DCDCInit_TypeDef dcdcInit = EMU_DCDCINIT_DEFAULT;
-   EMU_DCDCInit(&dcdcInit);
-
-   // Enable voltage downscaling in EM2/3 (VSCALE0)
-   EMU_EM23Init_TypeDef em23Init = EMU_EM23INIT_DEFAULT;
-   em23Init.vScaleEM23Voltage = emuVScaleEM23_LowPower;
-
-   // Initialize EM mode 2/3
-   EMU_EM23Init(&em23Init);
 #if defined(SL_CATALOG_KERNEL_PRESENT)
   // Start the kernel. Task(s) created in app_init() will start running.
   sl_system_kernel_start();

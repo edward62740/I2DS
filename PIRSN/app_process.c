@@ -137,11 +137,11 @@ void report_handler(void)
   } else {
       emberEventControlSetDelayMS(*report_control, sensor_report_period_ms);
 
-      app_log_info("poll");
-      NVIC_DisableIRQ(IADC_IRQn);
-      emberPollForData();
-      NVIC_ClearPendingIRQ(IADC_IRQn);
-            NVIC_EnableIRQ(IADC_IRQn);
+      //app_log_info("poll");
+     // NVIC_DisableIRQ(IADC_IRQn);
+      //emberPollForData();
+     // NVIC_ClearPendingIRQ(IADC_IRQn);
+         //   NVIC_EnableIRQ(IADC_IRQn);
                emberMessageSend(sink_node_id,
                                                         SENSOR_SINK_ENDPOINT, // endpoint
                                                         0, // messageTag
@@ -187,7 +187,7 @@ void emberAfMessageSentCallback(EmberStatus status,
 {
   (void) message;
   if (status != EMBER_SUCCESS) {
-    app_log_info("TX: 0x%02X\n", status);
+    //app_log_info("TX: 0x%02X\n", status);
   }
 }
 
@@ -234,13 +234,7 @@ void emberAfStackStatusCallback(EmberStatus status)
  *****************************************************************************/
 void emberAfTickCallback(void)
 {
-#if defined(SL_CATALOG_LED0_PRESENT)
-  if (emberStackIsUp()) {
-   // sl_led_turn_on(&sl_led_led0);
-  } else {
-    sl_led_turn_off(&sl_led_led0);
-  }
-#endif
+
 }
 
 /**************************************************************************//**
