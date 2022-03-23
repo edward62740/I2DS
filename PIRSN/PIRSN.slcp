@@ -40,6 +40,7 @@ component:
   id: simple_led
 - {id: restrictions_profile_connect}
 - {id: device_init}
+- {id: emlib_iadc}
 - {id: legacy_hal}
 - {id: app_log}
 - {id: connect_stack_common}

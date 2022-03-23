@@ -6,8 +6,13 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="emberAfCommonOkToEnterLowPowerCallback"/>
+		<item key="selection" value="MODEM"/>
 		<list key="findhistory">
+			<item value="modem"/>
+			<item value="moden"/>
+			<item value="moem"/>
+			<item value="prsTypeAsync"/>
+			<item value="prs"/>
 			<item value="emberAfCommonOkToEnterLowPowerCallback"/>
 			<item value="power"/>
 			<item value="leave"/>
