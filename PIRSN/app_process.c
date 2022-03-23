@@ -35,13 +35,13 @@
 #include "stack/include/ember.h"
 #include "hal/hal.h"
 #include "em_chip.h"
-#include "em_cmu.h"
-#include "em_iadc.h"
-#include "em_prs.h"
 #include "app_log.h"
 #include "sl_si70xx.h"
 #include "sl_i2cspm_instances.h"
 #include "poll.h"
+#include "em_iadc.h"
+#include "em_cmu.h"
+#include "em_emu.h"
 #include "sl_app_common.h"
 #include "app_process.h"
 #include "app_framework_common.h"
@@ -70,7 +70,7 @@ bool enable_sleep = false;
 /// report timing event control
 EmberEventControl *report_control;
 /// report timing period
-uint16_t sensor_report_period_ms =  (2 * MILLISECOND_TICKS_PER_SECOND);
+uint16_t sensor_report_period_ms =  (1 * MILLISECOND_TICKS_PER_SECOND);
 /// TX options set up for the network
 EmberMessageOptions tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SECURITY_ENABLED;
 
@@ -79,52 +79,53 @@ EmberMessageOptions tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SEC
 // -----------------------------------------------------------------------------
 /// Destination of the currently processed sink node
 static EmberNodeId sink_node_id = EMBER_COORDINATOR_ADDRESS;
-
-// -----------------------------------------------------------------------------
-//                          Public Function Definitions
-// -----------------------------------------------------------------------------
-
 static volatile IADC_Result_t sample;
 
 // Result converted to volts
 static volatile double singleResult;
-
-// Helper functions for voltage mea
+uint8_t buffer[4];
 
 void IADC_IRQHandler(void)
 {
+  // Read a result from the FIFO
   sample = IADC_pullSingleFifoResult(IADC0);
 
-    /*
-     * Calculate the voltage converted as follows:
-     *
-     * For single-ended conversions, the result can range from 0 to
-     * +Vref, i.e., for Vref = AVDD = 3.30 V, 0xFFF represents the
-     * full scale value of 3.30 V.
-     */
-    singleResult = sample.data * 3.3 / 0xFFF;
-    app_log_info("Supply Voltage: %dmV", singleResult * 5000 / 4096);
-    /*
-     * Clear the single conversion complete interrupt.  Reading FIFO
-     * results does not do this automatically.
-     */
-    IADC_clearInt(IADC0, IADC_IF_SINGLEDONE);
+  /*
+   * Calculate the voltage converted as follows:
+   *
+   * For single-ended conversions, the result can range from 0 to
+   * +Vref, i.e., for Vref = AVDD = 3.30 V, 0xFFF represents the
+   * full scale value of 3.30 V.
+   */
+  singleResult = sample.data * 3300 / 0xFFF;
+  app_log_info(" %d", sample.data);
+  buffer[0] = 0xFF & (uint8_t)(sample.data >> 24);
+  buffer[1] = 0xFF & (uint8_t)(sample.data >> 16);
+  buffer[2] = 0xFF & (uint8_t)(sample.data >> 8);
+  buffer[3] = 0xFF & (uint8_t)(sample.data);
 
+  /*
+   * Clear the single conversion complete interrupt.  Reading FIFO
+   * results does not do this automatically.
+   */
+  IADC_clearInt(IADC0, IADC_IF_SINGLEDONE);
 }
 
-
+// -----------------------------------------------------------------------------
+//                          Public Function Definitions
+// -----------------------------------------------------------------------------
 void sl_button_on_change(const sl_button_t *handle)
 {
   if (sl_button_get_state(handle) == SL_SIMPLE_BUTTON_PRESSED) {
-    enable_sleep = !enable_sleep;
-    uint8_t buf[1];
-    buf[0] = 0x01;
-    emberMessageSend(sink_node_id,
-                                    SENSOR_SINK_ENDPOINT, // endpoint
-                                    0, // messageTag
-                                    sizeof(buf),
-                                    buf,
-                                    tx_options);
+      uint8_t buf[1];
+          buf[0] = 0x01;
+          emberMessageSend(sink_node_id,
+                                          SENSOR_SINK_ENDPOINT, // endpoint
+                                          0, // messageTag
+                                          sizeof(buf),
+                                          buf,
+                                          tx_options);
+
   }
 }
 
@@ -137,12 +138,17 @@ void report_handler(void)
   if (!emberStackIsUp()) {
     emberEventControlSetInactive(*report_control);
   } else {
-      EmberStatus status;
-       status = emberPollForData();
-       app_log_info("poll");
+      emberEventControlSetDelayMS(*report_control, sensor_report_period_ms);
+      app_log_info("poll");
+
+               emberMessageSend(sink_node_id,
+                                                        SENSOR_SINK_ENDPOINT, // endpoint
+                                                        0, // messageTag
+                                                        sizeof(buffer),
+                                                        buffer,
+                                                        tx_options);
+      IADC_command(IADC0, iadcCmdStartSingle);
   }
-
-
 }
 
 /**************************************************************************//**
@@ -208,16 +214,15 @@ void emberAfStackStatusCallback(EmberStatus status)
     case EMBER_JOIN_TIMEOUT:
       app_log_info("Join process timed out!\n");
       break;
-    default:{
+    default:
       app_log_info("Stack status: 0x%02X\n", status);
-      EmberNetworkParameters parameters;
-    MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
-    parameters.radioTxPower = 0;
-    parameters.radioChannel = 11;
-    parameters.panId = 0x01FF;
-    status = emberJoinNetwork(EMBER_STAR_SLEEPY_END_DEVICE, &parameters);
-    app_log_info("Network status 0x%02X\n", status);
-    }
+          EmberNetworkParameters parameters;
+        MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
+        parameters.radioTxPower = 0;
+        parameters.radioChannel = 11;
+        parameters.panId = 0x01FF;
+        status = emberJoinNetwork(EMBER_STAR_SLEEPY_END_DEVICE, &parameters);
+        app_log_info("Network status 0x%02X\n", status);
       break;
   }
 }
