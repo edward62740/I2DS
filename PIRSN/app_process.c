@@ -70,7 +70,7 @@ bool enable_sleep = false;
 /// report timing event control
 EmberEventControl *report_control;
 /// report timing period
-uint16_t sensor_report_period_ms =  (1 * MILLISECOND_TICKS_PER_SECOND);
+uint16_t sensor_report_period_ms =  (5 * MILLISECOND_TICKS_PER_SECOND);
 /// TX options set up for the network
 EmberMessageOptions tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SECURITY_ENABLED;
 
@@ -80,9 +80,6 @@ EmberMessageOptions tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SEC
 /// Destination of the currently processed sink node
 static EmberNodeId sink_node_id = EMBER_COORDINATOR_ADDRESS;
 static volatile IADC_Result_t sample;
-
-// Result converted to volts
-static volatile double singleResult;
 uint8_t buffer[4];
 
 void IADC_IRQHandler(void)
@@ -97,12 +94,12 @@ void IADC_IRQHandler(void)
    * +Vref, i.e., for Vref = AVDD = 3.30 V, 0xFFF represents the
    * full scale value of 3.30 V.
    */
-  singleResult = sample.data * 3300 / 0xFFF;
-  app_log_info(" %d", sample.data);
-  buffer[0] = 0xFF & (uint8_t)(sample.data >> 24);
-  buffer[1] = 0xFF & (uint8_t)(sample.data >> 16);
-  buffer[2] = 0xFF & (uint8_t)(sample.data >> 8);
-  buffer[3] = 0xFF & (uint8_t)(sample.data);
+  uint32_t data = (sample.data * 1200)/1000;
+  app_log_info(" %d", data);
+  buffer[0] = 0xFF & (uint8_t)(data >> 24);
+  buffer[1] = 0xFF & (uint8_t)(data >> 16);
+  buffer[2] = 0xFF & (uint8_t)(data >> 8);
+  buffer[3] = 0xFF & (uint8_t)(data);
 
   /*
    * Clear the single conversion complete interrupt.  Reading FIFO
@@ -139,15 +136,19 @@ void report_handler(void)
     emberEventControlSetInactive(*report_control);
   } else {
       emberEventControlSetDelayMS(*report_control, sensor_report_period_ms);
-      app_log_info("poll");
 
+      app_log_info("poll");
+      NVIC_DisableIRQ(IADC_IRQn);
+      emberPollForData();
+      NVIC_ClearPendingIRQ(IADC_IRQn);
+            NVIC_EnableIRQ(IADC_IRQn);
                emberMessageSend(sink_node_id,
                                                         SENSOR_SINK_ENDPOINT, // endpoint
                                                         0, // messageTag
                                                         sizeof(buffer),
                                                         buffer,
                                                         tx_options);
-      IADC_command(IADC0, iadcCmdStartSingle);
+     // IADC_command(IADC0, iadcCmdStartSingle);
   }
 }
 

@@ -74,14 +74,19 @@ void emberAfIncomingMessageCallback(EmberIncomingMessage *message)
     // or if security is required but the message is non-encrypted
     return;
   }
+  uint8_t buffer[4];
 
   app_log_info("RX: Data from 0x%04X:", message->source);
   for (int j = 0; j < message->length; j++) {
     app_log_info(" %02X", message->payload[j]);
+    buffer[j] = message->payload[j];
   }
-  app_log_info(" Temperature: %d.%03dC Humidity: %d.%03d%%\n",
-               emberFetchLowHighInt32u(message->payload) / 1000, emberFetchLowHighInt32u(message->payload) % 1000,
-               emberFetchLowHighInt32u(message->payload + 4) / 1000, emberFetchLowHighInt32u(message->payload + 4) % 1000);
+  uint32_t data = buffer[0] << 24;
+  data |= buffer[1] << 16;
+  data |= buffer[2] << 8;
+  data |= buffer[3];
+  app_log_info(" Voltage: %d\n",
+              data);
 }
 
 /**************************************************************************//**

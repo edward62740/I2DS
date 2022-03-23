@@ -35,7 +35,7 @@
 // <o EMBER_AF_PLUGIN_POLL_SHORT_POLL_INTERVAL_QS> Short Poll Interval in quarter seconds<1-255>
 // <i> Default: 4
 // <i> The amount of time (in quarter seconds) the device will wait between MAC data polls when it is expecting data.
-#define EMBER_AF_PLUGIN_POLL_SHORT_POLL_INTERVAL_QS        (4)
+#define EMBER_AF_PLUGIN_POLL_SHORT_POLL_INTERVAL_QS        8
 
 // <o EMBER_AF_PLUGIN_POLL_LONG_POLL_INTERVAL_S> Long Poll Interval in quarter seconds<1-65535>
 // <i> Default: 600
