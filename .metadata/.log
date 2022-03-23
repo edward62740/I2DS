@@ -7060,3 +7060,1989 @@ java.lang.InterruptedException
 	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:207)
 	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:220)
 	at java.base/java.lang.Thread.run(Thread.java:834)
+!SESSION 2022-03-23 12:23:02.153 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.5
+java.vendor=Amazon.com Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.silabs.ss.platform.jetty.server 1 0 2022-03-23 12:23:03.231
+!MESSAGE ContentServer started at: 127.0.0.1, 54262
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-23 12:23:03.231
+!MESSAGE com.silabs.ss.tool.launcher.product found! Writing main studio shared file
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-23 12:23:10.911
+!MESSAGE Invalid discovery key: null
+
+!ENTRY org.eclipse.core.jobs 4 2 2022-03-23 12:23:12.828
+!MESSAGE Deadlock detected. All locks owned by thread Worker-2: Refreshing workspace will be suspended.
+!STACK 0
+java.lang.IllegalStateException
+	at org.eclipse.core.internal.jobs.DeadlockDetector.reportDeadlock(DeadlockDetector.java:604)
+	at org.eclipse.core.internal.jobs.DeadlockDetector.lockWaitStart(DeadlockDetector.java:408)
+	at org.eclipse.core.internal.jobs.LockManager.addLockWaitThread(LockManager.java:147)
+	at org.eclipse.core.internal.jobs.OrderedLock.doAcquire(OrderedLock.java:171)
+	at org.eclipse.core.internal.jobs.OrderedLock.acquire(OrderedLock.java:109)
+	at org.eclipse.core.internal.jobs.OrderedLock.acquire(OrderedLock.java:85)
+	at org.eclipse.core.internal.resources.WorkManager.checkIn(WorkManager.java:125)
+	at org.eclipse.core.internal.resources.Workspace.prepareOperation(Workspace.java:2242)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2287)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.runAtomic(CProjectDescriptionManager.java:503)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.runWspModification(CProjectDescriptionManager.java:471)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.runWspModification(CProjectDescriptionManager.java:443)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.updateProjectDescriptions(CProjectDescriptionManager.java:535)
+	at org.eclipse.cdt.core.model.CoreModel.updateProjectDescriptions(CoreModel.java:1449)
+	at org.eclipse.cdt.internal.core.model.CModelManager.handleEvent(CModelManager.java:1038)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.notifyLanguageSettingsChangeListeners(LanguageSettingsProvidersSerializer.java:1456)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.serializeLanguageSettingsWorkspace(LanguageSettingsProvidersSerializer.java:604)
+	at org.eclipse.cdt.core.language.settings.providers.LanguageSettingsManager.serializeLanguageSettingsWorkspace(LanguageSettingsManager.java:367)
+	at org.eclipse.cdt.core.language.settings.providers.LanguageSettingsSerializableProvider.serializeLanguageSettings(LanguageSettingsSerializableProvider.java:276)
+	at org.eclipse.cdt.managedbuilder.language.settings.providers.AbstractBuiltinSpecsDetector.runForEachLanguage(AbstractBuiltinSpecsDetector.java:613)
+	at com.silabs.ss.tool.ide.arm.internal.toolchain.gnu.cdt.support.GNUARMBuiltinSpecsDetector.run(GNUARMBuiltinSpecsDetector.java:34)
+	at com.silabs.ss.tool.ide.arm.internal.toolchain.gnu.cdt.support.GNUARMCdtToolchain.fillLanguageSettings(GNUARMCdtToolchain.java:464)
+	at com.silabs.ss.framework.ide.api.project.core.cpp.CdtToolchain.getLanguageSettings(CdtToolchain.java:161)
+	at com.silabs.ss.framework.ide.api.project.core.cpp.CdtToolchain.getLanguageSettingEntries(CdtToolchain.java:58)
+	at com.silabs.ss.framework.ide.internal.project.core.cpp.SLSLanguageSettingsProvider.getToolchainLanguageSettings(SLSLanguageSettingsProvider.java:91)
+	at com.silabs.ss.framework.ide.internal.project.core.cpp.SLSLanguageSettingsProvider.getSettingEntries(SLSLanguageSettingsProvider.java:70)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer$LanguageSettingsWorkspaceProvider.getSettingEntries(LanguageSettingsProvidersSerializer.java:193)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.getSettingEntriesPooled(LanguageSettingsProvidersSerializer.java:1466)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.getSettingEntriesUpResourceTree(LanguageSettingsProvidersSerializer.java:1496)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.getSettingEntriesByKind(LanguageSettingsProvidersSerializer.java:1560)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.getSettingEntriesByKind(LanguageSettingsProvidersSerializer.java:1604)
+	at org.eclipse.cdt.core.settings.model.util.PathEntryTranslator.collectResourceDataEntries(PathEntryTranslator.java:2070)
+	at org.eclipse.cdt.core.settings.model.util.PathEntryTranslator.access$11(PathEntryTranslator.java:2042)
+	at org.eclipse.cdt.core.settings.model.util.PathEntryTranslator$1.visit(PathEntryTranslator.java:2030)
+	at org.eclipse.cdt.core.settings.model.util.PathSettingsContainer.doAccept(PathSettingsContainer.java:522)
+	at org.eclipse.cdt.core.settings.model.util.PathSettingsContainer.accept(PathSettingsContainer.java:518)
+	at org.eclipse.cdt.core.settings.model.util.PathEntryTranslator.collectEntries(PathEntryTranslator.java:2022)
+	at org.eclipse.cdt.internal.core.settings.model.ConfigBasedPathEntryStore.getEntries(ConfigBasedPathEntryStore.java:244)
+	at org.eclipse.cdt.internal.core.settings.model.ConfigBasedPathEntryStore.getRawPathEntries(ConfigBasedPathEntryStore.java:125)
+	at org.eclipse.cdt.internal.core.model.PathEntryStoreProxy.getRawPathEntries(PathEntryStoreProxy.java:102)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getRawPathEntries(PathEntryManager.java:666)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getResolvedPathEntries(PathEntryManager.java:557)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getResolvedPathEntries(PathEntryManager.java:530)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getResolvedPathEntries(PathEntryManager.java:514)
+	at org.eclipse.cdt.internal.core.model.PathEntryStoreChangedOperation.executeOperation(PathEntryStoreChangedOperation.java:42)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.execute(CModelOperation.java:346)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.run(CModelOperation.java:613)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.runOperation(CModelOperation.java:641)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.pathEntryStoreChanged(PathEntryManager.java:1344)
+	at org.eclipse.cdt.internal.core.model.PathEntryStoreProxy.notifyListeners(PathEntryStoreProxy.java:67)
+	at org.eclipse.cdt.internal.core.model.PathEntryStoreProxy.fireContentChangedEvent(PathEntryStoreProxy.java:60)
+	at org.eclipse.cdt.internal.core.model.PathEntryStoreProxy.postProcessProviderChange(PathEntryStoreProxy.java:146)
+	at org.eclipse.cdt.internal.core.settings.model.AbstractCExtensionProxy.checkUpdateProvider(AbstractCExtensionProxy.java:126)
+	at org.eclipse.cdt.internal.core.settings.model.AbstractCExtensionProxy.doHandleEvent(AbstractCExtensionProxy.java:172)
+	at org.eclipse.cdt.internal.core.model.PathEntryStoreProxy.doHandleEvent(PathEntryStoreProxy.java:152)
+	at org.eclipse.cdt.internal.core.settings.model.AbstractCExtensionProxy.handleEvent(AbstractCExtensionProxy.java:159)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.notifyListeners(CProjectDescriptionManager.java:2218)
+	at org.eclipse.cdt.internal.core.settings.model.AbstractCProjectDescriptionStorage.fireLoadedEvent(AbstractCProjectDescriptionStorage.java:271)
+	at org.eclipse.cdt.internal.core.settings.model.xml.XmlProjectDescriptionStorage.getProjectDescription(XmlProjectDescriptionStorage.java:267)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.getProjectDescriptionInternal(CProjectDescriptionManager.java:426)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.getProjectDescription(CProjectDescriptionManager.java:408)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.getProjectDescription(CProjectDescriptionManager.java:402)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.getProjectDescription(CProjectDescriptionManager.java:395)
+	at org.eclipse.cdt.core.CCorePlugin.getProjectDescription(CCorePlugin.java:1464)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.createLanguageSettingsChangeEvents(LanguageSettingsProvidersSerializer.java:529)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.serializeLanguageSettingsWorkspace(LanguageSettingsProvidersSerializer.java:575)
+	at org.eclipse.cdt.core.language.settings.providers.LanguageSettingsManager.serializeLanguageSettingsWorkspace(LanguageSettingsManager.java:367)
+	at org.eclipse.cdt.core.language.settings.providers.LanguageSettingsSerializableProvider.serializeLanguageSettings(LanguageSettingsSerializableProvider.java:276)
+	at org.eclipse.cdt.managedbuilder.language.settings.providers.AbstractBuiltinSpecsDetector.runForEachLanguage(AbstractBuiltinSpecsDetector.java:613)
+	at com.silabs.ss.tool.ide.arm.internal.toolchain.gnu.cdt.support.GNUARMBuiltinSpecsDetector.run(GNUARMBuiltinSpecsDetector.java:34)
+	at com.silabs.ss.tool.ide.arm.internal.toolchain.gnu.cdt.support.GNUARMCdtToolchain.fillLanguageSettings(GNUARMCdtToolchain.java:464)
+	at com.silabs.ss.framework.ide.api.project.core.cpp.CdtToolchain.getLanguageSettings(CdtToolchain.java:161)
+	at com.silabs.ss.framework.ide.api.project.core.cpp.CdtToolchain.getLanguageSettingEntries(CdtToolchain.java:58)
+	at com.silabs.ss.framework.ide.internal.project.core.cpp.SLSLanguageSettingsProvider.getToolchainLanguageSettings(SLSLanguageSettingsProvider.java:91)
+	at com.silabs.ss.framework.ide.internal.project.core.cpp.SLSLanguageSettingsProvider.getSettingEntries(SLSLanguageSettingsProvider.java:70)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer$LanguageSettingsWorkspaceProvider.getSettingEntries(LanguageSettingsProvidersSerializer.java:193)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.getSettingEntriesPooled(LanguageSettingsProvidersSerializer.java:1466)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.getSettingEntriesUpResourceTree(LanguageSettingsProvidersSerializer.java:1496)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.getSettingEntriesByKind(LanguageSettingsProvidersSerializer.java:1560)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.getSettingEntriesByKind(LanguageSettingsProvidersSerializer.java:1604)
+	at org.eclipse.cdt.core.settings.model.util.PathEntryTranslator.collectResourceDataEntries(PathEntryTranslator.java:2070)
+	at org.eclipse.cdt.core.settings.model.util.PathEntryTranslator.access$11(PathEntryTranslator.java:2042)
+	at org.eclipse.cdt.core.settings.model.util.PathEntryTranslator$1.visit(PathEntryTranslator.java:2030)
+	at org.eclipse.cdt.core.settings.model.util.PathSettingsContainer.doAccept(PathSettingsContainer.java:522)
+	at org.eclipse.cdt.core.settings.model.util.PathSettingsContainer.accept(PathSettingsContainer.java:518)
+	at org.eclipse.cdt.core.settings.model.util.PathEntryTranslator.collectEntries(PathEntryTranslator.java:2022)
+	at org.eclipse.cdt.internal.core.settings.model.ConfigBasedPathEntryStore.getEntries(ConfigBasedPathEntryStore.java:244)
+	at org.eclipse.cdt.internal.core.settings.model.ConfigBasedPathEntryStore.getRawPathEntries(ConfigBasedPathEntryStore.java:125)
+	at org.eclipse.cdt.internal.core.model.PathEntryStoreProxy.getRawPathEntries(PathEntryStoreProxy.java:102)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getRawPathEntries(PathEntryManager.java:666)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getResolvedPathEntries(PathEntryManager.java:557)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getResolvedPathEntries(PathEntryManager.java:530)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getResolvedPathEntries(PathEntryManager.java:514)
+	at org.eclipse.cdt.internal.core.model.PathEntryStoreChangedOperation.executeOperation(PathEntryStoreChangedOperation.java:42)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.execute(CModelOperation.java:346)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.run(CModelOperation.java:613)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.runOperation(CModelOperation.java:641)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.pathEntryStoreChanged(PathEntryManager.java:1344)
+	at org.eclipse.cdt.internal.core.model.PathEntryStoreProxy.notifyListeners(PathEntryStoreProxy.java:67)
+	at org.eclipse.cdt.internal.core.model.PathEntryStoreProxy.fireContentChangedEvent(PathEntryStoreProxy.java:60)
+	at org.eclipse.cdt.internal.core.model.PathEntryStoreProxy.postProcessProviderChange(PathEntryStoreProxy.java:146)
+	at org.eclipse.cdt.internal.core.settings.model.AbstractCExtensionProxy.checkUpdateProvider(AbstractCExtensionProxy.java:126)
+	at org.eclipse.cdt.internal.core.settings.model.AbstractCExtensionProxy.providerRequested(AbstractCExtensionProxy.java:42)
+	at org.eclipse.cdt.internal.core.model.PathEntryStoreProxy.getRawPathEntries(PathEntryStoreProxy.java:101)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getRawPathEntries(PathEntryManager.java:666)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getResolvedPathEntries(PathEntryManager.java:557)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getResolvedPathEntries(PathEntryManager.java:530)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getResolvedPathEntries(PathEntryManager.java:514)
+	at org.eclipse.cdt.core.model.CoreModel.getResolvedPathEntries(CoreModel.java:955)
+	at org.eclipse.cdt.internal.core.model.CProject.getResolvedPathEntries(CProject.java:404)
+	at org.eclipse.cdt.internal.core.model.CProject.getOutputEntries(CProject.java:513)
+	at org.eclipse.cdt.internal.core.model.CProject.isOnOutputEntry(CProject.java:568)
+	at org.eclipse.cdt.internal.core.model.CContainer.computeChild(CContainer.java:218)
+	at org.eclipse.cdt.internal.core.model.CContainer.computeChildren(CContainer.java:185)
+	at org.eclipse.cdt.internal.core.model.CContainer.buildStructure(CContainer.java:157)
+	at org.eclipse.cdt.internal.core.model.Openable.generateInfos(Openable.java:264)
+	at org.eclipse.cdt.internal.core.model.Openable.openParent(Openable.java:241)
+	at org.eclipse.cdt.internal.core.model.TranslationUnit.openParent(TranslationUnit.java:537)
+	at org.eclipse.cdt.internal.core.model.Openable.generateInfos(Openable.java:253)
+	at org.eclipse.cdt.internal.core.model.CElement.openWhenClosed(CElement.java:429)
+	at org.eclipse.cdt.internal.core.model.TranslationUnit.makeConsistent(TranslationUnit.java:573)
+	at org.eclipse.cdt.internal.core.model.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:65)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.execute(CModelOperation.java:346)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.run(CModelOperation.java:613)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.runOperation(CModelOperation.java:641)
+	at org.eclipse.cdt.internal.core.model.WorkingCopy.reconcile(WorkingCopy.java:365)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:79)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.initialReconcile(CReconcilingStrategy.java:123)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:119)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.initialReconcile(CCompositeReconcilingStrategy.java:108)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:98)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.initialProcess(CReconciler.java:335)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:177)
+!SUBENTRY 1 org.eclipse.core.jobs 4 2 2022-03-23 12:23:12.828
+!MESSAGE Thread org.eclipse.cdt.internal.ui.text.CReconciler has locks: OrderedLock (4), R/ and is waiting for lock OrderedLock (0)
+!SUBENTRY 1 org.eclipse.core.jobs 4 2 2022-03-23 12:23:12.828
+!MESSAGE Thread Worker-2: Refreshing workspace has locks: OrderedLock (0) and is waiting for lock OrderedLock (4)
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-03-23 12:23:13.500
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-23 12:23:13.937
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.tool.installer.core 2 0 2022-03-23 12:23:15.500
+!MESSAGE Problem getting package resources: changelog
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-03-23 12:23:17.466
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 12:23:51.322
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:24:01.453
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.debug.edc.arm 4 0 2022-03-23 12:24:02.790
+!MESSAGE Exception parsing ARM stack
+!STACK 0
+java.lang.IllegalArgumentException: Comparison method violates its general contract!
+	at java.base/java.util.ComparableTimSort.mergeHi(ComparableTimSort.java:870)
+	at java.base/java.util.ComparableTimSort.mergeAt(ComparableTimSort.java:487)
+	at java.base/java.util.ComparableTimSort.mergeCollapse(ComparableTimSort.java:413)
+	at java.base/java.util.ComparableTimSort.sort(ComparableTimSort.java:213)
+	at java.base/java.util.Arrays.sort(Arrays.java:1315)
+	at java.base/java.util.Arrays.sort(Arrays.java:1509)
+	at java.base/java.util.ArrayList.sort(ArrayList.java:1749)
+	at java.base/java.util.Collections.sort(Collections.java:145)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.parseLineTable(DwarfInfoReader.java:1344)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfCompileUnit.parseLineTable(DwarfCompileUnit.java:132)
+	at org.eclipse.cdt.debug.edc.internal.symbols.CompileUnitScope.getLineEntries(CompileUnitScope.java:78)
+	at org.eclipse.cdt.debug.edc.internal.symbols.ModuleLineEntryProvider.addCompileUnit(ModuleLineEntryProvider.java:89)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfModuleScope.getModuleLineEntryProvider(DwarfModuleScope.java:236)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Symbols.getLineEntriesForAddressRange(Symbols.java:171)
+	at org.eclipse.cdt.debug.edc.internal.arm.ARMStack.computeStackFrames(ARMStack.java:412)
+	at org.eclipse.cdt.debug.edc.services.Stack.updateFrames(Stack.java:1680)
+	at org.eclipse.cdt.debug.edc.services.Stack.getFramesForDMC(Stack.java:1659)
+	at org.eclipse.cdt.debug.edc.services.Stack$3.run(Stack.java:1477)
+	at org.eclipse.cdt.debug.edc.services.AbstractEDCService$SafeRunner.run(AbstractEDCService.java:193)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 12:25:08.349
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-23 12:25:19.650
+!MESSAGE Invalid discovery key: null
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:25:21.450
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 12:25:22.213
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:25:22.213
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 12:25:58.695
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:26:08.756
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 12:26:09.515
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:26:09.515
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 12:26:50.558
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:27:00.782
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 12:27:01.475
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:27:01.475
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 12:28:26.335
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:28:36.576
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 12:28:37.337
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:28:37.337
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 12:29:22.640
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:29:29.604
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 12:29:30.365
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:29:30.365
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.support.browser.html 1 0 2022-03-23 12:30:10.917
+!MESSAGE Browser workarea set to: C:\Users\█████████\Desktop\I2DS\.browser
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 12:30:57.485
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:31:07.733
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 12:31:08.494
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:31:08.494
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 12:31:31.951
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:31:38.493
+!MESSAGE Unknown context [rc.root.000440240220] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 12:31:39.253
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440240220 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:31:39.253
+!MESSAGE Fail to get TCF context for process: rc.root.000440240220
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 12:32:12.724
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:32:23.074
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 12:32:23.835
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:32:23.835
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-23 12:32:58.752
+!MESSAGE Deleted Shared Daemon File: C:\Users\█████████\.uc\cli\mainstudio.running
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-23 12:32:58.753
+!MESSAGE Deleted Shared Daemon Version File: C:\Users\█████████\.uc\cli\mainstudio.running.version
+
+!ENTRY org.eclipse.tcf 4 0 2022-03-23 12:32:58.867
+!MESSAGE Failed to shutdown TCF event dispatch thread
+!STACK 0
+java.lang.InterruptedException
+	at java.base/java.lang.Object.wait(Native Method)
+	at java.base/java.lang.Thread.join(Thread.java:1305)
+	at java.base/java.lang.Thread.join(Thread.java:1379)
+	at org.eclipse.tcf.EventQueue.shutdown(EventQueue.java:76)
+	at org.eclipse.tcf.Activator.stop(Activator.java:154)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:899)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:1)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.stop(BundleContextImpl.java:891)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.stopWorker0(EquinoxBundle.java:1029)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.stopWorker(EquinoxBundle.java:370)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:658)
+	at org.eclipse.osgi.container.Module.stop(Module.java:520)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.decStartLevel(ModuleContainer.java:1885)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1760)
+	at org.eclipse.osgi.container.SystemModule.stopWorker(SystemModule.java:275)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule.stopWorker(EquinoxBundle.java:202)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:658)
+	at org.eclipse.osgi.container.Module.stop(Module.java:520)
+	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:207)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:220)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+!SESSION 2022-03-23 12:38:40.091 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.5
+java.vendor=Amazon.com Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.silabs.ss.platform.jetty.server 1 0 2022-03-23 12:38:41.231
+!MESSAGE ContentServer started at: 127.0.0.1, 58955
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-23 12:38:41.231
+!MESSAGE com.silabs.ss.tool.launcher.product found! Writing main studio shared file
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-23 12:38:48.976
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-03-23 12:38:51.470
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-23 12:38:52.002
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.tool.installer.core 2 0 2022-03-23 12:38:53.113
+!MESSAGE Problem getting package resources: changelog
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-03-23 12:38:55.202
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.support.browser.html 1 0 2022-03-23 12:39:55.539
+!MESSAGE Browser workarea set to: C:\Users\█████████\Desktop\I2DS\.browser
+
+!ENTRY com.silabs.ss.platform.rcp.core 4 0 2022-03-23 12:39:58.354
+!MESSAGE 
+!STACK 0
+com.silabs.ss.framework.uc.core.api.exception.UcException: Generation: Projects failed PIRSN
+
+Failed to generate PIRSN for Pirsn [PIRSN]
+Problem with PIRSNFailed to load project defined module uc.module.setup.componentSetup.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.defaultSettings.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.ucTemplate.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.ucProject.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.ucConfig.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+
+
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.doGenerateProjects(UcGenerator.java:214)
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.generateProjects(UcGenerator.java:154)
+	at com.silabs.ss.framework.uc.internal.generation.UcThreadingGenerator$UcProjectGenerationTask.run(UcThreadingGenerator.java:451)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.core.jobs 4 2 2022-03-23 12:39:58.359
+!MESSAGE An internal error occurred during: "PIRSN project generation task".
+!STACK 0
+com.silabs.ss.framework.uc.core.api.exception.UcException: Generation: Projects failed PIRSN
+
+Failed to generate PIRSN for Pirsn [PIRSN]
+Problem with PIRSNFailed to load project defined module uc.module.setup.componentSetup.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.defaultSettings.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.ucTemplate.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.ucProject.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.ucConfig.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+
+
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.doGenerateProjects(UcGenerator.java:214)
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.generateProjects(UcGenerator.java:154)
+	at com.silabs.ss.framework.uc.internal.generation.UcThreadingGenerator$UcProjectGenerationTask.run(UcThreadingGenerator.java:451)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY com.silabs.ss.platform.rcp.core 4 0 2022-03-23 12:39:58.536
+!MESSAGE 
+!STACK 0
+com.silabs.ss.framework.uc.core.api.exception.UcException: Generation: Projects failed PIRSN
+
+Failed to generate PIRSN for Pirsn [PIRSN]
+Problem with PIRSNFailed to load project defined module uc.module.setup.componentSetup.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.defaultSettings.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.ucTemplate.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.ucProject.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.ucConfig.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+
+
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.doGenerateProjects(UcGenerator.java:214)
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.generateProjects(UcGenerator.java:154)
+	at com.silabs.ss.framework.uc.internal.generation.UcThreadingGenerator$UcProjectGenerationTask.run(UcThreadingGenerator.java:451)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.core.jobs 4 2 2022-03-23 12:39:58.538
+!MESSAGE An internal error occurred during: "PIRSN project generation task".
+!STACK 0
+com.silabs.ss.framework.uc.core.api.exception.UcException: Generation: Projects failed PIRSN
+
+Failed to generate PIRSN for Pirsn [PIRSN]
+Problem with PIRSNFailed to load project defined module uc.module.setup.componentSetup.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.defaultSettings.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.ucTemplate.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.ucProject.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.ucConfig.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+
+
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.doGenerateProjects(UcGenerator.java:214)
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.generateProjects(UcGenerator.java:154)
+	at com.silabs.ss.framework.uc.internal.generation.UcThreadingGenerator$UcProjectGenerationTask.run(UcThreadingGenerator.java:451)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY com.silabs.ss.platform.rcp.core 4 0 2022-03-23 12:39:58.635
+!MESSAGE 
+!STACK 0
+com.silabs.ss.framework.uc.core.api.exception.UcException: Generation: Projects failed PIRSN
+
+Failed to generate PIRSN for Pirsn [PIRSN]
+Problem with PIRSNFailed to load project defined module uc.module.setup.componentSetup.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.defaultSettings.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.ucTemplate.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.ucProject.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.ucConfig.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+
+
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.doGenerateProjects(UcGenerator.java:214)
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.generateProjects(UcGenerator.java:154)
+	at com.silabs.ss.framework.uc.internal.generation.UcThreadingGenerator$UcProjectGenerationTask.run(UcThreadingGenerator.java:451)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.core.jobs 4 2 2022-03-23 12:39:58.637
+!MESSAGE An internal error occurred during: "PIRSN project generation task".
+!STACK 0
+com.silabs.ss.framework.uc.core.api.exception.UcException: Generation: Projects failed PIRSN
+
+Failed to generate PIRSN for Pirsn [PIRSN]
+Problem with PIRSNFailed to load project defined module uc.module.setup.componentSetup.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.defaultSettings.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.ucTemplate.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.ucProject.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+Problem with PIRSNFailed to load project defined module uc.module.setup.ucConfig.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc from project PIRSN
+
+
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.doGenerateProjects(UcGenerator.java:214)
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.generateProjects(UcGenerator.java:154)
+	at com.silabs.ss.framework.uc.internal.generation.UcThreadingGenerator$UcProjectGenerationTask.run(UcThreadingGenerator.java:451)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.ui.ide 4 4 2022-03-23 12:40:23.117
+!MESSAGE Problems saving workspace
+
+!ENTRY org.eclipse.ui.ide 2 1 2022-03-23 12:40:23.117
+!MESSAGE Problems occurred while trying to save the state of the workbench.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2022-03-23 12:40:23.117
+!MESSAGE The project description file (.project) for 'PIRSN' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-23 12:40:23.491
+!MESSAGE Deleted Shared Daemon File: C:\Users\█████████\.uc\cli\mainstudio.running
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-23 12:40:23.507
+!MESSAGE Deleted Shared Daemon Version File: C:\Users\█████████\.uc\cli\mainstudio.running.version
+
+!ENTRY org.eclipse.core.resources 2 10035 2022-03-23 12:40:23.632
+!MESSAGE The workspace will exit with unsaved changes in this session.
+
+!ENTRY org.eclipse.tcf 4 0 2022-03-23 12:40:23.632
+!MESSAGE Failed to shutdown TCF event dispatch thread
+!STACK 0
+java.lang.InterruptedException
+	at java.base/java.lang.Object.wait(Native Method)
+	at java.base/java.lang.Thread.join(Thread.java:1305)
+	at java.base/java.lang.Thread.join(Thread.java:1379)
+	at org.eclipse.tcf.EventQueue.shutdown(EventQueue.java:76)
+	at org.eclipse.tcf.Activator.stop(Activator.java:154)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:899)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:1)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.stop(BundleContextImpl.java:891)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.stopWorker0(EquinoxBundle.java:1029)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.stopWorker(EquinoxBundle.java:370)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:658)
+	at org.eclipse.osgi.container.Module.stop(Module.java:520)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.decStartLevel(ModuleContainer.java:1885)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1760)
+	at org.eclipse.osgi.container.SystemModule.stopWorker(SystemModule.java:275)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule.stopWorker(EquinoxBundle.java:202)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:658)
+	at org.eclipse.osgi.container.Module.stop(Module.java:520)
+	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:207)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:220)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+!SESSION 2022-03-23 12:40:21.455 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.5
+java.vendor=Amazon.com Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.silabs.ss.platform.jetty.server 1 0 2022-03-23 12:40:22.585
+!MESSAGE ContentServer started at: 127.0.0.1, 49783
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-23 12:40:22.601
+!MESSAGE com.silabs.ss.tool.launcher.product found! Writing main studio shared file
+
+!ENTRY org.eclipse.core.resources 2 10035 2022-03-23 12:40:24.226
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-23 12:40:33.450
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.framework.ide.project.core.cpp 2 0 2022-03-23 12:40:33.590
+!MESSAGE Current config requested but there are no build configs!
+!STACK 0
+java.lang.Exception
+	at com.silabs.java.utils.ExceptionUtils.newMinimalStackException(ExceptionUtils.java:29)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:622)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:1)
+	at com.silabs.ss.tool.uc.api.core.ProjectUtils.ucProjectFromIProject(ProjectUtils.java:159)
+	at com.silabs.ss.tool.uc.editor.markers.UcMarkerManager.init(UcMarkerManager.java:234)
+	at com.silabs.ss.tool.uc.editor.Activator.start(Activator.java:63)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:842)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at ... extra clipped....(Unknown Source)
+
+!ENTRY com.silabs.ss.framework.ide.project.core.cpp 2 0 2022-03-23 12:40:33.606
+!MESSAGE Current config requested but there are no build configs!
+!STACK 0
+java.lang.Exception
+	at com.silabs.java.utils.ExceptionUtils.newMinimalStackException(ExceptionUtils.java:29)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:622)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:1)
+	at com.silabs.ss.framework.ide.api.project.sls.core.SLSIDEProjectUtils.findSdkId(SLSIDEProjectUtils.java:42)
+	at com.silabs.ss.framework.ide.api.project.sls.core.SLSIDEProjectUtils.findSdkId(SLSIDEProjectUtils.java:30)
+	at com.silabs.ss.tool.uc.editor.component.views.ComponentSelector.initEditor(ComponentSelector.java:160)
+	at com.silabs.ss.tool.uc.editor.component.views.ComponentSelector.init(ComponentSelector.java:275)
+	at org.eclipse.ui.internal.EditorReference.initialize(EditorReference.java:353)
+	at org.eclipse.ui.internal.e4.compatibility.CompatibilityPart.create(CompatibilityPart.java:340)
+	at ... extra clipped....(Unknown Source)
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-23 12:40:36.473
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.support.browser.html 1 0 2022-03-23 12:40:52.018
+!MESSAGE Browser workarea set to: C:\Users\█████████\Desktop\I2DS\.browser
+
+!ENTRY com.silabs.ss.framework.ide.project.core.cpp 2 0 2022-03-23 12:40:53.175
+!MESSAGE Current config requested but there are no build configs!
+!STACK 0
+java.lang.Exception
+	at com.silabs.java.utils.ExceptionUtils.newMinimalStackException(ExceptionUtils.java:29)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:622)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:1)
+	at com.silabs.ss.framework.ide.internal.project.ui.SLSProjectLabelDecorator.computeLabel(SLSProjectLabelDecorator.java:179)
+	at com.silabs.ss.framework.ide.internal.project.ui.SLSProjectLabelDecorator.decorate(SLSProjectLabelDecorator.java:160)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorDefinition.decorate(LightweightDecoratorDefinition.java:247)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager$LightweightRunnable.run(LightweightDecoratorManager.java:105)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.decorate(LightweightDecoratorManager.java:360)
+	at ... extra clipped....(Unknown Source)
+
+!ENTRY org.eclipse.core.jobs 4 2 2022-03-23 12:40:53.696
+!MESSAGE Deadlock detected. All locks owned by thread Worker-15: Adding project listener: AbstractCProjectListener will be suspended.
+!STACK 0
+java.lang.IllegalStateException
+	at org.eclipse.core.internal.jobs.DeadlockDetector.reportDeadlock(DeadlockDetector.java:604)
+	at org.eclipse.core.internal.jobs.DeadlockDetector.lockWaitStart(DeadlockDetector.java:408)
+	at org.eclipse.core.internal.jobs.LockManager.addLockWaitThread(LockManager.java:147)
+	at org.eclipse.core.internal.jobs.OrderedLock.doAcquire(OrderedLock.java:171)
+	at org.eclipse.core.internal.jobs.OrderedLock.acquire(OrderedLock.java:109)
+	at org.eclipse.core.internal.jobs.OrderedLock.acquire(OrderedLock.java:85)
+	at org.eclipse.cdt.internal.core.settings.model.xml.XmlProjectDescriptionStorage.getProjectDescription(XmlProjectDescriptionStorage.java:233)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.getProjectDescriptionInternal(CProjectDescriptionManager.java:426)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.getProjectDescription(CProjectDescriptionManager.java:408)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.getProjectDescription(CProjectDescriptionManager.java:402)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.getProjectDescription(CProjectDescriptionManager.java:395)
+	at org.eclipse.cdt.core.model.CoreModel.getProjectDescription(CoreModel.java:1436)
+	at com.silabs.ss.framework.ide.api.project.core.cpp.external.EclipseCdtProjectImportAnalyzer.gatherFromExistingProject(EclipseCdtProjectImportAnalyzer.java:312)
+	at com.silabs.ss.framework.ide.api.project.core.cpp.external.EclipseCdtProjectImportAnalyzer.importProjectInformation(EclipseCdtProjectImportAnalyzer.java:168)
+	at com.silabs.ss.framework.ide.api.project.core.cpp.external.CdtExternalProjectImporter.createImportModel(CdtExternalProjectImporter.java:128)
+	at com.silabs.ss.framework.ide.api.project.core.cpp.external.SlsExternalProjectImporter.createImportModel(SlsExternalProjectImporter.java:88)
+	at com.silabs.ss.framework.project.api.core.utils.ProjectUpdateUtils.createExistingRawProjectModel(ProjectUpdateUtils.java:150)
+	at com.silabs.ss.framework.project.api.core.utils.ProjectUpdateUtils.createExistingUserProjectModel(ProjectUpdateUtils.java:123)
+	at com.silabs.ss.framework.project.api.core.utils.ProjectUpdateUtils.createExistingUserProjectModel(ProjectUpdateUtils.java:108)
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.generateProject(UcGenerator.java:378)
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.lambda$10(UcGenerator.java:345)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1654)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEachOrdered(ReferencePipeline.java:502)
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.generateProjects(UcGenerator.java:352)
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.doGenerateProjects(UcGenerator.java:183)
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.generateProjects(UcGenerator.java:154)
+	at com.silabs.ss.framework.uc.internal.generation.UcThreadingGenerator$UcProjectGenerationTask.run(UcThreadingGenerator.java:451)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.core.jobs 4 2 2022-03-23 12:40:53.696
+!MESSAGE Thread Worker-0:  project generation task has locks: R/, L/PIRSN/.cproject and is waiting for lock OrderedLock (9)
+!SUBENTRY 1 org.eclipse.core.jobs 4 2 2022-03-23 12:40:53.696
+!MESSAGE Thread Worker-15: Adding project listener: AbstractCProjectListener has locks: OrderedLock (9) and is waiting for lock L/PIRSN/.cproject
+
+!ENTRY com.silabs.ss.framework.project.core 4 0 2022-03-23 12:40:54.140
+!MESSAGE Unknown property in EMF model. Property: linker_map_file
+
+!ENTRY com.silabs.ss.platform.rcp.core 4 0 2022-03-23 12:40:54.592
+!MESSAGE 
+!STACK 0
+com.silabs.ss.framework.uc.core.api.exception.UcException: Generation: Projects failed PIRSN
+
+Failed to generate PIRSN for Pirsn [PIRSN]
+At least one build configuration is required!
+
+
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.doGenerateProjects(UcGenerator.java:214)
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.generateProjects(UcGenerator.java:154)
+	at com.silabs.ss.framework.uc.internal.generation.UcThreadingGenerator$UcProjectGenerationTask.run(UcThreadingGenerator.java:451)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.core.jobs 4 2 2022-03-23 12:40:54.597
+!MESSAGE An internal error occurred during: " project generation task".
+!STACK 0
+com.silabs.ss.framework.uc.core.api.exception.UcException: Generation: Projects failed PIRSN
+
+Failed to generate PIRSN for Pirsn [PIRSN]
+At least one build configuration is required!
+
+
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.doGenerateProjects(UcGenerator.java:214)
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.generateProjects(UcGenerator.java:154)
+	at com.silabs.ss.framework.uc.internal.generation.UcThreadingGenerator$UcProjectGenerationTask.run(UcThreadingGenerator.java:451)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY com.silabs.ss.platform.rcp.core 4 0 2022-03-23 12:40:54.598
+!MESSAGE Failed to generate
+!STACK 0
+com.silabs.ss.framework.uc.core.api.exception.UcException: com.silabs.ss.framework.uc.core.api.exception.UcException: Generation: Projects failed PIRSN
+
+Failed to generate PIRSN for Pirsn [PIRSN]
+At least one build configuration is required!
+
+
+	at com.silabs.ss.framework.uc.internal.generation.UcThreadingGenerator.checkError(UcThreadingGenerator.java:169)
+	at com.silabs.ss.framework.uc.internal.generation.UcThreadingGenerator.waitForProjectTask(UcThreadingGenerator.java:159)
+	at com.silabs.ss.framework.uc.internal.generation.UcThreadingGenerator.doGenerate(UcThreadingGenerator.java:87)
+	at com.silabs.ss.framework.uc.api.generation.UcParameterizedGenerator.run(UcParameterizedGenerator.java:166)
+	at com.silabs.ss.framework.uc.api.generation.UcParameterizedGenerator.run(UcParameterizedGenerator.java:66)
+	at com.silabs.ss.framework.uc.api.generation.UcGeneration.generate(UcGeneration.java:73)
+	at com.silabs.ss.framework.uc.api.generation.UcGeneration.doGenerate(UcGeneration.java:127)
+	at com.silabs.ss.framework.uc.api.generation.UcGeneration.generate(UcGeneration.java:93)
+	at com.silabs.ss.framework.uc.api.project.UcProjectUtils.lambda$0(UcProjectUtils.java:86)
+	at org.eclipse.core.runtime.jobs.Job$1.run(Job.java:164)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: com.silabs.ss.framework.uc.core.api.exception.UcException: Generation: Projects failed PIRSN
+
+Failed to generate PIRSN for Pirsn [PIRSN]
+At least one build configuration is required!
+
+
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.doGenerateProjects(UcGenerator.java:214)
+	at com.silabs.ss.framework.uc.internal.generation.UcGenerator.generateProjects(UcGenerator.java:154)
+	at com.silabs.ss.framework.uc.internal.generation.UcThreadingGenerator$UcProjectGenerationTask.run(UcThreadingGenerator.java:451)
+	... 1 more
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-03-23 12:40:54.630
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.framework.ide.project.core.cpp 2 0 2022-03-23 12:40:54.720
+!MESSAGE Current config requested but there are no build configs!
+!STACK 0
+java.lang.Exception
+	at com.silabs.java.utils.ExceptionUtils.newMinimalStackException(ExceptionUtils.java:29)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:622)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:1)
+	at com.silabs.ss.framework.ide.internal.project.sls.core.builder.SlsProjectReferenceProvider.getDependentProjects(SlsProjectReferenceProvider.java:40)
+	at org.eclipse.core.internal.resources.ProjectDescription.computeDynamicReferencesForProject(ProjectDescription.java:951)
+	at org.eclipse.core.internal.resources.ProjectDescription.getAllBuildConfigReferences(ProjectDescription.java:266)
+	at org.eclipse.core.internal.resources.ProjectDescription.getAllReferences(ProjectDescription.java:223)
+	at org.eclipse.core.internal.resources.Project.getReferencingProjects(Project.java:492)
+	at org.eclipse.cdt.internal.core.pdom.PDOMManager.changeProject(PDOMManager.java:830)
+	at ... extra clipped....(Unknown Source)
+
+!ENTRY org.eclipse.core.resources 4 0 2022-03-23 12:40:54.722
+!MESSAGE Unable to load dynamic reference provider: ConfigurationElementHandle [name: builder, handle id: 15044, namespace: com.silabs.ss.framework.ide.project.sls.core]
+!STACK 1
+org.eclipse.core.runtime.CoreException: Project: PIRSN has no build configurations!
+	at com.silabs.ss.platform.api.rcp.core.StatusReporter.newCoreException(StatusReporter.java:244)
+	at com.silabs.ss.framework.ide.internal.project.sls.core.builder.SlsProjectReferenceProvider.getDependentProjects(SlsProjectReferenceProvider.java:47)
+	at org.eclipse.core.internal.resources.ProjectDescription.computeDynamicReferencesForProject(ProjectDescription.java:951)
+	at org.eclipse.core.internal.resources.ProjectDescription.getAllBuildConfigReferences(ProjectDescription.java:266)
+	at org.eclipse.core.internal.resources.ProjectDescription.getAllReferences(ProjectDescription.java:223)
+	at org.eclipse.core.internal.resources.Project.getReferencingProjects(Project.java:492)
+	at org.eclipse.cdt.internal.core.pdom.PDOMManager.changeProject(PDOMManager.java:830)
+	at org.eclipse.cdt.internal.core.pdom.CModelListener.elementChanged(CModelListener.java:75)
+	at org.eclipse.cdt.internal.core.model.CModelManager$2.run(CModelManager.java:1196)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.cdt.internal.core.model.CModelManager.notifyListeners(CModelManager.java:1187)
+	at org.eclipse.cdt.internal.core.model.CModelManager.firePostChangeDelta(CModelManager.java:1143)
+	at org.eclipse.cdt.internal.core.model.CModelManager.fire(CModelManager.java:1108)
+	at org.eclipse.cdt.internal.core.model.CModelManager.fire(CModelManager.java:1065)
+	at org.eclipse.cdt.internal.core.model.CModelManager.resourceChanged(CModelManager.java:940)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:305)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:295)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:158)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:380)
+	at org.eclipse.core.internal.resources.Workspace.endOperation(Workspace.java:1502)
+	at org.eclipse.core.internal.resources.Resource.refreshLocal(Resource.java:1563)
+	at org.eclipse.core.internal.refresh.RefreshJob.runInWorkspace(RefreshJob.java:166)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:42)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 com.silabs.ss.framework.ide.project.sls.core 4 0 2022-03-23 12:40:54.722
+!MESSAGE Project: PIRSN has no build configurations!
+
+!ENTRY com.silabs.ss.framework.ide.project.core.cpp 2 0 2022-03-23 12:40:55.812
+!MESSAGE Current config requested but there are no build configs!
+!STACK 0
+java.lang.Exception
+	at com.silabs.java.utils.ExceptionUtils.newMinimalStackException(ExceptionUtils.java:29)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:622)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:1)
+	at com.silabs.ss.framework.ide.internal.project.ui.SLSProjectLabelDecorator.computeLabel(SLSProjectLabelDecorator.java:179)
+	at com.silabs.ss.framework.ide.internal.project.ui.SLSProjectLabelDecorator.decorate(SLSProjectLabelDecorator.java:160)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorDefinition.decorate(LightweightDecoratorDefinition.java:247)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager$LightweightRunnable.run(LightweightDecoratorManager.java:105)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.decorate(LightweightDecoratorManager.java:360)
+	at ... extra clipped....(Unknown Source)
+
+!ENTRY com.silabs.ss.tool.installer.core 2 0 2022-03-23 12:40:56.943
+!MESSAGE Problem getting package resources: changelog
+
+!ENTRY com.silabs.ss.framework.ide.project.core.cpp 2 0 2022-03-23 12:40:58.067
+!MESSAGE Current config requested but there are no build configs!
+!STACK 0
+java.lang.Exception
+	at com.silabs.java.utils.ExceptionUtils.newMinimalStackException(ExceptionUtils.java:29)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:622)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:1)
+	at com.silabs.ss.tool.energyprofiler.internal.launch.ui.EnergyProfilerUIUtils.isEnergyProfileable(EnergyProfilerUIUtils.java:35)
+	at com.silabs.ss.tool.energyprofiler.internal.launch.ui.SelectionHandler.selectionChanged(SelectionHandler.java:39)
+	at org.eclipse.ui.internal.e4.compatibility.SelectionService.notifyListeners(SelectionService.java:240)
+	at org.eclipse.ui.internal.e4.compatibility.SelectionService.handleSelectionChanged(SelectionService.java:94)
+	at org.eclipse.ui.internal.e4.compatibility.SelectionService.lambda$0(SelectionService.java:68)
+	at org.eclipse.e4.ui.internal.workbench.SelectionAggregator$1.run(SelectionAggregator.java:123)
+	at ... extra clipped....(Unknown Source)
+
+!ENTRY com.silabs.ss.framework.ide.project.core.cpp 2 0 2022-03-23 12:40:58.464
+!MESSAGE Current config requested but there are no build configs!
+!STACK 0
+java.lang.Exception
+	at com.silabs.java.utils.ExceptionUtils.newMinimalStackException(ExceptionUtils.java:29)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:622)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:1)
+	at com.silabs.ss.framework.ide.internal.project.ui.SLSProjectLabelDecorator.computeLabel(SLSProjectLabelDecorator.java:179)
+	at com.silabs.ss.framework.ide.internal.project.ui.SLSProjectLabelDecorator.decorate(SLSProjectLabelDecorator.java:160)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorDefinition.decorate(LightweightDecoratorDefinition.java:247)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager$LightweightRunnable.run(LightweightDecoratorManager.java:105)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.decorate(LightweightDecoratorManager.java:360)
+	at ... extra clipped....(Unknown Source)
+
+!ENTRY com.silabs.ss.framework.ide.project.core.cpp 2 0 2022-03-23 12:40:58.526
+!MESSAGE Current config requested but there are no build configs!
+!STACK 0
+java.lang.Exception
+	at com.silabs.java.utils.ExceptionUtils.newMinimalStackException(ExceptionUtils.java:29)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:622)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:1)
+	at com.silabs.ss.tool.energyprofiler.internal.launch.ui.EnergyProfilerUIUtils.isEnergyProfileable(EnergyProfilerUIUtils.java:35)
+	at com.silabs.ss.tool.energyprofiler.internal.launch.ui.SelectionHandler.selectionChanged(SelectionHandler.java:39)
+	at org.eclipse.ui.internal.e4.compatibility.SelectionService.notifyListeners(SelectionService.java:240)
+	at org.eclipse.ui.internal.e4.compatibility.SelectionService.handleSelectionChanged(SelectionService.java:94)
+	at org.eclipse.ui.internal.e4.compatibility.SelectionService.lambda$0(SelectionService.java:68)
+	at org.eclipse.e4.ui.internal.workbench.SelectionAggregator$1.run(SelectionAggregator.java:123)
+	at ... extra clipped....(Unknown Source)
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-03-23 12:40:58.808
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.framework.ide.project.core.cpp 2 0 2022-03-23 12:40:58.974
+!MESSAGE Current config requested but there are no build configs!
+!STACK 0
+java.lang.Exception
+	at com.silabs.java.utils.ExceptionUtils.newMinimalStackException(ExceptionUtils.java:29)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:622)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:1)
+	at com.silabs.ss.framework.ide.internal.project.ui.SLSProjectLabelDecorator.computeLabel(SLSProjectLabelDecorator.java:179)
+	at com.silabs.ss.framework.ide.internal.project.ui.SLSProjectLabelDecorator.decorate(SLSProjectLabelDecorator.java:160)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorDefinition.decorate(LightweightDecoratorDefinition.java:247)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager$LightweightRunnable.run(LightweightDecoratorManager.java:105)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.decorate(LightweightDecoratorManager.java:360)
+	at ... extra clipped....(Unknown Source)
+
+!ENTRY com.silabs.ss.framework.ide.project.core.cpp 2 0 2022-03-23 12:41:02.080
+!MESSAGE Current config requested but there are no build configs!
+!STACK 0
+java.lang.Exception
+	at com.silabs.java.utils.ExceptionUtils.newMinimalStackException(ExceptionUtils.java:29)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:622)
+	at com.silabs.ss.framework.ide.internal.api.project.core.cpp.BaseCppProjectHandle.getCurrentConfiguration(BaseCppProjectHandle.java:1)
+	at com.silabs.ss.tool.uc.api.core.ProjectUtils.isUcProject(ProjectUtils.java:67)
+	at com.silabs.ss.tool.uc.editor.util.UcProjectTester.test(UcProjectTester.java:25)
+	at org.eclipse.core.internal.expressions.Property.test(Property.java:65)
+	at org.eclipse.core.internal.expressions.TestExpression.evaluate(TestExpression.java:103)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:55)
+	at org.eclipse.core.internal.expressions.AndExpression.evaluate(AndExpression.java:34)
+	at ... extra clipped....(Unknown Source)
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-23 12:41:24.629
+!MESSAGE Unknown architecture(s) [efm32~series[2]~device_configuration[3], efm32~series[2]~device_configuration[4]] in sample app Internal Storage Bootloader (single image on 512kB device with 131072k flash base)
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-23 12:41:24.632
+!MESSAGE Unknown architecture(s) [efm32~series[2]~device_configuration[4]] in sample app Internal Storage Bootloader (single image on 1536kB device with 131072k flash base)
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-23 12:41:24.634
+!MESSAGE Unknown architecture(s) [efm32~series[2]~device_configuration[2]~flash[352K]] in sample app Internal Storage Bootloader (single image on 352kB device)
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-23 12:41:24.636
+!MESSAGE Unknown architecture(s) [efm32~series[2]~device_configuration[3], efm32~series[2]~device_configuration[4]] in sample app Internal Storage Bootloader (single image on 352kB device with 131072k flash base)
+
+!ENTRY org.eclipse.cdt.core 1 0 2022-03-23 12:42:05.892
+!MESSAGE Indexed 'PIRSN' (143 sources, 391 headers) in 6.54 sec: 26,173 declarations; 75,619 references; 0 unresolved inclusions; 1 syntax errors; 92 unresolved names (0.09%)
+
+!ENTRY com.silabs.ss.support.browser.html 4 0 2022-03-23 12:42:19.795
+!MESSAGE Browser 'com.silabs.ss.tool.uc.editor.html.UCComponentSelectorEditor-PIRSN.slcp' error with browser access
+!STACK 0
+java.util.concurrent.TimeoutException
+	at java.base/java.util.concurrent.FutureTask.get(FutureTask.java:204)
+	at com.silabs.ss.support.browser.api.html.jxbrowser.JxBrowserService.accessBrowserWithReturnImpl(JxBrowserService.java:100)
+	at com.silabs.ss.support.browser.api.html.AbstractBrowserService.accessBrowserImpl(AbstractBrowserService.java:299)
+	at com.silabs.ss.support.browser.api.html.AbstractBrowserService.lambda$2(AbstractBrowserService.java:257)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+!ENTRY com.silabs.ss.support.browser.html 4 0 2022-03-23 12:42:19.795
+!MESSAGE Browser 'com.silabs.ss.tool.uc.editor.html.UCComponentSelectorEditor-PIRSN.slcp'setPage failed, url = http://127.0.0.1:49783/resources/clic/index.html?project=file_3A_2FC_3A_2FUsers_2F█████████_2FDesktop_2FI2DS_2FPIRSN_2FPIRSN.slcp
+!STACK 0
+com.teamdev.jxbrowser.navigation.TimeoutException: Failed to execute task within 20 seconds.
+	at com.teamdev.jxbrowser.navigation.internal.NavigationImpl.loadAndWait(NavigationImpl.java:277)
+	at com.teamdev.jxbrowser.navigation.internal.NavigationImpl.loadAndWait(NavigationImpl.java:223)
+	at com.teamdev.jxbrowser.navigation.internal.NavigationImpl.loadUrlAndWait(NavigationImpl.java:107)
+	at com.teamdev.jxbrowser.navigation.internal.NavigationImpl.loadUrlAndWait(NavigationImpl.java:94)
+	at com.silabs.ss.support.browser.api.html.jxbrowser.JxBrowserService.setPageImpl(JxBrowserService.java:423)
+	at com.silabs.ss.support.browser.api.html.AbstractBrowserService.lambda$3(AbstractBrowserService.java:258)
+	at com.silabs.ss.support.browser.api.html.AbstractBrowserService.lambda$5(AbstractBrowserService.java:300)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+!ENTRY com.silabs.ss.support.browser.html 4 0 2022-03-23 12:42:39.806
+!MESSAGE Browser 'com.silabs.ss.tool.uc.editor.html.UCComponentSelectorEditor-PIRSN.slcp' error with browser access
+!STACK 0
+java.util.concurrent.TimeoutException
+	at java.base/java.util.concurrent.FutureTask.get(FutureTask.java:204)
+	at com.silabs.ss.support.browser.api.html.jxbrowser.JxBrowserService.accessBrowserWithReturnImpl(JxBrowserService.java:100)
+	at com.silabs.ss.support.browser.api.html.AbstractBrowserService.accessBrowserImpl(AbstractBrowserService.java:299)
+	at com.silabs.ss.support.browser.api.html.AbstractBrowserService.lambda$6(AbstractBrowserService.java:321)
+	at com.silabs.ss.support.browser.api.html.AbstractBrowserService.executeSequential(AbstractBrowserService.java:133)
+	at com.silabs.ss.support.browser.api.html.AbstractBrowserService.executeJavascript(AbstractBrowserService.java:320)
+	at com.silabs.ss.support.browser.api.html.AbstractBrowserService.insertCSS(AbstractBrowserService.java:396)
+	at com.silabs.ss.support.browser.api.html.AbstractBrowserService.lambda$4(AbstractBrowserService.java:265)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+!ENTRY com.silabs.ss.support.browser.html 4 0 2022-03-23 12:42:44.900
+!MESSAGE Incomplete JxBrowser initialization
+!STACK 0
+java.util.concurrent.TimeoutException
+	at java.base/java.util.concurrent.FutureTask.get(FutureTask.java:204)
+	at com.silabs.ss.support.browser.api.html.jxbrowser.JxBrowserPartView.createPartControl(JxBrowserPartView.java:161)
+	at com.silabs.ss.framework.ide.internal.ui.BrowserFileViewer.createPartControl(BrowserFileViewer.java:52)
+	at org.eclipse.ui.internal.e4.compatibility.CompatibilityPart.createPartControl(CompatibilityPart.java:154)
+	at org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor.createPartControl(CompatibilityEditor.java:96)
+	at org.eclipse.ui.internal.e4.compatibility.CompatibilityPart.create(CompatibilityPart.java:361)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:58)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.processAnnotated(InjectorImpl.java:1002)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.processAnnotated(InjectorImpl.java:967)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.internalInject(InjectorImpl.java:139)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.internalMake(InjectorImpl.java:408)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.make(InjectorImpl.java:331)
+	at org.eclipse.e4.core.contexts.ContextInjectionFactory.make(ContextInjectionFactory.java:202)
+	at org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.createFromBundle(ReflectionContributionFactory.java:91)
+	at org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.doCreate(ReflectionContributionFactory.java:60)
+	at org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.create(ReflectionContributionFactory.java:42)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ContributedPartRenderer.createWidget(ContributedPartRenderer.java:132)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createWidget(PartRenderingEngine.java:1002)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:662)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:768)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$0(PartRenderingEngine.java:739)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$2.run(PartRenderingEngine.java:733)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:717)
+	at org.eclipse.e4.ui.internal.workbench.PartServiceImpl$1.handleEvent(PartServiceImpl.java:107)
+	at org.eclipse.e4.ui.services.internal.events.UIEventHandler.lambda$0(UIEventHandler.java:38)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:236)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:146)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:4629)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:219)
+	at org.eclipse.e4.ui.services.internal.events.UIEventHandler.handleEvent(UIEventHandler.java:38)
+	at org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:205)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:203)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:151)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:132)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:75)
+	at org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:44)
+	at org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:55)
+	at org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:63)
+	at org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:424)
+	at org.eclipse.e4.ui.model.application.ui.impl.ElementContainerImpl.setSelectedElementGen(ElementContainerImpl.java:170)
+	at org.eclipse.e4.ui.model.application.ui.impl.ElementContainerImpl.setSelectedElement(ElementContainerImpl.java:188)
+	at org.eclipse.e4.ui.internal.workbench.ModelServiceImpl.showElementInWindow(ModelServiceImpl.java:661)
+	at org.eclipse.e4.ui.internal.workbench.ModelServiceImpl.bringToTop(ModelServiceImpl.java:625)
+	at org.eclipse.e4.ui.internal.workbench.PartServiceImpl.delegateBringToTop(PartServiceImpl.java:790)
+	at org.eclipse.e4.ui.internal.workbench.PartServiceImpl.showPart(PartServiceImpl.java:1236)
+	at org.eclipse.ui.internal.WorkbenchPage.busyOpenEditor(WorkbenchPage.java:3207)
+	at org.eclipse.ui.internal.WorkbenchPage.lambda$9(WorkbenchPage.java:3112)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:72)
+	at org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:3110)
+	at org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:3080)
+	at org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:3063)
+	at org.eclipse.ui.ide.IDE.openEditor(IDE.java:607)
+	at com.silabs.ss.framework.ide.api.project.ui.util.SLSProjectHandlerEngine.doOpenEditor(SLSProjectHandlerEngine.java:500)
+	at com.silabs.ss.framework.ide.api.project.ui.util.SLSProjectHandlerEngine$3.lambda$0(SLSProjectHandlerEngine.java:485)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:185)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3963)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3590)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at com.silabs.ss.platform.internal.product.Application.start(Application.java:38)
+	at com.silabs.ss.tool.launcher.internal.product.StudioV5Application.start(StudioV5Application.java:36)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+
+!ENTRY com.silabs.ss.support.browser.html 4 0 2022-03-23 12:42:44.902
+!MESSAGE Problem creating browser view
+!STACK 0
+java.lang.NullPointerException
+	at com.teamdev.jxbrowser.deps.com.google.common.base.Preconditions.checkNotNull(Preconditions.java:880)
+	at com.teamdev.jxbrowser.view.swt.BrowserView.<init>(BrowserView.java:78)
+	at com.teamdev.jxbrowser.view.swt.BrowserView.newInstance(BrowserView.java:62)
+	at com.silabs.ss.support.browser.api.html.jxbrowser.JxBrowserService.createView(JxBrowserService.java:255)
+	at com.silabs.ss.support.browser.api.html.jxbrowser.JxBrowserPartView.createPartControl(JxBrowserPartView.java:168)
+	at com.silabs.ss.framework.ide.internal.ui.BrowserFileViewer.createPartControl(BrowserFileViewer.java:52)
+	at org.eclipse.ui.internal.e4.compatibility.CompatibilityPart.createPartControl(CompatibilityPart.java:154)
+	at org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor.createPartControl(CompatibilityEditor.java:96)
+	at org.eclipse.ui.internal.e4.compatibility.CompatibilityPart.create(CompatibilityPart.java:361)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:58)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.processAnnotated(InjectorImpl.java:1002)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.processAnnotated(InjectorImpl.java:967)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.internalInject(InjectorImpl.java:139)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.internalMake(InjectorImpl.java:408)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.make(InjectorImpl.java:331)
+	at org.eclipse.e4.core.contexts.ContextInjectionFactory.make(ContextInjectionFactory.java:202)
+	at org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.createFromBundle(ReflectionContributionFactory.java:91)
+	at org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.doCreate(ReflectionContributionFactory.java:60)
+	at org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.create(ReflectionContributionFactory.java:42)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ContributedPartRenderer.createWidget(ContributedPartRenderer.java:132)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createWidget(PartRenderingEngine.java:1002)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:662)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:768)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$0(PartRenderingEngine.java:739)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$2.run(PartRenderingEngine.java:733)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:717)
+	at org.eclipse.e4.ui.internal.workbench.PartServiceImpl$1.handleEvent(PartServiceImpl.java:107)
+	at org.eclipse.e4.ui.services.internal.events.UIEventHandler.lambda$0(UIEventHandler.java:38)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:236)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:146)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:4629)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:219)
+	at org.eclipse.e4.ui.services.internal.events.UIEventHandler.handleEvent(UIEventHandler.java:38)
+	at org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:205)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:203)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:151)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:132)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:75)
+	at org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:44)
+	at org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:55)
+	at org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:63)
+	at org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:424)
+	at org.eclipse.e4.ui.model.application.ui.impl.ElementContainerImpl.setSelectedElementGen(ElementContainerImpl.java:170)
+	at org.eclipse.e4.ui.model.application.ui.impl.ElementContainerImpl.setSelectedElement(ElementContainerImpl.java:188)
+	at org.eclipse.e4.ui.internal.workbench.ModelServiceImpl.showElementInWindow(ModelServiceImpl.java:661)
+	at org.eclipse.e4.ui.internal.workbench.ModelServiceImpl.bringToTop(ModelServiceImpl.java:625)
+	at org.eclipse.e4.ui.internal.workbench.PartServiceImpl.delegateBringToTop(PartServiceImpl.java:790)
+	at org.eclipse.e4.ui.internal.workbench.PartServiceImpl.showPart(PartServiceImpl.java:1236)
+	at org.eclipse.ui.internal.WorkbenchPage.busyOpenEditor(WorkbenchPage.java:3207)
+	at org.eclipse.ui.internal.WorkbenchPage.lambda$9(WorkbenchPage.java:3112)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:72)
+	at org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:3110)
+	at org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:3080)
+	at org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:3063)
+	at org.eclipse.ui.ide.IDE.openEditor(IDE.java:607)
+	at com.silabs.ss.framework.ide.api.project.ui.util.SLSProjectHandlerEngine.doOpenEditor(SLSProjectHandlerEngine.java:500)
+	at com.silabs.ss.framework.ide.api.project.ui.util.SLSProjectHandlerEngine$3.lambda$0(SLSProjectHandlerEngine.java:485)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:185)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3963)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3590)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at com.silabs.ss.platform.internal.product.Application.start(Application.java:38)
+	at com.silabs.ss.tool.launcher.internal.product.StudioV5Application.start(StudioV5Application.java:36)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SESSION 2022-03-23 12:42:47.065 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.5
+java.vendor=Amazon.com Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.silabs.ss.platform.jetty.server 1 0 2022-03-23 12:42:48.186
+!MESSAGE ContentServer started at: 127.0.0.1, 57655
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-23 12:42:48.186
+!MESSAGE com.silabs.ss.tool.launcher.product found! Writing main studio shared file
+
+!ENTRY org.eclipse.core.resources 2 10035 2022-03-23 12:42:48.468
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-23 12:42:56.114
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.support.browser.html 1 0 2022-03-23 12:42:59.088
+!MESSAGE Browser workarea set to: C:\Users\█████████\Desktop\I2DS\.browser
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-23 12:42:59.135
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-03-23 12:43:02.379
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.tool.installer.core 2 0 2022-03-23 12:43:03.883
+!MESSAGE Problem getting package resources: changelog
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-03-23 12:43:05.997
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 12:46:18.011
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:46:28.178
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 12:46:28.943
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:46:28.943
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 12:48:09.218
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:48:19.433
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 12:48:20.231
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 12:48:20.231
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 13:07:56.538
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:08:07.007
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 13:08:07.784
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:08:07.784
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 13:09:16.127
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:09:26.340
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 13:09:27.020
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:09:27.020
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 13:10:07.130
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:10:17.350
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 13:10:18.111
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:10:18.111
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 13:11:09.450
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:11:19.511
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 13:11:20.271
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:11:20.271
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY org.eclipse.ui 4 0 2022-03-23 13:11:20.275
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.dsf.ui.viewmodel.DefaultVMModelProxyStrategy$11.handleSuccess(DefaultVMModelProxyStrategy.java:736)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.handleCompleted(RequestMonitor.java:391)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor$2.run(RequestMonitor.java:317)
+	at org.eclipse.cdt.dsf.ui.concurrent.SimpleDisplayExecutor.runInSwtThread(SimpleDisplayExecutor.java:116)
+	at org.eclipse.cdt.dsf.ui.concurrent.SimpleDisplayExecutor.lambda$0(SimpleDisplayExecutor.java:81)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:185)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3963)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3590)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at com.silabs.ss.platform.internal.product.Application.start(Application.java:38)
+	at com.silabs.ss.tool.launcher.internal.product.StudioV5Application.start(StudioV5Application.java:36)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 13:11:41.471
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:11:51.966
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 13:11:52.637
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:11:52.637
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-23 13:12:57.822
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 13:13:07.756
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:13:17.821
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 13:13:18.584
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:13:18.584
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-23 13:15:05.068
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 13:15:13.800
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:15:24.030
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 13:15:24.723
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:15:24.723
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-23 13:42:50.392
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.tool.hwconfig.ui.pintool 1 0 2022-03-23 13:49:13.803
+!MESSAGE componentAdded: delta=com.silabs.ss.framework.uc.core.internal.project.UcProjectDelta@a6ac4e7, components=[IADC]
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 13:50:35.612
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:50:45.672
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 13:50:46.362
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:50:46.362
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 13:53:14.854
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:53:25.065
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 13:53:25.826
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:53:25.826
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 13:55:06.601
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:55:16.704
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 13:55:17.472
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:55:17.472
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 13:56:11.819
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:56:22.136
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 13:56:22.901
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:56:22.901
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 13:57:20.744
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:57:29.071
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 13:57:29.831
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:57:29.831
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 13:59:33.160
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:59:43.291
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 13:59:44.053
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 13:59:44.054
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 14:00:28.410
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:00:36.635
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 14:00:37.399
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:00:37.399
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 14:03:11.275
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:03:21.535
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 14:03:22.293
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:03:22.293
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 14:03:49.308
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:03:57.649
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 14:03:58.414
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:03:58.414
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 14:04:42.060
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:04:50.385
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 14:04:51.145
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:04:51.145
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 14:16:57.238
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:17:05.460
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 14:17:06.144
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:17:06.144
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 14:19:59.302
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:20:09.384
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 14:20:10.144
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:20:10.144
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 14:20:44.310
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:20:50.815
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 14:20:51.576
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:20:51.576
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 14:22:50.584
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:22:57.146
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 14:22:57.906
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:22:57.906
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 14:24:10.365
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:24:16.832
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 14:24:17.592
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:24:17.592
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 14:25:17.122
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:25:23.621
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 14:25:24.382
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:25:24.382
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 14:26:40.654
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:26:50.851
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 14:26:51.612
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:26:51.612
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 14:27:15.525
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:27:22.038
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 14:27:22.797
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:27:22.797
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 14:28:24.140
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:28:30.704
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 14:28:31.464
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:28:31.464
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 14:30:05.961
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:30:16.047
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 14:30:16.808
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:30:16.808
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-23 14:32:17.550
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-23 14:34:04.670
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:34:14.733
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-23 14:34:15.491
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-23 14:34:15.491
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-23 14:35:12.946
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-23 14:36:06.425
+!MESSAGE Deleted Shared Daemon File: C:\Users\█████████\.uc\cli\mainstudio.running
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-23 14:36:06.425
+!MESSAGE Deleted Shared Daemon Version File: C:\Users\█████████\.uc\cli\mainstudio.running.version
+
+!ENTRY org.eclipse.tcf 4 0 2022-03-23 14:36:06.643
+!MESSAGE Failed to shutdown TCF event dispatch thread
+!STACK 0
+java.lang.InterruptedException
+	at java.base/java.lang.Object.wait(Native Method)
+	at java.base/java.lang.Thread.join(Thread.java:1305)
+	at java.base/java.lang.Thread.join(Thread.java:1379)
+	at org.eclipse.tcf.EventQueue.shutdown(EventQueue.java:76)
+	at org.eclipse.tcf.Activator.stop(Activator.java:154)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:899)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:1)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.stop(BundleContextImpl.java:891)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.stopWorker0(EquinoxBundle.java:1029)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.stopWorker(EquinoxBundle.java:370)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:658)
+	at org.eclipse.osgi.container.Module.stop(Module.java:520)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.decStartLevel(ModuleContainer.java:1885)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1760)
+	at org.eclipse.osgi.container.SystemModule.stopWorker(SystemModule.java:275)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule.stopWorker(EquinoxBundle.java:202)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:658)
+	at org.eclipse.osgi.container.Module.stop(Module.java:520)
+	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:207)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:220)
+	at java.base/java.lang.Thread.run(Thread.java:834)
