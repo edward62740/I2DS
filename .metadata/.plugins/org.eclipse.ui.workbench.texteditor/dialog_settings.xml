@@ -6,8 +6,11 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="MODEM"/>
+		<item key="selection" value="Poll"/>
 		<list key="findhistory">
+			<item value="poll"/>
+			<item value="iadc"/>
+			<item value="idac"/>
 			<item value="modem"/>
 			<item value="moden"/>
 			<item value="moem"/>
@@ -20,7 +23,6 @@
 			<item value="tx_power"/>
 			<item value="signal"/>
 			<item value="rssi"/>
-			<item value="rss"/>
 		</list>
 		<list key="replacehistory">
 		</list>
