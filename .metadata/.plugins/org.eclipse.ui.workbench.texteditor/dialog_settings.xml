@@ -6,8 +6,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="PRESSED"/>
 		<list key="findhistory">
+			<item value="pressed"/>
+			<item value="cli"/>
 			<item value="report_handler"/>
 			<item value="poll"/>
 			<item value="iadc"/>
@@ -21,8 +23,6 @@
 			<item value="power"/>
 			<item value="leave"/>
 			<item value="reset"/>
-			<item value="tx_power"/>
-			<item value="signal"/>
 		</list>
 		<list key="replacehistory">
 		</list>

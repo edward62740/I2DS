@@ -10626,3 +10626,857 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.core.CCorePlugin.log(CCorePlugin.java:1576)
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:175)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2022-03-24 09:05:43.108 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.5
+java.vendor=Amazon.com Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.silabs.ss.platform.jetty.server 1 0 2022-03-24 09:05:46.092
+!MESSAGE ContentServer started at: 127.0.0.1, 59403
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:05:46.107
+!MESSAGE com.silabs.ss.tool.launcher.product found! Writing main studio shared file
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-03-24 09:06:06.051
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.tool.installer.core 2 0 2022-03-24 09:06:06.910
+!MESSAGE Problem getting package resources: changelog
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-03-24 09:06:09.097
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.support.browser.html 1 0 2022-03-24 09:15:37.925
+!MESSAGE Browser workarea set to: C:\Users\█████████\Desktop\I2DS\.browser
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-24 09:26:53.157
+!MESSAGE Unknown architecture(s) [efm32~series[2]~device_configuration[3], efm32~series[2]~device_configuration[4]] in sample app Internal Storage Bootloader (single image on 512kB device with 131072k flash base)
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-24 09:26:53.161
+!MESSAGE Unknown architecture(s) [efm32~series[2]~device_configuration[4]] in sample app Internal Storage Bootloader (single image on 1536kB device with 131072k flash base)
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-24 09:26:53.164
+!MESSAGE Unknown architecture(s) [efm32~series[2]~device_configuration[2]~flash[352K]] in sample app Internal Storage Bootloader (single image on 352kB device)
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-24 09:26:53.166
+!MESSAGE Unknown architecture(s) [efm32~series[2]~device_configuration[3], efm32~series[2]~device_configuration[4]] in sample app Internal Storage Bootloader (single image on 352kB device with 131072k flash base)
+
+!ENTRY org.eclipse.cdt.core 1 0 2022-03-24 09:27:34.535
+!MESSAGE Indexed 'power_manager_kernel_micriumos' (69 sources, 227 headers) in 6.24 sec: 15,812 declarations; 57,455 references; 0 unresolved inclusions; 2 syntax errors; 0 unresolved names (0%)
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:33:16.763
+!MESSAGE editor file home calculation for Studio resulted in C:\Users\█████████\Desktop\I2DS\PIRSN\.uceditor for PIRSN with component Stack Common
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:33:16.982
+!MESSAGE Servlet registered: /rest/ucedit/metadata
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:33:16.987
+!MESSAGE Servlet registered: /rest/ucedit/action/opensource
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:33:16.995
+!MESSAGE Servlet registered: /rest/ucedit/action/cmsisedit
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:33:16.996
+!MESSAGE sockets ready servlet being set up
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:33:17.000
+!MESSAGE Servlet registered: /rest/ucedit/action/socketsready
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:33:17.001
+!MESSAGE sockets ready servlet is ready
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:33:17.005
+!MESSAGE Servlet registered: /rest/ucedit/action/configsready
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:33:17.006
+!MESSAGE Websocket on server side linked to /ws/ucedit/filechanges
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:33:17.012
+!MESSAGE editor file home calculation for Studio resulted in C:\Users\█████████\Desktop\I2DS\PIRSN\.uceditor for PIRSN with component Stack Common
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:33:17.049
+!MESSAGE Initial cmsis parsing: {stack-common-config.h=Start Parse Offset: 2599
+End Parse Offset: 2599
+Parsing Error: null
+Parsing Error offset: -1
+fContainWizard: true
+}
+
+!ENTRY com.silabs.ss.tool.uc.editor 4 0 2022-03-24 09:33:17.052
+!MESSAGE Could not load pintool device data within 30 second timeframe. Marker manager not connected to component editor -- device errors will not show up.
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:33:17.059
+!MESSAGE CMSIS Parse success for stack-common-config.h
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:33:17.087
+!MESSAGE preparing cmsis websocket update: {"configurables":{"removed":[],"updated":[{"parent_category_id":"CMSIS_$stack-common-config.h$_Connect Stack Common configuration","conf_type":"spinner","min":250,"max":10000,"initial":4000,"header":"stack-common-config.h","step":2,"label":"Minimum Heap Size in bytes","id":"CMSIS_$stack-common-config.h$_EMBER_HEAP_SIZE","type":"conf","desc":"Default: 4000\r\nThe minimum size in bytes of the memory heap."},{"parent_category_id":"CMSIS_$stack-common-config.h$_Connect Stack Common configuration","conf_type":"spinner","initial":-65,"header":"stack-common-config.h","label":"MAC CCA Threshold in dBm","id":"CMSIS_$stack-common-config.h$_EMBER_RADIO_CCA_THRESHOLD","type":"conf","desc":"Default: -65\r\nMAC CCA Threshold value in dBm."},{"parent_category_id":"CMSIS_$stack-common-config.h$_Connect Stack Common configuration","conf_type":"spinner","min":1,"max":65,"initial":25,"header":"stack-common-config.h","label":"MAC ACK timeout in milliseconds","id":"CMSIS_$stack-common-config.h$_EMBER_MAC_ACK_TIMEOUT_MS","type":"conf","desc":"Default: 25\r\nThis parameter should be fine-tuned to reduce energy consumption for sleepy devices and depends on the data rate of the PHY configuration used."},{"parent_category_id":"CMSIS_$stack-common-config.h$_Connect Stack Common configuration","conf_type":"spinner","min":1,"max":64,"initial":10,"header":"stack-common-config.h","label":"Size of the short-to-long address mapping table","id":"CMSIS_$stack-common-config.h$_EMBER_SECURITY_SHORT_TO_LONG_MAPPING_TABLE_SIZE","type":"conf","desc":"Default: 10\r\nThis table is only used for EMBER_MAC_MODE_DEVICE and EMBER_MAC_MODE_SLEEPY_DEVICE, but the memory will be allocated on all device types."},{"header":"stack-common-config.h","label":"Connect Stack Common configuration","id":"CMSIS_$stack-common-config.h$_Connect Stack Common configuration","type":"cat","conf_class":"cmsis"}]},"clientId":"project/file_3A_2FC_3A_2FUsers_2F█████████_2FDesktop_2FI2DS_2FPIRSN_2FPIRSN.slcp/component/connect_stack_common","header":"stack-common-config.h","wsType":"config_update","conf_class":"cmsis"}
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:33:17.307
+!MESSAGE Client mentioned sockets are all ready: counting down latch
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:33:17.308
+!MESSAGE latch unlocked: cmsis socket response sending
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:33:17.395
+!MESSAGE Clear CMSIS Issues WS call: {"clientId":"project/file_3A_2FC_3A_2FUsers_2F█████████_2FDesktop_2FI2DS_2FPIRSN_2FPIRSN.slcp/component/connect_stack_common","ids":[],"wsType":"clear_issues"}
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:33:20.794
+!MESSAGE UcEditorController: onWebSocketClose CALLED statusCode=1001 reason=null
+
+!ENTRY com.silabs.ss.tool.hwconfig.ui.pintool 1 0 2022-03-24 09:54:08.566
+!MESSAGE componentAdded: delta=com.silabs.ss.framework.uc.core.internal.project.UcProjectDelta@1468af4c, components=[Micrium OS Kernel]
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:54:14.827
+!MESSAGE editor file home calculation for Studio resulted in C:\Users\█████████\Desktop\I2DS\PIRSN\.uceditor for PIRSN with component Micrium OS Kernel
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:54:14.839
+!MESSAGE editor file home calculation for Studio resulted in C:\Users\█████████\Desktop\I2DS\PIRSN\.uceditor for PIRSN with component Micrium OS Kernel
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:54:14.843
+!MESSAGE Initial cmsis parsing: {os_cfg.h=Start Parse Offset: 13808
+End Parse Offset: 13808
+Parsing Error: null
+Parsing Error offset: -1
+fContainWizard: true
+}
+
+!ENTRY com.silabs.ss.tool.uc.editor 4 0 2022-03-24 09:54:14.851
+!MESSAGE Could not load pintool device data within 30 second timeframe. Marker manager not connected to component editor -- device errors will not show up.
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:54:14.868
+!MESSAGE CMSIS Parse success for os_cfg.h
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:54:14.869
+!MESSAGE preparing cmsis websocket update: {"configurables":{"removed":[],"updated":[{"parent_category_id":"CMSIS_$os_cfg.h$_Miscellaneous Configuration","conf_type":"check","initial":false,"header":"os_cfg.h","label":"Enable application hooks","id":"CMSIS_$os_cfg.h$_OS_CFG_APP_HOOKS_EN","type":"conf","desc":"Enable or disable Application-specific Hooks.\r\nDefault: 0"},{"parent_category_id":"CMSIS_$os_cfg.h$_Miscellaneous Configuration","conf_type":"check","initial":false,"header":"os_cfg.h","label":"Add debug helper code and variable","id":"CMSIS_$os_cfg.h$_OS_CFG_DBG_EN","type":"conf","desc":"Enable debug helper code and variables.\r\nDefault: 0"},{"parent_category_id":"CMSIS_$os_cfg.h$_Miscellaneous Configuration","conf_type":"check","initial":true,"header":"os_cfg.h","label":"Enable ticks support","id":"CMSIS_$os_cfg.h$_OS_CFG_TICK_EN","type":"conf","desc":"Enable or disable support for ticks (Delay functions, pend with timeouts, etc).\r\nDefault: 1"},{"parent_category_id":"CMSIS_$os_cfg.h$_Miscellaneous Configuration","conf_type":"check","initial":false,"header":"os_cfg.h","label":"Add timestamping capabilities","id":"CMSIS_$os_cfg.h$_OS_CFG_TS_EN","type":"conf","desc":"Default: 0"},{"parent_category_id":"CMSIS_$os_cfg.h$_Miscellaneous Configuration","conf_type":"spinner","initial":64,"header":"os_cfg.h","label":"Maximum number of task priorities","id":"CMSIS_$os_cfg.h$_OS_CFG_PRIO_MAX","type":"conf","desc":"Default: 64"},{"parent_category_id":"CMSIS_$os_cfg.h$_Miscellaneous Configuration","conf_type":"check","initial":false,"header":"os_cfg.h","label":"Enable scheduler lock time measurement","id":"CMSIS_$os_cfg.h$_OS_CFG_SCHED_LOCK_TIME_MEAS_EN","type":"conf","desc":"Default: 0"},{"parent_category_id":"CMSIS_$os_cfg.h$_Miscellaneous Configuration","conf_type":"check","initial":false,"header":"os_cfg.h","label":"Enable Round-Robin scheduling","id":"CMSIS_$os_cfg.h$_OS_CFG_SCHED_ROUND_ROBIN_EN","type":"conf","desc":"Default: 0"},{"parent_category_id":"CMSIS_$os_cfg.h$_Miscellaneous Configuration","conf_type":"spinner","initial":64,"header":"os_cfg.h","label":"Minimum allowable task stack size (in CPU_STK elements)","id":"CMSIS_$os_cfg.h$_OS_CFG_STK_SIZE_MIN","type":"conf","desc":"Default: 64"},{"parent_category_id":"CMSIS_$os_cfg.h$_Miscellaneous Configuration","conf_type":"spinner","initial":0,"header":"os_cfg.h","label":"Add threadsafe errno support","id":"CMSIS_$os_cfg.h$_OS_CFG_ERRNO_EN","type":"conf","desc":"Default: 0"},{"header":"os_cfg.h","label":"Miscellaneous Configuration","id":"CMSIS_$os_cfg.h$_Miscellaneous Configuration","type":"cat","conf_class":"cmsis"},{"parent_category_id":"CMSIS_$os_cfg.h$_Event Flags Configuration","conf_type":"check","initial":true,"header":"os_cfg.h","label":"Enable event flags","id":"CMSIS_$os_cfg.h$_OS_CFG_FLAG_EN","type":"conf","desc":"Enable the event flags synchronization construct.\r\nDefault: 1"},{"parent_category_id":"CMSIS_$os_cfg.h$_Event Flags Configuration","conf_type":"check","initial":false,"header":"os_cfg.h","label":"Enable Active-low event flags","id":"CMSIS_$os_cfg.h$_OS_CFG_FLAG_MODE_CLR_EN","type":"conf","desc":"Enable the active-low mode of the event flags\r\nDefault: 0"},{"header":"os_cfg.h","label":"Event Flags Configuration","id":"CMSIS_$os_cfg.h$_Event Flags Configuration","type":"cat","conf_class":"cmsis"},{"parent_category_id":"CMSIS_$os_cfg.h$_Mutual Exclusion Semaphores Configuration","conf_type":"check","initial":true,"header":"os_cfg.h","label":"Enable mutexes","id":"CMSIS_$os_cfg.h$_OS_CFG_MUTEX_EN","type":"conf","desc":"Enable the Mutual Exclusion (Mutex) synchronization construct.\r\nDefault: 1"},{"header":"os_cfg.h","label":"Mutual Exclusion Semaphores Configuration","id":"CMSIS_$os_cfg.h$_Mutual Exclusion Semaphores Configuration","type":"cat","conf_class":"cmsis"},{"parent_category_id":"CMSIS_$os_cfg.h$_Message Queues Configuration","conf_type":"check","initial":true,"header":"os_cfg.h","label":"Enable queues","id":"CMSIS_$os_cfg.h$_OS_CFG_Q_EN","type":"conf","desc":"Enable the message queue construct.\r\nDefault: 1"},{"header":"os_cfg.h","label":"Message Queues Configuration","id":"CMSIS_$os_cfg.h$_Message Queues Configuration","type":"cat","conf_class":"cmsis"},{"parent_category_id":"CMSIS_$os_cfg.h$_Semaphores Configuration","conf_type":"check","initial":true,"header":"os_cfg.h","label":"Enable semaphores","id":"CMSIS_$os_cfg.h$_OS_CFG_SEM_EN","type":"conf","desc":"Enable the semaphore synchronization construct.\r\nDefault: 1"},{"header":"os_cfg.h","label":"Semaphores Configuration","id":"CMSIS_$os_cfg.h$_Semaphores Configuration","type":"cat","conf_class":"cmsis"},{"parent_category_id":"CMSIS_$os_cfg.h$_Monitors Configuration","conf_type":"check","initial":true,"header":"os_cfg.h","label":"Enable monitors","id":"CMSIS_$os_cfg.h$_OS_CFG_MON_EN","type":"conf","desc":"Enable the monitor (condition variable) synchronization construct.\r\nDefault: 1"},{"header":"os_cfg.h","label":"Monitors Configuration","id":"CMSIS_$os_cfg.h$_Monitors Configuration","type":"cat","conf_class":"cmsis"},{"parent_category_id":"CMSIS_$os_cfg.h$_Task Management Configuration","conf_type":"check","initial":false,"header":"os_cfg.h","label":"Enable statistics gathering task","id":"CMSIS_$os_cfg.h$_OS_CFG_STAT_TASK_EN","type":"conf","desc":"Default: 0"},{"parent_category_id":"CMSIS_$os_cfg.h$_Task Management Configuration","conf_type":"check","initial":true,"header":"os_cfg.h","label":"Enable stack overflow detection of the statistics task","id":"CMSIS_$os_cfg.h$_OS_CFG_STAT_TASK_STK_CHK_EN","type":"conf","desc":"Default: 1"},{"parent_category_id":"CMSIS_$os_cfg.h$_Task Management Configuration","conf_type":"check","initial":false,"header":"os_cfg.h","label":"Enable task profiling instrumentation","id":"CMSIS_$os_cfg.h$_OS_CFG_TASK_PROFILE_EN","type":"conf","desc":"Default: 0"},{"parent_category_id":"CMSIS_$os_cfg.h$_Task Management Configuration","conf_type":"check","initial":false,"header":"os_cfg.h","label":"Enable task message queues","id":"CMSIS_$os_cfg.h$_OS_CFG_TASK_Q_EN","type":"conf","desc":"Default: 0"},{"parent_category_id":"CMSIS_$os_cfg.h$_Task Management Configuration","conf_type":"spinner","initial":3,"header":"os_cfg.h","label":"Number of task registers","id":"CMSIS_$os_cfg.h$_OS_CFG_TASK_REG_TBL_SIZE","type":"conf","desc":"Default: 3"},{"parent_category_id":"CMSIS_$os_cfg.h$_Task Management Configuration","conf_type":"check","initial":false,"header":"os_cfg.h","label":"Enable redzone stack protection","id":"CMSIS_$os_cfg.h$_OS_CFG_TASK_STK_REDZONE_EN","type":"conf","desc":"Default: 0"},{"parent_category_id":"CMSIS_$os_cfg.h$_Task Management Configuration","conf_type":"spinner","initial":8,"header":"os_cfg.h","label":"Depth of the redzone stack protection","id":"CMSIS_$os_cfg.h$_OS_CFG_TASK_STK_REDZONE_DEPTH","type":"conf","desc":"Default: 8"},{"header":"os_cfg.h","label":"Task Management Configuration","id":"CMSIS_$os_cfg.h$_Task Management Configuration","type":"cat","conf_class":"cmsis"},{"parent_category_id":"CMSIS_$os_cfg.h$_Task Local Storage Management Configuration","conf_type":"spinner","initial":0,"header":"os_cfg.h","label":"Number of task local storage registers","id":"CMSIS_$os_cfg.h$_OS_CFG_TLS_TBL_SIZE","type":"conf","desc":"Default: 0"},{"header":"os_cfg.h","label":"Task Local Storage Management Configuration","id":"CMSIS_$os_cfg.h$_Task Local Storage Management Configuration","type":"cat","conf_class":"cmsis"},{"parent_category_id":"CMSIS_$os_cfg.h$_Timer Management Configuration","conf_type":"check","initial":false,"header":"os_cfg.h","label":"Enable software timers","id":"CMSIS_$os_cfg.h$_OS_CFG_TMR_EN","type":"conf","desc":"Default: 0"},{"header":"os_cfg.h","label":"Timer Management Configuration","id":"CMSIS_$os_cfg.h$_Timer Management Configuration","type":"cat","conf_class":"cmsis"},{"parent_category_id":"CMSIS_$os_cfg.h$_CMSIS RTOS2 Timer Management Configuration","conf_type":"check","initial":false,"header":"os_cfg.h","label":"Enable CMSIS RTOS2 software timers","id":"CMSIS_$os_cfg.h$_CMSIS_RTOS2_TIMER_TASK_EN","type":"conf","desc":"Default: 0"},{"parent_category_id":"CMSIS_$os_cfg.h$_CMSIS RTOS2 Timer Management Configuration","conf_type":"spinner","initial":128,"header":"os_cfg.h","label":"Timer task stack size","id":"CMSIS_$os_cfg.h$_CMSIS_RTOS2_TIMER_TASK_STACK_SIZE","type":"conf","desc":"Default: 128"},{"parent_category_id":"CMSIS_$os_cfg.h$_CMSIS RTOS2 Timer Management Configuration","conf_type":"spinner","initial":4,"header":"os_cfg.h","label":"Timer task priority","id":"CMSIS_$os_cfg.h$_CMSIS_RTOS2_TIMER_TASK_PRIO","type":"conf","desc":"Default: 4"},{"parent_category_id":"CMSIS_$os_cfg.h$_CMSIS RTOS2 Timer Management Configuration","conf_type":"spinner","initial":5,"header":"os_cfg.h","label":"Timer queue size","id":"CMSIS_$os_cfg.h$_CMSIS_RTOS2_TIMER_TASK_QUEUE_SIZE","type":"conf","desc":"Default: 5"},{"header":"os_cfg.h","label":"CMSIS RTOS2 Timer Management Configuration","id":"CMSIS_$os_cfg.h$_CMSIS RTOS2 Timer Management Configuration","type":"cat","conf_class":"cmsis"}]},"clientId":"project/file_3A_2FC_3A_2FUsers_2F█████████_2FDesktop_2FI2DS_2FPIRSN_2FPIRSN.slcp/component/micriumos_kernel","header":"os_cfg.h","wsType":"config_update","conf_class":"cmsis"}
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:54:15.107
+!MESSAGE Client mentioned sockets are all ready: counting down latch
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:54:15.108
+!MESSAGE latch unlocked: cmsis socket response sending
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 09:54:15.347
+!MESSAGE Clear CMSIS Issues WS call: {"clientId":"project/file_3A_2FC_3A_2FUsers_2F█████████_2FDesktop_2FI2DS_2FPIRSN_2FPIRSN.slcp/component/micriumos_kernel","ids":[],"wsType":"clear_issues"}
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-24 09:55:32.938
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-24 09:55:37.561
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-24 09:56:18.260
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-24 09:56:29.491
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-24 09:56:30.256
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-24 09:56:30.256
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-24 10:00:57.071
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 10:03:11.929
+!MESSAGE Resource Changed: Reparsing L/PIRSN/config/os_cfg.h for cmsis
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 10:03:11.933
+!MESSAGE A Cmsis Reparse was triggered for os_cfg.h
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 10:03:11.955
+!MESSAGE CMSIS Parse success for os_cfg.h
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 10:03:11.962
+!MESSAGE preparing cmsis websocket update: {"configurables":{"removed":[],"updated":[]},"clientId":"project/file_3A_2FC_3A_2FUsers_2F█████████_2FDesktop_2FI2DS_2FPIRSN_2FPIRSN.slcp/component/micriumos_kernel","header":"os_cfg.h","wsType":"config_update","conf_class":"cmsis"}
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 10:03:11.963
+!MESSAGE latch unlocked: cmsis socket response sending
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 10:03:12.010
+!MESSAGE Clear CMSIS Issues WS call: {"clientId":"project/file_3A_2FC_3A_2FUsers_2F█████████_2FDesktop_2FI2DS_2FPIRSN_2FPIRSN.slcp/component/micriumos_kernel","ids":[],"wsType":"clear_issues"}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-03-24 10:04:22.994
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-03-24 10:04:23.016
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-03-24 10:04:23.017
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.tool.launcher.ui 4 0 2022-03-24 10:04:24.484
+!MESSAGE Error getting document links from docs.silabs.com
+!STACK 0
+java.util.concurrent.CompletionException: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:645)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)
+	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:840)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:479)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+Caused by: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at org.json.JSONTokener.syntaxError(JSONTokener.java:433)
+	at org.json.JSONObject.<init>(JSONObject.java:195)
+	at org.json.JSONObject.<init>(JSONObject.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)
+	... 9 more
+
+!ENTRY com.silabs.ss.tool.launcher.ui 4 0 2022-03-24 10:04:24.709
+!MESSAGE Error getting document links from docs.silabs.com
+!STACK 0
+java.util.concurrent.CompletionException: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:645)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)
+	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:840)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:479)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+Caused by: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at org.json.JSONTokener.syntaxError(JSONTokener.java:433)
+	at org.json.JSONObject.<init>(JSONObject.java:195)
+	at org.json.JSONObject.<init>(JSONObject.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)
+	... 9 more
+
+!ENTRY com.silabs.ss.tool.launcher.ui 4 0 2022-03-24 10:04:24.907
+!MESSAGE Error getting document links from docs.silabs.com
+!STACK 0
+java.util.concurrent.CompletionException: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:645)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)
+	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:840)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:479)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+Caused by: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at org.json.JSONTokener.syntaxError(JSONTokener.java:433)
+	at org.json.JSONObject.<init>(JSONObject.java:195)
+	at org.json.JSONObject.<init>(JSONObject.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)
+	... 9 more
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-03-24 10:08:12.777
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-03-24 10:08:12.781
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-03-24 10:33:44.299
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-03-24 10:33:44.301
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.tool.launcher.ui 4 0 2022-03-24 10:33:44.554
+!MESSAGE Error getting document links from docs.silabs.com
+!STACK 0
+java.util.concurrent.CompletionException: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:645)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)
+	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:840)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:479)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+Caused by: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at org.json.JSONTokener.syntaxError(JSONTokener.java:433)
+	at org.json.JSONObject.<init>(JSONObject.java:195)
+	at org.json.JSONObject.<init>(JSONObject.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)
+	... 9 more
+
+!ENTRY com.silabs.ss.tool.launcher.ui 4 0 2022-03-24 10:33:44.831
+!MESSAGE Error getting document links from docs.silabs.com
+!STACK 0
+java.util.concurrent.CompletionException: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:645)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)
+	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:840)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:479)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+Caused by: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at org.json.JSONTokener.syntaxError(JSONTokener.java:433)
+	at org.json.JSONObject.<init>(JSONObject.java:195)
+	at org.json.JSONObject.<init>(JSONObject.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)
+	... 9 more
+
+!ENTRY com.silabs.ss.tool.launcher.ui 4 0 2022-03-24 10:33:45.149
+!MESSAGE Error getting document links from docs.silabs.com
+!STACK 0
+java.util.concurrent.CompletionException: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:645)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)
+	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:840)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:479)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+Caused by: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at org.json.JSONTokener.syntaxError(JSONTokener.java:433)
+	at org.json.JSONObject.<init>(JSONObject.java:195)
+	at org.json.JSONObject.<init>(JSONObject.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)
+	... 9 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-24 10:33:48.339
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-24 10:33:59.480
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-24 10:34:00.248
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-24 10:34:00.248
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-03-24 10:34:03.703
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-03-24 10:34:03.704
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 10:40:33.111
+!MESSAGE Clear CMSIS Issues WS call: {"clientId":"project/file_3A_2FC_3A_2FUsers_2F█████████_2FDesktop_2FI2DS_2FPIRSN_2FPIRSN.slcp/component/micriumos_kernel","ids":[],"wsType":"clear_issues"}
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 10:40:33.175
+!MESSAGE Clear CMSIS Issues WS call: {"clientId":"project/file_3A_2FC_3A_2FUsers_2F█████████_2FDesktop_2FI2DS_2FPIRSN_2FPIRSN.slcp/component/micriumos_kernel","ids":[],"wsType":"clear_issues"}
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-24 10:41:16.497
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-24 10:41:23.834
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-24 10:41:24.596
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-24 10:41:24.596
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-03-24 10:52:07.882
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-03-24 10:53:16.484
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-24 10:55:59.244
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-24 10:56:10.393
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-24 10:56:11.078
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-24 10:56:11.078
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-24 10:57:18.651
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-24 10:57:25.688
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-24 10:57:26.450
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-24 10:57:26.450
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-24 10:57:37.735
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-24 10:57:44.791
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-24 10:57:45.552
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-24 10:57:45.552
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 13:20:51.592
+!MESSAGE Clear CMSIS Issues WS call: {"clientId":"project/file_3A_2FC_3A_2FUsers_2F█████████_2FDesktop_2FI2DS_2FPIRSN_2FPIRSN.slcp/component/micriumos_kernel","ids":[],"wsType":"clear_issues"}
+
+!ENTRY com.silabs.ss.tool.hwconfig.ui.pintool 1 0 2022-03-24 13:20:51.636
+!MESSAGE componentAdded: delta=com.silabs.ss.framework.uc.core.internal.project.UcProjectDelta@2315bd76, components=[ACMP]
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 13:20:51.710
+!MESSAGE Clear CMSIS Issues WS call: {"clientId":"project/file_3A_2FC_3A_2FUsers_2F█████████_2FDesktop_2FI2DS_2FPIRSN_2FPIRSN.slcp/component/micriumos_kernel","ids":[],"wsType":"clear_issues"}
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 13:21:54.098
+!MESSAGE Clear CMSIS Issues WS call: {"clientId":"project/file_3A_2FC_3A_2FUsers_2F█████████_2FDesktop_2FI2DS_2FPIRSN_2FPIRSN.slcp/component/micriumos_kernel","ids":[],"wsType":"clear_issues"}
+
+!ENTRY com.silabs.ss.tool.hwconfig.ui.pintool 1 0 2022-03-24 13:21:54.123
+!MESSAGE componentAdded: delta=com.silabs.ss.framework.uc.core.internal.project.UcProjectDelta@23f9bad3, components=[LESENSE]
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 13:21:54.198
+!MESSAGE Clear CMSIS Issues WS call: {"clientId":"project/file_3A_2FC_3A_2FUsers_2F█████████_2FDesktop_2FI2DS_2FPIRSN_2FPIRSN.slcp/component/micriumos_kernel","ids":[],"wsType":"clear_issues"}
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-24 13:22:57.652
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-24 13:23:08.972
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-24 13:23:09.733
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-24 13:23:09.733
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-24 13:26:09.322
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-24 13:26:20.532
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-24 13:26:21.297
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-24 13:26:21.297
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-24 13:29:43.792
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-24 13:29:52.520
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-24 13:29:53.284
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-24 13:29:53.284
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 13:31:09.816
+!MESSAGE Clear CMSIS Issues WS call: {"clientId":"project/file_3A_2FC_3A_2FUsers_2F█████████_2FDesktop_2FI2DS_2FPIRSN_2FPIRSN.slcp/component/micriumos_kernel","ids":[],"wsType":"clear_issues"}
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 13:31:09.882
+!MESSAGE Clear CMSIS Issues WS call: {"clientId":"project/file_3A_2FC_3A_2FUsers_2F█████████_2FDesktop_2FI2DS_2FPIRSN_2FPIRSN.slcp/component/micriumos_kernel","ids":[],"wsType":"clear_issues"}
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-24 13:31:51.095
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-24 13:31:58.131
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-24 13:31:58.819
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-24 13:31:58.819
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-24 13:39:18.040
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-24 13:39:26.886
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-24 13:39:27.562
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-24 13:39:27.562
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.tool.uc.editor 2 0 2022-03-24 13:40:34.924
+!MESSAGE Could not examine potential editor to close: an editor for a removed component may have been left open due to Resource '/PIRSN/.uceditor/.PIRSN.iostream_eusartvcom.cedit' does not exist.
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException(/PIRSN/.uceditor/.PIRSN.iostream_eusartvcom.cedit)[368]: java.lang.Exception: Resource '/PIRSN/.uceditor/.PIRSN.iostream_eusartvcom.cedit' does not exist.
+	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
+	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:330)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:204)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:273)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:266)
+	at com.silabs.ss.tool.uc.editor.EclipseUcContextListener.removeEditor(EclipseUcContextListener.java:104)
+	at com.silabs.ss.tool.uc.editor.EclipseUcContextListener$1.lambda$0(EclipseUcContextListener.java:77)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:185)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3963)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3590)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at com.silabs.ss.platform.internal.product.Application.start(Application.java:38)
+	at com.silabs.ss.tool.launcher.internal.product.StudioV5Application.start(StudioV5Application.java:36)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2022-03-24 13:40:34.924
+!MESSAGE Resource '/PIRSN/.uceditor/.PIRSN.iostream_eusartvcom.cedit' does not exist.
+!STACK 0
+java.lang.Exception: Resource '/PIRSN/.uceditor/.PIRSN.iostream_eusartvcom.cedit' does not exist.
+	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
+	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:330)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:204)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:273)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:266)
+	at com.silabs.ss.tool.uc.editor.EclipseUcContextListener.removeEditor(EclipseUcContextListener.java:104)
+	at com.silabs.ss.tool.uc.editor.EclipseUcContextListener$1.lambda$0(EclipseUcContextListener.java:77)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:185)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3963)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3590)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at com.silabs.ss.platform.internal.product.Application.start(Application.java:38)
+	at com.silabs.ss.tool.launcher.internal.product.StudioV5Application.start(StudioV5Application.java:36)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+
+!ENTRY com.silabs.ss.tool.uc.editor 2 0 2022-03-24 13:40:34.925
+!MESSAGE Could not examine potential editor to close: an editor for a removed component may have been left open due to Resource '/PIRSN/.uceditor/.PIRSN.iostream_eusartvcom.cedit' does not exist.
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException(/PIRSN/.uceditor/.PIRSN.iostream_eusartvcom.cedit)[368]: java.lang.Exception: Resource '/PIRSN/.uceditor/.PIRSN.iostream_eusartvcom.cedit' does not exist.
+	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
+	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:330)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:204)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:273)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:266)
+	at com.silabs.ss.tool.uc.editor.EclipseUcContextListener.removeEditor(EclipseUcContextListener.java:104)
+	at com.silabs.ss.tool.uc.editor.EclipseUcContextListener$1.lambda$0(EclipseUcContextListener.java:77)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:185)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3963)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3590)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at com.silabs.ss.platform.internal.product.Application.start(Application.java:38)
+	at com.silabs.ss.tool.launcher.internal.product.StudioV5Application.start(StudioV5Application.java:36)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2022-03-24 13:40:34.925
+!MESSAGE Resource '/PIRSN/.uceditor/.PIRSN.iostream_eusartvcom.cedit' does not exist.
+!STACK 0
+java.lang.Exception: Resource '/PIRSN/.uceditor/.PIRSN.iostream_eusartvcom.cedit' does not exist.
+	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
+	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:330)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:204)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:273)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:266)
+	at com.silabs.ss.tool.uc.editor.EclipseUcContextListener.removeEditor(EclipseUcContextListener.java:104)
+	at com.silabs.ss.tool.uc.editor.EclipseUcContextListener$1.lambda$0(EclipseUcContextListener.java:77)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:185)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3963)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3590)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at com.silabs.ss.platform.internal.product.Application.start(Application.java:38)
+	at com.silabs.ss.tool.launcher.internal.product.StudioV5Application.start(StudioV5Application.java:36)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 13:40:34.944
+!MESSAGE UcEditorController: onWebSocketClose CALLED statusCode=1001 reason=null
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-24 13:41:21.354
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-24 13:41:31.463
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-24 13:41:32.142
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-24 13:41:32.142
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-03-24 13:50:37.498
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-03-24 13:50:47.547
+!MESSAGE Unknown context [rc.root.000440239324] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-03-24 13:50:48.315
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440239324 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-03-24 13:50:48.315
+!MESSAGE Fail to get TCF context for process: rc.root.000440239324
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 19:04:15.911
+!MESSAGE Deleted Shared Daemon File: C:\Users\█████████\.uc\cli\mainstudio.running
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-24 19:04:15.912
+!MESSAGE Deleted Shared Daemon Version File: C:\Users\█████████\.uc\cli\mainstudio.running.version
+
+!ENTRY org.eclipse.tcf 4 0 2022-03-24 19:04:16.062
+!MESSAGE Failed to shutdown TCF event dispatch thread
+!STACK 0
+java.lang.InterruptedException
+	at java.base/java.lang.Object.wait(Native Method)
+	at java.base/java.lang.Thread.join(Thread.java:1305)
+	at java.base/java.lang.Thread.join(Thread.java:1379)
+	at org.eclipse.tcf.EventQueue.shutdown(EventQueue.java:76)
+	at org.eclipse.tcf.Activator.stop(Activator.java:154)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:899)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:1)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.stop(BundleContextImpl.java:891)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.stopWorker0(EquinoxBundle.java:1029)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.stopWorker(EquinoxBundle.java:370)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:658)
+	at org.eclipse.osgi.container.Module.stop(Module.java:520)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.decStartLevel(ModuleContainer.java:1885)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1760)
+	at org.eclipse.osgi.container.SystemModule.stopWorker(SystemModule.java:275)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule.stopWorker(EquinoxBundle.java:202)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:658)
+	at org.eclipse.osgi.container.Module.stop(Module.java:520)
+	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:207)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:220)
+	at java.base/java.lang.Thread.run(Thread.java:834)

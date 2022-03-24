@@ -42,6 +42,8 @@
 #include "em_iadc.h"
 #include "em_cmu.h"
 #include "em_emu.h"
+#include "em_lesense.h"
+#include "em_acmp.h"
 #include "sl_app_common.h"
 #include "app_process.h"
 #include "app_framework_common.h"
@@ -106,6 +108,18 @@ void IADC_IRQHandler(void)
    * results does not do this automatically.
    */
   IADC_clearInt(IADC0, IADC_IF_SINGLEDONE);
+}
+
+void LESENSE_IRQHandler(void)
+{
+  // Clear all LESENSE interrupt flag
+  uint32_t flags = LESENSE_IntGet();
+  LESENSE_IntClear(flags);
+
+  if (flags & LESENSE_IF_CH0){
+      app_log_info("PRESSED");
+      sl_led_toggle(&sl_led_led0);
+  }
 }
 
 // -----------------------------------------------------------------------------
@@ -261,7 +275,6 @@ void emberAfEnergyScanCompleteCallback(int8_t mean,
   app_log_info("Energy scan complete, mean=%d min=%d max=%d var=%d\n",
                mean, min, max, variance);
 }
-
 #if defined(EMBER_AF_PLUGIN_MICRIUM_RTOS) && defined(EMBER_AF_PLUGIN_MICRIUM_RTOS_APP_TASK1)
 
 /**************************************************************************//**

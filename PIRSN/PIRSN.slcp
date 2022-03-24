@@ -36,6 +36,7 @@ component:
 - {id: sl_sensor_sink_core}
 - {id: mpu}
 - {id: iostream_recommended_stream}
+- {id: emlib_acmp}
 - instance: [led0]
   id: simple_led
 - {id: restrictions_profile_connect}
@@ -48,6 +49,7 @@ component:
 - {id: si70xx_driver}
 - {id: radio_config_simple_connect_singlephy}
 - {id: connect_aes_security}
+- {id: emlib_lesense}
 - {id: restrictions_profile_long_range}
 - instance: [sensor]
   id: i2cspm
