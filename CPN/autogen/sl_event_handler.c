@@ -10,10 +10,10 @@
 #include "sl_device_init_clocks.h"
 #include "sl_device_init_emu.h"
 #include "pa_conversions_efr32.h"
-#include "app_framework_common.h"
 #include "sl_board_control.h"
 #include "sl_sleeptimer.h"
 #include "app_log.h"
+#include "cmsis-rtos-support.h"
 #include "sl_iostream_init_eusart_instances.h"
 #include "sl_iostream_stdlib_config.h"
 #include "hal.h"
@@ -22,6 +22,8 @@
 #include "nvm3_default.h"
 #include "sl_simple_led_instances.h"
 #include "sl_cli_instances.h"
+#include "cpu.h"
+#include "cmsis_os2.h"
 #include "sl_iostream_init_instances.h"
 #include "sl_power_manager.h"
 
@@ -39,7 +41,14 @@ void sl_platform_init(void)
   sl_board_init();
   halInit();
   nvm3_initDefault();
+  CPU_Init();
+  osKernelInitialize();
   sl_power_manager_init();
+}
+
+void sl_kernel_start(void)
+{
+  osKernelStart();
 }
 
 void sl_driver_init(void)
@@ -62,33 +71,12 @@ void sl_service_init(void)
 void sl_stack_init(void)
 {
   sl_rail_util_pa_init();
-  connect_stack_init();
-  connect_app_framework_init();
-  connect_sleep_init();
+  emberAfPluginCmsisRtosIpcInit();
 }
 
 void sl_internal_app_init(void)
 {
   app_log_init();
-}
-
-void sl_platform_process_action(void)
-{
-}
-
-void sl_service_process_action(void)
-{
-  sl_cli_instances_tick();
-}
-
-void sl_stack_process_action(void)
-{
-  connect_stack_tick();
-  connect_app_framework_tick();
-}
-
-void sl_internal_app_process_action(void)
-{
 }
 
 void sl_iostream_init_instances(void)

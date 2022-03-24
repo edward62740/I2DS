@@ -1,6 +1,9 @@
 #CRC Codes for initially generated config files -- do not modify!
 app_assert_config.h=1351236558
 app_log_config.h=854633757
+cmsis-rtos-ipc-config.h=1595584381
+common_cfg.h=1943625275
+cpu_cfg.h=-1735116855
 debug_print_config.h=-1825782702
 emlib_core_debug_config.h=-551881347
 frequency-hopping-config.h=-892516827
@@ -8,12 +11,15 @@ legacy_hal_config.h=-1061067857
 mac-queue-config.h=-388183779
 mbedtls_config.h=-131196312
 nvm3_default_config.h=44458093
+os_cfg.h=-894494530
 parent-support-config.h=-1030125622
 poll-config.h=1608792970
 psa_crypto_config.h=2060553942
 rail/profile_connect.restriction=295472632
 rail/profile_long_range.restriction=-793959153
 rail/radio_settings.radioconf=-685795652
+rtos_cfg.h=-256426427
+rtos_err_cfg.h=-1638587530
 sl_board_control_config.h=-11277283
 sl_cli_config.h=339465296
 sl_cli_config_example.h=-2008182582

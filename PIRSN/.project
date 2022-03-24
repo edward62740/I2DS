@@ -119,6 +119,11 @@
 			<locationURI>STUDIO_SDK_LOC/platform/common/src/sl_string.c</locationURI>
 		</link>
 		<link>
+			<name>gecko_sdk_4.0.2/platform/emlib/inc/em_acmp.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_acmp.h</locationURI>
+		</link>
+		<link>
 			<name>gecko_sdk_4.0.2/platform/emlib/inc/em_assert.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_assert.h</locationURI>
@@ -189,6 +194,11 @@
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_iadc.h</locationURI>
 		</link>
 		<link>
+			<name>gecko_sdk_4.0.2/platform/emlib/inc/em_lesense.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_lesense.h</locationURI>
+		</link>
+		<link>
 			<name>gecko_sdk_4.0.2/platform/emlib/inc/em_msc.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_msc.h</locationURI>
@@ -239,6 +249,11 @@
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/inc/em_wdog.h</locationURI>
 		</link>
 		<link>
+			<name>gecko_sdk_4.0.2/platform/emlib/src/em_acmp.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_acmp.c</locationURI>
+		</link>
+		<link>
 			<name>gecko_sdk_4.0.2/platform/emlib/src/em_assert.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_assert.c</locationURI>
@@ -282,6 +297,11 @@
 			<name>gecko_sdk_4.0.2/platform/emlib/src/em_iadc.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_iadc.c</locationURI>
+		</link>
+		<link>
+			<name>gecko_sdk_4.0.2/platform/emlib/src/em_lesense.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/emlib/src/em_lesense.c</locationURI>
 		</link>
 		<link>
 			<name>gecko_sdk_4.0.2/platform/emlib/src/em_msc.c</name>
