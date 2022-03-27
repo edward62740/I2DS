@@ -6453,3 +6453,103 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.core.CCorePlugin.log(CCorePlugin.java:1576)
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:175)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2022-03-27 15:59:59.890 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.5
+java.vendor=Amazon.com Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.silabs.ss.platform.jetty.server 1 0 2022-03-27 16:00:00.999
+!MESSAGE ContentServer started at: 127.0.0.1, 65273
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-27 16:00:01.008
+!MESSAGE com.silabs.ss.tool.launcher.product found! Writing main studio shared file
+
+!ENTRY org.eclipse.core.resources 2 10035 2022-03-27 16:00:01.230
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-03-27 16:00:11.301
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.tool.installer.core 2 0 2022-03-27 16:00:12.881
+!MESSAGE Problem getting package resources: changelog
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-03-27 16:00:14.349
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.support.browser.html 1 0 2022-03-27 16:00:19.915
+!MESSAGE Browser workarea set to: C:\Users\█████████\Desktop\I2DS\.browser
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-03-27 16:00:22.916
+!MESSAGE Server returned HTTP response code: 403 for URL: https://updates.silabs.com/studio/v5/assets//common/photos/chip-packages/qfn40.png.timestamp
+!STACK 0
+java.io.IOException: Server returned HTTP response code: 403 for URL: https://updates.silabs.com/studio/v5/assets//common/photos/chip-packages/qfn40.png.timestamp
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1919)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1515)
+	at java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:250)
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService.downloadFile(AssetService.java:982)
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService.downloadAsset(AssetService.java:726)
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService.resolveAsset(AssetService.java:444)
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService$2.run(AssetService.java:373)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY com.silabs.ss.platform.content.core 1 0 2022-03-27 16:00:22.949
+!MESSAGE Unable to download asset://common/photos/chip-packages/qfn40.png
+!STACK 0
+java.lang.Exception: Failed to download https://updates.silabs.com/studio/v5/assets//common/photos/chip-packages/qfn40.png.timestamp
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService.downloadAsset(AssetService.java:730)
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService.resolveAsset(AssetService.java:444)
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService$2.run(AssetService.java:373)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY com.silabs.ss.platform.content.core 2 0 2022-03-27 16:00:22.950
+!MESSAGE Unable to download asset://common/photos/chip-packages/qfn40.png
+
+!ENTRY com.silabs.ss.support.browser.html 4 0 2022-03-27 16:00:22.950
+!MESSAGE  Problem with request for 'asset://common/photos/chip-packages/qfn40.png'
+!STACK 1
+org.eclipse.core.runtime.CoreException: Unable to download asset://common/photos/chip-packages/qfn40.png
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService.resolveAsset(AssetService.java:390)
+	at com.silabs.external.jxbrowser.LicenseManager.interceptAndReadPhotos(LicenseManager.java:141)
+	at com.teamdev.jxbrowser.net.internal.InterceptRequestCallbackProxy.on(InterceptRequestCallbackProxy.java:49)
+	at com.teamdev.jxbrowser.net.internal.InterceptRequestCallbackProxy.on(InterceptRequestCallbackProxy.java:32)
+	at com.teamdev.jxbrowser.internal.rpc.stream.CallbackStream.process(CallbackStream.java:181)
+	at com.teamdev.jxbrowser.internal.rpc.stream.Stream$StreamObserver.lambda$onNext$0(Stream.java:167)
+	at com.teamdev.jxbrowser.internal.BrowserThread$TaskRunner.processTasks(BrowserThread.java:137)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+!SUBENTRY 1 com.silabs.ss.platform.content.core 2 0 2022-03-27 16:00:22.950
+!MESSAGE Unable to download asset://common/photos/chip-packages/qfn40.png
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-27 16:01:51.676
+!MESSAGE Deleted Shared Daemon File: C:\Users\█████████\.uc\cli\mainstudio.running
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-27 16:01:51.677
+!MESSAGE Deleted Shared Daemon Version File: C:\Users\█████████\.uc\cli\mainstudio.running.version
+
+!ENTRY org.eclipse.tcf 4 0 2022-03-27 16:01:51.902
+!MESSAGE Failed to shutdown TCF event dispatch thread
+!STACK 0
+java.lang.InterruptedException
+	at java.base/java.lang.Object.wait(Native Method)
+	at java.base/java.lang.Thread.join(Thread.java:1305)
+	at java.base/java.lang.Thread.join(Thread.java:1379)
+	at org.eclipse.tcf.EventQueue.shutdown(EventQueue.java:76)
+	at org.eclipse.tcf.Activator.stop(Activator.java:154)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:899)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:1)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.stop(BundleContextImpl.java:891)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.stopWorker0(EquinoxBundle.java:1029)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.stopWorker(EquinoxBundle.java:370)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:658)
+	at org.eclipse.osgi.container.Module.stop(Module.java:520)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.decStartLevel(ModuleContainer.java:1885)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1760)
+	at org.eclipse.osgi.container.SystemModule.stopWorker(SystemModule.java:275)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule.stopWorker(EquinoxBundle.java:202)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:658)
+	at org.eclipse.osgi.container.Module.stop(Module.java:520)
+	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:207)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:220)
+	at java.base/java.lang.Thread.run(Thread.java:834)
