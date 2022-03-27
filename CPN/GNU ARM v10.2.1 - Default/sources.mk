@@ -19,7 +19,6 @@ SUBDIRS := \
 . \
 autogen \
 gecko_sdk_4.0.2/app/common/util/app_log \
-gecko_sdk_4.0.2/hardware/board/src \
 gecko_sdk_4.0.2/platform/CMSIS/RTOS2/Source \
 gecko_sdk_4.0.2/platform/Device/SiliconLabs/EFR32FG23/Source/GCC \
 gecko_sdk_4.0.2/platform/Device/SiliconLabs/EFR32FG23/Source \

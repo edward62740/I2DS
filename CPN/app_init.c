@@ -36,6 +36,7 @@
 #include "stack/include/ember.h"
 #include "app_process.h"
 #include "app_framework_common.h"
+#include "sl_simple_led_instances.h"
 // -----------------------------------------------------------------------------
 //                              Macros and Typedefs
 // -----------------------------------------------------------------------------
@@ -64,7 +65,7 @@ extern EmberEventControl *data_report_control;
 void emberAfInitCallback(void)
 {
   EmberStatus status;
-
+  sl_led_turn_off(&sl_led_led0);
   // CLI info message
   app_log_info("\nSink\n");
   emberSetSecurityKey(&security_key);
@@ -83,7 +84,7 @@ void emberAfInitCallback(void)
   status = emberFormNetwork(&parameters);
   sl_sleeptimer_delay_millisecond(50);
     status = emberPermitJoining(255);
-
+    sl_led_turn_on(&sl_led_led0);
 #if defined(EMBER_AF_PLUGIN_BLE)
   bleConnectionInfoTableInit();
 #endif

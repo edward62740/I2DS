@@ -24,26 +24,6 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>gecko_sdk_4.0.2/hardware/board/inc/sl_board_control.h</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/hardware/board/inc/sl_board_control.h</locationURI>
-		</link>
-		<link>
-			<name>gecko_sdk_4.0.2/hardware/board/inc/sl_board_init.h</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/hardware/board/inc/sl_board_init.h</locationURI>
-		</link>
-		<link>
-			<name>gecko_sdk_4.0.2/hardware/board/src/sl_board_control_gpio.c</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/hardware/board/src/sl_board_control_gpio.c</locationURI>
-		</link>
-		<link>
-			<name>gecko_sdk_4.0.2/hardware/board/src/sl_board_init.c</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/hardware/board/src/sl_board_init.c</locationURI>
-		</link>
-		<link>
 			<name>gecko_sdk_4.0.2/platform/CMSIS/Include/arm_common_tables.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/CMSIS/Include/arm_common_tables.h</locationURI>
@@ -719,11 +699,6 @@
 			<locationURI>STUDIO_SDK_LOC/platform/service/device_init/inc/sl_device_init_hfxo.h</locationURI>
 		</link>
 		<link>
-			<name>gecko_sdk_4.0.2/platform/service/device_init/inc/sl_device_init_lfxo.h</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/service/device_init/inc/sl_device_init_lfxo.h</locationURI>
-		</link>
-		<link>
 			<name>gecko_sdk_4.0.2/platform/service/device_init/inc/sl_device_init_nvic.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/service/device_init/inc/sl_device_init_nvic.h</locationURI>
@@ -742,11 +717,6 @@
 			<name>gecko_sdk_4.0.2/platform/service/device_init/src/sl_device_init_hfxo_s2.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/service/device_init/src/sl_device_init_hfxo_s2.c</locationURI>
-		</link>
-		<link>
-			<name>gecko_sdk_4.0.2/platform/service/device_init/src/sl_device_init_lfxo_s2.c</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/service/device_init/src/sl_device_init_lfxo_s2.c</locationURI>
 		</link>
 		<link>
 			<name>gecko_sdk_4.0.2/platform/service/device_init/src/sl_device_init_nvic.c</name>
@@ -1559,9 +1529,9 @@
 			<locationURI>STUDIO_SDK_LOC/platform/Device/SiliconLabs/EFR32FG23/Include/efr32fg23_wdog.h</locationURI>
 		</link>
 		<link>
-			<name>gecko_sdk_4.0.2/platform/Device/SiliconLabs/EFR32FG23/Include/efr32fg23b010f512im48.h</name>
+			<name>gecko_sdk_4.0.2/platform/Device/SiliconLabs/EFR32FG23/Include/efr32fg23b010f512im40.h</name>
 			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/Device/SiliconLabs/EFR32FG23/Include/efr32fg23b010f512im48.h</locationURI>
+			<locationURI>STUDIO_SDK_LOC/platform/Device/SiliconLabs/EFR32FG23/Include/efr32fg23b010f512im40.h</locationURI>
 		</link>
 		<link>
 			<name>gecko_sdk_4.0.2/platform/Device/SiliconLabs/EFR32FG23/Include/em_device.h</name>
