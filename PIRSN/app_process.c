@@ -72,7 +72,7 @@ bool enable_sleep = false;
 /// report timing event control
 EmberEventControl *report_control;
 /// report timing period
-uint16_t sensor_report_period_ms =  (5 * MILLISECOND_TICKS_PER_SECOND);
+uint16_t sensor_report_period_ms =  (2 * MILLISECOND_TICKS_PER_SECOND);
 /// TX options set up for the network
 EmberMessageOptions tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SECURITY_ENABLED;
 
@@ -163,6 +163,7 @@ void report_handler(void)
                                                         buffer,
                                                         tx_options);
      // IADC_command(IADC0, iadcCmdStartSingle);
+
   }
 }
 

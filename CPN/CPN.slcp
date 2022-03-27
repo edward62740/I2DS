@@ -23,7 +23,6 @@ toolchain_settings:
 - {value: debug, option: optimize}
 component:
 - {id: connect_parent_support}
-- {id: brd2600a_a01}
 - {id: connect_debug_print}
 - {id: iostream_retarget_stdio}
 - {id: connect_frequency_hopping}
@@ -31,11 +30,14 @@ component:
   id: cli
 - {id: sl_sensor_sink_core}
 - {id: mpu}
+- {id: EFR32FG23B020F512IM40}
 - {id: iostream_recommended_stream}
 - instance: [led0]
   id: simple_led
 - {id: restrictions_profile_connect}
 - {id: device_init}
+- instance: [inst0]
+  id: iostream_eusart
 - {id: legacy_hal}
 - {id: app_log}
 - {id: connect_stack_common}
@@ -49,7 +51,6 @@ component:
 - {id: connect_mac_queue}
 - {id: connect_poll}
 - {id: app_assert}
-- {id: EFR32FG23B010F512IM48}
 - {id: connect_app_framework_common}
 - {id: connect_stack_counters}
 other_file:

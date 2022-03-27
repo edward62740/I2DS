@@ -329,11 +329,10 @@
         </input>
         <input>
           <key>XTAL_FREQUENCY_HZ</key>
-          <value>int:39000000</value>
+          <value>int:40000000</value>
         </input>
       </profile_inputs>
-      <phy name="serializableObject:Efr32RadioConfiguratorPhy:OCELOT:Connect:PHY_Studio_Connect_915MHz_2GFSK_500kbps"/>
-      <metadata>{&quot;errors&quot;:{},&quot;warnings&quot;:{},&quot;disabledGizmos&quot;:{}}</metadata>
+      <metadata>{&quot;errors&quot;:{},&quot;warnings&quot;:{},&quot;disabledGizmos&quot;:{},&quot;selectedPhy&quot;:&quot;PHY_Studio_Connect_915MHz_2GFSK_500kbps&quot;}</metadata>
       <channel_config_entries>
         <channel_config_entry name="Channel Group 1">
           <physical_channel_offset>SAME_AS_FIRST_CHANNEL</physical_channel_offset>

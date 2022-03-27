@@ -25,7 +25,6 @@ toolchain_settings:
 - {value: debug, option: optimize}
 component:
 - {id: connect_parent_support}
-- {id: brd2600a_a01}
 - {id: connect_debug_print}
 - {id: iostream_retarget_stdio}
 - instance: [btn0]
@@ -41,6 +40,8 @@ component:
   id: simple_led
 - {id: restrictions_profile_connect}
 - {id: device_init}
+- instance: [inst0]
+  id: iostream_eusart
 - {id: emlib_iadc}
 - {id: legacy_hal}
 - {id: app_log}
@@ -58,8 +59,8 @@ component:
 - {id: connect_mac_queue}
 - {id: connect_poll}
 - {id: app_assert}
+- {id: EFR32FG23B010F512IM40}
 - {id: connect_app_framework_common}
-- {id: EFR32FG23B010F512IM48}
 - {id: connect_stack_counters}
 other_file:
 - {path: connect_create_gbl_image.bat}

@@ -87,6 +87,7 @@ void emberAfIncomingMessageCallback(EmberIncomingMessage *message)
   data |= buffer[3];
   app_log_info(" Voltage: %d\n",
               data);
+  sl_led_toggle(&sl_led_led0);
 }
 
 /**************************************************************************//**
@@ -137,9 +138,9 @@ void emberAfChildJoinCallback(EmberNodeType nodeType,
 void emberAfTickCallback(void)
 {
   if (emberStackIsUp()) {
-    sl_led_turn_on(&sl_led_led0);
+    //sl_led_turn_off(&sl_led_led0);
   } else {
-    sl_led_turn_off(&sl_led_led0);
+   // sl_led_turn_on(&sl_led_led0);
   }
 }
 
