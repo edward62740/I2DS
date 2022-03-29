@@ -74,12 +74,17 @@ void emberAfInitCallback (void)
   // CLI info message
   app_log_info("\nSensor\n");
 
-  status = emberNetworkInit ();
-  app_log_info("Network status 0x%02X\n", status);
+  while(status != EMBER_SUCCESS)
+    {
+      sl_sleeptimer_delay_millisecond(500);
+      status = emberNetworkInit();
+    }
   emberResetNetworkState ();
+  sl_sleeptimer_delay_millisecond(100);
+  app_log_info("Network status 0x%02X\n", status);
+
   status = emberSetSecurityKey (&security_key);
   app_log_info("Network status 0x%02X\n", status);
-  sl_sleeptimer_delay_millisecond(500);
 
   EmberNetworkParameters parameters;
   MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
@@ -92,7 +97,7 @@ void emberAfInitCallback (void)
   emberAfPluginPollEnableShortPolling (true);
   startBatteryMonitor();
   //startSensorMonitor();
-  sl_power_manager_remove_em_requirement (SL_POWER_MANAGER_EM1);
+  //sl_power_manager_remove_em_requirement (SL_POWER_MANAGER_EM1);
   sl_power_manager_add_em_requirement (SL_POWER_MANAGER_EM2);
 
 }

@@ -3,23 +3,30 @@
     "channel_name": "Protocol_Configuration-Channel_Group_1",
     "result_code": "0",
     "error_message": "",
-    "logs": [],
+    "logs": [
+      {
+        "type": "warning",
+        "message": [
+          "WARNING: IF + BW/2 > ADC Bandwidth"
+        ]
+      }
+    ],
     "cfg_logs": [
       {
         "name": "Preamble Binary Pattern",
-        "value": "0101010101010101010101010101010101010101"
+        "value": "0000000000000000000000000000000000000000"
       },
       {
         "name": "Sync Word Binary Pattern",
-        "value": "0010110111010100"
+        "value": "10100111"
       },
       {
         "name": "Actual Bandwidth",
-        "value": 850000
+        "value": 2500000
       },
       {
         "name": "Desired baudrate",
-        "value": 500000
+        "value": 2000000
       },
       {
         "name": "Actual sample frequency",
@@ -51,11 +58,11 @@
       },
       {
         "name": "Acquisition Channel Bandwidth",
-        "value": 850000
+        "value": 2500000
       },
       {
         "name": "IF Frequency",
-        "value": 475000
+        "value": 1350000
       },
       {
         "name": "RSSI Update Period",

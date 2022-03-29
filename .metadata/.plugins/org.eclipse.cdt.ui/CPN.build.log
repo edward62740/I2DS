@@ -1,7 +1,6 @@
-16:01:30 **** Clean-only build of configuration GNU ARM v10.2.1 - Default for project CPN ****
-make -j8 clean 
-rm -rf CPN.axf
- 
+19:44:01 **** Incremental Build of configuration GNU ARM v10.2.1 - Default for project CPN ****
+make -j8 all 
+make: Nothing to be done for 'all'.
 
-16:01:42 Build Finished. 0 errors, 0 warnings. (took 11s.701ms)
+19:44:02 Build Finished. 0 errors, 0 warnings. (took 1s.50ms)
 

@@ -77,6 +77,7 @@ void emberAfIncomingMessageCallback(EmberIncomingMessage *message)
   uint8_t buffer[4];
 
   app_log_info("RX: Data from 0x%04X:", message->source);
+  app_log_info("rssi: %d:", message->rssi);
   for (int j = 0; j < message->length; j++) {
     app_log_info(" %02X", message->payload[j]);
     buffer[j] = message->payload[j];

@@ -1,7 +1,6 @@
-16:01:17 **** Clean-only build of configuration GNU ARM v10.2.1 - Default for project PIRSN ****
-make -j8 clean 
-rm -rf PIRSN.axf
- 
+19:43:08 **** Incremental Build of configuration GNU ARM v10.2.1 - Default for project PIRSN ****
+make -j8 all 
+make: Nothing to be done for 'all'.
 
-16:01:27 Build Finished. 0 errors, 0 warnings. (took 10s.470ms)
+19:43:09 Build Finished. 0 errors, 0 warnings. (took 988ms)
 
