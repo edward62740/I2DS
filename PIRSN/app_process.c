@@ -72,7 +72,7 @@ bool enable_sleep = false;
 /// report timing event control
 EmberEventControl *report_control;
 /// report timing period
-uint16_t sensor_report_period_ms =  (2 * MILLISECOND_TICKS_PER_SECOND);
+uint16_t sensor_report_period_ms =  (10 * MILLISECOND_TICKS_PER_SECOND);
 /// TX options set up for the network
 EmberMessageOptions tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SECURITY_ENABLED;
 
@@ -84,8 +84,7 @@ static EmberNodeId sink_node_id = EMBER_COORDINATOR_ADDRESS;
 static volatile IADC_Result_t sample;
 uint8_t buffer[4];
 
-void IADC_IRQHandler(void)
-{
+void IADC_IRQHandler(void){
   // Read a result from the FIFO
   sample = IADC_pullSingleFifoResult(IADC0);
 
@@ -228,9 +227,20 @@ void emberAfStackStatusCallback(EmberStatus status)
       app_log_error("Joining to the network rejected!\n");
       break;
     case EMBER_JOIN_TIMEOUT:
-      app_log_info("Join process timed out!\n");
+
+      {
+        app_log_info("Join process timed out!\n");
+          EmberNetworkParameters parameters;
+        MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
+        parameters.radioTxPower = 0;
+        parameters.radioChannel = 11;
+        parameters.panId = 0x01FF;
+        status = emberJoinNetwork(EMBER_STAR_SLEEPY_END_DEVICE, &parameters);
+        app_log_info("Network status 0x%02X\n", status);
+  }
       break;
     default:
+      {
       app_log_info("Stack status: 0x%02X\n", status);
           EmberNetworkParameters parameters;
         MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
@@ -239,6 +249,7 @@ void emberAfStackStatusCallback(EmberStatus status)
         parameters.panId = 0x01FF;
         status = emberJoinNetwork(EMBER_STAR_SLEEPY_END_DEVICE, &parameters);
         app_log_info("Network status 0x%02X\n", status);
+  }
       break;
   }
 }

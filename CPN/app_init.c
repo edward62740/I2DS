@@ -69,9 +69,14 @@ void emberAfInitCallback(void)
   // CLI info message
   app_log_info("\nSink\n");
   emberSetSecurityKey(&security_key);
-  status = emberNetworkInit();
-  emberResetNetworkState();
 
+  while(status != EMBER_SUCCESS)
+    {
+
+      status = emberNetworkInit();
+      sl_sleeptimer_delay_millisecond(500);
+    }
+  emberResetNetworkState ();
   app_log_info("Network status 0x%02X\n", status);
 
     EmberNetworkParameters parameters;
@@ -81,9 +86,10 @@ void emberAfInitCallback(void)
     parameters.radioTxPower = SENSOR_SINK_TX_POWER;
     parameters.radioChannel = 11;
     parameters.panId = SENSOR_SINK_PAN_ID;
-  status = emberFormNetwork(&parameters);
-  sl_sleeptimer_delay_millisecond(50);
-    status = emberPermitJoining(255);
+  while( emberFormNetwork(&parameters) != EMBER_SUCCESS)
+    ;
+  while( emberPermitJoining(255) != EMBER_SUCCESS)
+      ;
     sl_led_turn_on(&sl_led_led0);
 #if defined(EMBER_AF_PLUGIN_BLE)
   bleConnectionInfoTableInit();

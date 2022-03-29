@@ -105,7 +105,7 @@
         </input>
         <input>
           <key>DEVIATION</key>
-          <value>int:175000</value>
+          <value>int:250000</value>
         </input>
         <input>
           <key>DEVIATION_TOL_PPM</key>
@@ -121,15 +121,15 @@
         </input>
         <input>
           <key>DSSS_CHIPPING_CODE</key>
-          <value>long:0</value>
+          <value>long:31433</value>
         </input>
         <input>
           <key>DSSS_LEN</key>
-          <value>int:0</value>
+          <value>int:16</value>
         </input>
         <input>
           <key>DSSS_SPREADING_FACTOR</key>
-          <value>int:0</value>
+          <value>int:4</value>
         </input>
         <input>
           <key>ERRORS_IN_TIMING_WINDOW</key>
@@ -205,7 +205,7 @@
         </input>
         <input>
           <key>MODULATION_TYPE</key>
-          <value>serializableObject:EnumDataItem:0</value>
+          <value>serializableObject:EnumDataItem:7</value>
         </input>
         <input>
           <key>NUMBER_OF_TIMING_WINDOWS</key>
@@ -225,11 +225,11 @@
         </input>
         <input>
           <key>PREAMBLE_PATTERN</key>
-          <value>int:1</value>
+          <value>int:0</value>
         </input>
         <input>
           <key>PREAMBLE_PATTERN_LEN</key>
-          <value>int:2</value>
+          <value>int:4</value>
         </input>
         <input>
           <key>RSSI_PERIOD</key>
@@ -241,7 +241,7 @@
         </input>
         <input>
           <key>SHAPING_FILTER</key>
-          <value>serializableObject:EnumDataItem:1</value>
+          <value>serializableObject:EnumDataItem:4</value>
         </input>
         <input>
           <key>SHAPING_FILTER_PARAM</key>
@@ -265,11 +265,11 @@
         </input>
         <input>
           <key>SYMBOL_ENCODING</key>
-          <value>serializableObject:EnumDataItem:0</value>
+          <value>serializableObject:EnumDataItem:2</value>
         </input>
         <input>
           <key>SYNCWORD_0</key>
-          <value>long:11732</value>
+          <value>long:167</value>
         </input>
         <input>
           <key>SYNCWORD_1</key>
@@ -277,7 +277,7 @@
         </input>
         <input>
           <key>SYNCWORD_LENGTH</key>
-          <value>int:16</value>
+          <value>int:8</value>
         </input>
         <input>
           <key>SYNCWORD_TX_SKIP</key>
@@ -332,7 +332,7 @@
           <value>int:40000000</value>
         </input>
       </profile_inputs>
-      <metadata>{&quot;errors&quot;:{},&quot;warnings&quot;:{},&quot;disabledGizmos&quot;:{},&quot;selectedPhy&quot;:&quot;PHY_Studio_Connect_915MHz_2GFSK_500kbps&quot;}</metadata>
+      <metadata>{&quot;errors&quot;:{},&quot;warnings&quot;:{},&quot;disabledGizmos&quot;:{},&quot;selectedPhy&quot;:&quot;PHY_Studio_Connect_915MHz_OQPSK_500kbps&quot;}</metadata>
       <channel_config_entries>
         <channel_config_entry name="Channel Group 1">
           <physical_channel_offset>SAME_AS_FIRST_CHANNEL</physical_channel_offset>
