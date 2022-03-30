@@ -78,21 +78,23 @@ void emberAfInitCallback (void)
     {
       sl_sleeptimer_delay_millisecond(500);
       status = emberNetworkInit();
+
     }
-  emberResetNetworkState ();
+  //emberResetNetworkState ();
   sl_sleeptimer_delay_millisecond(100);
   app_log_info("Network status 0x%02X\n", status);
 
-  status = emberSetSecurityKey (&security_key);
-  app_log_info("Network status 0x%02X\n", status);
+  while(emberSetSecurityKey (&security_key) != EMBER_SUCCESS)
+    ;
 
-  EmberNetworkParameters parameters;
-  MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
-  parameters.radioTxPower = 0;
-  parameters.radioChannel = 11;
-  parameters.panId = 0x01FF;
-  status = emberJoinNetwork(EMBER_STAR_SLEEPY_END_DEVICE, &parameters);
   app_log_info("Network status 0x%02X\n", status);
+  EmberNetworkParameters parameters;
+MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
+parameters.radioTxPower = 0;
+parameters.radioChannel = 11;
+parameters.panId = 0x01FF;
+status = emberJoinNetwork(EMBER_STAR_SLEEPY_END_DEVICE, &parameters);
+app_log_info("Network status 0x%02X\n", status);
 
   emberAfPluginPollEnableShortPolling (true);
   startBatteryMonitor();

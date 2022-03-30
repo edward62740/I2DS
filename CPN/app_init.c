@@ -76,7 +76,7 @@ void emberAfInitCallback(void)
       status = emberNetworkInit();
       sl_sleeptimer_delay_millisecond(500);
     }
-  emberResetNetworkState ();
+ // emberResetNetworkState ();
   app_log_info("Network status 0x%02X\n", status);
 
     EmberNetworkParameters parameters;
