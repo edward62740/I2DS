@@ -72,7 +72,7 @@ bool enable_sleep = false;
 /// report timing event control
 EmberEventControl *report_control;
 /// report timing period
-uint16_t sensor_report_period_ms =  (10 * MILLISECOND_TICKS_PER_SECOND);
+uint16_t sensor_report_period_ms =  (2 * MILLISECOND_TICKS_PER_SECOND);
 /// TX options set up for the network
 EmberMessageOptions tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SECURITY_ENABLED;
 
@@ -216,6 +216,7 @@ void emberAfStackStatusCallback(EmberStatus status)
       app_log_info("Joined to Sink with node ID: 0x%04X\n", emberGetNodeId());
       // Schedule start of periodic sensor reporting to the Sink
       emberEventControlSetDelayMS(*report_control, sensor_report_period_ms);
+      emberSetRadioPower(10, false);
       break;
     case EMBER_NETWORK_DOWN:
       app_log_info("Network down\n");
