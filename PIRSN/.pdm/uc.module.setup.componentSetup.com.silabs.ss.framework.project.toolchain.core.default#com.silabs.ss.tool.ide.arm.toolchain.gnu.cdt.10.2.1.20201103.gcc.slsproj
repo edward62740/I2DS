@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="uc.module.setup.componentSetup.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc" propertyScope="project">
-  <folder name="gecko_sdk_4.0.1">
+  <folder name="gecko_sdk_4.0.2">
     <folder name="platform">
       <folder name="Device">
         <folder name="SiliconLabs">
@@ -98,36 +98,6 @@
         <folder name="src">
           <file name="sl_string.c" uri="studio:/sdk/platform/common/src/sl_string.c"/>
           <file name="sl_slist.c" uri="studio:/sdk/platform/common/src/sl_slist.c"/>
-        </folder>
-      </folder>
-      <folder name="driver">
-        <folder name="button">
-          <folder name="src">
-            <file name="sl_button.c" uri="studio:/sdk/platform/driver/button/src/sl_button.c"/>
-            <file name="sl_simple_button.c" uri="studio:/sdk/platform/driver/button/src/sl_simple_button.c"/>
-          </folder>
-          <folder name="inc">
-            <file name="sl_button.h" uri="studio:/sdk/platform/driver/button/inc/sl_button.h"/>
-            <file name="sl_simple_button.h" uri="studio:/sdk/platform/driver/button/inc/sl_simple_button.h"/>
-          </folder>
-        </folder>
-        <folder name="i2cspm">
-          <folder name="src">
-            <file name="sl_i2cspm.c" uri="studio:/sdk/platform/driver/i2cspm/src/sl_i2cspm.c"/>
-          </folder>
-          <folder name="inc">
-            <file name="sl_i2cspm.h" uri="studio:/sdk/platform/driver/i2cspm/inc/sl_i2cspm.h"/>
-          </folder>
-        </folder>
-        <folder name="leddrv">
-          <folder name="src">
-            <file name="sl_led.c" uri="studio:/sdk/platform/driver/leddrv/src/sl_led.c"/>
-            <file name="sl_simple_led.c" uri="studio:/sdk/platform/driver/leddrv/src/sl_simple_led.c"/>
-          </folder>
-          <folder name="inc">
-            <file name="sl_led.h" uri="studio:/sdk/platform/driver/leddrv/inc/sl_led.h"/>
-            <file name="sl_simple_led.h" uri="studio:/sdk/platform/driver/leddrv/inc/sl_simple_led.h"/>
-          </folder>
         </folder>
       </folder>
       <folder name="service">
@@ -327,14 +297,6 @@
             <file name="ecode.h" uri="studio:/sdk/platform/emdrv/common/inc/ecode.h"/>
           </folder>
         </folder>
-        <folder name="gpiointerrupt">
-          <folder name="src">
-            <file name="gpiointerrupt.c" uri="studio:/sdk/platform/emdrv/gpiointerrupt/src/gpiointerrupt.c"/>
-          </folder>
-          <folder name="inc">
-            <file name="gpiointerrupt.h" uri="studio:/sdk/platform/emdrv/gpiointerrupt/inc/gpiointerrupt.h"/>
-          </folder>
-        </folder>
         <folder name="nvm3">
           <folder name="src">
             <file name="nvm3_default_common_linker.c" uri="studio:/sdk/platform/emdrv/nvm3/src/nvm3_default_common_linker.c"/>
@@ -366,6 +328,7 @@
           <file name="em_i2c.c" uri="studio:/sdk/platform/emlib/src/em_i2c.c"/>
           <file name="em_iadc.c" uri="studio:/sdk/platform/emlib/src/em_iadc.c"/>
           <file name="em_lesense.c" uri="studio:/sdk/platform/emlib/src/em_lesense.c"/>
+          <file name="em_letimer.c" uri="studio:/sdk/platform/emlib/src/em_letimer.c"/>
           <file name="em_msc.c" uri="studio:/sdk/platform/emlib/src/em_msc.c"/>
           <file name="em_prs.c" uri="studio:/sdk/platform/emlib/src/em_prs.c"/>
           <file name="em_rmu.c" uri="studio:/sdk/platform/emlib/src/em_rmu.c"/>
@@ -393,6 +356,7 @@
           <file name="em_i2c.h" uri="studio:/sdk/platform/emlib/inc/em_i2c.h"/>
           <file name="em_iadc.h" uri="studio:/sdk/platform/emlib/inc/em_iadc.h"/>
           <file name="em_lesense.h" uri="studio:/sdk/platform/emlib/inc/em_lesense.h"/>
+          <file name="em_letimer.h" uri="studio:/sdk/platform/emlib/inc/em_letimer.h"/>
           <file name="em_msc.h" uri="studio:/sdk/platform/emlib/inc/em_msc.h"/>
           <file name="em_msc_compat.h" uri="studio:/sdk/platform/emlib/inc/em_msc_compat.h"/>
           <file name="em_prs.h" uri="studio:/sdk/platform/emlib/inc/em_prs.h"/>
@@ -401,6 +365,26 @@
           <file name="em_system.h" uri="studio:/sdk/platform/emlib/inc/em_system.h"/>
           <file name="em_usart.h" uri="studio:/sdk/platform/emlib/inc/em_usart.h"/>
           <file name="em_wdog.h" uri="studio:/sdk/platform/emlib/inc/em_wdog.h"/>
+        </folder>
+      </folder>
+      <folder name="driver">
+        <folder name="i2cspm">
+          <folder name="src">
+            <file name="sl_i2cspm.c" uri="studio:/sdk/platform/driver/i2cspm/src/sl_i2cspm.c"/>
+          </folder>
+          <folder name="inc">
+            <file name="sl_i2cspm.h" uri="studio:/sdk/platform/driver/i2cspm/inc/sl_i2cspm.h"/>
+          </folder>
+        </folder>
+        <folder name="leddrv">
+          <folder name="src">
+            <file name="sl_led.c" uri="studio:/sdk/platform/driver/leddrv/src/sl_led.c"/>
+            <file name="sl_simple_led.c" uri="studio:/sdk/platform/driver/leddrv/src/sl_simple_led.c"/>
+          </folder>
+          <folder name="inc">
+            <file name="sl_led.h" uri="studio:/sdk/platform/driver/leddrv/inc/sl_led.h"/>
+            <file name="sl_simple_led.h" uri="studio:/sdk/platform/driver/leddrv/inc/sl_simple_led.h"/>
+          </folder>
         </folder>
       </folder>
       <folder name="peripheral">
@@ -789,7 +773,6 @@
   <includePath uri="studio:/sdk/app/common/util/app_assert"/>
   <includePath uri="studio:/sdk/app/common/util/app_log"/>
   <includePath uri="studio:/sdk/platform/common/inc"/>
-  <includePath uri="studio:/sdk/platform/driver/button/inc"/>
   <includePath uri="studio:/sdk/platform/service/cli/inc"/>
   <includePath uri="studio:/sdk/platform/CMSIS/Include"/>
   <includePath uri="studio:/sdk/protocol/flex/app-framework-common"/>
@@ -802,7 +785,6 @@
   <includePath uri="studio:/sdk/platform/emdrv/common/inc"/>
   <includePath uri="studio:/sdk/platform/emlib/inc"/>
   <includePath uri="studio:/sdk/platform/emlib/host/inc"/>
-  <includePath uri="studio:/sdk/platform/emdrv/gpiointerrupt/inc"/>
   <includePath uri="studio:/sdk/platform/service/hfxo_manager/inc"/>
   <includePath uri="studio:/sdk/platform/driver/i2cspm/inc"/>
   <includePath uri="studio:/sdk/platform/service/iostream/inc"/>

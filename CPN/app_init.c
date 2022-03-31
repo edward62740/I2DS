@@ -37,6 +37,7 @@
 #include "app_process.h"
 #include "app_framework_common.h"
 #include "sl_simple_led_instances.h"
+#include "app_framework_common.h"
 // -----------------------------------------------------------------------------
 //                              Macros and Typedefs
 // -----------------------------------------------------------------------------
@@ -66,6 +67,7 @@ void emberAfInitCallback(void)
 {
   EmberStatus status;
   sl_led_turn_off(&sl_led_led0);
+
   // CLI info message
   app_log_info("\nSink\n");
   emberSetSecurityKey(&security_key);
@@ -91,6 +93,7 @@ void emberAfInitCallback(void)
   while( emberPermitJoining(255) != EMBER_SUCCESS)
       ;
     sl_led_turn_on(&sl_led_led0);
+    emberCalibrateCurrentChannel();
 #if defined(EMBER_AF_PLUGIN_BLE)
   bleConnectionInfoTableInit();
 #endif

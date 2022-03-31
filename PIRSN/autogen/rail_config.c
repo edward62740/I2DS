@@ -344,7 +344,7 @@ const uint32_t Protocol_Configuration_modemConfigBase[] = {
 const RAIL_ChannelConfigEntry_t Protocol_Configuration_channels[] = {
   {
     .phyConfigDeltaAdd = NULL,
-    .baseFrequency = 915000000,
+    .baseFrequency = 900000000,
     .channelSpacing = 400000,
     .physicalChannelOffset = 0,
     .channelNumberStart = 0,

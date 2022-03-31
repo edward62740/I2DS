@@ -42,12 +42,14 @@
 #include "em_cmu.h"
 #include "em_emu.h"
 #include "em_prs.h"
-#include "em_lesense.h"
+#include "em_gpio.h"
+#include "em_letimer.h"
 #include "em_acmp.h"
 #include "sl_simple_led_instances.h"
 // -----------------------------------------------------------------------------
 //                              Macros and Typedefs
 // -----------------------------------------------------------------------------
+
 
 // -----------------------------------------------------------------------------
 //                          Static Function Declarations
@@ -73,7 +75,6 @@ void emberAfInitCallback (void)
   emberAfAllocateEvent (&report_control, &report_handler);
   // CLI info message
   app_log_info("\nSensor\n");
-
   while(status != EMBER_SUCCESS)
     {
       sl_sleeptimer_delay_millisecond(500);
@@ -98,7 +99,9 @@ app_log_info("Network status 0x%02X\n", status);
 
   emberAfPluginPollEnableShortPolling (true);
   startBatteryMonitor();
-  //startSensorMonitor();
+  emberCalibrateCurrentChannel();
+  startSensorMonitor();
+
   //sl_power_manager_remove_em_requirement (SL_POWER_MANAGER_EM1);
   sl_power_manager_add_em_requirement (SL_POWER_MANAGER_EM2);
 
@@ -142,84 +145,22 @@ void startBatteryMonitor ()
 
 void startSensorMonitor()
 {
-  CMU_ClockEnable (cmuClock_GPIO, true);
-  CMU_ClockEnable (cmuClock_ACMP0, true);
+  // Configure GPIO Clock. Note this is not required for EFR32xG21
+  CMU_ClockEnable(cmuClock_GPIO, true);
 
-  // ACMP Configuration
-  ACMP_Init_TypeDef initACMP = ACMP_INIT_DEFAULT;
 
-  // Initialize ACMP
-  ACMP_Init (ACMP0, &initACMP);
 
-  // Allocate BODD0 to ACMP0 to be able to use the input
-  GPIO->BBUSALLOC_SET = GPIO_BBUSALLOC_BODD0_ACMP0;
+  // Configure Button PB1 as input and enable interrupt
+  GPIO_PinModeSet(gpioPortC, 5, gpioModeInput, 1);
+  GPIO_ExtIntConfig(gpioPortC,
+                    5,
+                    5,
+                    true,
+                    false,
+                    true);
 
-  // Select 1.25V internal as the reference voltage for ACMP negative input
-  ACMP0->INPUTCTRL_SET = ACMP_INPUTCTRL_NEGSEL_VREFDIV1V25;
+  // Enable ODD interrupt to catch button press that changes slew rate
+  NVIC_ClearPendingIRQ(GPIO_ODD_IRQn);
+  NVIC_EnableIRQ(GPIO_ODD_IRQn);
 
-  // Port B external interface override
-  ACMP0->INPUTCTRL_SET = ACMP_INPUTCTRL_POSSEL_EXTPB;
-
-  // Wait for warm-up
-  while (!(ACMP0->STATUS && ACMP_IF_ACMPRDY))
-    ;
-  /*****************************************************************************
-   * Set LFRCO as EFM32GRPACLK clock source
-   * Enable clock for LESENSE
-   * Enable PRS clock as it is needed for LESENSE initialization
-   *****************************************************************************/
-  CMU_ClockSelectSet (cmuClock_EM23GRPACLK, cmuSelect_LFRCO);
-  CMU_ClockEnable (cmuClock_LESENSE, true);
-  CMU_ClockEnable (cmuClock_PRS, true);
-  // LESENSE default configurations
-  LESENSE_Init_TypeDef initLesense = LESENSE_INIT_DEFAULT;
-  LESENSE_ChDesc_TypeDef initLesenseCh = LESENSE_CH_CONF_DEFAULT;
-
-  // Do not store scan result and invert ACMP0 to accommodate the PB0 pull-up
-  initLesense.coreCtrl.storeScanRes = false;
-  initLesense.coreCtrl.invACMP0 = 1;
-
-  // Enable LESENSE control of the ACMP0 positive input mux
-  initLesense.perCtrl.acmp0Mode = lesenseACMPModeMux;
-
-  // Channel Configuration
-  initLesenseCh.enaScanCh = true;  // Enable scan channel
-  initLesenseCh.enaInt = true;     // Enable interrupt
-  initLesenseCh.sampleDelay = 0x1; // 1+1 LF Clock cycle sample delay
-  initLesenseCh.sampleMode = lesenseSampleModeACMP;
-  initLesenseCh.intMode = lesenseSetIntPosEdge;  // Interrupt on sensor posEdge
-
-  //Initialize LESENSE interface
-  LESENSE_Init (&initLesense, true);
-
-  // Configure channel 0
-  LESENSE_ChannelConfig (&initLesenseCh, 0);
-
-  // 8 Hz scan
-  LESENSE_ScanFreqSet (0, 8);
-
-  // Wait for SYNCBUSY clear
-  while (LESENSE->SYNCBUSY)
-    ;
-
-  // Disable LESENSE, needed in order to configure the offset and internal timer
-  LESENSE->EN_CLR = LESENSE_EN_EN;
-  while (LESENSE->EN & _LESENSE_EN_DISABLING_MASK)
-    ;
-
-  // LESENSE offset 1 = ACMP PB + 1 = ACMP input PB1 which is push button 0
-  LESENSE->CH_SET[0].INTERACT = (1 << _LESENSE_CH_INTERACT_OFFSET_SHIFT);
-  LESENSE->EN_SET = LESENSE_EN_EN;  // Enable LESENSE
-  while (LESENSE->SYNCBUSY)
-    ;         // SYNCBUSY check;
-
-  // Enable interrupt in NVIC
-  NVIC_ClearPendingIRQ (LESENSE_IRQn);
-  NVIC_EnableIRQ (LESENSE_IRQn);
-
-  // Disable PRS clock as it is no longer needed
-  CMU_ClockEnable (cmuClock_PRS, false);
-
-  // Start continuous scan
-  LESENSE_ScanStart ();
 }
