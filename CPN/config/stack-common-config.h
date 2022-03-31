@@ -40,7 +40,7 @@
 // <o EMBER_RADIO_CCA_THRESHOLD> MAC CCA Threshold in dBm
 // <i> Default: -65
 // <i> MAC CCA Threshold value in dBm.
-#define EMBER_RADIO_CCA_THRESHOLD   (-65)
+#define EMBER_RADIO_CCA_THRESHOLD   -65
 
 // <o EMBER_MAC_ACK_TIMEOUT_MS> MAC ACK timeout in milliseconds <1-65>
 // <i> Default: 25

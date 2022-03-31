@@ -61,7 +61,7 @@
         </input>
         <input>
           <key>BASE_FREQUENCY_HZ</key>
-          <value>long:915000000</value>
+          <value>long:900000000</value>
         </input>
         <input>
           <key>BAUDRATE_TOL_PPM</key>

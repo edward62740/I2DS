@@ -42,7 +42,7 @@
 #include "em_iadc.h"
 #include "em_cmu.h"
 #include "em_emu.h"
-#include "em_lesense.h"
+#include "em_burtc.h"
 #include "em_acmp.h"
 #include "sl_app_common.h"
 #include "app_process.h"
@@ -50,7 +50,6 @@
 #if defined(SL_CATALOG_LED0_PRESENT)
 #include "sl_simple_led_instances.h"
 #endif
-#include "sl_simple_button_instances.h"
 #if defined(SL_CATALOG_KERNEL_PRESENT)
 #include "sl_component_catalog.h"
 #include "sl_power_manager.h"
@@ -60,6 +59,24 @@
 //                              Macros and Typedefs
 // -----------------------------------------------------------------------------
 #define MAX_TX_FAILURES     (10u)
+typedef enum {
+  INIT,
+  REPORT,
+  WARN = 0x9A,
+  REQUEST,
+  REPLY,
+  SYNC = 0xFF,
+} message_pid_t;
+
+typedef enum {
+  ACTIVE = 0x05,
+  INACTIVE,
+  FAULT_HW = 0xCA,
+  FAULT_OPN,
+} sensor_state_t;
+
+
+
 // -----------------------------------------------------------------------------
 //                          Static Function Declarations
 // -----------------------------------------------------------------------------
@@ -67,12 +84,19 @@
 // -----------------------------------------------------------------------------
 //                                Global Variables
 // -----------------------------------------------------------------------------
+volatile struct SensorInfo {
+  sensor_state_t state;
+  uint32_t battery_voltage;
+  EmberNodeType node_type;
+} SensorInfo;
+
+
 /// Global flag set by a button push to allow or disallow entering to sleep
 bool enable_sleep = false;
 /// report timing event control
 EmberEventControl *report_control;
 /// report timing period
-uint16_t sensor_report_period_ms =  (2 * MILLISECOND_TICKS_PER_SECOND);
+uint16_t sensor_report_period_ms =  (5 * MILLISECOND_TICKS_PER_SECOND);
 /// TX options set up for the network
 EmberMessageOptions tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SECURITY_ENABLED;
 
@@ -82,62 +106,70 @@ EmberMessageOptions tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SEC
 /// Destination of the currently processed sink node
 static EmberNodeId sink_node_id = EMBER_COORDINATOR_ADDRESS;
 static volatile IADC_Result_t sample;
-uint8_t buffer[4];
+
 
 void IADC_IRQHandler(void){
-  // Read a result from the FIFO
   sample = IADC_pullSingleFifoResult(IADC0);
+  SensorInfo.battery_voltage = (sample.data * 1200)/1000;
+  app_log_info(" %d", SensorInfo.battery_voltage);
+  //app_log_info((uint8_t));
 
-  /*
-   * Calculate the voltage converted as follows:
-   *
-   * For single-ended conversions, the result can range from 0 to
-   * +Vref, i.e., for Vref = AVDD = 3.30 V, 0xFFF represents the
-   * full scale value of 3.30 V.
-   */
-  uint32_t data = (sample.data * 1200)/1000;
-  app_log_info(" %d", data);
-  buffer[0] = 0xFF & (uint8_t)(data >> 24);
-  buffer[1] = 0xFF & (uint8_t)(data >> 16);
-  buffer[2] = 0xFF & (uint8_t)(data >> 8);
-  buffer[3] = 0xFF & (uint8_t)(data);
 
-  /*
-   * Clear the single conversion complete interrupt.  Reading FIFO
-   * results does not do this automatically.
-   */
   IADC_clearInt(IADC0, IADC_IF_SINGLEDONE);
 }
 
-void LESENSE_IRQHandler(void)
+void GPIO_ODD_IRQHandler(void)
 {
-  // Clear all LESENSE interrupt flag
-  uint32_t flags = LESENSE_IntGet();
-  LESENSE_IntClear(flags);
+  // Get and clear all pending GPIO interrupts
+  uint32_t interruptMask = GPIO_IntGet();
+  GPIO_IntClear(interruptMask);
 
-  if (flags & LESENSE_IF_CH0){
-      app_log_info("PRESSED");
+  // Check if button 1 was pressed
+  if (interruptMask & (1 << 5))
+  {
       sl_led_toggle(&sl_led_led0);
+      app_log_info("pressed");
+      uint8_t buffer[3];
+      buffer[0] = 0xFF & (uint8_t) WARN;
+      buffer[1] = 0xFF & (uint8_t) 1;
+      buffer[2] = 0xFF & (uint8_t) SensorInfo.state;
+      emberMessageSend (sink_node_id,
+      SENSOR_SINK_ENDPOINT, // endpoint
+                        0, // messageTag
+                        sizeof(buffer), buffer, tx_options);
+
   }
+
+  CMU_ClockSelectSet(cmuClock_EM4GRPACLK, cmuSelect_ULFRCO);
+   CMU_ClockEnable(cmuClock_BURTC, true);
+   CMU_ClockEnable(cmuClock_BURAM, true);
+
+   BURTC_Init_TypeDef burtcInit = BURTC_INIT_DEFAULT;
+   burtcInit.compare0Top = true; // reset counter when counter reaches compare value
+   burtcInit.em4comp = true;     // BURTC compare interrupt wakes from EM4 (causes reset)
+   BURTC_Init(&burtcInit);
+
+   BURTC_CounterReset();
+   BURTC_CompareSet(0, 2600);
+
+   BURTC_IntEnable(BURTC_IEN_COMP);    // compare match
+   NVIC_EnableIRQ(BURTC_IRQn);
+   BURTC_Enable(true);
+
 }
 
+void BURTC_IRQHandler(void)
+{
+  BURTC_CounterReset();
+    BURTC_CompareSet(0, 2600);
+    NVIC_DisableIRQ(BURTC_IRQn);
+    BURTC_Enable(false);
+    BURTC_IntClear(BURTC_IF_COMP); // compare match
+ app_log_info("END");
+}
 // -----------------------------------------------------------------------------
 //                          Public Function Definitions
 // -----------------------------------------------------------------------------
-void sl_button_on_change(const sl_button_t *handle)
-{
-  if (sl_button_get_state(handle) == SL_SIMPLE_BUTTON_PRESSED) {
-      uint8_t buf[1];
-          buf[0] = 0x01;
-          emberMessageSend(sink_node_id,
-                                          SENSOR_SINK_ENDPOINT, // endpoint
-                                          0, // messageTag
-                                          sizeof(buf),
-                                          buf,
-                                          tx_options);
-
-  }
-}
 
 /**************************************************************************//**
  * Here we print out the first two bytes reported by the sinks as a little
@@ -148,20 +180,26 @@ void report_handler(void)
   if (!emberStackIsUp()) {
     emberEventControlSetInactive(*report_control);
   } else {
-      emberEventControlSetDelayMS(*report_control, sensor_report_period_ms);
-
+      uint8_t buffer[6];
+      buffer[0] = 0xFF & (uint8_t) REPORT;
+      buffer[1] = 0xFF & (uint8_t) (SensorInfo.battery_voltage >> 24);
+      buffer[2] = 0xFF & (uint8_t) (SensorInfo.battery_voltage >> 16);
+      buffer[3] = 0xFF & (uint8_t) (SensorInfo.battery_voltage >> 8);
+      buffer[4] = 0xFF & (uint8_t) (SensorInfo.battery_voltage);
+      buffer[5] = 0xFF & (uint8_t) SensorInfo.state;
+      emberMessageSend (sink_node_id,
+      SENSOR_SINK_ENDPOINT, // endpoint
+                        0, // messageTag
+                        sizeof(buffer), buffer, tx_options);
       //app_log_info("poll");
      // NVIC_DisableIRQ(IADC_IRQn);
       //emberPollForData();
      // NVIC_ClearPendingIRQ(IADC_IRQn);
          //   NVIC_EnableIRQ(IADC_IRQn);
-               emberMessageSend(sink_node_id,
-                                                        SENSOR_SINK_ENDPOINT, // endpoint
-                                                        0, // messageTag
-                                                        sizeof(buffer),
-                                                        buffer,
-                                                        tx_options);
+
      // IADC_command(IADC0, iadcCmdStartSingle);
+      emberEventControlSetDelayMS(*report_control, sensor_report_period_ms);
+
 
   }
 }
@@ -180,16 +218,44 @@ bool emberAfCommonOkToEnterLowPowerCallback(bool enter_em2, uint32_t duration_ms
 /**************************************************************************//**
  * This function is called when a message is received.
  *****************************************************************************/
-void emberAfIncomingMessageCallback(EmberIncomingMessage *message)
+void emberAfIncomingMessageCallback (EmberIncomingMessage *message)
 {
   uint8_t i;
-  if (message->endpoint == SENSOR_SINK_ENDPOINT) {
-    app_log_info("RX: Data from 0x%04X:", message->source);
-    for (i = SENSOR_SINK_DATA_OFFSET; i < message->length; i++) {
-      app_log_info(" %x", message->payload[i]);
+
+  if (message->endpoint == SENSOR_SINK_ENDPOINT)
+    {
+      app_log_info("RX: Data from 0x%04X:", message->source);
+      if (message->payload[0] == REQUEST)
+        {
+          if (message->payload[1] == (uint8_t) ACTIVE)
+            {
+              SensorInfo.state = ACTIVE;
+              NVIC_ClearPendingIRQ (GPIO_ODD_IRQn);
+              NVIC_EnableIRQ (GPIO_ODD_IRQn);
+
+            }
+          else if (message->payload[1] == (uint8_t) INACTIVE)
+            {
+              SensorInfo.state = INACTIVE;
+              NVIC_ClearPendingIRQ (GPIO_ODD_IRQn);
+              NVIC_DisableIRQ (GPIO_ODD_IRQn);
+            }
+        }
+      uint8_t buffer[3];
+      buffer[0] = 0xFF & (uint8_t) REPLY;
+      buffer[1] = 0xFF & (uint8_t) 0;
+      buffer[2] = 0xFF & (uint8_t) SensorInfo.state;
+      emberMessageSend (sink_node_id,
+      SENSOR_SINK_ENDPOINT, // endpoint
+                        0, // messageTag
+                        sizeof(buffer), buffer, tx_options);
+
+      for (i = SENSOR_SINK_DATA_OFFSET; i < message->length; i++)
+        {
+          app_log_info(" %x", message->payload[i]);
+        }
+      app_log_info("\n");
     }
-    app_log_info("\n");
-  }
 }
 
 /**************************************************************************//**
@@ -214,9 +280,12 @@ void emberAfStackStatusCallback(EmberStatus status)
     case EMBER_NETWORK_UP:
       app_log_info("Network up\n");
       app_log_info("Joined to Sink with node ID: 0x%04X\n", emberGetNodeId());
+      SensorInfo.state= ACTIVE;
+      SensorInfo.battery_voltage = 0;
       // Schedule start of periodic sensor reporting to the Sink
       emberEventControlSetDelayMS(*report_control, sensor_report_period_ms);
-      emberSetRadioPower(10, false);
+      while(emberSetRadioPower(10, false) != EMBER_SUCCESS)
+        ;
       break;
     case EMBER_NETWORK_DOWN:
       app_log_info("Network down\n");

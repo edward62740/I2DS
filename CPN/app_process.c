@@ -40,10 +40,25 @@
 #include "app_framework_common.h"
 #include "sl_simple_led_instances.h"
 #include "app_process.h"
+
 // -----------------------------------------------------------------------------
 //                              Macros and Typedefs
 // -----------------------------------------------------------------------------
+typedef enum {
+  INIT,
+  REPORT,
+  WARN = 0x9A,
+  REQUEST,
+  REPLY,
+  SYNC = 0xFF,
+} message_pid_t;
 
+typedef enum {
+  ACTIVE = 0x05,
+  INACTIVE,
+  FAULT_HW = 0xCA,
+  FAULT_OPN,
+} sensor_state_t;
 // -----------------------------------------------------------------------------
 //                          Static Function Declarations
 // -----------------------------------------------------------------------------
@@ -65,7 +80,38 @@ EmberMessageOptions tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SEC
 /**************************************************************************//**
  * This function is called when a message is received.
  *****************************************************************************/
-void emberAfIncomingMessageCallback(EmberIncomingMessage *message)
+EmberEventControl *report_control;
+/// report timing period
+uint16_t sensor_report_period_ms =  (3 * MILLISECOND_TICKS_PER_SECOND);
+uint8_t remote_state = INACTIVE;
+void report_handler (void)
+{
+  if (!emberStackIsUp ())
+    {
+      emberEventControlSetInactive(*report_control);
+    }
+  else
+    {
+      uint8_t tx_buffer[2];
+      tx_buffer[0] = (uint8_t) REQUEST;
+      if (remote_state == INACTIVE)
+        {
+          tx_buffer[1] = (uint8_t) ACTIVE;
+        }
+      else if (remote_state == ACTIVE)
+        {
+          tx_buffer[1] = (uint8_t) INACTIVE;
+        }
+      emberMessageSend (0x0001,
+      SENSOR_SINK_ENDPOINT, // endpoint
+                        0, // messageTag
+                        sizeof(tx_buffer), tx_buffer, tx_options);
+      app_log_info(" Request state switch to %d \n", remote_state);
+      emberEventControlSetDelayMS(*report_control, sensor_report_period_ms);
+
+    }
+}
+void emberAfIncomingMessageCallback (EmberIncomingMessage *message)
 {
   if ((message->endpoint != SENSOR_SINK_ENDPOINT)
       || ((tx_options & EMBER_OPTIONS_SECURITY_ENABLED)
@@ -74,21 +120,45 @@ void emberAfIncomingMessageCallback(EmberIncomingMessage *message)
     // or if security is required but the message is non-encrypted
     return;
   }
-  uint8_t buffer[4];
-
-  app_log_info("RX: Data from 0x%04X:", message->source);
-  app_log_info("rssi: %d:", message->rssi);
+  uint8_t buffer[6];
+  uint8_t state = INACTIVE;
+  //app_log_info("RX: Data from 0x%04X:", message->source);
+  //app_log_info("rssi: %d, lqi: %d", message->rssi, message->lqi);
   for (int j = 0; j < message->length; j++) {
-    app_log_info(" %02X", message->payload[j]);
+    //app_log_info(" %02X", message->payload[j]);
     buffer[j] = message->payload[j];
   }
-  uint32_t data = buffer[0] << 24;
-  data |= buffer[1] << 16;
-  data |= buffer[2] << 8;
-  data |= buffer[3];
-  app_log_info(" Voltage: %d\n",
-              data);
-  sl_led_toggle(&sl_led_led0);
+  switch (buffer[0])
+    {
+    case REPORT:
+      {
+      uint32_t data = buffer[1] << 24;
+      data |= buffer[2] << 16;
+      data |= buffer[3] << 8;
+      data |= buffer[4];
+      state = buffer[5];
+      remote_state = state;
+      app_log_info(" Voltage: %d, State: %d \n", data, state);
+      break;
+      }
+    case REPLY:
+      {
+      state = buffer[5];
+      app_log_info(" Ack state switch, State: %d \n", state);
+      break;
+      }
+    case WARN:
+      {
+      state = buffer[5];
+      app_log_info(" Warning, State: %d \n", state);
+      }
+      break;
+    default:
+      break;
+    }
+
+
+
 }
 
 /**************************************************************************//**
@@ -113,6 +183,7 @@ void emberAfStackStatusCallback(EmberStatus status)
   switch (status) {
     case EMBER_NETWORK_UP:
       app_log_info("Network up\n");
+      emberAfAllocateEvent (&report_control, &report_handler);
       break;
     case EMBER_NETWORK_DOWN:
       app_log_info("Network down\n");
