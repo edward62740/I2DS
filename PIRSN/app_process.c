@@ -60,12 +60,12 @@
 // -----------------------------------------------------------------------------
 #define MAX_TX_FAILURES     (10u)
 typedef enum {
-  INIT,
-  REPORT,
-  WARN = 0x9A,
-  REQUEST,
-  REPLY,
-  SYNC = 0xFF,
+  INIT,          // (S -> C) notify sensor type and features
+  REPORT,        // (S -> C) report battery levels and status
+  WARN = 0x9A,   // (S -> C) report triggered sensor
+  REQUEST,       // (S <- C) request change status
+  REPLY,         // (S <- C) ack REQUEST
+  SYNC = 0xFF,   // (S <- C) request INIT
 } message_pid_t;
 
 typedef enum {
@@ -75,20 +75,33 @@ typedef enum {
   FAULT_OPN,
 } sensor_state_t;
 
+typedef enum {
+  CPN = 0x88,
+  PIRSN,
+  ACSN,
+} device_hw_t ;
 
-
-// -----------------------------------------------------------------------------
-//                          Static Function Declarations
-// -----------------------------------------------------------------------------
-
-// -----------------------------------------------------------------------------
-//                                Global Variables
-// -----------------------------------------------------------------------------
-volatile struct SensorInfo {
+typedef struct {
+  device_hw_t hw;
   sensor_state_t state;
   uint32_t battery_voltage;
   EmberNodeType node_type;
-} SensorInfo;
+  EmberNodeId central_id;
+  EmberNodeId self_id;
+  uint8_t endpoint;
+} DeviceInfo;
+DeviceInfo selfInfo;
+
+void initSensorInfo(DeviceInfo *info, device_hw_t hw, sensor_state_t state, uint32_t battery_voltage, EmberNodeType node_type,
+                    EmberNodeId central_id, EmberNodeId self_id, uint8_t endpoint) {
+  info->hw = hw;
+  info->state = state;
+  info->battery_voltage = battery_voltage;
+  info->node_type = node_type;
+  info->central_id = central_id;
+  info->self_id = self_id;
+  info->endpoint = endpoint;
+}
 
 
 /// Global flag set by a button push to allow or disallow entering to sleep
@@ -104,18 +117,17 @@ EmberMessageOptions tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SEC
 //                                Static Variables
 // -----------------------------------------------------------------------------
 /// Destination of the currently processed sink node
-static EmberNodeId sink_node_id = EMBER_COORDINATOR_ADDRESS;
-static volatile IADC_Result_t sample;
+
 
 
 void IADC_IRQHandler(void){
+  static volatile IADC_Result_t sample;
   sample = IADC_pullSingleFifoResult(IADC0);
-  SensorInfo.battery_voltage = (sample.data * 1200)/1000;
-  app_log_info(" %d", SensorInfo.battery_voltage);
+  selfInfo.battery_voltage = (sample.data * 1200)/1000;
+  app_log_info(" %d", selfInfo.battery_voltage);
   //app_log_info((uint8_t));
-
-
   IADC_clearInt(IADC0, IADC_IF_SINGLEDONE);
+
 }
 
 void GPIO_ODD_IRQHandler(void)
@@ -127,13 +139,13 @@ void GPIO_ODD_IRQHandler(void)
   // Check if button 1 was pressed
   if (interruptMask & (1 << 5))
   {
-      sl_led_toggle(&sl_led_led0);
+      sl_led_turn_on(&sl_led_led0);
       app_log_info("pressed");
       uint8_t buffer[3];
       buffer[0] = 0xFF & (uint8_t) WARN;
       buffer[1] = 0xFF & (uint8_t) 1;
-      buffer[2] = 0xFF & (uint8_t) SensorInfo.state;
-      emberMessageSend (sink_node_id,
+      buffer[2] = 0xFF & (uint8_t) selfInfo.state;
+      emberMessageSend (selfInfo.central_id,
       SENSOR_SINK_ENDPOINT, // endpoint
                         0, // messageTag
                         sizeof(buffer), buffer, tx_options);
@@ -180,14 +192,15 @@ void report_handler(void)
   if (!emberStackIsUp()) {
     emberEventControlSetInactive(*report_control);
   } else {
+      sl_led_turn_on(&sl_led_led0);
       uint8_t buffer[6];
       buffer[0] = 0xFF & (uint8_t) REPORT;
-      buffer[1] = 0xFF & (uint8_t) (SensorInfo.battery_voltage >> 24);
-      buffer[2] = 0xFF & (uint8_t) (SensorInfo.battery_voltage >> 16);
-      buffer[3] = 0xFF & (uint8_t) (SensorInfo.battery_voltage >> 8);
-      buffer[4] = 0xFF & (uint8_t) (SensorInfo.battery_voltage);
-      buffer[5] = 0xFF & (uint8_t) SensorInfo.state;
-      emberMessageSend (sink_node_id,
+      buffer[1] = 0xFF & (uint8_t) (selfInfo.battery_voltage >> 24);
+      buffer[2] = 0xFF & (uint8_t) (selfInfo.battery_voltage >> 16);
+      buffer[3] = 0xFF & (uint8_t) (selfInfo.battery_voltage >> 8);
+      buffer[4] = 0xFF & (uint8_t) (selfInfo.battery_voltage);
+      buffer[5] = 0xFF & (uint8_t) selfInfo.state;
+      emberMessageSend (selfInfo.central_id,
       SENSOR_SINK_ENDPOINT, // endpoint
                         0, // messageTag
                         sizeof(buffer), buffer, tx_options);
@@ -221,7 +234,7 @@ bool emberAfCommonOkToEnterLowPowerCallback(bool enter_em2, uint32_t duration_ms
 void emberAfIncomingMessageCallback (EmberIncomingMessage *message)
 {
   uint8_t i;
-
+  sl_led_turn_on(&sl_led_led1);
   if (message->endpoint == SENSOR_SINK_ENDPOINT)
     {
       app_log_info("RX: Data from 0x%04X:", message->source);
@@ -229,23 +242,23 @@ void emberAfIncomingMessageCallback (EmberIncomingMessage *message)
         {
           if (message->payload[1] == (uint8_t) ACTIVE)
             {
-              SensorInfo.state = ACTIVE;
+              selfInfo.state = ACTIVE;
               NVIC_ClearPendingIRQ (GPIO_ODD_IRQn);
               NVIC_EnableIRQ (GPIO_ODD_IRQn);
 
             }
           else if (message->payload[1] == (uint8_t) INACTIVE)
             {
-              SensorInfo.state = INACTIVE;
+              selfInfo.state = INACTIVE;
               NVIC_ClearPendingIRQ (GPIO_ODD_IRQn);
               NVIC_DisableIRQ (GPIO_ODD_IRQn);
             }
         }
       uint8_t buffer[3];
       buffer[0] = 0xFF & (uint8_t) REPLY;
-      buffer[1] = 0xFF & (uint8_t) 0;
-      buffer[2] = 0xFF & (uint8_t) SensorInfo.state;
-      emberMessageSend (sink_node_id,
+      buffer[1] = 0xFF & (uint8_t) ((bool)(message->payload[1] != (uint8_t) selfInfo.state));
+      buffer[2] = 0xFF & (uint8_t) selfInfo.state;
+      emberMessageSend (selfInfo.central_id,
       SENSOR_SINK_ENDPOINT, // endpoint
                         0, // messageTag
                         sizeof(buffer), buffer, tx_options);
@@ -267,8 +280,9 @@ void emberAfMessageSentCallback(EmberStatus status,
 {
   (void) message;
   if (status != EMBER_SUCCESS) {
-    //app_log_info("TX: 0x%02X\n", status);
   }
+  sl_led_turn_off(&sl_led_led0);
+  sl_led_turn_off(&sl_led_led1);
 }
 
 /**************************************************************************//**
@@ -280,15 +294,43 @@ void emberAfStackStatusCallback(EmberStatus status)
     case EMBER_NETWORK_UP:
       app_log_info("Network up\n");
       app_log_info("Joined to Sink with node ID: 0x%04X\n", emberGetNodeId());
-      SensorInfo.state= ACTIVE;
-      SensorInfo.battery_voltage = 0;
+      initSensorInfo(&selfInfo, PIRSN, ACTIVE, 0, emberGetNodeType(),
+                          EMBER_COORDINATOR_ADDRESS, emberGetNodeId(), SENSOR_SINK_ENDPOINT);
       // Schedule start of periodic sensor reporting to the Sink
       emberEventControlSetDelayMS(*report_control, sensor_report_period_ms);
-      while(emberSetRadioPower(10, false) != EMBER_SUCCESS)
-        ;
+      uint8_t buffer[13];
+      buffer[0] = 0xFF & (uint8_t) INIT;
+      buffer[1] = 0xFF & (uint8_t) (selfInfo.hw);
+      buffer[2] = 0xFF & (uint8_t) (selfInfo.state);
+      buffer[3] = 0xFF & (uint8_t) (selfInfo.battery_voltage >> 24);
+      buffer[4] = 0xFF & (uint8_t) (selfInfo.battery_voltage >> 16);
+      buffer[5] = 0xFF & (uint8_t) (selfInfo.battery_voltage >> 8);
+      buffer[6] = 0xFF & (uint8_t) (selfInfo.battery_voltage);
+      buffer[7] = 0xFF & (uint8_t) (selfInfo.node_type);
+      buffer[8] = 0xFF & (uint8_t) (selfInfo.central_id >> 8);
+      buffer[9] = 0xFF & (uint8_t) (selfInfo.central_id);
+      buffer[10] = 0xFF & (uint8_t) (selfInfo.self_id >> 8);
+      buffer[11] = 0xFF & (uint8_t) (selfInfo.self_id);
+      buffer[12] = 0xFF & (uint8_t) (selfInfo.endpoint);
+      sl_led_turn_on(&sl_led_led0);
+      emberMessageSend (selfInfo.central_id,
+      SENSOR_SINK_ENDPOINT, // endpoint
+                        0, // messageTag
+                        sizeof(buffer), buffer, tx_options);
       break;
     case EMBER_NETWORK_DOWN:
-      app_log_info("Network down\n");
+      {
+        sl_led_turn_on(&sl_led_led1);
+             app_log_info("Join process timed out!\n");
+               EmberNetworkParameters parameters;
+             MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
+             parameters.radioTxPower = 0;
+             parameters.radioChannel = 11;
+             parameters.panId = 0x01FF;
+             status = emberJoinNetwork(EMBER_STAR_SLEEPY_END_DEVICE, &parameters);
+             app_log_info("Network status 0x%02X\n", status);
+             sl_led_turn_off(&sl_led_led1);
+       }
       break;
     case EMBER_JOIN_SCAN_FAILED:
       app_log_error("Scanning during join failed\n");
@@ -299,6 +341,7 @@ void emberAfStackStatusCallback(EmberStatus status)
     case EMBER_JOIN_TIMEOUT:
 
       {
+        sl_led_turn_on(&sl_led_led1);
         app_log_info("Join process timed out!\n");
           EmberNetworkParameters parameters;
         MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
@@ -307,10 +350,12 @@ void emberAfStackStatusCallback(EmberStatus status)
         parameters.panId = 0x01FF;
         status = emberJoinNetwork(EMBER_STAR_SLEEPY_END_DEVICE, &parameters);
         app_log_info("Network status 0x%02X\n", status);
+        sl_led_turn_off(&sl_led_led1);
   }
       break;
     default:
       {
+        sl_led_turn_on(&sl_led_led1);
       app_log_info("Stack status: 0x%02X\n", status);
           EmberNetworkParameters parameters;
         MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
@@ -319,6 +364,7 @@ void emberAfStackStatusCallback(EmberStatus status)
         parameters.panId = 0x01FF;
         status = emberJoinNetwork(EMBER_STAR_SLEEPY_END_DEVICE, &parameters);
         app_log_info("Network status 0x%02X\n", status);
+        sl_led_turn_off(&sl_led_led1);
   }
       break;
   }

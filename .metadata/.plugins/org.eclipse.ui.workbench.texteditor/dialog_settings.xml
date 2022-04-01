@@ -6,23 +6,23 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="report"/>
+		<item key="selection" value="poll"/>
 		<list key="findhistory">
+			<item value="poll"/>
+			<item value="sl_led"/>
+			<item value="state"/>
+			<item value="sink_node_id"/>
+			<item value="timed"/>
+			<item value="FORM"/>
+			<item value="form"/>
+			<item value="key"/>
+			<item value="security"/>
+			<item value="pjoin"/>
+			<item value="emberinit"/>
+			<item value="leave"/>
 			<item value="gpioi"/>
 			<item value="report"/>
 			<item value="emberEventControlSetInactive"/>
-			<item value="report_buffer"/>
-			<item value="ack"/>
-			<item value="rssi"/>
-			<item value="i2c"/>
-			<item value="sli_power_manager_apply_em"/>
-			<item value="apply_em"/>
-			<item value="pressed"/>
-			<item value="cli"/>
-			<item value="report_handler"/>
-			<item value="poll"/>
-			<item value="iadc"/>
-			<item value="idac"/>
 		</list>
 		<list key="replacehistory">
 		</list>

@@ -1,4 +1,4 @@
-19:17:35 **** Incremental Build of configuration GNU ARM v10.2.1 - Default for project PIRSN ****
+13:54:13 **** Incremental Build of configuration GNU ARM v10.2.1 - Default for project PIRSN ****
 make -j8 all 
 Building file: ../app_process.c
 Invoking: GNU ARM C Compiler
@@ -23,29 +23,29 @@ Running size tool
 arm-none-eabi-size "PIRSN.axf" -A
 PIRSN.axf  :
 section              size        addr
-.text              143972   134217728
-.ARM.exidx              8   134361700
+.text              144332   134217728
+.ARM.exidx              8   134362060
 .stack               4096   536870912
 .noinit               156   536875008
-.data                1036   536875164
-.bss                10324   536876200
-.heap               49920   536886528
-.nvm                40960   134361708
+.data                1040   536875164
+.bss                10328   536876204
+.heap               49912   536886536
+.nvm                40960   134362068
 .ARM.attributes        54           0
 .comment               77           0
-.debug_info        532343           0
-.debug_abbrev       66780           0
-.debug_loc         176063           0
-.debug_aranges       9152           0
-.debug_ranges       11968           0
-.debug_macro       401106           0
-.debug_line        390524           0
-.debug_str        2272046           0
-.debug_frame        35444           0
-Total             4146029
+.debug_info        533037           0
+.debug_abbrev       66770           0
+.debug_loc         176272           0
+.debug_aranges       9160           0
+.debug_ranges       12008           0
+.debug_macro       401155           0
+.debug_line        391049           0
+.debug_str        2272343           0
+.debug_frame        35476           0
+Total             4148233
 
 
  
 
-19:17:38 Build Finished. 0 errors, 0 warnings. (took 2s.821ms)
+13:54:15 Build Finished. 0 errors, 0 warnings. (took 2s.543ms)
 

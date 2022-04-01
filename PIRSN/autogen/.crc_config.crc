@@ -39,6 +39,7 @@ sl_rail_util_pa_config.h=365401960
 sl_simple_button_btn0_config.h=714815580
 sl_simple_button_config.h=362231615
 sl_simple_led_led0_config.h=908622594
+sl_simple_led_led1_config.h=-1228414042
 sl_sleeptimer_config.h=-1879962229
 sl_token_manager_config.h=-1101352028
 stack-common-config.h=-932171946

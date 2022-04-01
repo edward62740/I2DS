@@ -75,32 +75,33 @@ void emberAfInitCallback (void)
   emberAfAllocateEvent (&report_control, &report_handler);
   // CLI info message
   app_log_info("\nSensor\n");
-  while(status != EMBER_SUCCESS)
+  while (status != EMBER_SUCCESS)
     {
-      sl_sleeptimer_delay_millisecond(500);
-      status = emberNetworkInit();
+      sl_sleeptimer_delay_millisecond (500);
+      status = emberNetworkInit ();
 
     }
+
   //emberResetNetworkState ();
-  sl_sleeptimer_delay_millisecond(100);
+  sl_sleeptimer_delay_millisecond (100);
   app_log_info("Network status 0x%02X\n", status);
 
-  while(emberSetSecurityKey (&security_key) != EMBER_SUCCESS)
+  while (emberSetSecurityKey (&security_key) != EMBER_SUCCESS)
     ;
 
   app_log_info("Network status 0x%02X\n", status);
   EmberNetworkParameters parameters;
-MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
-parameters.radioTxPower = 0;
-parameters.radioChannel = 11;
-parameters.panId = 0x01FF;
-status = emberJoinNetwork(EMBER_STAR_SLEEPY_END_DEVICE, &parameters);
-app_log_info("Network status 0x%02X\n", status);
+  MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
+  parameters.radioTxPower = 0;
+  parameters.radioChannel = 11;
+  parameters.panId = 0x01FF;
+  status = emberJoinNetwork(EMBER_STAR_SLEEPY_END_DEVICE, &parameters);
+  app_log_info("Network status 0x%02X\n", status);
 
   emberAfPluginPollEnableShortPolling (true);
-  startBatteryMonitor();
+  startBatteryMonitor ();
   emberCalibrateCurrentChannel();
-  startSensorMonitor();
+  startSensorMonitor ();
 
   //sl_power_manager_remove_em_requirement (SL_POWER_MANAGER_EM1);
   sl_power_manager_add_em_requirement (SL_POWER_MANAGER_EM2);
@@ -147,9 +148,6 @@ void startSensorMonitor()
 {
   // Configure GPIO Clock. Note this is not required for EFR32xG21
   CMU_ClockEnable(cmuClock_GPIO, true);
-
-
-
   // Configure Button PB1 as input and enable interrupt
   GPIO_PinModeSet(gpioPortC, 5, gpioModeInput, 1);
   GPIO_ExtIntConfig(gpioPortC,

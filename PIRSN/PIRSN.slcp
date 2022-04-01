@@ -34,7 +34,7 @@ component:
 - {id: mpu}
 - {id: iostream_recommended_stream}
 - {id: emlib_acmp}
-- instance: [led0]
+- instance: [led0, led1]
   id: simple_led
 - {id: restrictions_profile_connect}
 - {id: device_init}
