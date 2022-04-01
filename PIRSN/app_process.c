@@ -47,18 +47,14 @@
 #include "sl_app_common.h"
 #include "app_process.h"
 #include "app_framework_common.h"
-#if defined(SL_CATALOG_LED0_PRESENT)
+#include "app_radio.h"
 #include "sl_simple_led_instances.h"
-#endif
 #if defined(SL_CATALOG_KERNEL_PRESENT)
 #include "sl_component_catalog.h"
 #include "sl_power_manager.h"
 #endif
 
-// -----------------------------------------------------------------------------
-//                              Macros and Typedefs
-// -----------------------------------------------------------------------------
-#define MAX_TX_FAILURES     (10u)
+
 typedef enum {
   INIT,          // (S -> C) notify sensor type and features
   REPORT,        // (S -> C) report battery levels and status
@@ -91,6 +87,12 @@ typedef struct {
   uint8_t endpoint;
 } DeviceInfo;
 DeviceInfo selfInfo;
+
+// -----------------------------------------------------------------------------
+//                              Macros and Typedefs
+// -----------------------------------------------------------------------------
+#define MAX_TX_FAILURES     (10u)
+
 
 void initSensorInfo(DeviceInfo *info, device_hw_t hw, sensor_state_t state, uint32_t battery_voltage, EmberNodeType node_type,
                     EmberNodeId central_id, EmberNodeId self_id, uint8_t endpoint) {
@@ -235,7 +237,7 @@ void emberAfIncomingMessageCallback (EmberIncomingMessage *message)
 {
   uint8_t i;
   sl_led_turn_on(&sl_led_led1);
-  if (message->endpoint == SENSOR_SINK_ENDPOINT)
+  if ((message->endpoint == selfInfo.endpoint) || (message->source == selfInfo.central_id))
     {
       app_log_info("RX: Data from 0x%04X:", message->source);
       if (message->payload[0] == REQUEST)
@@ -253,15 +255,20 @@ void emberAfIncomingMessageCallback (EmberIncomingMessage *message)
               NVIC_ClearPendingIRQ (GPIO_ODD_IRQn);
               NVIC_DisableIRQ (GPIO_ODD_IRQn);
             }
+          uint8_t buffer[3];
+          buffer[0] = 0xFF & (uint8_t) REPLY;
+          buffer[1] = 0xFF & (uint8_t) ((bool) (message->payload[1] != (uint8_t) selfInfo.state));
+          buffer[2] = 0xFF & (uint8_t) selfInfo.state;
+          emberMessageSend (selfInfo.central_id,
+          SENSOR_SINK_ENDPOINT, // endpoint
+                            0, // messageTag
+                            sizeof(buffer), buffer, tx_options);
         }
-      uint8_t buffer[3];
-      buffer[0] = 0xFF & (uint8_t) REPLY;
-      buffer[1] = 0xFF & (uint8_t) ((bool)(message->payload[1] != (uint8_t) selfInfo.state));
-      buffer[2] = 0xFF & (uint8_t) selfInfo.state;
-      emberMessageSend (selfInfo.central_id,
-      SENSOR_SINK_ENDPOINT, // endpoint
-                        0, // messageTag
-                        sizeof(buffer), buffer, tx_options);
+      else if (message->payload[0] == SYNC)
+        {
+
+        }
+
 
       for (i = SENSOR_SINK_DATA_OFFSET; i < message->length; i++)
         {
@@ -317,6 +324,7 @@ void emberAfStackStatusCallback(EmberStatus status)
       SENSOR_SINK_ENDPOINT, // endpoint
                         0, // messageTag
                         sizeof(buffer), buffer, tx_options);
+      applicationSensorTxInit();
       break;
     case EMBER_NETWORK_DOWN:
       {

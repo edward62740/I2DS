@@ -147,6 +147,7 @@ app_process.o: ../app_process.c \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\app\flex\component\connect\sl_sensor_sink\sl_app_common.h \
  ../app_process.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\app-framework-common\app_framework_common.h \
+ ../app_radio.h \
  C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_simple_led_instances.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_simple_led.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_led.h
@@ -298,6 +299,7 @@ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_acmp
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\app\flex\component\connect\sl_sensor_sink\sl_app_common.h:
 ../app_process.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\app-framework-common\app_framework_common.h:
+../app_radio.h:
 C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_simple_led_instances.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_simple_led.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_led.h:

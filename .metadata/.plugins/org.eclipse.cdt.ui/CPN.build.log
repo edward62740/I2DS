@@ -1,4 +1,4 @@
-13:53:26 **** Incremental Build of configuration GNU ARM v10.2.1 - Default for project CPN ****
+19:36:48 **** Incremental Build of configuration GNU ARM v10.2.1 - Default for project CPN ****
 make -j8 all 
 Building file: ../app_process.c
 Invoking: GNU ARM C Compiler
@@ -47,5 +47,5 @@ Total             4532441
 
  
 
-13:53:29 Build Finished. 0 errors, 0 warnings. (took 2s.808ms)
+19:36:52 Build Finished. 0 errors, 0 warnings. (took 3s.134ms)
 
