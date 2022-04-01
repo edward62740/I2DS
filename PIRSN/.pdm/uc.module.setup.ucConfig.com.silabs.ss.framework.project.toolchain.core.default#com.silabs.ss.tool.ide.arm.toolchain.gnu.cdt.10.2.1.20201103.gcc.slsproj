@@ -25,6 +25,7 @@
     <file name="frequency-hopping-config.h" generated="true" linked="false"/>
     <file name="sl_cli_config_example.h" generated="true" linked="false"/>
     <file name="sl_simple_led_led0_config.h" generated="true" linked="false"/>
+    <file name="sl_simple_led_led1_config.h" generated="true" linked="false"/>
     <file name="nvm3_default_config.h" generated="true" linked="false"/>
     <file name="legacy_hal_config.h" generated="true" linked="false"/>
     <file name="sl_device_init_emu_config.h" generated="true" linked="false"/>

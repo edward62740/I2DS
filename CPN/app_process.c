@@ -41,16 +41,18 @@
 #include "sl_simple_led_instances.h"
 #include "app_process.h"
 
+
 // -----------------------------------------------------------------------------
 //                              Macros and Typedefs
 // -----------------------------------------------------------------------------
+#define MAX_CONNECTED_DEVICES     (30u)
 typedef enum {
-  INIT,
-  REPORT,
-  WARN = 0x9A,
-  REQUEST,
-  REPLY,
-  SYNC = 0xFF,
+  INIT,          // (S -> C) notify sensor type and features
+  REPORT,        // (S -> C) report battery levels and status
+  WARN = 0x9A,   // (S -> C) report triggered sensor
+  REQUEST,       // (S <- C) request change status
+  REPLY,         // (S <- C) ack REQUEST
+  SYNC = 0xFF,   // (S <- C) request INIT
 } message_pid_t;
 
 typedef enum {
@@ -59,6 +61,35 @@ typedef enum {
   FAULT_HW = 0xCA,
   FAULT_OPN,
 } sensor_state_t;
+
+typedef enum {
+  CPN = 0x88,
+  PIRSN,
+  ACSN,
+} device_hw_t ;
+
+typedef struct {
+  device_hw_t hw;
+  sensor_state_t state;
+  uint32_t battery_voltage;
+  EmberNodeType node_type;
+  EmberNodeId central_id;
+  EmberNodeId self_id;
+  uint8_t endpoint;
+} DeviceInfo;
+DeviceInfo selfInfo, sensorInfo[MAX_CONNECTED_DEVICES];
+volatile uint8_t sensorIndex = 0;
+
+void initSensorInfo(DeviceInfo *info, device_hw_t hw, sensor_state_t state, uint32_t battery_voltage, EmberNodeType node_type,
+                    EmberNodeId central_id, EmberNodeId self_id, uint8_t endpoint) {
+  info->hw = hw;
+  info->state = state;
+  info->battery_voltage = battery_voltage;
+  info->node_type = node_type;
+  info->central_id = central_id;
+  info->self_id = self_id;
+  info->endpoint = endpoint;
+}
 // -----------------------------------------------------------------------------
 //                          Static Function Declarations
 // -----------------------------------------------------------------------------
@@ -80,37 +111,11 @@ EmberMessageOptions tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SEC
 /**************************************************************************//**
  * This function is called when a message is received.
  *****************************************************************************/
-EmberEventControl *report_control;
-/// report timing period
-uint16_t sensor_report_period_ms =  (3 * MILLISECOND_TICKS_PER_SECOND);
-uint8_t remote_state = INACTIVE;
-void report_handler (void)
-{
-  if (!emberStackIsUp ())
-    {
-      emberEventControlSetInactive(*report_control);
-    }
-  else
-    {
-      uint8_t tx_buffer[2];
-      tx_buffer[0] = (uint8_t) REQUEST;
-      if (remote_state == INACTIVE)
-        {
-          tx_buffer[1] = (uint8_t) ACTIVE;
-        }
-      else if (remote_state == ACTIVE)
-        {
-          tx_buffer[1] = (uint8_t) INACTIVE;
-        }
-      emberMessageSend (0x0001,
-      SENSOR_SINK_ENDPOINT, // endpoint
-                        0, // messageTag
-                        sizeof(tx_buffer), tx_buffer, tx_options);
-      app_log_info(" Request state switch to %d \n", remote_state);
-      emberEventControlSetDelayMS(*report_control, sensor_report_period_ms);
 
-    }
-}
+uint8_t remote_state = INACTIVE;
+
+
+
 void emberAfIncomingMessageCallback (EmberIncomingMessage *message)
 {
   if ((message->endpoint != SENSOR_SINK_ENDPOINT)
@@ -120,8 +125,7 @@ void emberAfIncomingMessageCallback (EmberIncomingMessage *message)
     // or if security is required but the message is non-encrypted
     return;
   }
-  uint8_t buffer[6];
-  uint8_t state = INACTIVE;
+  uint8_t buffer[message->length];
   //app_log_info("RX: Data from 0x%04X:", message->source);
   //app_log_info("rssi: %d, lqi: %d", message->rssi, message->lqi);
   for (int j = 0; j < message->length; j++) {
@@ -132,27 +136,95 @@ void emberAfIncomingMessageCallback (EmberIncomingMessage *message)
     {
     case REPORT:
       {
-      uint32_t data = buffer[1] << 24;
-      data |= buffer[2] << 16;
-      data |= buffer[3] << 8;
-      data |= buffer[4];
-      state = buffer[5];
-      remote_state = state;
-      app_log_info(" Voltage: %d, State: %d \n", data, state);
+        uint32_t data = buffer[1] << 24;
+        data |= buffer[2] << 16;
+        data |= buffer[3] << 8;
+        data |= buffer[4];
+        uint8_t state = buffer[5];
+        remote_state = state;
+        app_log_info(" Voltage: %d, State: %d \n", data, state);
       break;
       }
     case REPLY:
       {
-      state = buffer[5];
-      app_log_info(" Ack state switch, State: %d \n", state);
+        uint8_t info = buffer[1];
+      app_log_info(" Ack state switch, State: %d \n", info);
       break;
       }
     case WARN:
       {
-      state = buffer[5];
-      app_log_info(" Warning, State: %d \n", state);
+        uint8_t info = buffer[1];
+      app_log_info(" Warning, State: %d \n", info);
+        uint8_t tx_buffer[2];
+        tx_buffer[0] = (uint8_t) REQUEST;
+        if (remote_state == INACTIVE)
+          {
+            tx_buffer[1] = (uint8_t) ACTIVE;
+          }
+        else if (remote_state == ACTIVE)
+          {
+            tx_buffer[1] = (uint8_t) INACTIVE;
+          }
+        emberMessageSend (0x0001,
+        SENSOR_SINK_ENDPOINT, // endpoint
+                          0, // messageTag
+                          sizeof(tx_buffer), tx_buffer, tx_options);
+        app_log_info(" Request state switch to %d \n", tx_buffer[1]);
+        break;
       }
-      break;
+    case INIT:
+      {
+        uint8_t hw = buffer[1];
+        uint8_t state = buffer[2];
+        uint32_t battery = buffer[3] << 24;
+        battery |= buffer[4] << 16;
+        battery |= buffer[5] << 8;
+        battery |= buffer[6];
+        uint8_t nt = buffer[7];
+        uint16_t cid = buffer[8] << 8;
+        cid |= buffer[9];
+        uint16_t sid = buffer[10] << 8;
+        sid |= buffer[11];
+        uint8_t ep = buffer[12];
+        uint8_t iter = 0;
+        for (uint8_t i = 0; i < (uint8_t)MAX_CONNECTED_DEVICES; i++)
+          {
+            if (sensorInfo[i].self_id == sid)
+              {
+                sensorInfo[i].hw = buffer[1];
+                sensorInfo[i].state = buffer[2];
+                sensorInfo[i].battery_voltage = battery;
+                sensorInfo[i].node_type = buffer[7];
+                sensorInfo[i].central_id = cid;
+                sensorInfo[i].self_id = sid;
+                sensorInfo[i].endpoint = buffer[12];
+                app_log_info("Updated device %d ", sid);
+                break;
+              }
+            else
+              {
+                iter++;
+              }
+          }
+        app_log_info("icnt %d ", iter);
+        if(iter == (uint8_t)MAX_CONNECTED_DEVICES){
+            sensorInfo[sensorIndex].hw = buffer[1];
+            sensorInfo[sensorIndex].state = buffer[2];
+            sensorInfo[sensorIndex].battery_voltage = battery;
+            sensorInfo[sensorIndex].node_type = buffer[7];
+            sensorInfo[sensorIndex].central_id = cid;
+            sensorInfo[sensorIndex].self_id = sid;
+            sensorInfo[sensorIndex].endpoint = buffer[12];
+            sensorIndex++;
+            app_log_info("Added new device %d ", sid);
+        }
+        remote_state = state;
+        app_log_info(
+            " INIT -> State: %d, HW: %d, Voltage: %d, Nodetype: %d, CID: %d, SID: %d, ENDP: %d \n",
+            state, hw, battery, nt, cid, sid, ep);
+        break;
+      }
+
     default:
       break;
     }
@@ -183,15 +255,61 @@ void emberAfStackStatusCallback(EmberStatus status)
   switch (status) {
     case EMBER_NETWORK_UP:
       app_log_info("Network up\n");
-      emberAfAllocateEvent (&report_control, &report_handler);
       break;
     case EMBER_NETWORK_DOWN:
-      app_log_info("Network down\n");
+      {
+              EmberNetworkParameters parameters;
+              MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
+              parameters.radioTxPower = SENSOR_SINK_TX_POWER;
+              parameters.radioChannel = 11;
+              parameters.panId = SENSOR_SINK_PAN_ID;
+              emberSetSecurityKey (&security_key);
+              while (status != EMBER_SUCCESS)
+                {
+                  status = emberFormNetwork (&parameters);
+                  sl_sleeptimer_delay_millisecond (500);
+                  app_log_info("form Network status 0x%02X\n", status);
+                }
+              status = 0x01;
+
+              emberClearSelectiveJoinPayload ();
+              while (status != EMBER_SUCCESS)
+                {
+                  status = emberPermitJoining (255);
+                  sl_sleeptimer_delay_millisecond (500);
+                  app_log_info("pj Network status 0x%02X\n", status);
+                }
+              app_log_info("Stack status: 0x%02X\n", status);
+              break;
+            }
       break;
     default:
-      app_log_info("Stack status: 0x%02X\n", status);
-      break;
-  }
+      {
+        EmberNetworkParameters parameters;
+        MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
+        parameters.radioTxPower = SENSOR_SINK_TX_POWER;
+        parameters.radioChannel = 11;
+        parameters.panId = SENSOR_SINK_PAN_ID;
+        emberSetSecurityKey (&security_key);
+        while (status != EMBER_SUCCESS)
+          {
+            status = emberFormNetwork (&parameters);
+            sl_sleeptimer_delay_millisecond (500);
+            app_log_info("form Network status 0x%02X\n", status);
+          }
+        status = 0x01;
+
+        emberClearSelectiveJoinPayload ();
+        while (status != EMBER_SUCCESS)
+          {
+            status = emberPermitJoining (255);
+            sl_sleeptimer_delay_millisecond (500);
+            app_log_info("pj Network status 0x%02X\n", status);
+          }
+        app_log_info("Stack status: 0x%02X\n", status);
+        break;
+      }
+    }
 }
 
 /**************************************************************************//**

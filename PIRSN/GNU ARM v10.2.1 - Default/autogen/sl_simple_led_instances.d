@@ -76,7 +76,8 @@ autogen/sl_simple_led_instances.o: ../autogen/sl_simple_led_instances.c \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_common.h \
  C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_component_catalog.h \
  C\:\Users\█████████\Desktop\I2DS\PIRSN\config/emlib_core_debug_config.h \
- C\:\Users\█████████\Desktop\I2DS\PIRSN\config/sl_simple_led_led0_config.h
+ C\:\Users\█████████\Desktop\I2DS\PIRSN\config/sl_simple_led_led0_config.h \
+ C\:\Users\█████████\Desktop\I2DS\PIRSN\config/sl_simple_led_led1_config.h
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\common\toolchain\inc\sl_gcc_preinclude.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_simple_led.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_led.h:
@@ -155,3 +156,4 @@ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_comm
 C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_component_catalog.h:
 C\:\Users\█████████\Desktop\I2DS\PIRSN\config/emlib_core_debug_config.h:
 C\:\Users\█████████\Desktop\I2DS\PIRSN\config/sl_simple_led_led0_config.h:
+C\:\Users\█████████\Desktop\I2DS\PIRSN\config/sl_simple_led_led1_config.h:

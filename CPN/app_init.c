@@ -37,7 +37,6 @@
 #include "app_process.h"
 #include "app_framework_common.h"
 #include "sl_simple_led_instances.h"
-#include "app_framework_common.h"
 // -----------------------------------------------------------------------------
 //                              Macros and Typedefs
 // -----------------------------------------------------------------------------
@@ -65,35 +64,57 @@ extern EmberEventControl *data_report_control;
 ******************************************************************************/
 void emberAfInitCallback(void)
 {
-  EmberStatus status;
-  sl_led_turn_off(&sl_led_led0);
-
   // CLI info message
   app_log_info("\nSink\n");
-  emberSetSecurityKey(&security_key);
 
-  while(status != EMBER_SUCCESS)
+
+  EmberStatus status;
+  status = 0x01;
+
+  while(status != (EMBER_SUCCESS || EMBER_NOT_JOINED))
     {
-
       status = emberNetworkInit();
       sl_sleeptimer_delay_millisecond(500);
+      app_log_info("init Network status 0x%02X\n", status);
     }
- // emberResetNetworkState ();
-  app_log_info("Network status 0x%02X\n", status);
+  status = 0x01;
+  emberResetNetworkState ();
+/*
+    while(status != EMBER_SUCCESS) {
+        status = emberSetSecurityKey (&security_key);
+        sl_sleeptimer_delay_millisecond(500);
+        app_log_info("sec Network status 0x%02X\n", status);
+    }
+    status = 0x01;
+*/
 
-    EmberNetworkParameters parameters;
-    emberSetSecurityKey(&security_key);
+ // sl_sleeptimer_delay_millisecond(1500);
+  //emberResetNetworkState ();
+  /*sl_sleeptimer_delay_millisecond(500);
+  status = 0x01;
 
-    MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
-    parameters.radioTxPower = SENSOR_SINK_TX_POWER;
-    parameters.radioChannel = 11;
-    parameters.panId = SENSOR_SINK_PAN_ID;
-  while( emberFormNetwork(&parameters) != EMBER_SUCCESS)
-    ;
-  while( emberPermitJoining(255) != EMBER_SUCCESS)
-      ;
-    sl_led_turn_on(&sl_led_led0);
-    emberCalibrateCurrentChannel();
+  while (status != (EMBER_SUCCESS || EMBER_NOT_JOINED))
+    {
+      status = emberNetworkInit ();
+      sl_sleeptimer_delay_millisecond (500);
+      app_log_info("init2 Network status 0x%02X\n", status);
+    }
+  status = 0x01;
+  while (status != EMBER_SUCCESS)
+    {
+      status = emberFormNetwork (&parameters);
+      sl_sleeptimer_delay_millisecond (2500);
+      app_log_info("form2 Network status 0x%02X\n", status);
+    }
+  status = 0x01;
+  while (status != EMBER_SUCCESS)
+    {
+      status = emberPermitJoining (255);
+      sl_sleeptimer_delay_millisecond (500);
+      app_log_info("pj2 Network status 0x%02X\n", status);
+    }
+  sl_led_turn_on (&sl_led_led0);*/
+  //emberCalibrateCurrentChannel();
 #if defined(EMBER_AF_PLUGIN_BLE)
   bleConnectionInfoTableInit();
 #endif
