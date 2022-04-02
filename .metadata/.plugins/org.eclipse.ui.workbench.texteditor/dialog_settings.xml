@@ -6,23 +6,23 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="poll"/>
+		<item key="selection" value="Nap"/>
 		<list key="findhistory">
+			<item value="nap"/>
+			<item value="hibernate"/>
+			<item value="pwr"/>
+			<item value="power"/>
+			<item value="tx"/>
+			<item value="reply"/>
+			<item value="REPLY"/>
+			<item value="gpio_odd"/>
+			<item value="selfInfo"/>
 			<item value="poll"/>
 			<item value="sl_led"/>
 			<item value="state"/>
 			<item value="sink_node_id"/>
 			<item value="timed"/>
 			<item value="FORM"/>
-			<item value="form"/>
-			<item value="key"/>
-			<item value="security"/>
-			<item value="pjoin"/>
-			<item value="emberinit"/>
-			<item value="leave"/>
-			<item value="gpioi"/>
-			<item value="report"/>
-			<item value="emberEventControlSetInactive"/>
 		</list>
 		<list key="replacehistory">
 		</list>

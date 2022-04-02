@@ -72,6 +72,7 @@ app_process.o: ../app_process.c \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_assert.h \
  C\:\Users\█████████\Desktop\I2DS\CPN\autogen/sl_component_catalog.h \
  C\:\Users\█████████\Desktop\I2DS\CPN\config/emlib_core_debug_config.h \
+ ../app_process.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\ember.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\ember-types.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\config\ember-configuration-defaults.h \
@@ -165,8 +166,7 @@ app_process.o: ../app_process.c \
  C\:\Users\█████████\Desktop\I2DS\CPN\autogen/sl_simple_led_instances.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_simple_led.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_led.h \
- c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_gpio.h \
- ../app_process.h
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_gpio.h
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\common\toolchain\inc\sl_gcc_preinclude.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\platform-header.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_core.h:
@@ -240,6 +240,7 @@ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_comm
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_assert.h:
 C\:\Users\█████████\Desktop\I2DS\CPN\autogen/sl_component_catalog.h:
 C\:\Users\█████████\Desktop\I2DS\CPN\config/emlib_core_debug_config.h:
+../app_process.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\ember.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\ember-types.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\config\ember-configuration-defaults.h:
@@ -334,4 +335,3 @@ C\:\Users\█████████\Desktop\I2DS\CPN\autogen/sl_simple_led_ins
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_simple_led.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_led.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_gpio.h:
-../app_process.h:

@@ -32,6 +32,7 @@
 //                                   Includes
 // -----------------------------------------------------------------------------
 #include PLATFORM_HEADER
+#include "app_process.h"
 #include "stack/include/ember.h"
 #include "hal/hal.h"
 #include "em_chip.h"
@@ -45,38 +46,7 @@
 // -----------------------------------------------------------------------------
 //                              Macros and Typedefs
 // -----------------------------------------------------------------------------
-#define MAX_CONNECTED_DEVICES     (30u)
-typedef enum {
-  INIT,          // (S -> C) notify sensor type and features
-  REPORT,        // (S -> C) report battery levels and status
-  WARN = 0x9A,   // (S -> C) report triggered sensor
-  REQUEST,       // (S <- C) request change status
-  REPLY,         // (S <- C) ack REQUEST
-  SYNC = 0xFF,   // (S <- C) request INIT
-} message_pid_t;
 
-typedef enum {
-  ACTIVE = 0x05,
-  INACTIVE,
-  FAULT_HW = 0xCA,
-  FAULT_OPN,
-} sensor_state_t;
-
-typedef enum {
-  CPN = 0x88,
-  PIRSN,
-  ACSN,
-} device_hw_t ;
-
-typedef struct {
-  device_hw_t hw;
-  sensor_state_t state;
-  uint32_t battery_voltage;
-  EmberNodeType node_type;
-  EmberNodeId central_id;
-  EmberNodeId self_id;
-  uint8_t endpoint;
-} DeviceInfo;
 DeviceInfo selfInfo, sensorInfo[MAX_CONNECTED_DEVICES];
 volatile uint8_t sensorIndex = 0;
 
@@ -154,22 +124,31 @@ void emberAfIncomingMessageCallback (EmberIncomingMessage *message)
     case WARN:
       {
         uint8_t info = buffer[1];
-      app_log_info(" Warning, State: %d \n", info);
-        uint8_t tx_buffer[2];
+        if(info == 0){
+            app_log_info(" Warning started %d \n", info);
+        }
+        else {
+            app_log_info(" Warning ended with %d trigs \n", buffer[2]);
+        }
+
+        uint8_t tx_buffer[3];
         tx_buffer[0] = (uint8_t) REQUEST;
+        tx_buffer[1] = (uint8_t) REQ_STATE;
         if (remote_state == INACTIVE)
           {
-            tx_buffer[1] = (uint8_t) ACTIVE;
+            tx_buffer[2] = (uint8_t) ACTIVE;
           }
         else if (remote_state == ACTIVE)
           {
-            tx_buffer[1] = (uint8_t) INACTIVE;
+            tx_buffer[2] = (uint8_t) INACTIVE;
           }
+/*
         emberMessageSend (0x0001,
         SENSOR_SINK_ENDPOINT, // endpoint
                           0, // messageTag
                           sizeof(tx_buffer), tx_buffer, tx_options);
-        app_log_info(" Request state switch to %d \n", tx_buffer[1]);
+        app_log_info(" Request state switch to %d \n", tx_buffer[2]);
+        */
         break;
       }
     case INIT:
