@@ -83,6 +83,75 @@ main.o: ../main.c \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_bus.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_core.h \
  ../app_init.h ../app_process.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\platform-header.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\ember.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\api-rename.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\ember-types.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\config\ember-configuration-defaults.h \
+ C\:\Users\█████████\Desktop\I2DS\PIRSN\config/stack-common-config.h \
+ C\:\Users\█████████\Desktop\I2DS\PIRSN\config/frequency-hopping-config.h \
+ C\:\Users\█████████\Desktop\I2DS\PIRSN\config/parent-support-config.h \
+ C\:\Users\█████████\Desktop\I2DS\PIRSN\config/mac-queue-config.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\error.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\error-def.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\memory-buffer.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\event.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\network-management.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\stack-info.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\message.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\byte-utilities.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\radio-stream.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\hal\hal.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\hal.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\ember.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\error-def.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\micro.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\micro-types.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\micro-common.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\efm32_micro.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\reset-def.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\serial.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_usart.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\ember-types.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\led.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\button.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\crc.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\random.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\token_manager\inc\sl_token_api.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\ember-types.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\token_manager\inc\sl_token_manufacturing_api.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\token_manager\inc\sl_token_manufacturing.h \
+ C\:\Users\█████████\Desktop\I2DS\PIRSN\config/sl_token_manager_config.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\token_manager\inc\sl_token_manufacturing_series_2.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\config\token-stack.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\cortexm3/diagnostic.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_chip.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_system.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_gpio.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\app\common\util\app_log\app_log.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\iostream\inc\sl_iostream.h \
+ C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_iostream_handles.h \
+ C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_iostream_init_eusart_instances.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\iostream\inc\sl_iostream_uart.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\iostream\inc\sl_iostream.h \
+ C\:\Users\█████████\Desktop\I2DS\PIRSN\config/app_log_config.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\hardware\driver\si70xx\inc\sl_si70xx.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\i2cspm\inc\sl_i2cspm.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_gpio.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_i2c.h \
+ C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_i2cspm_instances.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\poll\poll.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_iadc.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_cmu.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_cmu_compat.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_burtc.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_acmp.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\app\flex\component\connect\sl_sensor_sink\sl_app_common.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\app-framework-common\app_framework_common.h \
+ ../app_radio.h \
+ C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_simple_led_instances.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_simple_led.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_led.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\system\inc\sl_system_process_action.h
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\common\toolchain\inc\sl_gcc_preinclude.h:
 C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_component_catalog.h:
@@ -169,4 +238,73 @@ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_bus.
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_core.h:
 ../app_init.h:
 ../app_process.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\platform-header.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\ember.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\api-rename.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\ember-types.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\config\ember-configuration-defaults.h:
+C\:\Users\█████████\Desktop\I2DS\PIRSN\config/stack-common-config.h:
+C\:\Users\█████████\Desktop\I2DS\PIRSN\config/frequency-hopping-config.h:
+C\:\Users\█████████\Desktop\I2DS\PIRSN\config/parent-support-config.h:
+C\:\Users\█████████\Desktop\I2DS\PIRSN\config/mac-queue-config.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\error.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\error-def.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\memory-buffer.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\event.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\network-management.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\stack-info.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\message.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\byte-utilities.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\radio-stream.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\hal\hal.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\hal.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\ember.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\error-def.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\micro.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\micro-types.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\micro-common.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\efm32_micro.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\reset-def.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\serial.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_usart.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\ember-types.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\led.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\button.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\crc.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\random.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\token_manager\inc\sl_token_api.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\include\ember-types.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\token_manager\inc\sl_token_manufacturing_api.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\token_manager\inc\sl_token_manufacturing.h:
+C\:\Users\█████████\Desktop\I2DS\PIRSN\config/sl_token_manager_config.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\token_manager\inc\sl_token_manufacturing_series_2.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\stack\config\token-stack.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\cortexm3/diagnostic.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_chip.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_system.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_gpio.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\app\common\util\app_log\app_log.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\iostream\inc\sl_iostream.h:
+C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_iostream_handles.h:
+C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_iostream_init_eusart_instances.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\iostream\inc\sl_iostream_uart.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\iostream\inc\sl_iostream.h:
+C\:\Users\█████████\Desktop\I2DS\PIRSN\config/app_log_config.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\hardware\driver\si70xx\inc\sl_si70xx.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\i2cspm\inc\sl_i2cspm.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_gpio.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_i2c.h:
+C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_i2cspm_instances.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\poll\poll.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_iadc.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_cmu.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_cmu_compat.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_burtc.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_acmp.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\app\flex\component\connect\sl_sensor_sink\sl_app_common.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\app-framework-common\app_framework_common.h:
+../app_radio.h:
+C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_simple_led_instances.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_simple_led.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_led.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\system\inc\sl_system_process_action.h:

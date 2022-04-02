@@ -1,5 +1,6 @@
 app_init.o: ../app_init.c \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\common\toolchain\inc\sl_gcc_preinclude.h \
+ ../app_init.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\app\common\util\app_log\app_log.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\iostream\inc\sl_iostream.h \
  C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_component_catalog.h \
@@ -140,17 +141,21 @@ app_init.o: ../app_init.c \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_i2c.h \
  C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_i2cspm_instances.h \
  ../app_process.h \
- c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\app-framework-common\app_framework_common.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\poll\poll.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_iadc.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_cmu.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_cmu_compat.h \
- c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_prs.h \
- c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_letimer.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_burtc.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_acmp.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\app-framework-common\app_framework_common.h \
+ ../app_radio.h \
  C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_simple_led_instances.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_simple_led.h \
- c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_led.h
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_led.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_prs.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_letimer.h
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\common\toolchain\inc\sl_gcc_preinclude.h:
+../app_init.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\app\common\util\app_log\app_log.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\iostream\inc\sl_iostream.h:
 C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_component_catalog.h:
@@ -291,13 +296,16 @@ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_gpio
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_i2c.h:
 C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_i2cspm_instances.h:
 ../app_process.h:
-c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\app-framework-common\app_framework_common.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\poll\poll.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_iadc.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_cmu.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_cmu_compat.h:
-c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_prs.h:
-c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_letimer.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_burtc.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_acmp.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\app-framework-common\app_framework_common.h:
+../app_radio.h:
 C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_simple_led_instances.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_simple_led.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_led.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_prs.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_letimer.h:

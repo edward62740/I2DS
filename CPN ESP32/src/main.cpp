@@ -12,7 +12,7 @@ Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_MOSI, TFT_CLK, TFT_R
 XPT2046 touch(16, 17);
 static uint16_t prev_x = 0xffff, prev_y = 0xffff;
 void setup()
-{
+{/*
   Serial.begin(9600);
   Serial.println("ILI9341 Test!");
 
@@ -39,12 +39,30 @@ tft.fillScreen(ILI9341_BLACK);
   Serial.println(x, HEX);
   x = tft.readcommand8(ILI9341_RDSELFDIAG);
   Serial.print("Self Diagnostic: 0x");
-  Serial.println(x, HEX);
+  Serial.println(x, HEX);*/
+  Serial.begin(115200);
+  Serial1.begin(115200, SERIAL_8N1, 19, 22);
 
 }
 
-void loop(void)
-{
+
+
+
+void loop() {
+
+  if (Serial.available()) {      // If anything comes in Serial (USB),
+
+    Serial1.write(Serial.read());   // read it and send it out Serial1 (pins 0 & 1)
+
+  }
+
+  if (Serial1.available()) {     // If anything comes in Serial1 (pins 0 & 1)
+
+    Serial.write(Serial1.read());   // read it and send it out Serial (USB)
+
+  }
+}
+/*
   if (touch.isTouching()) {
     
     uint16_t x, y;
@@ -61,4 +79,4 @@ void loop(void)
     prev_x = prev_y = 0xffff;
   }
   delay(20);
-}
+}*/

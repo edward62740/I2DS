@@ -19,6 +19,10 @@
 // -----------------------------------------------------------------------------
 
 void applicationSensorTxInit(void);
-
+void applicationSensorTxStartEvent(void);
+void applicationSensorTxEndEvent(void);
+void applicationSensorTxRoutine(void);
+void applicationSensorTxReply(bool success);
+void applicationSensorRxMsg(EmberIncomingMessage *message);
 
 #endif  // APP_RADIO_H

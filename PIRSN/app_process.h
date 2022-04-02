@@ -29,7 +29,28 @@
  ******************************************************************************/
 #ifndef APP_PROCESS_H
 #define APP_PROCESS_H
-
+#include PLATFORM_HEADER
+#include "stack/include/ember.h"
+#include "hal/hal.h"
+#include "em_chip.h"
+#include "app_log.h"
+#include "sl_si70xx.h"
+#include "sl_i2cspm_instances.h"
+#include "poll.h"
+#include "em_iadc.h"
+#include "em_cmu.h"
+#include "em_emu.h"
+#include "em_burtc.h"
+#include "em_acmp.h"
+#include "sl_app_common.h"
+#include "app_process.h"
+#include "app_framework_common.h"
+#include "app_radio.h"
+#include "sl_simple_led_instances.h"
+#if defined(SL_CATALOG_KERNEL_PRESENT)
+#include "sl_component_catalog.h"
+#include "sl_power_manager.h"
+#endif
 
 
 // -----------------------------------------------------------------------------
@@ -39,6 +60,48 @@
 // -----------------------------------------------------------------------------
 //                              Macros and Typedefs
 // -----------------------------------------------------------------------------
+
+typedef enum {
+  INIT,          // (S -> C) notify sensor type and features
+  REPORT,        // (S -> C) report battery levels and status
+  WARN = 0x9A,   // (S -> C) report triggered sensor
+  REQUEST,       // (S <- C) request change status
+  REPLY,         // (S <- C) ack REQUEST
+  SYNC = 0xFF,   // (S <- C) request INIT
+} message_pid_t;
+
+typedef enum {
+  ACTIVE = 0x05,
+  INACTIVE,
+  FAULT_HW = 0xCA,
+  FAULT_OPN,
+} sensor_state_t;
+
+typedef enum {
+  CPN = 0x88,
+  PIRSN,
+  ACSN,
+} device_hw_t ;
+
+typedef enum {
+  REQ_STATE,
+  REQ_TXPWR,
+  REQ_REPORT,
+  REQ_LED,
+} message_request_t;
+
+typedef struct {
+  device_hw_t hw;
+  sensor_state_t state;
+  uint32_t battery_voltage;
+  EmberNodeType node_type;
+  EmberNodeId central_id;
+  EmberNodeId self_id;
+  uint8_t endpoint;
+  uint8_t trigd;
+} DeviceInfo;
+extern DeviceInfo selfInfo;
+extern volatile bool cooldown;
 // -----------------------------------------------------------------------------
 //                                Global Variables
 // -----------------------------------------------------------------------------
@@ -59,5 +122,7 @@ extern bool enable_sleep;
  * endian 16-bits decimal.
  *****************************************************************************/
 void report_handler(void);
+void initSensorInfo(DeviceInfo *info, device_hw_t hw, sensor_state_t state, uint32_t battery_voltage, EmberNodeType node_type,
+                    EmberNodeId central_id, EmberNodeId self_id, uint8_t endpoint, uint8_t trigd);
 
 #endif  // APP_PROCESS_H

@@ -46,4 +46,6 @@
 //                          Public Function Declarations
 // -----------------------------------------------------------------------------
 
+void startBatteryMonitor(void);
+void startSensorMonitor(void);
 #endif  // APP_INIT_H
