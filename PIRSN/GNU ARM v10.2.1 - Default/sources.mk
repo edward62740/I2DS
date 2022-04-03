@@ -19,12 +19,10 @@ SUBDIRS := \
 . \
 autogen \
 gecko_sdk_4.0.2/app/common/util/app_log \
-gecko_sdk_4.0.2/hardware/driver/si70xx/src \
 gecko_sdk_4.0.2/platform/Device/SiliconLabs/EFR32FG23/Source/GCC \
 gecko_sdk_4.0.2/platform/Device/SiliconLabs/EFR32FG23/Source \
 gecko_sdk_4.0.2/platform/common/src \
 gecko_sdk_4.0.2/platform/common/toolchain/src \
-gecko_sdk_4.0.2/platform/driver/i2cspm/src \
 gecko_sdk_4.0.2/platform/driver/leddrv/src \
 gecko_sdk_4.0.2/platform/emdrv/nvm3/src \
 gecko_sdk_4.0.2/platform/emlib/src \
@@ -40,7 +38,6 @@ gecko_sdk_4.0.2/platform/service/power_manager/src \
 gecko_sdk_4.0.2/platform/service/sleeptimer/src \
 gecko_sdk_4.0.2/platform/service/system/src \
 gecko_sdk_4.0.2/platform/service/token_manager/src \
-gecko_sdk_4.0.2/platform/service/udelay/src \
 gecko_sdk_4.0.2/protocol/flex/app-framework-common \
 gecko_sdk_4.0.2/protocol/flex/poll \
 gecko_sdk_4.0.2/protocol/flex/stack/config \

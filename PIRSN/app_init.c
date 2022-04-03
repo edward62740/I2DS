@@ -34,8 +34,6 @@
 #include "app_init.h"
 #include "app_log.h"
 #include "sl_app_common.h"
-#include "sl_si70xx.h"
-#include "sl_i2cspm_instances.h"
 #include "sl_sleeptimer.h"
 #include "app_process.h"
 #include "app_framework_common.h"
@@ -98,11 +96,11 @@ void emberAfInitCallback(void)
   parameters.panId = 0x01FF;
   status = emberJoinNetwork(EMBER_STAR_SLEEPY_END_DEVICE, &parameters);
   app_log_info("Network status 0x%02X\n", status);
-
+  startSensorMonitor ();
   emberAfPluginPollEnableShortPolling (true);
   startBatteryMonitor ();
-  emberCalibrateCurrentChannel();
-  startSensorMonitor ();
+  //emberCalibrateCurrentChannel();
+
 
   //sl_power_manager_remove_em_requirement (SL_POWER_MANAGER_EM1);
   sl_power_manager_add_em_requirement (SL_POWER_MANAGER_EM2);
@@ -143,7 +141,6 @@ void startBatteryMonitor(void)
   IADC_enableInt (IADC0, IADC_IEN_SINGLEDONE);
   NVIC_ClearPendingIRQ (IADC_IRQn);
   NVIC_EnableIRQ (IADC_IRQn);
-  NVIC_SetPriority(IADC_IRQn, 6);
 }
 
 void startSensorMonitor(void)
@@ -162,5 +159,4 @@ void startSensorMonitor(void)
   // Enable ODD interrupt to catch button press that changes slew rate
   NVIC_ClearPendingIRQ(GPIO_ODD_IRQn);
   NVIC_EnableIRQ(GPIO_ODD_IRQn);
-  NVIC_SetPriority(GPIO_ODD_IRQn, 5);
 }

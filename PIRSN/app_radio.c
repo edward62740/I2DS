@@ -3,8 +3,6 @@
 #include "hal/hal.h"
 #include "em_chip.h"
 #include "app_log.h"
-#include "sl_si70xx.h"
-#include "sl_i2cspm_instances.h"
 #include "poll.h"
 #include "em_iadc.h"
 #include "em_cmu.h"
@@ -128,16 +126,16 @@ void applicationSensorRxMsg(EmberIncomingMessage *message)
                     {
                       success = (message->payload[2] != selfInfo.state) ? true : false;
                       selfInfo.state = ACTIVE;
-                      NVIC_ClearPendingIRQ (GPIO_ODD_IRQn);
-                      NVIC_EnableIRQ (GPIO_ODD_IRQn);
+                     // NVIC_ClearPendingIRQ (GPIO_ODD_IRQn);
+                      //NVIC_EnableIRQ (GPIO_ODD_IRQn);
 
                     }
                   else if (message->payload[2] == (uint8_t) INACTIVE)
                     {
                       success = (message->payload[2] != selfInfo.state) ? true : false;
                       selfInfo.state = INACTIVE;
-                      NVIC_ClearPendingIRQ (GPIO_ODD_IRQn);
-                      NVIC_DisableIRQ (GPIO_ODD_IRQn);
+                     // NVIC_ClearPendingIRQ (GPIO_ODD_IRQn);
+                      //NVIC_DisableIRQ (GPIO_ODD_IRQn);
                     }
                   break;
                 }

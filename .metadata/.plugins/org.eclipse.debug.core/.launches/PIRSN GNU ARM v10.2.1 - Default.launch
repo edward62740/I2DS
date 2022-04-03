@@ -6,12 +6,16 @@
     <stringAttribute key="com.silabs.ss.framework.debugger.core.MCU" value=""/>
     <booleanAttribute key="com.silabs.ss.framework.debugger.core.RUN_FROM_RESET" value="true"/>
     <booleanAttribute key="com.silabs.ss.framework.debugger.core.SMART_DOWNLOAD" value="false"/>
+    <stringAttribute key="com.silabs.ss.framework.debugger.core.TIF" value=""/>
     <stringAttribute key="com.silabs.ss.tool.ide.arm.debug.CONNECT_METHOD" value="normal"/>
+    <intAttribute key="org.eclipse.cdt.launch.ATTR_BUILD_BEFORE_LAUNCH_ATTR" value="2"/>
     <stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_START_MODE" value="run"/>
     <booleanAttribute key="org.eclipse.cdt.launch.DEBUGGER_STOP_AT_█████████" value="true"/>
     <stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_STOP_AT_█████████_SYMBOL" value="main"/>
     <stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="GNU ARM v10.2.1 - Default/PIRSN.axf"/>
     <stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="PIRSN"/>
+    <booleanAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_AUTO_ATTR" value="false"/>
+    <stringAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_ID_ATTR" value=""/>
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
         <listEntry value="/PIRSN"/>
     </listAttribute>

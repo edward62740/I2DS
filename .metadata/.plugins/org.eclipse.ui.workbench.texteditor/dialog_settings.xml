@@ -6,8 +6,13 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Nap"/>
+		<item key="selection" value="start"/>
 		<list key="findhistory">
+			<item value="start"/>
+			<item value="init"/>
+			<item value="nvic"/>
+			<item value="cmu"/>
+			<item value="priority"/>
 			<item value="nap"/>
 			<item value="hibernate"/>
 			<item value="pwr"/>
@@ -18,11 +23,6 @@
 			<item value="gpio_odd"/>
 			<item value="selfInfo"/>
 			<item value="poll"/>
-			<item value="sl_led"/>
-			<item value="state"/>
-			<item value="sink_node_id"/>
-			<item value="timed"/>
-			<item value="FORM"/>
 		</list>
 		<list key="replacehistory">
 		</list>

@@ -1,0 +1,128 @@
+/***************************************************************************//**
+ * @file
+ * @brief app_process.h
+ *******************************************************************************
+ * # License
+ * <b>Copyright 2018 Silicon Laboratories Inc. www.silabs.com</b>
+ *******************************************************************************
+ *
+ * SPDX-License-Identifier: Zlib
+ *
+ * The licensor of this software is Silicon Laboratories Inc.
+ *
+ * This software is provided 'as-is', without any express or implied
+ * warranty. In no event will the authors be held liable for any damages
+ * arising from the use of this software.
+ *
+ * Permission is granted to anyone to use this software for any purpose,
+ * including commercial applications, and to alter it and redistribute it
+ * freely, subject to the following restrictions:
+ *
+ * 1. The origin of this software must not be misrepresented; you must not
+ *    claim that you wrote the original software. If you use this software
+ *    in a product, an acknowledgment in the product documentation would be
+ *    appreciated but is not required.
+ * 2. Altered source versions must be plainly marked as such, and must not be
+ *    misrepresented as being the original software.
+ * 3. This notice may not be removed or altered from any source distribution.
+ *
+ ******************************************************************************/
+#ifndef APP_PROCESS_H
+#define APP_PROCESS_H
+#include PLATFORM_HEADER
+#include "stack/include/ember.h"
+#include "hal/hal.h"
+#include "em_chip.h"
+#include "app_log.h"
+#include "sl_si70xx.h"
+#include "sl_i2cspm_instances.h"
+#include "poll.h"
+#include "em_iadc.h"
+#include "em_cmu.h"
+#include "em_emu.h"
+#include "em_burtc.h"
+#include "em_acmp.h"
+#include "sl_app_common.h"
+#include "app_process.h"
+#include "app_framework_common.h"
+#include "app_radio.h"
+#include "sl_simple_led_instances.h"
+#if defined(SL_CATALOG_KERNEL_PRESENT)
+#include "sl_component_catalog.h"
+#include "sl_power_manager.h"
+#endif
+
+
+// -----------------------------------------------------------------------------
+//                                   Includes
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+//                              Macros and Typedefs
+// -----------------------------------------------------------------------------
+
+typedef enum {
+  INIT,          // (S -> C) notify sensor type and features
+  REPORT,        // (S -> C) report battery levels and status
+  WARN = 0x9A,   // (S -> C) report triggered sensor
+  REQUEST,       // (S <- C) request change status
+  REPLY,         // (S <- C) ack REQUEST
+  SYNC = 0xFF,   // (S <- C) request INIT
+} message_pid_t;
+
+typedef enum {
+  ACTIVE = 0x05,
+  INACTIVE,
+  FAULT_HW = 0xCA,
+  FAULT_OPN,
+} sensor_state_t;
+
+typedef enum {
+  CPN = 0x88,
+  PIRSN,
+  ACSN,
+} device_hw_t ;
+
+typedef enum {
+  REQ_STATE,
+  REQ_TXPWR,
+  REQ_REPORT,
+  REQ_LED,
+} message_request_t;
+
+typedef struct {
+  device_hw_t hw;
+  sensor_state_t state;
+  uint32_t battery_voltage;
+  EmberNodeType node_type;
+  EmberNodeId central_id;
+  EmberNodeId self_id;
+  uint8_t endpoint;
+  uint8_t trigd;
+} DeviceInfo;
+extern DeviceInfo selfInfo;
+extern volatile bool cooldown;
+// -----------------------------------------------------------------------------
+//                                Global Variables
+// -----------------------------------------------------------------------------
+/// Global flag set by a button push to allow or disallow entering to sleep
+extern bool enable_sleep;
+
+// -----------------------------------------------------------------------------
+//                          Public Function Declarations
+// -----------------------------------------------------------------------------
+
+/**************************************************************************//**
+ * The function is used for Application logic.
+ *
+ * @param None
+ * @returns None
+ *
+ * Here we print out the first two bytes reported by the sinks as a little
+ * endian 16-bits decimal.
+ *****************************************************************************/
+void report_handler(void);
+void initSensorInfo(DeviceInfo *info, device_hw_t hw, sensor_state_t state, uint32_t battery_voltage, EmberNodeType node_type,
+                    EmberNodeId central_id, EmberNodeId self_id, uint8_t endpoint, uint8_t trigd);
+
+#endif  // APP_PROCESS_H
