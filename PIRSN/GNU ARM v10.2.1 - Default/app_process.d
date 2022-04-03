@@ -133,11 +133,6 @@ app_process.o: ../app_process.c \
  C\:\Users\█████████\Desktop\I2DS\PIRSN\config/sl_sleeptimer_config.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_emu.h \
  C\:\Users\█████████\Desktop\I2DS\PIRSN\config/app_log_config.h \
- c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\hardware\driver\si70xx\inc\sl_si70xx.h \
- c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\i2cspm\inc\sl_i2cspm.h \
- c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_gpio.h \
- c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_i2c.h \
- C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_i2cspm_instances.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\poll\poll.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_iadc.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_cmu.h \
@@ -150,7 +145,8 @@ app_process.o: ../app_process.c \
  ../app_radio.h \
  C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_simple_led_instances.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_simple_led.h \
- c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_led.h
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_led.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_gpio.h
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\common\toolchain\inc\sl_gcc_preinclude.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\platform-header.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_core.h:
@@ -285,11 +281,6 @@ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\sleeptime
 C\:\Users\█████████\Desktop\I2DS\PIRSN\config/sl_sleeptimer_config.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_emu.h:
 C\:\Users\█████████\Desktop\I2DS\PIRSN\config/app_log_config.h:
-c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\hardware\driver\si70xx\inc\sl_si70xx.h:
-c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\i2cspm\inc\sl_i2cspm.h:
-c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_gpio.h:
-c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_i2c.h:
-C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_i2cspm_instances.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\poll\poll.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_iadc.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_cmu.h:
@@ -303,3 +294,4 @@ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\protocol\flex\app-framewor
 C\:\Users\█████████\Desktop\I2DS\PIRSN\autogen/sl_simple_led_instances.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_simple_led.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_led.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_gpio.h:

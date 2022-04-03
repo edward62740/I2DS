@@ -34,8 +34,6 @@
 #include "hal/hal.h"
 #include "em_chip.h"
 #include "app_log.h"
-#include "sl_si70xx.h"
-#include "sl_i2cspm_instances.h"
 #include "poll.h"
 #include "em_iadc.h"
 #include "em_cmu.h"

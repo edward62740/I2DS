@@ -126,10 +126,6 @@ autogen/sl_event_handler.o: ../autogen/sl_event_handler.c \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\common\inc\sl_slist.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_emu.h \
  C\:\Users\█████████\Desktop\I2DS\PIRSN\config/app_log_config.h \
- ../autogen/sl_i2cspm_instances.h \
- c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\i2cspm\inc\sl_i2cspm.h \
- c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_gpio.h \
- c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_i2c.h \
  ../autogen/sl_iostream_init_eusart_instances.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\iostream\inc\sl_iostream_stdlib_config.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\hal.h \
@@ -167,6 +163,7 @@ autogen/sl_event_handler.o: ../autogen/sl_event_handler.c \
  ../autogen/sl_simple_led_instances.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_simple_led.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_led.h \
+ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_gpio.h \
  ../autogen/sl_cli_instances.h ../autogen/sl_component_catalog.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\cli\inc\sl_cli.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\cli\inc\sl_cli_types.h \
@@ -301,10 +298,6 @@ C\:\Users\█████████\Desktop\I2DS\PIRSN\config/sl_power_manager
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\common\inc\sl_slist.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_emu.h:
 C\:\Users\█████████\Desktop\I2DS\PIRSN\config/app_log_config.h:
-../autogen/sl_i2cspm_instances.h:
-c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\i2cspm\inc\sl_i2cspm.h:
-c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_gpio.h:
-c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_i2c.h:
 ../autogen/sl_iostream_init_eusart_instances.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\iostream\inc\sl_iostream_stdlib_config.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\hal.h:
@@ -342,6 +335,7 @@ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emdrv\nvm3\inc\nv
 ../autogen/sl_simple_led_instances.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_simple_led.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\driver\leddrv\inc\sl_led.h:
+c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_gpio.h:
 ../autogen/sl_cli_instances.h:
 ../autogen/sl_component_catalog.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\cli\inc\sl_cli.h:
