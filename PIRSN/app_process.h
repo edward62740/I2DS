@@ -98,8 +98,10 @@ typedef struct {
   uint8_t endpoint;
   uint8_t trigd;
 } DeviceInfo;
-extern DeviceInfo selfInfo;
+extern volatile DeviceInfo selfInfo;
 extern volatile bool cooldown;
+
+
 // -----------------------------------------------------------------------------
 //                                Global Variables
 // -----------------------------------------------------------------------------

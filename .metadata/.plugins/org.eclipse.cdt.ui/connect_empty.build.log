@@ -1,0 +1,6 @@
+08:51:17 **** Incremental Build of configuration GNU ARM v10.2.1 - Default for project connect_empty ****
+make -j8 all 
+make: Nothing to be done for 'all'.
+
+08:51:17 Build Finished. 0 errors, 0 warnings. (took 724ms)
+

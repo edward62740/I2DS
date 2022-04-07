@@ -31,10 +31,11 @@ component:
 - instance: [example]
   id: cli
 - {id: sl_sensor_sink_core}
+- {id: emlib_pcnt}
 - {id: mpu}
 - {id: iostream_recommended_stream}
 - {id: emlib_acmp}
-- instance: [led0, led1]
+- instance: [comms, stat]
   id: simple_led
 - {id: restrictions_profile_connect}
 - {id: device_init}

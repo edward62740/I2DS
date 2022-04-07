@@ -32,7 +32,7 @@ component:
 - {id: mpu}
 - {id: EFR32FG23B020F512IM40}
 - {id: iostream_recommended_stream}
-- instance: [led0]
+- instance: [comms, stat]
   id: simple_led
 - {id: restrictions_profile_connect}
 - {id: device_init}
@@ -42,7 +42,6 @@ component:
 - {id: app_log}
 - {id: connect_stack_common}
 - {id: sl_system}
-- {id: micriumos_kernel}
 - {id: radio_config_simple_connect_singlephy}
 - {id: connect_aes_security}
 - {id: restrictions_profile_long_range}

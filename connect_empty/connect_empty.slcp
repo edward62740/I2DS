@@ -1,0 +1,58 @@
+# Silicon Labs Project Configuration Tools: slcp, v0, Component selection file.
+project_name: connect_empty
+label: connect_empty
+description: The Connect Empty project is a barebone Connect app that can be a basis
+  of streamlined proprietary solutions.
+category: Connect Examples
+package: Flex
+quality: production
+readme:
+- {path: ../../../SimplicityStudio/SDKs/gecko_sdk/app/flex/documentation/example/connect/connect_empty/readme.md}
+source:
+- {path: main.c}
+- {path: app_init.c}
+- {path: app_process.c}
+include:
+- path: ''
+  file_list:
+  - {path: app_init.h}
+  - {path: app_process.h}
+sdk: {id: gecko_sdk, version: 4.0.1}
+toolchain_settings:
+- {value: debug, option: optimize}
+component:
+- {id: emlib_iadc}
+- {id: app_log}
+- {id: sl_flex_assert}
+- {id: sl_system}
+- {id: iostream_retarget_stdio}
+- {id: mpu}
+- {id: radio_config_simple_connect_singlephy}
+- {id: emlib_lesense}
+- {id: iostream_recommended_stream}
+- {id: restrictions_profile_long_range}
+- instance: [inst, inst0]
+  id: simple_led
+- {id: printf}
+- {id: token_manager}
+- {id: restrictions_profile_connect}
+- {id: device_init}
+- {id: connect_poll}
+- instance: [inst]
+  id: iostream_eusart
+- {id: EFR32FG23B010F512IM40}
+- {id: connect_app_framework_common}
+other_file:
+- {path: connect_create_gbl_image.bat}
+- {path: connect_create_gbl_image.sh}
+requires:
+- {name: a_radio_config}
+configuration:
+- {name: SL_BOARD_ENABLE_VCOM, value: '1'}
+- {name: SL_IOSTREAM_USART_VCOM_FLOW_CONTROL_TYPE, value: usartHwFlowControlNone}
+- {name: SL_IOSTREAM_EUSART_VCOM_FLOW_CONTROL_TYPE, value: eusartHwFlowControlNone}
+- {name: SL_HEAP_SIZE, value: '8192'}
+ui_hints:
+  highlight:
+  - {path: readme.md, focus: true}
+

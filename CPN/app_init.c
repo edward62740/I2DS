@@ -37,6 +37,9 @@
 #include "app_process.h"
 #include "app_framework_common.h"
 #include "sl_simple_led_instances.h"
+#include "em_cmu.h"
+#include "em_emu.h"
+#include "em_eusart.h"
 // -----------------------------------------------------------------------------
 //                              Macros and Typedefs
 // -----------------------------------------------------------------------------
@@ -79,47 +82,38 @@ void emberAfInitCallback(void)
     }
   status = 0x01;
   emberResetNetworkState ();
-/*
-    while(status != EMBER_SUCCESS) {
-        status = emberSetSecurityKey (&security_key);
-        sl_sleeptimer_delay_millisecond(500);
-        app_log_info("sec Network status 0x%02X\n", status);
-    }
-    status = 0x01;
-*/
 
- // sl_sleeptimer_delay_millisecond(1500);
-  //emberResetNetworkState ();
-  /*sl_sleeptimer_delay_millisecond(500);
-  status = 0x01;
-
-  while (status != (EMBER_SUCCESS || EMBER_NOT_JOINED))
-    {
-      status = emberNetworkInit ();
-      sl_sleeptimer_delay_millisecond (500);
-      app_log_info("init2 Network status 0x%02X\n", status);
-    }
-  status = 0x01;
-  while (status != EMBER_SUCCESS)
-    {
-      status = emberFormNetwork (&parameters);
-      sl_sleeptimer_delay_millisecond (2500);
-      app_log_info("form2 Network status 0x%02X\n", status);
-    }
-  status = 0x01;
-  while (status != EMBER_SUCCESS)
-    {
-      status = emberPermitJoining (255);
-      sl_sleeptimer_delay_millisecond (500);
-      app_log_info("pj2 Network status 0x%02X\n", status);
-    }
-  sl_led_turn_on (&sl_led_led0);*/
-  //emberCalibrateCurrentChannel();
 #if defined(EMBER_AF_PLUGIN_BLE)
   bleConnectionInfoTableInit();
 #endif
 }
 
-// -----------------------------------------------------------------------------
-//                          Static Function Definitions
-// -----------------------------------------------------------------------------
+void startIPC(void)
+{
+  CMU_ClockEnable (cmuClock_GPIO, true);
+  CMU_ClockEnable (cmuClock_EUSART1, true);
+  GPIO_PinModeSet (gpioPortC, 4, gpioModePushPull, 1);
+  // Configure the EUSART RX pin to the board controller as an input
+  GPIO_PinModeSet (gpioPortC, 6, gpioModeInput, 0);
+  EUSART_UartInit_TypeDef init = EUSART_UART_INIT_DEFAULT_HF;
+
+  // Route EUSART1 TX and RX to the board controller TX and RX pins
+  GPIO->EUSARTROUTE[1].TXROUTE = (gpioPortC << _GPIO_EUSART_TXROUTE_PORT_SHIFT)
+      | (4 << _GPIO_EUSART_TXROUTE_PIN_SHIFT);
+  GPIO->EUSARTROUTE[1].RXROUTE = (gpioPortC << _GPIO_EUSART_RXROUTE_PORT_SHIFT)
+      | (6 << _GPIO_EUSART_RXROUTE_PIN_SHIFT);
+
+  // Enable RX and TX signals now that they have been routed
+  GPIO->EUSARTROUTE[1].ROUTEEN = GPIO_EUSART_ROUTEEN_RXPEN
+      | GPIO_EUSART_ROUTEEN_TXPEN;
+
+  // Configure and enable EUSART1 for high-frequency (EM0/1) operation
+  EUSART_UartInitHf (EUSART1, &init);
+  EUSART_IntEnable (EUSART1, EUSART_IEN_RXFL);
+  EUSART_IntDisable (EUSART1, EUSART_IEN_TXFL);
+  // Enable NVIC USART sources
+  NVIC_ClearPendingIRQ (EUSART1_RX_IRQn);
+  NVIC_EnableIRQ (EUSART1_RX_IRQn);
+  NVIC_ClearPendingIRQ (EUSART1_TX_IRQn);
+  NVIC_EnableIRQ (EUSART1_TX_IRQn);
+}

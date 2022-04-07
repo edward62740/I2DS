@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ASCII"?>
+<device:XMLDevice xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:device="http://www.silabs.com/ss/hwconfig/document/device.ecore" name="pin_tool.EFR32FG23B010F512IM40" partId="mcu.arm.efr32.fg23.efr32fg23b010f512im40" contextId="com.silabs.sdk.stack.super:4.0.1._-286987052">
+  <mode name="DefaultMode">
+    <property object="DefaultMode" propertyId="mode.diagramLocation" value="100, 100"/>
+    <property object="EUSART0" propertyId="ABModule.selectedRequirement" value="eusart%T%SL_IOSTREAM_EUSART_INST%T%sl_iostream_eusart_inst_config.h"/>
+    <property object="EUSART0" propertyId="ABPeripheral.included" value="true"/>
+    <property object="PORTIO" propertyId="portio.eusart0.enable.rx" value="Enabled"/>
+    <property object="PORTIO" propertyId="portio.eusart0.enable.tx" value="Enabled"/>
+    <property object="PORTIO" propertyId="portio.eusart0.location.rx" value="7"/>
+    <property object="PORTIO" propertyId="portio.eusart0.location.tx" value="6"/>
+  </mode>
+  <modeTransition>
+    <property object="RESET &#x2192; DefaultMode" propertyId="modeTransition.source" value="RESET"/>
+    <property object="RESET &#x2192; DefaultMode" propertyId="modeTransition.target" value="DefaultMode"/>
+  </modeTransition>
+</device:XMLDevice>

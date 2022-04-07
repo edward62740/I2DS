@@ -1,0 +1,507 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>CLI Command Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;1,300;1,500&display=swap" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,500;1,300;1,500&display=swap" rel="stylesheet">
+<style>
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, code, em, strong,
+ol, ul, li, article, aside, footer, header, menu, nav, section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+body {
+  line-height: 1;
+  background: #f8f8f8;
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  padding-bottom: 36px;
+}
+ol, ul {
+  list-style: none;
+}
+strong {
+  font-weight: 500;
+}
+em {
+  font-style: italic;
+}
+
+.command {
+  background: #ffffff;
+  margin: 18px;
+  position: relative;
+  padding: 21px 24px 24px 24px;
+  min-width: 300px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.27);
+  border-radius: 2px;
+}
+.command-header-bar {
+  position: absolute;
+  height: 32px;
+  width: 4px;
+  top: 24px;
+  left: 0;
+  background-color: #0086d9;
+}
+
+h1 {
+  font-size: 42px;
+  margin: 18px;
+  line-height: 54px;
+}
+h2 {
+  font-size: 36px;
+  margin: 18px;
+  padding-top: 18px;
+  line-height: 42px;
+}
+h3 {
+  font-size: 30px;
+  margin: 18px;
+  line-height: 36px;
+}
+h4 {
+  font-size: 24px;
+  margin: 18px;
+  line-height: 30px;
+}
+
+.command-header {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 18px;
+  color: #333333;
+  line-height: 38px;
+  padding-bottom: 8px;
+}
+.group-header {
+  font-family: 'Roboto Mono', monospace;
+  color: #444447;
+}
+
+.command-name {
+  font-weight: 500;
+}
+.command-argument {
+  padding-left: 12px;
+}
+.command-handler {
+  display:inline-block;
+  float: right;
+  font-size: 12px;
+  line-height: 38px;
+}
+.group-info > .help, .group-info > .alias-list {
+  margin: 0 18px;
+}
+
+.arguments-title {
+  font-weight: 500;
+  margin-top: 8px;
+  line-height: 20px;
+}
+.argument-list li {
+  margin-left: 12px;
+  line-height: 20px;
+}
+.argument-list .argument-name {
+  font-family: 'Roboto Mono', monospace;
+  display: inline-block;
+  width: 50px;
+}
+
+.aliases-title {
+  font-weight: 500;
+  margin-top: 8px;
+  line-height: 20px;
+  display: inline-block;
+}
+.alias-list .alias {
+  margin-left: 12px;
+  line-height: 20px;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.search {
+  padding: 0 18px;
+  float: right;
+  font-size: 18px;
+}
+
+#search {
+  padding: 12px;
+  border: 1px solid #acacac;
+  border-radius: 2px;
+  width: 300px;
+  font-size: 16px;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 300;
+}
+
+</style>
+</head>
+
+<!--
+Example syntax (.slcc or .slcp) for populating this file:
+
+  template_contribution:
+    - name: cli_command          # Register a command
+      value:
+        name: status             # Name of command
+        handler: status_command  # Function to be called. Must be defined
+        help: "Prints status"    # Optional help description
+        shortcuts:               # Optional shorcut list
+          - name: st
+        argument:                # Argument list, if apliccable
+          - type: uint8          # Variable type
+            help: "Channel"      # Optional description
+          - type: string
+            help: "Text"
+    - name: cli_group            # Register a group
+      value:
+        name: shell              # Group name
+        help: "Shell commands"   # Optional help description
+        shortcuts:               # Optional shorcuts
+          - name: sh
+    - name: cli_command
+      value:
+        name: repeat
+        handler: repeat_cmd
+        help: "Repeat commands"
+        shortcuts:
+          - name: r
+          - name: rep
+        group: shell            # Associate command with group
+        argument:
+          - type: string
+            help: "Text"
+          - type: additional
+            help: "More text"
+-->
+
+<body>
+<div class="search">
+<input type="text" tabindex="0" id="search" placeholder="Search for command..." />
+</div>
+<h1>CLI Command Reference</h1>
+
+
+
+<div class="command-list">
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">info</span>
+      <span class="command-handler">cli_info</span>
+    </div>
+    <div class="command-info">
+      <div class="help">MCU ID, Network state, Node ID, PAN ID, Channel ID, etc.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">reset</span>
+      <span class="command-handler">cli_reset</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Reset the hardware</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">counter</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">cli_counter</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Print out the passed stack counter</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>Counter type
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">set_channel</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">cli_set_channel</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set Connect channel</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>Channel ID
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">leave</span>
+      <span class="command-handler">cli_leave</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Forget the current network and revert to EMBER_NO_NETWORK</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">set_tx_options</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">cli_set_tx_option</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set Tx options</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>Security(0x01) MAC Ack(0x02) High Prio(0x04)
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">start_energy_scan</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">cli_start_energy_scan</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Scan the energy level on the given channel</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>Channel ID
+        </li>
+        <li>
+        <span class="argument-name">u8</span>Number of samples
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">set_key</span>
+        <span class="command-argument">hex</span>
+      <span class="command-handler">cli_set_security_key</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set security key</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">hex</span>Security key (size:EMBER_ENCRYPTION_KEY_SIZE)
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">form</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[u16]</span>
+      <span class="command-handler">cli_form</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Forms a network</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>Channel
+        </li>
+        <li>
+        <span class="argument-name">u16</span><em>(optional)</em> Optional PAN ID
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">set_tx_power</span>
+        <span class="command-argument">i16</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">cli_set_tx_power</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Sets the antenna output power. The second optional parameter can be used to save the TX power as default.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">i16</span>TX power value in 0.1 dBm steps
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> 1 - TX power persistent (saved in token), 0 - TX power volatile
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">pjoin</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[str]</span>
+      <span class="command-handler">cli_pjoin</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Permit join for a given time period with optional selective payload</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>Duration
+        </li>
+        <li>
+        <span class="argument-name">str</span><em>(optional)</em> Optional Join payload
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">remove_child</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">[hex]</span>
+      <span class="command-handler">cli_remove_child</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Remove a specific sensor child from the list.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>Mode
+        </li>
+        <li>
+        <span class="argument-name">u16</span>Short Address of the child to remove. Not used if long address given.
+        </li>
+        <li>
+        <span class="argument-name">hex</span><em>(optional)</em> Long Address of the child to remove.
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div></div>
+
+<script>
+searchbar = document.getElementById('search');
+searchbar.addEventListener('input', function(e) {
+  value = e.target.value.toLowerCase();
+  commands = document.querySelectorAll('.command-name');
+  commands.forEach(function(el) {
+    if (el.textContent.trim().toLowerCase().includes(value)) {
+      el.closest('.command').style.display = 'block';
+    } else {
+      el.closest('.command').style.display = 'none';
+    }
+  });
+});
+</script>
+</body>
+</html>

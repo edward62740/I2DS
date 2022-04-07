@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="uc.module.setup.componentSetup.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc" propertyScope="project">
-  <folder name="gecko_sdk_4.0.2">
+  <folder name="gecko_sdk_4.0.1">
     <folder name="platform">
       <folder name="Device">
         <folder name="SiliconLabs">
@@ -80,17 +80,10 @@
       <folder name="common">
         <folder name="inc">
           <file name="sl_atomic.h" uri="studio:/sdk/platform/common/inc/sl_atomic.h"/>
-          <file name="sl_cmsis_os2_common.h" uri="studio:/sdk/platform/common/inc/sl_cmsis_os2_common.h"/>
-          <file name="sli_cmsis_os2_ext_task_register.h" uri="studio:/sdk/platform/common/inc/sli_cmsis_os2_ext_task_register.h"/>
           <file name="sl_enum.h" uri="studio:/sdk/platform/common/inc/sl_enum.h"/>
           <file name="sl_string.h" uri="studio:/sdk/platform/common/inc/sl_string.h"/>
           <file name="sl_slist.h" uri="studio:/sdk/platform/common/inc/sl_slist.h"/>
           <file name="sl_status.h" uri="studio:/sdk/platform/common/inc/sl_status.h"/>
-        </folder>
-        <folder name="src">
-          <file name="sli_cmsis_os2_ext_task_register.c" uri="studio:/sdk/platform/common/src/sli_cmsis_os2_ext_task_register.c"/>
-          <file name="sl_string.c" uri="studio:/sdk/platform/common/src/sl_string.c"/>
-          <file name="sl_slist.c" uri="studio:/sdk/platform/common/src/sl_slist.c"/>
         </folder>
         <folder name="toolchain">
           <folder name="src">
@@ -101,6 +94,10 @@
             <file name="sl_memory.h" uri="studio:/sdk/platform/common/toolchain/inc/sl_memory.h"/>
             <file name="sl_gcc_preinclude.h" uri="studio:/sdk/platform/common/toolchain/inc/sl_gcc_preinclude.h"/>
           </folder>
+        </folder>
+        <folder name="src">
+          <file name="sl_string.c" uri="studio:/sdk/platform/common/src/sl_string.c"/>
+          <file name="sl_slist.c" uri="studio:/sdk/platform/common/src/sl_slist.c"/>
         </folder>
       </folder>
       <folder name="service">
@@ -237,11 +234,11 @@
         <folder name="system">
           <folder name="src">
             <file name="sl_system_init.c" uri="studio:/sdk/platform/service/system/src/sl_system_init.c"/>
-            <file name="sl_system_kernel.c" uri="studio:/sdk/platform/service/system/src/sl_system_kernel.c"/>
+            <file name="sl_system_process_action.c" uri="studio:/sdk/platform/service/system/src/sl_system_process_action.c"/>
           </folder>
           <folder name="inc">
             <file name="sl_system_init.h" uri="studio:/sdk/platform/service/system/inc/sl_system_init.h"/>
-            <file name="sl_system_kernel.h" uri="studio:/sdk/platform/service/system/inc/sl_system_kernel.h"/>
+            <file name="sl_system_process_action.h" uri="studio:/sdk/platform/service/system/inc/sl_system_process_action.h"/>
           </folder>
         </folder>
         <folder name="sleeptimer">
@@ -283,15 +280,6 @@
           <file name="cmsis_gcc.h" uri="studio:/sdk/platform/CMSIS/Include/cmsis_gcc.h"/>
           <file name="core_cm33.h" uri="studio:/sdk/platform/CMSIS/Include/core_cm33.h"/>
           <file name="mpu_armv8.h" uri="studio:/sdk/platform/CMSIS/Include/mpu_armv8.h"/>
-        </folder>
-        <folder name="RTOS2">
-          <folder name="Include">
-            <file name="cmsis_os2.h" uri="studio:/sdk/platform/CMSIS/RTOS2/Include/cmsis_os2.h"/>
-            <file name="os_tick.h" uri="studio:/sdk/platform/CMSIS/RTOS2/Include/os_tick.h"/>
-          </folder>
-          <folder name="Source">
-            <file name="os_systick.c" uri="studio:/sdk/platform/CMSIS/RTOS2/Source/os_systick.c"/>
-          </folder>
         </folder>
       </folder>
       <folder name="emdrv">
@@ -369,114 +357,6 @@
           <folder name="inc">
             <file name="sl_led.h" uri="studio:/sdk/platform/driver/leddrv/inc/sl_led.h"/>
             <file name="sl_simple_led.h" uri="studio:/sdk/platform/driver/leddrv/inc/sl_simple_led.h"/>
-          </folder>
-        </folder>
-      </folder>
-      <folder name="micrium_os">
-        <folder name="common">
-          <folder name="source">
-            <folder name="kal">
-              <file name="kal_kernel.c" uri="studio:/sdk/platform/micrium_os/common/source/kal/kal_kernel.c"/>
-              <file name="kal_priv.h" uri="studio:/sdk/platform/micrium_os/common/source/kal/kal_priv.h"/>
-            </folder>
-            <folder name="lib">
-              <file name="lib_ascii.c" uri="studio:/sdk/platform/micrium_os/common/source/lib/lib_ascii.c"/>
-              <file name="lib_str.c" uri="studio:/sdk/platform/micrium_os/common/source/lib/lib_str.c"/>
-              <file name="lib_mem.c" uri="studio:/sdk/platform/micrium_os/common/source/lib/lib_mem.c"/>
-              <file name="lib_str_priv.h" uri="studio:/sdk/platform/micrium_os/common/source/lib/lib_str_priv.h"/>
-            </folder>
-            <folder name="logging">
-              <file name="logging.c" uri="studio:/sdk/platform/micrium_os/common/source/logging/logging.c"/>
-              <file name="logging_chk_priv.h" uri="studio:/sdk/platform/micrium_os/common/source/logging/logging_chk_priv.h"/>
-              <file name="logging_priv.h" uri="studio:/sdk/platform/micrium_os/common/source/logging/logging_priv.h"/>
-            </folder>
-            <folder name="ring_buf">
-              <file name="ring_buf.c" uri="studio:/sdk/platform/micrium_os/common/source/ring_buf/ring_buf.c"/>
-              <file name="ring_buf_priv.h" uri="studio:/sdk/platform/micrium_os/common/source/ring_buf/ring_buf_priv.h"/>
-            </folder>
-            <folder name="rtos">
-              <file name="rtos_err_str.c" uri="studio:/sdk/platform/micrium_os/common/source/rtos/rtos_err_str.c"/>
-              <file name="rtos_utils.c" uri="studio:/sdk/platform/micrium_os/common/source/rtos/rtos_utils.c"/>
-              <file name="rtos_utils_priv.h" uri="studio:/sdk/platform/micrium_os/common/source/rtos/rtos_utils_priv.h"/>
-            </folder>
-            <folder name="common">
-              <file name="common_priv.h" uri="studio:/sdk/platform/micrium_os/common/source/common/common_priv.h"/>
-            </folder>
-            <folder name="preprocessor">
-              <file name="preprocessor_priv.h" uri="studio:/sdk/platform/micrium_os/common/source/preprocessor/preprocessor_priv.h"/>
-            </folder>
-          </folder>
-          <folder name="include">
-            <file name="common.h" uri="studio:/sdk/platform/micrium_os/common/include/common.h"/>
-            <file name="kal.h" uri="studio:/sdk/platform/micrium_os/common/include/kal.h"/>
-            <file name="lib_ascii.h" uri="studio:/sdk/platform/micrium_os/common/include/lib_ascii.h"/>
-            <file name="lib_def.h" uri="studio:/sdk/platform/micrium_os/common/include/lib_def.h"/>
-            <file name="lib_math.h" uri="studio:/sdk/platform/micrium_os/common/include/lib_math.h"/>
-            <file name="lib_mem.h" uri="studio:/sdk/platform/micrium_os/common/include/lib_mem.h"/>
-            <file name="lib_str.h" uri="studio:/sdk/platform/micrium_os/common/include/lib_str.h"/>
-            <file name="lib_utils.h" uri="studio:/sdk/platform/micrium_os/common/include/lib_utils.h"/>
-            <file name="logging.h" uri="studio:/sdk/platform/micrium_os/common/include/logging.h"/>
-            <file name="rtos_err.h" uri="studio:/sdk/platform/micrium_os/common/include/rtos_err.h"/>
-            <file name="rtos_opt_def.h" uri="studio:/sdk/platform/micrium_os/common/include/rtos_opt_def.h"/>
-            <file name="rtos_path.h" uri="studio:/sdk/platform/micrium_os/common/include/rtos_path.h"/>
-            <file name="rtos_prio.h" uri="studio:/sdk/platform/micrium_os/common/include/rtos_prio.h"/>
-            <file name="rtos_types.h" uri="studio:/sdk/platform/micrium_os/common/include/rtos_types.h"/>
-            <file name="rtos_utils.h" uri="studio:/sdk/platform/micrium_os/common/include/rtos_utils.h"/>
-            <file name="rtos_version.h" uri="studio:/sdk/platform/micrium_os/common/include/rtos_version.h"/>
-            <file name="toolchains.h" uri="studio:/sdk/platform/micrium_os/common/include/toolchains.h"/>
-          </folder>
-        </folder>
-        <folder name="cpu">
-          <folder name="source">
-            <file name="cpu_core.c" uri="studio:/sdk/platform/micrium_os/cpu/source/cpu_core.c"/>
-          </folder>
-          <folder name="include">
-            <file name="cpu.h" uri="studio:/sdk/platform/micrium_os/cpu/include/cpu.h"/>
-            <file name="cpu_cache.h" uri="studio:/sdk/platform/micrium_os/cpu/include/cpu_cache.h"/>
-            <file name="cpu_def.h" uri="studio:/sdk/platform/micrium_os/cpu/include/cpu_def.h"/>
-            <file name="cpu_port_sel.h" uri="studio:/sdk/platform/micrium_os/cpu/include/cpu_port_sel.h"/>
-          </folder>
-        </folder>
-        <folder name="ports">
-          <folder name="source">
-            <folder name="gnu">
-              <file name="armv8m_cpu_a.S" uri="studio:/sdk/platform/micrium_os/ports/source/gnu/armv8m_cpu_a.S"/>
-              <file name="armv7m_cpu_c.c" uri="studio:/sdk/platform/micrium_os/ports/source/gnu/armv7m_cpu_c.c"/>
-              <file name="armv7m_cpu_port.h" uri="studio:/sdk/platform/micrium_os/ports/source/gnu/armv7m_cpu_port.h"/>
-              <file name="armv7m_os_cpu.h" uri="studio:/sdk/platform/micrium_os/ports/source/gnu/armv7m_os_cpu.h"/>
-              <file name="armv8m_os_cpu_a.S" uri="studio:/sdk/platform/micrium_os/ports/source/gnu/armv8m_os_cpu_a.S"/>
-              <file name="armv7m_os_cpu_c.c" uri="studio:/sdk/platform/micrium_os/ports/source/gnu/armv7m_os_cpu_c.c"/>
-            </folder>
-            <folder name="generic">
-              <file name="arm_cpu_dwt_ts.c" uri="studio:/sdk/platform/micrium_os/ports/source/generic/arm_cpu_dwt_ts.c"/>
-            </folder>
-          </folder>
-        </folder>
-        <folder name="kernel">
-          <folder name="source">
-            <file name="os_core.c" uri="studio:/sdk/platform/micrium_os/kernel/source/os_core.c"/>
-            <file name="os_cfg_app.c" uri="studio:/sdk/platform/micrium_os/kernel/source/os_cfg_app.c"/>
-            <file name="os_dbg.c" uri="studio:/sdk/platform/micrium_os/kernel/source/os_dbg.c"/>
-            <file name="os_flag.c" uri="studio:/sdk/platform/micrium_os/kernel/source/os_flag.c"/>
-            <file name="os_mon.c" uri="studio:/sdk/platform/micrium_os/kernel/source/os_mon.c"/>
-            <file name="os_msg.c" uri="studio:/sdk/platform/micrium_os/kernel/source/os_msg.c"/>
-            <file name="os_mutex.c" uri="studio:/sdk/platform/micrium_os/kernel/source/os_mutex.c"/>
-            <file name="os_prio.c" uri="studio:/sdk/platform/micrium_os/kernel/source/os_prio.c"/>
-            <file name="os_q.c" uri="studio:/sdk/platform/micrium_os/kernel/source/os_q.c"/>
-            <file name="os_sem.c" uri="studio:/sdk/platform/micrium_os/kernel/source/os_sem.c"/>
-            <file name="os_stat.c" uri="studio:/sdk/platform/micrium_os/kernel/source/os_stat.c"/>
-            <file name="os_task.c" uri="studio:/sdk/platform/micrium_os/kernel/source/os_task.c"/>
-            <file name="os_time.c" uri="studio:/sdk/platform/micrium_os/kernel/source/os_time.c"/>
-            <file name="os_tmr.c" uri="studio:/sdk/platform/micrium_os/kernel/source/os_tmr.c"/>
-            <file name="os_var.c" uri="studio:/sdk/platform/micrium_os/kernel/source/os_var.c"/>
-            <file name="cmsis_os2.c" uri="studio:/sdk/platform/micrium_os/kernel/source/cmsis_os2.c"/>
-            <file name="os_priv.h" uri="studio:/sdk/platform/micrium_os/kernel/source/os_priv.h"/>
-          </folder>
-          <folder name="include">
-            <file name="os.h" uri="studio:/sdk/platform/micrium_os/kernel/include/os.h"/>
-            <file name="os_port_sel.h" uri="studio:/sdk/platform/micrium_os/kernel/include/os_port_sel.h"/>
-            <file name="os_trace.h" uri="studio:/sdk/platform/micrium_os/kernel/include/os_trace.h"/>
-            <file name="os_type.h" uri="studio:/sdk/platform/micrium_os/kernel/include/os_type.h"/>
           </folder>
         </folder>
       </folder>
@@ -578,18 +458,6 @@
           <file name="app_framework_sleep.c" uri="studio:/sdk/protocol/flex/app-framework-common/app_framework_sleep.c"/>
           <file name="app_framework_common.h" uri="studio:/sdk/protocol/flex/app-framework-common/app_framework_common.h"/>
           <file name="app_framework_callback.h" uri="studio:/sdk/protocol/flex/app-framework-common/app_framework_callback.h"/>
-        </folder>
-        <folder name="cmsis-stack-ipc">
-          <file name="cmsis-rtos-af-task.c" uri="studio:/sdk/protocol/flex/cmsis-stack-ipc/cmsis-rtos-af-task.c"/>
-          <file name="cmsis-rtos-ipc-api-gen.c" uri="studio:/sdk/protocol/flex/cmsis-stack-ipc/cmsis-rtos-ipc-api-gen.c"/>
-          <file name="cmsis-rtos-ipc-cb-gen.c" uri="studio:/sdk/protocol/flex/cmsis-stack-ipc/cmsis-rtos-ipc-cb-gen.c"/>
-          <file name="cmsis-rtos-ipc-common.c" uri="studio:/sdk/protocol/flex/cmsis-stack-ipc/cmsis-rtos-ipc-common.c"/>
-          <file name="cmsis-rtos-support.c" uri="studio:/sdk/protocol/flex/cmsis-stack-ipc/cmsis-rtos-support.c"/>
-          <file name="cmsis-rtos-vncp-task.c" uri="studio:/sdk/protocol/flex/cmsis-stack-ipc/cmsis-rtos-vncp-task.c"/>
-          <file name="os_app_hooks.c" uri="studio:/sdk/protocol/flex/cmsis-stack-ipc/os_app_hooks.c"/>
-          <file name="cmsis-rtos-ipc-api-gen.h" uri="studio:/sdk/protocol/flex/cmsis-stack-ipc/cmsis-rtos-ipc-api-gen.h"/>
-          <file name="cmsis-rtos-support-gen.h" uri="studio:/sdk/protocol/flex/cmsis-stack-ipc/cmsis-rtos-support-gen.h"/>
-          <file name="cmsis-rtos-support.h" uri="studio:/sdk/protocol/flex/cmsis-stack-ipc/cmsis-rtos-support.h"/>
         </folder>
         <folder name="debug-print">
           <file name="debug_print.h" uri="studio:/sdk/protocol/flex/debug-print/debug_print.h"/>
@@ -808,7 +676,7 @@
                 <file name="sl_se_manager_util.c" uri="studio:/sdk/util/third_party/crypto/sl_component/se_manager/src/sl_se_manager_util.c"/>
                 <file name="sl_se_manager_attestation.c" uri="studio:/sdk/util/third_party/crypto/sl_component/se_manager/src/sl_se_manager_attestation.c"/>
                 <file name="sli_se_manager_osal.h" uri="studio:/sdk/util/third_party/crypto/sl_component/se_manager/src/sli_se_manager_osal.h"/>
-                <file name="sli_se_manager_osal_cmsis_rtos2.h" uri="studio:/sdk/util/third_party/crypto/sl_component/se_manager/src/sli_se_manager_osal_cmsis_rtos2.h"/>
+                <file name="sli_se_manager_osal_baremetal.h" uri="studio:/sdk/util/third_party/crypto/sl_component/se_manager/src/sli_se_manager_osal_baremetal.h"/>
               </folder>
               <folder name="inc">
                 <file name="sl_se_manager.h" uri="studio:/sdk/util/third_party/crypto/sl_component/se_manager/inc/sl_se_manager.h"/>
@@ -868,9 +736,7 @@
   <includePath uri="studio:/sdk/platform/common/inc"/>
   <includePath uri="studio:/sdk/platform/service/cli/inc"/>
   <includePath uri="studio:/sdk/platform/CMSIS/Include"/>
-  <includePath uri="studio:/sdk/platform/CMSIS/RTOS2/Include"/>
   <includePath uri="studio:/sdk/protocol/flex/app-framework-common"/>
-  <includePath uri="studio:/sdk/protocol/flex/cmsis-stack-ipc"/>
   <includePath uri="studio:/sdk/protocol/flex/debug-print"/>
   <includePath uri="studio:/sdk/protocol/flex/poll"/>
   <includePath uri="studio:/sdk/protocol/flex"/>
@@ -888,13 +754,6 @@
   <includePath uri="studio:/sdk/util/third_party/crypto/mbedtls/library"/>
   <includePath uri="studio:/sdk/util/third_party/crypto/sl_component/sl_mbedtls_support/config"/>
   <includePath uri="studio:/sdk/util/third_party/crypto/sl_component/sl_mbedtls_support/inc"/>
-  <includePath uri="studio:/sdk/platform/micrium_os/common/source"/>
-  <includePath uri="studio:/sdk/platform/micrium_os/common/include"/>
-  <includePath uri="studio:/sdk/platform/micrium_os/cpu/include"/>
-  <includePath uri="studio:/sdk/platform/micrium_os/ports/source"/>
-  <includePath uri="studio:/sdk/platform/micrium_os"/>
-  <includePath uri="studio:/sdk/platform/micrium_os/kernel/source"/>
-  <includePath uri="studio:/sdk/platform/micrium_os/kernel/include"/>
   <includePath uri="studio:/sdk/platform/service/mpu/inc"/>
   <includePath uri="studio:/sdk/platform/emdrv/nvm3/inc"/>
   <includePath uri="studio:/sdk/platform/peripheral/inc"/>
@@ -919,10 +778,7 @@
   <includePath uri="studio:/sdk/platform/service/token_manager/inc"/>
   <macroDefinition name="SINK_ROLE" value="1"/>
   <macroDefinition name="EFR32FG23B020F512IM40"/>
-  <macroDefinition name="configNUM_SDK_THREAD_LOCAL_STORAGE_POINTERS" value="2"/>
   <macroDefinition name="SL_COMPONENT_CATALOG_PRESENT"/>
-  <macroDefinition name="CMSISRTOS"/>
-  <macroDefinition name="SKIP_API_RENAME"/>
   <macroDefinition name="EMBER_STACK_CONNECT"/>
   <macroDefinition name="CORTEXM3"/>
   <macroDefinition name="CORTEXM3_EFM32_MICRO"/>
