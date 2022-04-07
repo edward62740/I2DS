@@ -39,7 +39,7 @@
 // <i> Enable if CMU_IRQHandler/HFXO0_IRQHandler is needed from your application.
 // <i> The function sl_power_manager_irq_handler() will have to be called from you custom handler if this is enabled.
 // <i> Default: 0
-#define SL_POWER_MANAGER_CUSTOM_HF_OSCILLATOR_IRQ_HANDLER  0
+#define SL_POWER_MANAGER_CUSTOM_HF_OSCILLATOR_IRQ_HANDLER  1
 
 // <o SL_POWER_MANAGER_LOWEST_EM_ALLOWED> Lowest Energy mode allowed
 // <2=> EM2

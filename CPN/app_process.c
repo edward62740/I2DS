@@ -41,14 +41,17 @@
 #include "app_framework_common.h"
 #include "sl_simple_led_instances.h"
 #include "app_process.h"
-
+#include "em_cmu.h"
+#include "em_emu.h"
+#include "em_eusart.h"
+#include "app_ipc.h"
 
 // -----------------------------------------------------------------------------
 //                              Macros and Typedefs
 // -----------------------------------------------------------------------------
 
 DeviceInfo selfInfo, sensorInfo[MAX_CONNECTED_DEVICES];
-volatile uint8_t sensorIndex = 0;
+uint8_t sensorIndex = 0;
 
 void initSensorInfo(DeviceInfo *info, device_hw_t hw, sensor_state_t state, uint32_t battery_voltage, EmberNodeType node_type,
                     EmberNodeId central_id, EmberNodeId self_id, uint8_t endpoint) {
@@ -70,6 +73,7 @@ void initSensorInfo(DeviceInfo *info, device_hw_t hw, sensor_state_t state, uint
 /// TX options set up for the network
 EmberMessageOptions tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SECURITY_ENABLED;
 
+
 // -----------------------------------------------------------------------------
 //                                Static Variables
 // -----------------------------------------------------------------------------
@@ -86,8 +90,12 @@ uint8_t remote_state = INACTIVE;
 
 
 
+
+
+
 void emberAfIncomingMessageCallback (EmberIncomingMessage *message)
 {
+  sl_led_turn_on(&sl_led_stat);
   if ((message->endpoint != SENSOR_SINK_ENDPOINT)
       || ((tx_options & EMBER_OPTIONS_SECURITY_ENABLED)
           && !(message->options & EMBER_OPTIONS_SECURITY_ENABLED))) {
@@ -209,7 +217,7 @@ void emberAfIncomingMessageCallback (EmberIncomingMessage *message)
     }
 
 
-
+  sl_led_turn_off(&sl_led_stat);
 }
 
 /**************************************************************************//**
@@ -234,9 +242,12 @@ void emberAfStackStatusCallback(EmberStatus status)
   switch (status) {
     case EMBER_NETWORK_UP:
       app_log_info("Network up\n");
+      sl_led_turn_on(&sl_led_comms);
+      //startIPC();
       break;
     case EMBER_NETWORK_DOWN:
       {
+        sl_led_toggle(&sl_led_comms);
               EmberNetworkParameters parameters;
               MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
               parameters.radioTxPower = SENSOR_SINK_TX_POWER;
@@ -250,7 +261,7 @@ void emberAfStackStatusCallback(EmberStatus status)
                   app_log_info("form Network status 0x%02X\n", status);
                 }
               status = 0x01;
-
+              sl_led_toggle(&sl_led_comms);
               emberClearSelectiveJoinPayload ();
               while (status != EMBER_SUCCESS)
                 {
@@ -259,11 +270,13 @@ void emberAfStackStatusCallback(EmberStatus status)
                   app_log_info("pj Network status 0x%02X\n", status);
                 }
               app_log_info("Stack status: 0x%02X\n", status);
+              sl_led_toggle(&sl_led_comms);
               break;
             }
       break;
     default:
       {
+        sl_led_toggle(&sl_led_comms);
         EmberNetworkParameters parameters;
         MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
         parameters.radioTxPower = SENSOR_SINK_TX_POWER;
@@ -277,7 +290,7 @@ void emberAfStackStatusCallback(EmberStatus status)
             app_log_info("form Network status 0x%02X\n", status);
           }
         status = 0x01;
-
+        sl_led_toggle(&sl_led_comms);
         emberClearSelectiveJoinPayload ();
         while (status != EMBER_SUCCESS)
           {
@@ -286,6 +299,7 @@ void emberAfStackStatusCallback(EmberStatus status)
             app_log_info("pj Network status 0x%02X\n", status);
           }
         app_log_info("Stack status: 0x%02X\n", status);
+        sl_led_toggle(&sl_led_comms);
         break;
       }
     }
@@ -306,6 +320,9 @@ void emberAfChildJoinCallback(EmberNodeType nodeType,
  *****************************************************************************/
 void emberAfTickCallback(void)
 {
+ /* if(ipcDataReady){
+      ipcRxHandler(&sensorInfo[MAX_CONNECTED_DEVICES]);
+  }*/
   if (emberStackIsUp()) {
     //sl_led_turn_off(&sl_led_led0);
   } else {

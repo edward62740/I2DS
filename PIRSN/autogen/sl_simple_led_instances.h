@@ -20,8 +20,8 @@
 
 #include "sl_simple_led.h"
 
-extern const sl_led_t sl_led_led0;
-extern const sl_led_t sl_led_led1;
+extern const sl_led_t sl_led_comms;
+extern const sl_led_t sl_led_stat;
 
 extern const sl_led_t *sl_simple_led_array[];
 

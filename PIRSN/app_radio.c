@@ -30,6 +30,10 @@ EmberStatus applicationSensorRadioInit(void)
   status = emberJoinNetwork(EMBER_STAR_SLEEPY_END_DEVICE, &parameters);
   return status;
 }
+
+uint16_t applicationSensorCheckRadioBusy(void){
+  return (SCB->ICSR & SCB_ICSR_VECTACTIVE_Msk) != 0 ;
+}
 void applicationSensorTxInit(void)
 {
   uint8_t buffer[13];
@@ -75,6 +79,7 @@ void applicationSensorTxEndEvent(void)
   buffer[1] = 0xFF & (uint8_t) 1;
   buffer[2] = 0xFF & (uint8_t) selfInfo.trigd;
   buffer[3] = 0xFF & (uint8_t) selfInfo.state;
+
   emberMessageSend (selfInfo.central_id,
   SENSOR_SINK_ENDPOINT, // endpoint
                     0, // messageTag
