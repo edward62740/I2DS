@@ -46,25 +46,25 @@
 // -----------------------------------------------------------------------------
 #define MAX_CONNECTED_DEVICES     (30u)
 typedef enum {     /* Packet identifier byte */
-  INIT,            // (S -> C) notify sensor type and features
-  REPORT,          // (S -> C) report battery levels and status
-  WARN = 0x9A,     // (S -> C) report triggered sensor
-  REQUEST,         // (S <- C) request change status
-  REPLY,           // (S <- C) ack REQUEST
-  SYNC = 0xFF,     // (S <- C) request INIT
+  MSG_INIT,            // (S -> C) notify sensor type and features
+  MSG_REPORT,          // (S -> C) report battery levels and status
+  MSG_WARN = 0x9A,     // (S -> C) report triggered sensor
+  MSG_REQUEST,         // (S <- C) request change status
+  MSG_REPLY,           // (S <- C) ack REQUEST
+  MSG_SYNC = 0xFF,     // (S <- C) request INIT
 } message_pid_t;
 
 typedef enum {     /* Sensor state byte */
-  ACTIVE = 0x05,   // Sensor element active
-  INACTIVE,        // Sensor element inactive
-  FAULT_HW = 0xCA, // Hardware fault detected
-  FAULT_OPN,       // Operational fault detected
+  S_ACTIVE = 0x05,   // Sensor element active
+  S_INACTIVE,        // Sensor element inactive
+  S_FAULT_HW = 0xCA, // Hardware fault detected
+  S_FAULT_OPN,       // Operational fault detected
 } sensor_state_t;
 
 typedef enum {     /* Hardware identification byte */
-  CPN = 0x88,      // Control Panel Node (Coordinator)
-  PIRSN,           // PIR Sensor Node (Sensor)
-  ACSN,            // Access Control Sensor Node (Sensor)
+  HW_CPN = 0x88,      // Control Panel Node (Coordinator)
+  HW_PIRSN,           // PIR Sensor Node (Sensor)
+  HW_ACSN,            // Access Control Sensor Node (Sensor)
 } device_hw_t ;
 
 typedef enum {     /* Request identifier byte */
