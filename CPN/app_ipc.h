@@ -19,7 +19,7 @@ extern volatile uint8_t ipcRxBuffer[IPC_RX_MAX_SIZE];
 extern volatile uint8_t ipcTxBuffer[IPC_TX_MAX_SIZE];
 
 extern volatile uint32_t ipcRxPos;
-extern volatile uint32_t ipcTxPos;
+extern volatile uint32_t ipcTxLen;
 extern volatile bool ipcDataReady;
 
 typedef enum {     /* IPC message identification byte */
@@ -28,4 +28,6 @@ typedef enum {     /* IPC message identification byte */
   IPC_REQUEST,         // (C <- EXT) request sensor change state
   IPC_ACK,             // (C <- EXT) response to IPC_CHANGE; request IPC_LIST
 } ipc_message_pid_t;
-void ipcRxHandler(DeviceInfo *info[]);
+void ipcRxHandler(void);
+void ipcInitThread(void);
+void ipcRtosTask(void *p_arg);

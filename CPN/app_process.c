@@ -86,7 +86,7 @@ EmberMessageOptions tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SEC
  * This function is called when a message is received.
  *****************************************************************************/
 
-uint8_t remote_state = INACTIVE;
+uint8_t remote_state = S_INACTIVE;
 
 
 
@@ -112,7 +112,7 @@ void emberAfIncomingMessageCallback (EmberIncomingMessage *message)
   }
   switch (buffer[0])
     {
-    case REPORT:
+    case MSG_REPORT:
       {
         uint32_t data = buffer[1] << 24;
         data |= buffer[2] << 16;
@@ -120,16 +120,29 @@ void emberAfIncomingMessageCallback (EmberIncomingMessage *message)
         data |= buffer[4];
         uint8_t state = buffer[5];
         remote_state = state;
+        uint8_t iter = 0;
+        for (uint8_t i = 0; i < (uint8_t) MAX_CONNECTED_DEVICES; i++)
+          {
+            if (sensorInfo[i].self_id == message->source)
+              {
+                sensorInfo[i].battery_voltage = data;
+                break;
+              }
+            else
+              {
+                iter++;
+              }
+          }
         app_log_info(" Voltage: %d, State: %d \n", data, state);
       break;
       }
-    case REPLY:
+    case MSG_REPLY:
       {
         uint8_t info = buffer[1];
       app_log_info(" Ack state switch, State: %d \n", info);
       break;
       }
-    case WARN:
+    case MSG_WARN:
       {
         uint8_t info = buffer[1];
         if(info == 0){
@@ -140,15 +153,15 @@ void emberAfIncomingMessageCallback (EmberIncomingMessage *message)
         }
 
         uint8_t tx_buffer[3];
-        tx_buffer[0] = (uint8_t) REQUEST;
+        tx_buffer[0] = (uint8_t) MSG_REQUEST;
         tx_buffer[1] = (uint8_t) REQ_STATE;
-        if (remote_state == INACTIVE)
+        if (remote_state == S_INACTIVE)
           {
-            tx_buffer[2] = (uint8_t) ACTIVE;
+            tx_buffer[2] = (uint8_t) S_ACTIVE;
           }
-        else if (remote_state == ACTIVE)
+        else if (remote_state == S_ACTIVE)
           {
-            tx_buffer[2] = (uint8_t) INACTIVE;
+            tx_buffer[2] = (uint8_t) S_INACTIVE;
           }
 /*
         emberMessageSend (0x0001,
@@ -159,7 +172,7 @@ void emberAfIncomingMessageCallback (EmberIncomingMessage *message)
         */
         break;
       }
-    case INIT:
+    case MSG_INIT:
       {
         uint8_t hw = buffer[1];
         uint8_t state = buffer[2];
@@ -176,7 +189,7 @@ void emberAfIncomingMessageCallback (EmberIncomingMessage *message)
         uint8_t iter = 0;
         for (uint8_t i = 0; i < (uint8_t)MAX_CONNECTED_DEVICES; i++)
           {
-            if (sensorInfo[i].self_id == sid)
+            if (sensorInfo[i].self_id == message->source)
               {
                 sensorInfo[i].hw = buffer[1];
                 sensorInfo[i].state = buffer[2];
@@ -243,7 +256,7 @@ void emberAfStackStatusCallback(EmberStatus status)
     case EMBER_NETWORK_UP:
       app_log_info("Network up\n");
       sl_led_turn_on(&sl_led_comms);
-      //startIPC();
+
       break;
     case EMBER_NETWORK_DOWN:
       {
@@ -320,9 +333,7 @@ void emberAfChildJoinCallback(EmberNodeType nodeType,
  *****************************************************************************/
 void emberAfTickCallback(void)
 {
- /* if(ipcDataReady){
-      ipcRxHandler(&sensorInfo[MAX_CONNECTED_DEVICES]);
-  }*/
+
   if (emberStackIsUp()) {
     //sl_led_turn_off(&sl_led_led0);
   } else {

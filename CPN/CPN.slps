@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <model:MDescriptors xmlns:model="http://www.silabs.com/ss/Studio.ecore">
   <descriptors name="CPN">
-    <properties key="projectCommon.sdkId" value="com.silabs.sdk.stack.super:4.0.1._-286987052"/>
+    <properties key="projectCommon.sdkId" value="com.silabs.sdk.stack.super:4.0.2._1224998501"/>
     <properties key="universalConfig.generationDirectory" value="C:\Users\█████████\Desktop\I2DS\CPN"/>
     <properties key="universalConfig.toolchainCompatibility" value="iar gcc"/>
     <properties key="projectCommon.boardIds" value="com.silabs.board.none:0.0.0"/>

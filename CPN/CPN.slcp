@@ -42,6 +42,7 @@ component:
 - {id: app_log}
 - {id: connect_stack_common}
 - {id: sl_system}
+- {id: micriumos_kernel}
 - {id: radio_config_simple_connect_singlephy}
 - {id: connect_aes_security}
 - {id: restrictions_profile_long_range}
