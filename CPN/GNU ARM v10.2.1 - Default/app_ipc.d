@@ -171,7 +171,7 @@ app_ipc.o: ../app_ipc.c \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_cmu_compat.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_eusart.h \
  c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_eusart_compat.h \
- ../app_ipc.h
+ ../app_ipc.h ../app_radio.h
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\common\toolchain\inc\sl_gcc_preinclude.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\service\legacy_hal\inc\platform-header.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_core.h:
@@ -345,3 +345,4 @@ c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_cmu_
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_eusart.h:
 c\:\users\workstation\simplicitystudio\sdks\gecko_sdk\platform\emlib\inc\em_eusart_compat.h:
 ../app_ipc.h:
+../app_radio.h:

@@ -59,6 +59,7 @@ typedef enum {     /* Sensor state byte */
   S_INACTIVE,        // Sensor element inactive
   S_FAULT_HW = 0xCA, // Hardware fault detected
   S_FAULT_OPN,       // Operational fault detected
+  S_ALERTING,        // Sensor element triggering
 } sensor_state_t;
 
 typedef enum {     /* Hardware identification byte */

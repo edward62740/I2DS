@@ -86,7 +86,7 @@ void emAfPluginCmsisRtosInitTasks(void)
 {
   // Create Connect task.
   osThreadAttr_t connectStackattribute = {
-    "Connect Stask",
+    "Connect Stack",
     osThreadDetached,
     NULL,
     0,

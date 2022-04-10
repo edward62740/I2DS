@@ -26,8 +26,11 @@ typedef enum {     /* IPC message identification byte */
   IPC_CHANGE,          // (C -> EXT) notify change of information
   IPC_LIST,            // (C -> EXT) send list of connected sensors and associated information
   IPC_REQUEST,         // (C <- EXT) request sensor change state
-  IPC_ACK,             // (C <- EXT) response to IPC_CHANGE; request IPC_LIST
+  IPC_ACK,             // (C <->EXT) response to IPC_CHANGE; request IPC_LIST
+  IPC_ERR,
 } ipc_message_pid_t;
-void ipcRxHandler(void);
+void startIPC(void);
+void ipcReplyHandler(void);
+bool ipcRequestHandler(EmberNodeId id, sensor_state_t state);
 void ipcInitThread(void);
 void ipcRtosTask(void *p_arg);

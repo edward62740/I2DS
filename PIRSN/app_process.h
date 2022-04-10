@@ -64,7 +64,7 @@ typedef enum {
   REPORT,        // (S -> C) report battery levels and status
   WARN = 0x9A,   // (S -> C) report triggered sensor
   REQUEST,       // (S <- C) request change status
-  REPLY,         // (S <- C) ack REQUEST
+  REPLY,         // (S -> C) ack REQUEST
   SYNC = 0xFF,   // (S <- C) request INIT
 } message_pid_t;
 

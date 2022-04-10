@@ -78,7 +78,6 @@ int main(void)
 #if defined(SL_CATALOG_KERNEL_PRESENT)
   // Start the kernel. Task(s) created in app_init() will start running.
 
-
   sl_system_kernel_start();
 #else // SL_CATALOG_KERNEL_PRESENT
   while (1) {
