@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Clear"/>
+		<item key="selection" value="Rx"/>
 		<list key="findhistory">
+			<item value="rx"/>
 			<item value="clear"/>
 			<item value="flush"/>
 			<item value="clear rx"/>
@@ -22,7 +23,6 @@
 			<item value="thread"/>
 			<item value="osthreadnew"/>
 			<item value="osthread"/>
-			<item value="ostask"/>
 		</list>
 		<list key="replacehistory">
 		</list>

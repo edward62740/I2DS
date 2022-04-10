@@ -12,7 +12,7 @@
 #include "em_emu.h"
 #include "em_eusart.h"
 #include "app_ipc.h"
-
+#include "app_radio.h"
 volatile uint8_t ipcRxBuffer[IPC_RX_MAX_SIZE];
 volatile uint8_t ipcTxBuffer[IPC_TX_MAX_SIZE];
 volatile uint32_t ipcRxPos = 0;
@@ -21,30 +21,36 @@ volatile bool ipcDataReady = false;
 volatile bool ipcRespReady = false;
 volatile uint8_t tmpRxBuffer[IPC_RX_MAX_SIZE];
 volatile uint32_t offset = 0;
+volatile bool ipcReceive = false;
 osThreadId_t ipcId;
 
 void EUSART1_RX_IRQHandler(void)
 {
-  EUSART_IntClear(EUSART1, EUSART_IF_RXFL);
-  ipcRxBuffer[ipcRxPos] = EUSART1->RXDATA;
-  for(volatile uint32_t i = 0; i < ipcRxPos; i++){
-       app_log_info("Data: 0x%02X, %d  \n", ipcRxBuffer[ipcRxPos], ipcRxPos);
-  }
 
-  if ((ipcRxBuffer[ipcRxPos] != 0xAC) && (ipcRxPos < IPC_RX_MAX_SIZE))
-    {
-      ipcRxPos++;
 
+  volatile uint8_t tmpData = (uint8_t)EUSART1->RXDATA;
+
+  if (!ipcReceive) {
+      ipcRxPos = 0;
+      if (tmpData == 0xAF)
+          ipcReceive = true;
     }
-
-  else if (ipcRxBuffer[ipcRxPos] == 0xAC){
-
-
-
-
-      ipcDataReady = true;
+  else {
+      if ((tmpData != 0xAC) && (ipcRxPos < IPC_RX_MAX_SIZE))
+        {
+          ipcRxBuffer[ipcRxPos] = tmpData;
+          ipcRxPos++;
+        }
+      else if (tmpData == 0xAC && (ipcRxPos < IPC_RX_MAX_SIZE)){
+          ipcDataReady = true;
+          ipcReceive = false;
+      }
+      else if (ipcRxPos >= IPC_RX_MAX_SIZE) {
+          ipcRxPos = 0;
+          ipcReceive = false;
+      }
   }
-
+  EUSART_IntClear(EUSART1, EUSART_IF_RXFL);
 }
 
 void EUSART1_TX_IRQHandler(void)
@@ -52,8 +58,6 @@ void EUSART1_TX_IRQHandler(void)
   EUSART_IntClear (EUSART1, EUSART_IF_TXFL);
   if(ipcRespReady){
       ipcRespReady = false;
-
-
       for (uint32_t i = 0; i < ipcTxLen; i++)
         {
           EUSART1->TXDATA = ipcTxBuffer[i];
@@ -67,16 +71,18 @@ void EUSART1_TX_IRQHandler(void)
 
 
 }
-void ipcRxHandler(void){
+void ipcReplyHandler(void){
   EUSART_IntDisable (EUSART1, EUSART_IEN_RXFL);
-  app_log_info("running handler 0x%02X ", ipcRxBuffer[0]);
+  ipcRxPos = 0;
   ipcDataReady = false;
   uint8_t tmpTxIndex = 0;
-  switch (ipcRxBuffer[ipcRxPos - 1])
+  switch (ipcRxBuffer[0])
 
     {
-    case IPC_LIST:
+    case IPC_ACK:
       {
+        ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) IPC_LIST;
+        ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) sensorIndex;
         for(uint8_t i = 0; i < sensorIndex; i++){
             ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) sensorInfo[i].hw;
             ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) sensorInfo[i].state;
@@ -94,25 +100,42 @@ void ipcRxHandler(void){
         }
         break;
       }
+    case IPC_REQUEST:
+      {
+        ipcRequestHandler((EmberNodeId)(ipcRxBuffer[1] << 8 | ipcRxBuffer[2] ), ipcRxBuffer[3]);
+
+        break;
+      }
     default:
       {
-        ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) 0xCC;
+        ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) IPC_ERR;
         break;
       }
     }
-  ipcRxPos = 0;
-  ipcTxBuffer[tmpTxIndex++] = (uint8_t) ((13 * sensorIndex) + 1);
-  ipcTxLen = tmpTxIndex;
+
+  ipcTxBuffer[tmpTxIndex] = (uint8_t) tmpTxIndex;
+  ipcTxLen = tmpTxIndex + 1;
   ipcRespReady = true;
 
   EUSART_IntEnable (EUSART1, EUSART_IEN_TXFL);
 }
 
-void ipcNotify(void){
+void ipcNotify(void)
+{
 
 }
 
-void ipcInitThread(void){
+bool ipcRequestHandler(EmberNodeId id, sensor_state_t state)
+{
+  app_log_info("sending request to device %d state %d", id, state);
+  uint8_t iter = 0;
+  if(state != S_ACTIVE && state != S_INACTIVE)
+    return false;
+  applicationCoordinatorTxRequest(id, REQ_STATE, state);
+}
+
+void ipcInitThread(void)
+{
   osThreadAttr_t ipcStackAttribute = {
       "Inter Processor Communication Task",
       osThreadDetached,
@@ -124,7 +147,6 @@ void ipcInitThread(void){
       0,
       0
     };
-
 
     ipcId = osThreadNew(ipcRtosTask,
                                  NULL,
@@ -142,7 +164,7 @@ void ipcRtosTask(void *p_arg)
       ipcRxPos++;
     //app_log_info("rtos");
       if(ipcDataReady){
-          ipcRxHandler();
+          ipcReplyHandler();
       }
       osDelay(10);
   }

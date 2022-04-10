@@ -106,7 +106,7 @@ void applicationSensorTxReply(bool success)
 {
   uint8_t buffer[3];
   buffer[0] = 0xFF & (uint8_t) REPLY;
-  buffer[1] = 0xFF & success;
+  buffer[1] = 0xFF & (uint8_t) success;
   buffer[2] = 0xFF & (uint8_t) selfInfo.state;
   emberMessageSend (selfInfo.central_id,
   SENSOR_SINK_ENDPOINT, // endpoint

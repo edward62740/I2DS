@@ -99,7 +99,7 @@ void emberAfInitCallback(void)
   status = emberJoinNetwork(EMBER_STAR_SLEEPY_END_DEVICE, &parameters);
   app_log_info("Network status 0x%02X\n", status);
 
-//  emberAfPluginPollEnableShortPolling (true);
+ emberAfPluginPollEnableShortPolling (true);
 
   //emberCalibrateCurrentChannel();
 
@@ -150,7 +150,7 @@ void startSensorMonitor(void)
 {
   CMU_ClockEnable (cmuClock_GPIO, true);
   // Configure Button PB1 as input and enable interrupt
-  GPIO_PinModeSet(gpioPortC, 5, gpioModeInputPullFilter, 1);
+  GPIO_PinModeSet(gpioPortC, 5, gpioModeInput, 1);
 
   /* falling edge interrupt */
   GPIO_EM4EnablePinWakeup(GPIO_IEN_EM4WUIEN7, 0 << _GPIO_IEN_EM4WUIEN7_SHIFT);
