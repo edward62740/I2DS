@@ -8,19 +8,32 @@
 #include "app_framework_common.h"
 #include "sl_simple_led_instances.h"
 #include "app_process.h"
+#include "app_ipc.h"
 
+EmberMessageOptions tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SECURITY_ENABLED;
 
-void applicationCoordinatorTxRequest(EmberNodeId id, message_request_t type, uint8_t val)
+bool applicationCoordinatorTxRequest(EmberNodeId id, message_request_t type, uint8_t val)
 {
-  app_log_info("sending ... \n" );
+  EmberStatus status;
   uint8_t buffer[3];
   buffer[0] = 0xFF & (uint8_t) MSG_REQUEST;
   buffer[1] = 0xFF & (uint8_t) type;
   buffer[2] = 0xFF & (uint8_t) val;
-  emberMessageSend (id,
-  SENSOR_SINK_ENDPOINT, // endpoint
+  return (emberMessageSend (id,
+   SENSOR_SINK_ENDPOINT, // endpoint
                     0, // messageTag
-                    sizeof(buffer), buffer, tx_options);
+                    sizeof(buffer), buffer, tx_options) == 0x00) ? true : false;
+}
+
+bool applicationCoordinatorTxIdentify(EmberNodeId id)
+{
+  EmberStatus status;
+  uint8_t buffer[1];
+  buffer[0] = 0xFF & (uint8_t) MSG_SYNC;
+  return (emberMessageSend (id,
+   SENSOR_SINK_ENDPOINT, // endpoint
+                    0, // messageTag
+                    sizeof(buffer), buffer, tx_options) == 0x00) ? true : false;
 }
 
 void applicationCoordinatorRxMsg(EmberIncomingMessage *message)
@@ -28,86 +41,93 @@ void applicationCoordinatorRxMsg(EmberIncomingMessage *message)
   if ((message->endpoint != SENSOR_SINK_ENDPOINT)
         || ((tx_options & EMBER_OPTIONS_SECURITY_ENABLED)
             && !(message->options & EMBER_OPTIONS_SECURITY_ENABLED))) {
-      // drop the message if it's not coming from a sensor
-      // or if security is required but the message is non-encrypted
       return;
     }
-    uint8_t buffer[message->length];
-    //app_log_info("RX: Data from 0x%04X:", message->source);
-    //app_log_info("rssi: %d, lqi: %d", message->rssi, message->lqi);
-    for (int j = 0; j < message->length; j++) {
-      //app_log_info(" %02X", message->payload[j]);
-      buffer[j] = message->payload[j];
-    }
-    switch (buffer[0])
+    switch (message->payload[0])
       {
       case MSG_REPORT:
         {
-          uint32_t data = buffer[1] << 24;
-          data |= buffer[2] << 16;
-          data |= buffer[3] << 8;
-          data |= buffer[4];
-          uint8_t state = buffer[5];
-          uint8_t iter = 0;
-          for (uint8_t i = 0; i < (uint8_t) MAX_CONNECTED_DEVICES; i++)
-            {
-              if (sensorInfo[i].self_id == message->source)
-                {
-                  sensorInfo[i].battery_voltage = data;
-                  break;
-                }
-              else
-                {
-                  iter++;
-                }
-            }
-          app_log_info(" Voltage: %d, State: %d \n", data, state);
+        uint8_t iter = 0;
+        for (uint8_t i = 0; i < (uint8_t) MAX_CONNECTED_DEVICES; i++)
+          {
+            if (sensorInfo[i].self_id == message->source)
+              {
+                sensorInfo[i].battery_voltage = message->payload[1] << 24
+                    | message->payload[2] << 16 | message->payload[3] << 8
+                    | message->payload[4];
+                sensorInfo[i].state = message->payload[5];
+                sensorInfo[i].rssi = message->rssi;
+                sensorInfo[i].lqi = message->lqi;
+                break;
+              }
+            else
+              {
+                iter++;
+              }
+          }
+        if (iter == (uint8_t) MAX_CONNECTED_DEVICES)
+          {
+            applicationCoordinatorTxIdentify(message->source);
+          }
         break;
         }
       case MSG_REPLY:
         {
-          uint8_t info = buffer[1];
-        app_log_info(" Ack %d \n", info);
+          ipcRequestDone(message->payload[1]);
+        app_log_info(" Ack \n");
         break;
         }
       case MSG_WARN:
         {
-          uint8_t info = buffer[1];
-          if(info == 0){
-              app_log_info(" Warning started %d \n", info);
+
+          if(message->payload[1] == 0){
+              app_log_info(" Warning started \n");
+              ipcNotify(message->source, message->payload[3], 0x00, 0x00);
           }
           else {
-              app_log_info(" Warning ended with %d trigs \n", buffer[2]);
+              app_log_info(" Warning ended \n");
+              ipcNotify(message->source, message->payload[3], 0x01, message->payload[2]);
           }
-
+        for (uint8_t i = 0; i < (uint8_t) MAX_CONNECTED_DEVICES; i++)
+          {
+            if (sensorInfo[i].self_id == message->source)
+              {
+                sensorInfo[i].state = message->payload[3];
+                sensorInfo[i].rssi = message->rssi;
+                sensorInfo[i].lqi = message->lqi;
+                break;
+              }
+          }
           break;
         }
       case MSG_INIT:
         {
-          uint8_t hw = buffer[1];
-          uint8_t state = buffer[2];
-          uint32_t battery = buffer[3] << 24;
-          battery |= buffer[4] << 16;
-          battery |= buffer[5] << 8;
-          battery |= buffer[6];
-          uint8_t nt = buffer[7];
-          uint16_t cid = buffer[8] << 8;
-          cid |= buffer[9];
-          uint16_t sid = buffer[10] << 8;
-          sid |= buffer[11];
-          uint8_t ep = buffer[12];
+          uint8_t hw = message->payload[1];
+          uint8_t state = message->payload[2];
+          uint32_t battery = message->payload[3] << 24;
+          battery |= message->payload[4] << 16;
+          battery |= message->payload[5] << 8;
+          battery |= message->payload[6];
+          uint8_t nt = message->payload[7];
+          uint16_t cid = message->payload[8] << 8;
+          cid |= message->payload[9];
+          uint16_t sid = message->payload[10] << 8;
+          sid |= message->payload[11];
+          uint8_t ep = message->payload[12];
           uint8_t iter = 0;
           for (uint8_t i = 0; i < (uint8_t)MAX_CONNECTED_DEVICES; i++)
             {
               if (sensorInfo[i].self_id == message->source)
                 {
-                  sensorInfo[i].hw = buffer[1];
-                  sensorInfo[i].state = buffer[2];
+                  sensorInfo[i].hw = hw;
+                  sensorInfo[i].state = state;
                   sensorInfo[i].battery_voltage = battery;
-                  sensorInfo[i].node_type = buffer[7];
+                  sensorInfo[i].node_type = nt;
                   sensorInfo[i].central_id = cid;
                   sensorInfo[i].self_id = sid;
-                  sensorInfo[i].endpoint = buffer[12];
+                  sensorInfo[i].endpoint = ep;
+                  sensorInfo[i].rssi = message->rssi;
+                  sensorInfo[i].lqi = message->lqi;
                   app_log_info("Updated device %d ", sid);
                   break;
                 }
@@ -116,27 +136,24 @@ void applicationCoordinatorRxMsg(EmberIncomingMessage *message)
                   iter++;
                 }
             }
-          app_log_info("icnt %d ", iter);
           if(iter == (uint8_t)MAX_CONNECTED_DEVICES){
-              sensorInfo[sensorIndex].hw = buffer[1];
-              sensorInfo[sensorIndex].state = buffer[2];
+              sensorInfo[sensorIndex].hw = hw;
+              sensorInfo[sensorIndex].state = state;
               sensorInfo[sensorIndex].battery_voltage = battery;
-              sensorInfo[sensorIndex].node_type = buffer[7];
+              sensorInfo[sensorIndex].node_type = nt;
               sensorInfo[sensorIndex].central_id = cid;
               sensorInfo[sensorIndex].self_id = sid;
-              sensorInfo[sensorIndex].endpoint = buffer[12];
+              sensorInfo[sensorIndex].endpoint = ep;
+              sensorInfo[sensorIndex].rssi = message->rssi;
+              sensorInfo[sensorIndex].lqi = message->lqi;
               sensorIndex++;
               app_log_info("Added new device %d ", sid);
+              ipcNotify(message->source, message->payload[2], 0x02, 0xFF);
           }
           app_log_info(
               " INIT -> State: %d, HW: %d, Voltage: %d, Nodetype: %d, CID: %d, SID: %d, ENDP: %d \n",
               state, hw, battery, nt, cid, sid, ep);
           break;
         }
-
-      default:
-        break;
       }
-
-
 }

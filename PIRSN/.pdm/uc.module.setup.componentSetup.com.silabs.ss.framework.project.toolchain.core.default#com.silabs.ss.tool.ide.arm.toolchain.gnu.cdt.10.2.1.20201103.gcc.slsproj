@@ -81,7 +81,6 @@
         <folder name="inc">
           <file name="sl_atomic.h" uri="studio:/sdk/platform/common/inc/sl_atomic.h"/>
           <file name="sl_enum.h" uri="studio:/sdk/platform/common/inc/sl_enum.h"/>
-          <file name="sl_string.h" uri="studio:/sdk/platform/common/inc/sl_string.h"/>
           <file name="sl_slist.h" uri="studio:/sdk/platform/common/inc/sl_slist.h"/>
           <file name="sl_status.h" uri="studio:/sdk/platform/common/inc/sl_status.h"/>
         </folder>
@@ -96,32 +95,42 @@
           </folder>
         </folder>
         <folder name="src">
-          <file name="sl_string.c" uri="studio:/sdk/platform/common/src/sl_string.c"/>
           <file name="sl_slist.c" uri="studio:/sdk/platform/common/src/sl_slist.c"/>
         </folder>
       </folder>
-      <folder name="service">
-        <folder name="cli">
-          <folder name="inc">
-            <file name="sl_cli.h" uri="studio:/sdk/platform/service/cli/inc/sl_cli.h"/>
-            <file name="sl_cli_types.h" uri="studio:/sdk/platform/service/cli/inc/sl_cli_types.h"/>
-            <file name="sl_cli_command.h" uri="studio:/sdk/platform/service/cli/inc/sl_cli_command.h"/>
-            <file name="sl_cli_input.h" uri="studio:/sdk/platform/service/cli/inc/sl_cli_input.h"/>
-            <file name="sl_cli_tokenize.h" uri="studio:/sdk/platform/service/cli/inc/sl_cli_tokenize.h"/>
-            <file name="sl_cli_arguments.h" uri="studio:/sdk/platform/service/cli/inc/sl_cli_arguments.h"/>
-          </folder>
+      <folder name="CMSIS">
+        <folder name="Include">
+          <file name="arm_common_tables.h" uri="studio:/sdk/platform/CMSIS/Include/arm_common_tables.h"/>
+          <file name="arm_const_structs.h" uri="studio:/sdk/platform/CMSIS/Include/arm_const_structs.h"/>
+          <file name="arm_math.h" uri="studio:/sdk/platform/CMSIS/Include/arm_math.h"/>
+          <file name="cmsis_compiler.h" uri="studio:/sdk/platform/CMSIS/Include/cmsis_compiler.h"/>
+          <file name="cmsis_version.h" uri="studio:/sdk/platform/CMSIS/Include/cmsis_version.h"/>
+          <file name="cmsis_gcc.h" uri="studio:/sdk/platform/CMSIS/Include/cmsis_gcc.h"/>
+          <file name="core_cm33.h" uri="studio:/sdk/platform/CMSIS/Include/core_cm33.h"/>
+          <file name="mpu_armv8.h" uri="studio:/sdk/platform/CMSIS/Include/mpu_armv8.h"/>
+        </folder>
+      </folder>
+      <folder name="driver">
+        <folder name="debug">
           <folder name="src">
-            <file name="sl_cli_input.c" uri="studio:/sdk/platform/service/cli/src/sl_cli_input.c"/>
-            <file name="sl_cli_tokenize.c" uri="studio:/sdk/platform/service/cli/src/sl_cli_tokenize.c"/>
-            <file name="sl_cli_command.c" uri="studio:/sdk/platform/service/cli/src/sl_cli_command.c"/>
-            <file name="sl_cli.c" uri="studio:/sdk/platform/service/cli/src/sl_cli.c"/>
-            <file name="sl_cli_io.c" uri="studio:/sdk/platform/service/cli/src/sl_cli_io.c"/>
-            <file name="sl_cli_arguments.c" uri="studio:/sdk/platform/service/cli/src/sl_cli_arguments.c"/>
-            <file name="sli_cli_io.h" uri="studio:/sdk/platform/service/cli/src/sli_cli_io.h"/>
-            <file name="sli_cli_input.h" uri="studio:/sdk/platform/service/cli/src/sli_cli_input.h"/>
-            <file name="sli_cli_arguments.h" uri="studio:/sdk/platform/service/cli/src/sli_cli_arguments.h"/>
+            <file name="sl_debug_swo.c" uri="studio:/sdk/platform/driver/debug/src/sl_debug_swo.c"/>
+          </folder>
+          <folder name="inc">
+            <file name="sl_debug_swo.h" uri="studio:/sdk/platform/driver/debug/inc/sl_debug_swo.h"/>
           </folder>
         </folder>
+        <folder name="leddrv">
+          <folder name="src">
+            <file name="sl_led.c" uri="studio:/sdk/platform/driver/leddrv/src/sl_led.c"/>
+            <file name="sl_simple_led.c" uri="studio:/sdk/platform/driver/leddrv/src/sl_simple_led.c"/>
+          </folder>
+          <folder name="inc">
+            <file name="sl_led.h" uri="studio:/sdk/platform/driver/leddrv/inc/sl_led.h"/>
+            <file name="sl_simple_led.h" uri="studio:/sdk/platform/driver/leddrv/inc/sl_simple_led.h"/>
+          </folder>
+        </folder>
+      </folder>
+      <folder name="service">
         <folder name="device_init">
           <folder name="inc">
             <file name="sl_device_init_clocks.h" uri="studio:/sdk/platform/service/device_init/inc/sl_device_init_clocks.h"/>
@@ -151,7 +160,8 @@
         <folder name="iostream">
           <folder name="src">
             <file name="sl_iostream.c" uri="studio:/sdk/platform/service/iostream/src/sl_iostream.c"/>
-            <file name="sl_iostream_eusart.c" uri="studio:/sdk/platform/service/iostream/src/sl_iostream_eusart.c"/>
+            <file name="sl_iostream_debug.c" uri="studio:/sdk/platform/service/iostream/src/sl_iostream_debug.c"/>
+            <file name="sl_iostream_swo_itm_8.c" uri="studio:/sdk/platform/service/iostream/src/sl_iostream_swo_itm_8.c"/>
             <file name="sl_iostream_retarget_stdio.c" uri="studio:/sdk/platform/service/iostream/src/sl_iostream_retarget_stdio.c"/>
             <file name="sl_iostream_stdlib_config.c" uri="studio:/sdk/platform/service/iostream/src/sl_iostream_stdlib_config.c"/>
             <file name="sl_iostream_uart.c" uri="studio:/sdk/platform/service/iostream/src/sl_iostream_uart.c"/>
@@ -159,7 +169,9 @@
           </folder>
           <folder name="inc">
             <file name="sl_iostream.h" uri="studio:/sdk/platform/service/iostream/inc/sl_iostream.h"/>
-            <file name="sl_iostream_eusart.h" uri="studio:/sdk/platform/service/iostream/inc/sl_iostream_eusart.h"/>
+            <file name="sl_iostream_debug.h" uri="studio:/sdk/platform/service/iostream/inc/sl_iostream_debug.h"/>
+            <file name="sli_iostream_swo_itm_8.h" uri="studio:/sdk/platform/service/iostream/inc/sli_iostream_swo_itm_8.h"/>
+            <file name="sl_iostream_swo_itm_8.h" uri="studio:/sdk/platform/service/iostream/inc/sl_iostream_swo_itm_8.h"/>
             <file name="sl_iostream_stdlib_config.h" uri="studio:/sdk/platform/service/iostream/inc/sl_iostream_stdlib_config.h"/>
             <file name="sl_iostream_uart.h" uri="studio:/sdk/platform/service/iostream/inc/sl_iostream_uart.h"/>
             <file name="sli_iostream_uart.h" uri="studio:/sdk/platform/service/iostream/inc/sli_iostream_uart.h"/>
@@ -270,18 +282,6 @@
           </folder>
         </folder>
       </folder>
-      <folder name="CMSIS">
-        <folder name="Include">
-          <file name="arm_common_tables.h" uri="studio:/sdk/platform/CMSIS/Include/arm_common_tables.h"/>
-          <file name="arm_const_structs.h" uri="studio:/sdk/platform/CMSIS/Include/arm_const_structs.h"/>
-          <file name="arm_math.h" uri="studio:/sdk/platform/CMSIS/Include/arm_math.h"/>
-          <file name="cmsis_compiler.h" uri="studio:/sdk/platform/CMSIS/Include/cmsis_compiler.h"/>
-          <file name="cmsis_version.h" uri="studio:/sdk/platform/CMSIS/Include/cmsis_version.h"/>
-          <file name="cmsis_gcc.h" uri="studio:/sdk/platform/CMSIS/Include/cmsis_gcc.h"/>
-          <file name="core_cm33.h" uri="studio:/sdk/platform/CMSIS/Include/core_cm33.h"/>
-          <file name="mpu_armv8.h" uri="studio:/sdk/platform/CMSIS/Include/mpu_armv8.h"/>
-        </folder>
-      </folder>
       <folder name="emdrv">
         <folder name="common">
           <folder name="inc">
@@ -314,7 +314,6 @@
           <file name="em_assert.c" uri="studio:/sdk/platform/emlib/src/em_assert.c"/>
           <file name="em_core.c" uri="studio:/sdk/platform/emlib/src/em_core.c"/>
           <file name="em_emu.c" uri="studio:/sdk/platform/emlib/src/em_emu.c"/>
-          <file name="em_eusart.c" uri="studio:/sdk/platform/emlib/src/em_eusart.c"/>
           <file name="em_gpio.c" uri="studio:/sdk/platform/emlib/src/em_gpio.c"/>
           <file name="em_iadc.c" uri="studio:/sdk/platform/emlib/src/em_iadc.c"/>
           <file name="em_lesense.c" uri="studio:/sdk/platform/emlib/src/em_lesense.c"/>
@@ -341,8 +340,6 @@
           <file name="em_version.h" uri="studio:/sdk/platform/emlib/inc/em_version.h"/>
           <file name="em_core.h" uri="studio:/sdk/platform/emlib/inc/em_core.h"/>
           <file name="em_emu.h" uri="studio:/sdk/platform/emlib/inc/em_emu.h"/>
-          <file name="em_eusart.h" uri="studio:/sdk/platform/emlib/inc/em_eusart.h"/>
-          <file name="em_eusart_compat.h" uri="studio:/sdk/platform/emlib/inc/em_eusart_compat.h"/>
           <file name="em_gpio.h" uri="studio:/sdk/platform/emlib/inc/em_gpio.h"/>
           <file name="em_iadc.h" uri="studio:/sdk/platform/emlib/inc/em_iadc.h"/>
           <file name="em_lesense.h" uri="studio:/sdk/platform/emlib/inc/em_lesense.h"/>
@@ -356,18 +353,6 @@
           <file name="em_system.h" uri="studio:/sdk/platform/emlib/inc/em_system.h"/>
           <file name="em_usart.h" uri="studio:/sdk/platform/emlib/inc/em_usart.h"/>
           <file name="em_wdog.h" uri="studio:/sdk/platform/emlib/inc/em_wdog.h"/>
-        </folder>
-      </folder>
-      <folder name="driver">
-        <folder name="leddrv">
-          <folder name="src">
-            <file name="sl_led.c" uri="studio:/sdk/platform/driver/leddrv/src/sl_led.c"/>
-            <file name="sl_simple_led.c" uri="studio:/sdk/platform/driver/leddrv/src/sl_simple_led.c"/>
-          </folder>
-          <folder name="inc">
-            <file name="sl_led.h" uri="studio:/sdk/platform/driver/leddrv/inc/sl_led.h"/>
-            <file name="sl_simple_led.h" uri="studio:/sdk/platform/driver/leddrv/inc/sl_simple_led.h"/>
-          </folder>
         </folder>
       </folder>
       <folder name="peripheral">
@@ -732,7 +717,6 @@
   <file name="main.c" linked="false" uri="studio:/project/main.c"/>
   <file name="app_init.c" linked="false" uri="studio:/project/app_init.c"/>
   <file name="app_process.c" linked="false" uri="studio:/project/app_process.c"/>
-  <file name="app_cli.c" linked="false" uri="studio:/project/app_cli.c"/>
   <file name="app_init.h" linked="false" uri="studio:/project/app_init.h"/>
   <file name="app_process.h" linked="false" uri="studio:/project/app_process.h"/>
   <file name="connect_create_gbl_image.bat" linked="false" uri="studio:/project/connect_create_gbl_image.bat"/>
@@ -744,7 +728,6 @@
   <includePath uri="studio:/sdk/app/common/util/app_assert"/>
   <includePath uri="studio:/sdk/app/common/util/app_log"/>
   <includePath uri="studio:/sdk/platform/common/inc"/>
-  <includePath uri="studio:/sdk/platform/service/cli/inc"/>
   <includePath uri="studio:/sdk/platform/CMSIS/Include"/>
   <includePath uri="studio:/sdk/protocol/flex/app-framework-common"/>
   <includePath uri="studio:/sdk/protocol/flex/debug-print"/>
@@ -752,6 +735,7 @@
   <includePath uri="studio:/sdk/protocol/flex"/>
   <includePath uri="studio:/sdk/protocol/flex/stack"/>
   <includePath uri="studio:/sdk/protocol/flex/stack/include"/>
+  <includePath uri="studio:/sdk/platform/driver/debug/inc"/>
   <includePath uri="studio:/sdk/platform/service/device_init/inc"/>
   <includePath uri="studio:/sdk/platform/emdrv/common/inc"/>
   <includePath uri="studio:/sdk/platform/emlib/inc"/>

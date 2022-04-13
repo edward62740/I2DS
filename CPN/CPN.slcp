@@ -26,8 +26,6 @@ component:
 - {id: connect_debug_print}
 - {id: iostream_retarget_stdio}
 - {id: connect_frequency_hopping}
-- instance: [example]
-  id: cli
 - {id: sl_sensor_sink_core}
 - {id: mpu}
 - {id: EFR32FG23B020F512IM40}

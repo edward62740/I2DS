@@ -28,8 +28,6 @@ component:
 - {id: connect_debug_print}
 - {id: iostream_retarget_stdio}
 - {id: connect_frequency_hopping}
-- instance: [example]
-  id: cli
 - {id: sl_sensor_sink_core}
 - {id: emlib_pcnt}
 - {id: mpu}
@@ -39,8 +37,6 @@ component:
   id: simple_led
 - {id: restrictions_profile_connect}
 - {id: device_init}
-- instance: [inst0]
-  id: iostream_eusart
 - {id: emlib_iadc}
 - {id: legacy_hal}
 - {id: app_log}
@@ -55,6 +51,7 @@ component:
 - {id: token_manager}
 - {id: connect_mac_queue}
 - {id: connect_poll}
+- {id: iostream_debug}
 - {id: app_assert}
 - {id: EFR32FG23B010F512IM40}
 - {id: connect_app_framework_common}

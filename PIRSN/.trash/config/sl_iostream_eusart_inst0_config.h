@@ -79,7 +79,7 @@
 // <q SL_IOSTREAM_EUSART_INST0_RESTRICT_ENERGY_MODE_TO_ALLOW_RECEPTION> Restrict the energy mode to allow the reception.
 // <i> Default: 1
 // <i> Limits the lowest energy mode the system can sleep to in order to keep the reception on. May cause higher power consumption.
-#define SL_IOSTREAM_EUSART_INST0_RESTRICT_ENERGY_MODE_TO_ALLOW_RECEPTION    1
+#define SL_IOSTREAM_EUSART_INST0_RESTRICT_ENERGY_MODE_TO_ALLOW_RECEPTION    0
 
 // </h>
 
@@ -91,13 +91,13 @@
 #define SL_IOSTREAM_EUSART_INST0_PERIPHERAL      EUSART0
 #define SL_IOSTREAM_EUSART_INST0_PERIPHERAL_NO   0
 
-// EUSART0 TX on PA05
+// EUSART0 TX on PA06
 #define SL_IOSTREAM_EUSART_INST0_TX_PORT         gpioPortA
-#define SL_IOSTREAM_EUSART_INST0_TX_PIN          5
+#define SL_IOSTREAM_EUSART_INST0_TX_PIN          6
 
-// EUSART0 RX on PA06
+// EUSART0 RX on PA07
 #define SL_IOSTREAM_EUSART_INST0_RX_PORT         gpioPortA
-#define SL_IOSTREAM_EUSART_INST0_RX_PIN          6
+#define SL_IOSTREAM_EUSART_INST0_RX_PIN          7
 
 // [EUSART_SL_IOSTREAM_EUSART_INST0]$
 // <<< sl:end pin_tool >>>

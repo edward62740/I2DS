@@ -29,4 +29,41 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>gecko_sdk_4.0.2/platform/driver/debug/inc/sl_debug_swo.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/driver/debug/inc/sl_debug_swo.h</locationURI>
+		</link>
+		<link>
+			<name>gecko_sdk_4.0.2/platform/driver/debug/src/sl_debug_swo.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/driver/debug/src/sl_debug_swo.c</locationURI>
+		</link>
+		<link>
+			<name>gecko_sdk_4.0.2/platform/service/iostream/inc/sl_iostream_debug.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/inc/sl_iostream_debug.h</locationURI>
+		</link>
+		<link>
+			<name>gecko_sdk_4.0.2/platform/service/iostream/inc/sl_iostream_swo_itm_8.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/inc/sl_iostream_swo_itm_8.h</locationURI>
+		</link>
+		<link>
+			<name>gecko_sdk_4.0.2/platform/service/iostream/inc/sli_iostream_swo_itm_8.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/inc/sli_iostream_swo_itm_8.h</locationURI>
+		</link>
+		<link>
+			<name>gecko_sdk_4.0.2/platform/service/iostream/src/sl_iostream_debug.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/src/sl_iostream_debug.c</locationURI>
+		</link>
+		<link>
+			<name>gecko_sdk_4.0.2/platform/service/iostream/src/sl_iostream_swo_itm_8.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/src/sl_iostream_swo_itm_8.c</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
