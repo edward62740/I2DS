@@ -23,12 +23,12 @@ gecko_sdk_4.0.2/platform/Device/SiliconLabs/EFR32FG23/Source/GCC \
 gecko_sdk_4.0.2/platform/Device/SiliconLabs/EFR32FG23/Source \
 gecko_sdk_4.0.2/platform/common/src \
 gecko_sdk_4.0.2/platform/common/toolchain/src \
+gecko_sdk_4.0.2/platform/driver/debug/src \
 gecko_sdk_4.0.2/platform/driver/leddrv/src \
 gecko_sdk_4.0.2/platform/emdrv/nvm3/src \
 gecko_sdk_4.0.2/platform/emlib/src \
 gecko_sdk_4.0.2/platform/peripheral/src \
 gecko_sdk_4.0.2/platform/radio/rail_lib/plugin/pa-conversions \
-gecko_sdk_4.0.2/platform/service/cli/src \
 gecko_sdk_4.0.2/platform/service/device_init/src \
 gecko_sdk_4.0.2/platform/service/hfxo_manager/src \
 gecko_sdk_4.0.2/platform/service/iostream/src \

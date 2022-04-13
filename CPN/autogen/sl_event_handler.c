@@ -18,7 +18,6 @@
 #include "sl_mpu.h"
 #include "nvm3_default.h"
 #include "sl_simple_led_instances.h"
-#include "sl_cli_instances.h"
 #include "cpu.h"
 #include "cmsis_os2.h"
 #include "sl_iostream_init_instances.h"
@@ -58,7 +57,6 @@ void sl_service_init(void)
   sl_mbedtls_init();
   sl_mpu_disable_execute_from_ram();
   sl_iostream_init_instances();
-  sl_cli_instances_init();
 }
 
 void sl_stack_init(void)

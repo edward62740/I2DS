@@ -25,6 +25,7 @@ sl_cli_config.h=339465296
 sl_cli_config_example.h=-2008182582
 sl_custom_manufacturing_token_header.h=-2044335547
 sl_custom_token_header.h=-380227388
+sl_debug_swo_config.h=1225370925
 sl_device_init_dcdc_config.h=-363856818
 sl_device_init_emu_config.h=622680131
 sl_device_init_hfxo_config.h=85896035

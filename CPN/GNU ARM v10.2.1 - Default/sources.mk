@@ -38,7 +38,6 @@ gecko_sdk_4.0.2/platform/micrium_os/ports/source/generic \
 gecko_sdk_4.0.2/platform/micrium_os/ports/source/gnu \
 gecko_sdk_4.0.2/platform/peripheral/src \
 gecko_sdk_4.0.2/platform/radio/rail_lib/plugin/pa-conversions \
-gecko_sdk_4.0.2/platform/service/cli/src \
 gecko_sdk_4.0.2/platform/service/device_init/src \
 gecko_sdk_4.0.2/platform/service/hfxo_manager/src \
 gecko_sdk_4.0.2/platform/service/iostream/src \

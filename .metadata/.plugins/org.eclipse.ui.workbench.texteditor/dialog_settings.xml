@@ -6,23 +6,23 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Rx"/>
+		<item key="selection" value="offset"/>
 		<list key="findhistory">
-			<item value="rx"/>
-			<item value="clear"/>
-			<item value="flush"/>
-			<item value="clear rx"/>
-			<item value="pos"/>
-			<item value="sensorIndex"/>
+			<item value="offset"/>
+			<item value="comms"/>
+			<item value="stat"/>
+			<item value="state"/>
+			<item value="rssi"/>
 			<item value="startipc"/>
-			<item value="start"/>
-			<item value="ipcDataReady"/>
-			<item value="/***************************************************************************//**"/>
-			<item value="threadstart"/>
-			<item value="osthreadstart"/>
-			<item value="thread"/>
-			<item value="osthreadnew"/>
-			<item value="osthread"/>
+			<item value="ipc"/>
+			<item value="txo"/>
+			<item value="tx"/>
+			<item value="cooldown"/>
+			<item value="key"/>
+			<item value="alert"/>
+			<item value="notify"/>
+			<item value="done"/>
+			<item value="task"/>
 		</list>
 		<list key="replacehistory">
 		</list>
@@ -30,8 +30,8 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item key="DIALOG_X_ORIGIN" value="992"/>
 		<item key="DIALOG_Y_ORIGIN" value="377"/>
-		<item key="DIALOG_WIDTH" value="284"/>
-		<item key="DIALOG_HEIGHT" value="391"/>
-		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+		<item key="DIALOG_WIDTH" value="336"/>
+		<item key="DIALOG_HEIGHT" value="454"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
 	</section>
 </section>
