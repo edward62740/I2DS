@@ -2262,3 +2262,15 @@ java.lang.InterruptedException
 	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:207)
 	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:220)
 	at java.base/java.lang.Thread.run(Thread.java:834)
+!SESSION 2022-04-14 11:47:23.744 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.5
+java.vendor=Amazon.com Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.silabs.ss.platform.jetty.server 1 0 2022-04-14 11:47:26.182
+!MESSAGE ContentServer started at: 127.0.0.1, 49842
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-04-14 11:47:26.201
+!MESSAGE com.silabs.ss.tool.launcher.product found! Writing main studio shared file
