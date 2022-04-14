@@ -1929,3 +1929,336 @@ java.lang.InterruptedException
 	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:207)
 	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:220)
 	at java.base/java.lang.Thread.run(Thread.java:834)
+!SESSION 2022-04-14 11:18:08.364 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.5
+java.vendor=Amazon.com Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.silabs.ss.platform.jetty.server 1 0 2022-04-14 11:18:10.930
+!MESSAGE ContentServer started at: 127.0.0.1, 52429
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-04-14 11:18:10.953
+!MESSAGE com.silabs.ss.tool.launcher.product found! Writing main studio shared file
+
+!ENTRY org.eclipse.equinox.app 4 2 2022-04-14 11:18:37.430
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.equinox.app".
+!STACK 0
+org.eclipse.swt.SWTException: Widget is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:4720)
+	at org.eclipse.swt.SWT.error(SWT.java:4635)
+	at org.eclipse.swt.SWT.error(SWT.java:4606)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:452)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:351)
+	at org.eclipse.swt.widgets.Shell.close(Shell.java:547)
+	at org.eclipse.ui.splash.AbstractSplashHandler.dispose(AbstractSplashHandler.java:65)
+	at org.eclipse.ui.splash.BasicSplashHandler.dispose(BasicSplashHandler.java:163)
+	at org.eclipse.ui.internal.Workbench$3$1.applicationRunning(Workbench.java:838)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle$1.run(EclipseAppHandle.java:279)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.applicationRunning(EclipseAppHandle.java:267)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1095)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at com.silabs.ss.platform.internal.product.Application.start(Application.java:38)
+	at com.silabs.ss.tool.launcher.internal.product.StudioV5Application.start(StudioV5Application.java:36)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-04-14 11:18:41.079
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.platform.useraccounts.core 4 0 2022-04-14 11:18:41.486
+!MESSAGE Error in connection authentication or validation
+!STACK 0
+com.sforce.ws.SoapFaultException: StudioService: no access allowed to this class.
+	at com.sforce.ws.transport.SoapConnection.createException(SoapConnection.java:212)
+	at com.sforce.ws.transport.SoapConnection.receive(SoapConnection.java:156)
+	at com.sforce.ws.transport.SoapConnection.send(SoapConnection.java:99)
+	at com.sforce.soap.StudioService.SoapConnection.isValidated(SoapConnection.java:177)
+	at com.silabs.ss.platform.internal.useraccounts.core.salesforce.impl.SilabsSFAuthService.isValidated(SilabsSFAuthService.java:1001)
+	at com.silabs.ss.platform.internal.useraccounts.core.salesforce.impl.SilabsSFAuthService.createConnection(SilabsSFAuthService.java:240)
+	at com.silabs.ss.platform.internal.useraccounts.core.salesforce.impl.SilabsSFAuthService.getSecuredUpdateRepos(SilabsSFAuthService.java:333)
+	at com.silabs.ss.tool.internal.api.installer.core.SLSP2UpdateSites.fetchSFSecureModeUpdateSites(SLSP2UpdateSites.java:346)
+	at com.silabs.ss.tool.internal.api.installer.core.SLSP2UpdateSites.ensureStudioRepos(SLSP2UpdateSites.java:255)
+	at com.silabs.ss.tool.internal.api.installer.core.SLSP2UpdateSites.ensureStudioReposLoaded(SLSP2UpdateSites.java:619)
+	at com.silabs.ss.tool.internal.api.installer.core.InstallerUtils.ensurePackagesFetched(InstallerUtils.java:1908)
+	at com.silabs.ss.tool.internal.installer.core.updates.UpdateManager.updatePackageMetadata(UpdateManager.java:212)
+	at com.silabs.ss.tool.internal.installer.core.updates.UpdateManager.ensureUpdatesFetched(UpdateManager.java:278)
+	at com.silabs.ss.tool.internal.installer.core.updates.UpdateManager$1.run(UpdateManager.java:166)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY com.silabs.ss.tool.installer.core 2 0 2022-04-14 11:18:48.092
+!MESSAGE Problem getting package resources: changelog
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-04-14 11:18:57.661
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\ffd\xpress_configurator.timestamp
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-04-14 11:18:57.664
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY org.eclipse.jface 2 0 2022-04-14 11:23:29.780
+!MESSAGE Ignored reentrant call while viewer is busy. This is only logged once per viewer instance, but similar calls will still be ignored.
+!STACK 0
+java.lang.RuntimeException
+	at org.eclipse.jface.viewers.ColumnViewer.checkBusy(ColumnViewer.java:764)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.setExpandedState(AbstractTreeViewer.java:2511)
+	at org.eclipse.ui.navigator.CommonNavigator.handleDoubleClick(CommonNavigator.java:550)
+	at org.eclipse.ui.navigator.resources.ProjectExplorer.handleDoubleClick(ProjectExplorer.java:331)
+	at org.eclipse.ui.navigator.CommonNavigator$2.run(CommonNavigator.java:525)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.ui.navigator.CommonNavigator.lambda$2(CommonNavigator.java:522)
+	at org.eclipse.jface.viewers.StructuredViewer$1.run(StructuredViewer.java:777)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.ui.internal.JFaceUtil.lambda$0(JFaceUtil.java:47)
+	at org.eclipse.jface.util.SafeRunnable.run(SafeRunnable.java:174)
+	at org.eclipse.jface.viewers.StructuredViewer.fireDoubleClick(StructuredViewer.java:774)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.handleDoubleSelect(AbstractTreeViewer.java:1518)
+	at org.eclipse.ui.navigator.CommonViewer.handleDoubleSelect(CommonViewer.java:448)
+	at org.eclipse.jface.viewers.StructuredViewer$4.widgetDefaultSelected(StructuredViewer.java:1205)
+	at org.eclipse.jface.util.OpenStrategy.fireDefaultSelectionEvent(OpenStrategy.java:251)
+	at org.eclipse.jface.util.OpenStrategy.access$0(OpenStrategy.java:249)
+	at org.eclipse.jface.util.OpenStrategy$1.handleEvent(OpenStrategy.java:308)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4175)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1057)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3988)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3587)
+	at org.eclipse.ui.internal.dialogs.EventLoopProgressMonitor.runEventLoop(EventLoopProgressMonitor.java:127)
+	at org.eclipse.ui.internal.dialogs.EventLoopProgressMonitor.isCanceled(EventLoopProgressMonitor.java:101)
+	at org.eclipse.core.internal.jobs.ThreadJob.isCanceled(ThreadJob.java:147)
+	at org.eclipse.core.internal.jobs.ThreadJob.waitForRun(ThreadJob.java:276)
+	at org.eclipse.core.internal.jobs.ThreadJob.joinRun(ThreadJob.java:205)
+	at org.eclipse.core.internal.jobs.ImplicitJobs.begin(ImplicitJobs.java:95)
+	at org.eclipse.core.internal.jobs.JobManager.beginRule(JobManager.java:298)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.runWspModification(CProjectDescriptionManager.java:470)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.runWspModification(CProjectDescriptionManager.java:443)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.updateProjectDescriptions(CProjectDescriptionManager.java:535)
+	at org.eclipse.cdt.core.model.CoreModel.updateProjectDescriptions(CoreModel.java:1449)
+	at org.eclipse.cdt.internal.core.model.CModelManager.handleEvent(CModelManager.java:1038)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.notifyLanguageSettingsChangeListeners(LanguageSettingsProvidersSerializer.java:1456)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.serializeLanguageSettingsWorkspace(LanguageSettingsProvidersSerializer.java:604)
+	at org.eclipse.cdt.core.language.settings.providers.LanguageSettingsManager.serializeLanguageSettingsWorkspace(LanguageSettingsManager.java:367)
+	at org.eclipse.cdt.core.language.settings.providers.LanguageSettingsSerializableProvider.serializeLanguageSettings(LanguageSettingsSerializableProvider.java:276)
+	at org.eclipse.cdt.managedbuilder.language.settings.providers.AbstractBuiltinSpecsDetector.runForEachLanguage(AbstractBuiltinSpecsDetector.java:613)
+	at com.silabs.ss.tool.ide.arm.internal.toolchain.gnu.cdt.support.GNUARMBuiltinSpecsDetector.run(GNUARMBuiltinSpecsDetector.java:34)
+	at com.silabs.ss.tool.ide.arm.internal.toolchain.gnu.cdt.support.GNUARMCdtToolchain.fillLanguageSettings(GNUARMCdtToolchain.java:464)
+	at com.silabs.ss.framework.ide.api.project.core.cpp.CdtToolchain.getLanguageSettings(CdtToolchain.java:161)
+	at com.silabs.ss.framework.ide.api.project.core.cpp.CdtToolchain.getLanguageSettingEntries(CdtToolchain.java:58)
+	at com.silabs.ss.framework.ide.internal.project.core.cpp.SLSLanguageSettingsProvider.getToolchainLanguageSettings(SLSLanguageSettingsProvider.java:91)
+	at com.silabs.ss.framework.ide.internal.project.core.cpp.SLSLanguageSettingsProvider.getSettingEntries(SLSLanguageSettingsProvider.java:70)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer$LanguageSettingsWorkspaceProvider.getSettingEntries(LanguageSettingsProvidersSerializer.java:193)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.getSettingEntriesPooled(LanguageSettingsProvidersSerializer.java:1466)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.getSettingEntriesUpResourceTree(LanguageSettingsProvidersSerializer.java:1496)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.getSettingEntriesByKind(LanguageSettingsProvidersSerializer.java:1560)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.getSettingEntriesByKind(LanguageSettingsProvidersSerializer.java:1604)
+	at org.eclipse.cdt.core.settings.model.util.PathEntryTranslator.collectResourceDataEntries(PathEntryTranslator.java:2070)
+	at org.eclipse.cdt.core.settings.model.util.PathEntryTranslator.access$11(PathEntryTranslator.java:2042)
+	at org.eclipse.cdt.core.settings.model.util.PathEntryTranslator$1.visit(PathEntryTranslator.java:2030)
+	at org.eclipse.cdt.core.settings.model.util.PathSettingsContainer.doAccept(PathSettingsContainer.java:522)
+	at org.eclipse.cdt.core.settings.model.util.PathSettingsContainer.accept(PathSettingsContainer.java:518)
+	at org.eclipse.cdt.core.settings.model.util.PathEntryTranslator.collectEntries(PathEntryTranslator.java:2022)
+	at org.eclipse.cdt.internal.core.settings.model.ConfigBasedPathEntryStore.getEntries(ConfigBasedPathEntryStore.java:244)
+	at org.eclipse.cdt.internal.core.settings.model.ConfigBasedPathEntryStore.getRawPathEntries(ConfigBasedPathEntryStore.java:125)
+	at org.eclipse.cdt.internal.core.model.PathEntryStoreProxy.getRawPathEntries(PathEntryStoreProxy.java:102)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getRawPathEntries(PathEntryManager.java:666)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getResolvedPathEntries(PathEntryManager.java:557)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getResolvedPathEntries(PathEntryManager.java:530)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getResolvedPathEntries(PathEntryManager.java:514)
+	at org.eclipse.cdt.internal.core.model.PathEntryStoreChangedOperation.executeOperation(PathEntryStoreChangedOperation.java:42)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.execute(CModelOperation.java:346)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.run(CModelOperation.java:613)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.runOperation(CModelOperation.java:641)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.pathEntryStoreChanged(PathEntryManager.java:1344)
+	at org.eclipse.cdt.internal.core.model.PathEntryStoreProxy.notifyListeners(PathEntryStoreProxy.java:67)
+	at org.eclipse.cdt.internal.core.model.PathEntryStoreProxy.fireContentChangedEvent(PathEntryStoreProxy.java:60)
+	at org.eclipse.cdt.internal.core.model.PathEntryStoreProxy.postProcessProviderChange(PathEntryStoreProxy.java:146)
+	at org.eclipse.cdt.internal.core.settings.model.AbstractCExtensionProxy.checkUpdateProvider(AbstractCExtensionProxy.java:126)
+	at org.eclipse.cdt.internal.core.settings.model.AbstractCExtensionProxy.providerRequested(AbstractCExtensionProxy.java:42)
+	at org.eclipse.cdt.internal.core.model.PathEntryStoreProxy.getRawPathEntries(PathEntryStoreProxy.java:101)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getRawPathEntries(PathEntryManager.java:666)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getResolvedPathEntries(PathEntryManager.java:557)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getResolvedPathEntries(PathEntryManager.java:530)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getResolvedPathEntries(PathEntryManager.java:514)
+	at org.eclipse.cdt.core.model.CoreModel.getResolvedPathEntries(CoreModel.java:955)
+	at org.eclipse.cdt.internal.core.model.CProject.getResolvedPathEntries(CProject.java:404)
+	at org.eclipse.cdt.internal.core.model.CProject.getOutputEntries(CProject.java:513)
+	at org.eclipse.cdt.internal.core.model.CProject.isOnOutputEntry(CProject.java:568)
+	at org.eclipse.cdt.internal.core.model.CContainer.computeChild(CContainer.java:218)
+	at org.eclipse.cdt.internal.core.model.CContainer.computeChildren(CContainer.java:185)
+	at org.eclipse.cdt.internal.core.model.CContainer.buildStructure(CContainer.java:157)
+	at org.eclipse.cdt.internal.core.model.Openable.generateInfos(Openable.java:264)
+	at org.eclipse.cdt.internal.core.model.CElement.openWhenClosed(CElement.java:429)
+	at org.eclipse.cdt.internal.core.model.CElement.getElementInfo(CElement.java:307)
+	at org.eclipse.cdt.internal.core.model.CElement.getElementInfo(CElement.java:297)
+	at org.eclipse.cdt.internal.core.model.Parent.getChildren(Parent.java:57)
+	at org.eclipse.cdt.internal.ui.BaseCElementContentProvider.getSourceRoots(BaseCElementContentProvider.java:433)
+	at org.eclipse.cdt.internal.ui.BaseCElementContentProvider.getChildren(BaseCElementContentProvider.java:224)
+	at org.eclipse.cdt.internal.ui.cview.CViewContentProvider.getChildren(CViewContentProvider.java:92)
+	at org.eclipse.cdt.internal.ui.navigator.CNavigatorContentProvider.getChildren(CNavigatorContentProvider.java:231)
+	at org.eclipse.cdt.internal.ui.navigator.CNavigatorContentProvider.getPipelinedChildren(CNavigatorContentProvider.java:256)
+	at org.eclipse.ui.internal.navigator.extensions.SafeDelegateTreeContentProvider.getPipelinedChildren(SafeDelegateTreeContentProvider.java:173)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider.pipelineChildren(NavigatorContentServiceContentProvider.java:213)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider.access$1(NavigatorContentServiceContentProvider.java:201)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider$1.run(NavigatorContentServiceContentProvider.java:169)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider.internalGetChildren(NavigatorContentServiceContentProvider.java:146)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider.getChildren(NavigatorContentServiceContentProvider.java:132)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.getRawChildren(AbstractTreeViewer.java:1414)
+	at org.eclipse.jface.viewers.TreeViewer.getRawChildren(TreeViewer.java:350)
+	at org.eclipse.jface.viewers.StructuredViewer.getFilteredChildren(StructuredViewer.java:847)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.getSortedChildren(AbstractTreeViewer.java:621)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.createChildren(AbstractTreeViewer.java:813)
+	at org.eclipse.jface.viewers.TreeViewer.createChildren(TreeViewer.java:604)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.createChildren(AbstractTreeViewer.java:766)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.setExpandedState(AbstractTreeViewer.java:2516)
+	at org.eclipse.ui.navigator.CommonNavigator.handleDoubleClick(CommonNavigator.java:550)
+	at org.eclipse.ui.navigator.resources.ProjectExplorer.handleDoubleClick(ProjectExplorer.java:331)
+	at org.eclipse.ui.navigator.CommonNavigator$2.run(CommonNavigator.java:525)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.ui.navigator.CommonNavigator.lambda$2(CommonNavigator.java:522)
+	at org.eclipse.jface.viewers.StructuredViewer$1.run(StructuredViewer.java:777)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.ui.internal.JFaceUtil.lambda$0(JFaceUtil.java:47)
+	at org.eclipse.jface.util.SafeRunnable.run(SafeRunnable.java:174)
+	at org.eclipse.jface.viewers.StructuredViewer.fireDoubleClick(StructuredViewer.java:774)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.handleDoubleSelect(AbstractTreeViewer.java:1518)
+	at org.eclipse.ui.navigator.CommonViewer.handleDoubleSelect(CommonViewer.java:448)
+	at org.eclipse.jface.viewers.StructuredViewer$4.widgetDefaultSelected(StructuredViewer.java:1205)
+	at org.eclipse.jface.util.OpenStrategy.fireDefaultSelectionEvent(OpenStrategy.java:251)
+	at org.eclipse.jface.util.OpenStrategy.access$0(OpenStrategy.java:249)
+	at org.eclipse.jface.util.OpenStrategy$1.handleEvent(OpenStrategy.java:308)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4175)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1057)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3988)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3587)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at com.silabs.ss.platform.internal.product.Application.start(Application.java:38)
+	at com.silabs.ss.tool.launcher.internal.product.StudioV5Application.start(StudioV5Application.java:36)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-04-14 11:23:36.988
+!MESSAGE Long Runtime: Heuristic autoselection repeated 3 times. Duration: 1420ms
+
+!ENTRY com.silabs.ss.support.browser.html 1 0 2022-04-14 11:23:39.529
+!MESSAGE Browser workarea set to: C:\Users\█████████\Desktop\I2DS\.browser
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 2 0 2022-04-14 11:30:25.975
+!MESSAGE Connection to https://updates.silabs.com/studio/v5/control/stacks/PublicGA/updates/p2.index failed on Connection reset. Retry attempt 0 started
+!STACK 0
+javax.net.ssl.SSLException: Connection reset
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:127)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:320)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:263)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:258)
+	at java.base/sun.security.ssl.SSLSocketImpl.handleException(SSLSocketImpl.java:1314)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:839)
+	at org.apache.http.impl.io.SessionInputBufferImpl.streamRead(SessionInputBufferImpl.java:137)
+	at org.apache.http.impl.io.SessionInputBufferImpl.fillBuffer(SessionInputBufferImpl.java:153)
+	at org.apache.http.impl.io.SessionInputBufferImpl.readLine(SessionInputBufferImpl.java:282)
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:138)
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:56)
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:259)
+	at org.apache.http.impl.DefaultBHttpClientConnection.receiveResponseHeader(DefaultBHttpClientConnection.java:163)
+	at org.apache.http.impl.conn.CPoolProxy.receiveResponseHeader(CPoolProxy.java:165)
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:273)
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:125)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:272)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:185)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:89)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83)
+	at org.eclipse.ecf.provider.filetransfer.httpclient45.HttpClientRetrieveFileTransfer.performConnect(HttpClientRetrieveFileTransfer.java:1000)
+	at org.eclipse.ecf.provider.filetransfer.httpclient45.HttpClientRetrieveFileTransfer.access$0(HttpClientRetrieveFileTransfer.java:992)
+	at org.eclipse.ecf.provider.filetransfer.httpclient45.HttpClientRetrieveFileTransfer$1.performFileTransfer(HttpClientRetrieveFileTransfer.java:988)
+	at org.eclipse.ecf.filetransfer.FileTransferJob.run(FileTransferJob.java:74)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+	Suppressed: java.net.SocketException: Connection reset by peer: socket write error
+		at java.base/java.net.SocketOutputStream.socketWrite0(Native Method)
+		at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:110)
+		at java.base/java.net.SocketOutputStream.write(SocketOutputStream.java:150)
+		at java.base/sun.security.ssl.SSLSocketOutputRecord.encodeAlert(SSLSocketOutputRecord.java:81)
+		at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:351)
+		... 25 more
+Caused by: java.net.SocketException: Connection reset
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:186)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:448)
+	at java.base/sun.security.ssl.SSLSocketInputRecord.bytesInCompletePacket(SSLSocketInputRecord.java:68)
+	at java.base/sun.security.ssl.SSLSocketImpl.readApplicationRecord(SSLSocketImpl.java:1104)
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:823)
+	... 21 more
+
+!ENTRY org.eclipse.cdt.core 1 0 2022-04-14 11:32:00.453
+!MESSAGE Indexed 'se_manager_tamper' (44 sources, 185 headers) in 5.66 sec: 13,964 declarations; 43,508 references; 0 unresolved inclusions; 31 syntax errors; 4 unresolved names (0.007%)
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-04-14 11:35:04.687
+!MESSAGE Deleted Shared Daemon File: C:\Users\█████████\.uc\cli\mainstudio.running
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-04-14 11:35:04.693
+!MESSAGE Deleted Shared Daemon Version File: C:\Users\█████████\.uc\cli\mainstudio.running.version
+
+!ENTRY org.eclipse.tcf 4 0 2022-04-14 11:35:04.921
+!MESSAGE Failed to shutdown TCF event dispatch thread
+!STACK 0
+java.lang.InterruptedException
+	at java.base/java.lang.Object.wait(Native Method)
+	at java.base/java.lang.Thread.join(Thread.java:1305)
+	at java.base/java.lang.Thread.join(Thread.java:1379)
+	at org.eclipse.tcf.EventQueue.shutdown(EventQueue.java:76)
+	at org.eclipse.tcf.Activator.stop(Activator.java:154)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:899)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:1)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.stop(BundleContextImpl.java:891)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.stopWorker0(EquinoxBundle.java:1029)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.stopWorker(EquinoxBundle.java:370)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:658)
+	at org.eclipse.osgi.container.Module.stop(Module.java:520)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.decStartLevel(ModuleContainer.java:1885)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1760)
+	at org.eclipse.osgi.container.SystemModule.stopWorker(SystemModule.java:275)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule.stopWorker(EquinoxBundle.java:202)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:658)
+	at org.eclipse.osgi.container.Module.stop(Module.java:520)
+	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:207)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:220)
+	at java.base/java.lang.Thread.run(Thread.java:834)
