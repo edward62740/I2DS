@@ -40,7 +40,7 @@ typedef enum {     /* IPC message identification byte */
 
 
 void ipcReplyHandler(void);
-void ipcRequestDone(uint8_t ret);
+void ipcRequestDone(uint8_t ret, EmberNodeId id);
 bool ipcRequestHandler(EmberNodeId id, sensor_state_t state);
 void ipcNotify(EmberNodeId id, sensor_state_t state, uint8_t alert, uint8_t count);
 void ipcInitThread(void);
