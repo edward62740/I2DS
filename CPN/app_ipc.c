@@ -124,11 +124,13 @@ void ipcReplyHandler(void){
   EUSART_IntEnable (EUSART1, EUSART_IEN_TXFL);
 }
 
-void ipcRequestDone(uint8_t ret)
+void ipcRequestDone(uint8_t ret, EmberNodeId id)
 {
   EUSART_IntDisable (EUSART1, EUSART_IEN_RXFL);
   uint8_t tmpTxIndex = 0;
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) IPC_REQUEST_DONE;
+  ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) (id >> 8);
+  ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) id;
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) ret;
   ipcTxBuffer[tmpTxIndex] = (uint8_t) tmpTxIndex;
   ipcTxLen = tmpTxIndex + 1;
