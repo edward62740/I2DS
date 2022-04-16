@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Done"/>
+		<item key="selection" value="RequestDone"/>
 		<list key="findhistory">
+			<item value="requestdone"/>
 			<item value="done"/>
 			<item value="offset"/>
 			<item value="comms"/>
@@ -22,7 +23,6 @@
 			<item value="key"/>
 			<item value="alert"/>
 			<item value="notify"/>
-			<item value="task"/>
 		</list>
 		<list key="replacehistory">
 		</list>

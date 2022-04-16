@@ -73,7 +73,7 @@ void applicationCoordinatorRxMsg(EmberIncomingMessage *message)
         }
       case MSG_REPLY:
         {
-          ipcRequestDone(message->payload[1],message->source);
+          ipcRequestDone(message->payload[1],message->source,message->payload[2]);
         app_log_info(" Ack \n");
         break;
         }
