@@ -102,11 +102,11 @@ void BURTC_IRQHandler(void)
       BURTC_IntClear (BURTC_IntGet ());
       NVIC_EnableIRQ (BURTC_IRQn);
       BURTC_Enable (true);
+      selfInfo.state = S_ACTIVE;
       endtx = true;
     }
   else
     {
-      selfInfo.state = S_ACTIVE;
       BURTC_CounterReset ();
       BURTC_CompareSet (0, 2600);
       NVIC_DisableIRQ (BURTC_IRQn);

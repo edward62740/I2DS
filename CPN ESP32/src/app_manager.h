@@ -4,7 +4,7 @@
 
 void firebaseTask(void *pvParameters);
 void managerTask(void *pvParameters);
-
+typedef uint32_t err_count_t;
 typedef struct
 { /* Sensor info */
   uint8_t hw;
@@ -28,9 +28,26 @@ typedef struct
   int16_t touchArea[4]; // x, y, w, h
   bool guiUpdatePending;
   bool ipcResponsePending;
+  bool dead;
+  uint16_t DeviceInfoChangeIndex;
 } DeviceInfoExt;
+
 extern DeviceInfoExt selfInfoExt, sensorInfoExt[30];
 extern TimerHandle_t ipcDeviceUpdateTimer;
 extern QueueHandle_t ipc2ManagerDeviceInfoQueue;
 extern bool updateDevice;
-#endif  // APP_MANAGER_H
+
+struct
+{
+  err_count_t IPC_REQUEST_SEND_NOACK = 0;
+  err_count_t IPC_REQUEST_SEND_FAIL = 0;
+  err_count_t IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW = 0;
+  err_count_t IPC_QUEUE_SEND_DEVICEINFO_FAIL = 0;
+  err_count_t IPC_CHANGE_INVALID = 0;
+  err_count_t IPC_CHANGE_INDEX_OUT_OF_BOUNDS = 0;
+  err_count_t MANAGER_QUEUE_SEND_DEVICEINDEX_OVERFLOW = 0;
+  err_count_t MANAGER_QUEUE_SEND_DEVICEINDEX_FAIL = 0;
+  err_count_t MANAGER_QUEUE_RECEIVE_OUT_OF_BOUNDS = 0;
+} self;
+
+#endif // APP_MANAGER_H
