@@ -6,7 +6,7 @@ This is a sub-GHz proprietary security sensor system.
 ## CPN
 * Radio, IPS, application completed
 * TBD esp application and db connection
-* TBD local GUI and touch interface command system
+* TBD improve GUI responsiveness and determinism
 * TBD automatic tx pwr adjustment
 
 ## PIRSN
