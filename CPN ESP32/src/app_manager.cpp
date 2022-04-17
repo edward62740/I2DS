@@ -9,10 +9,13 @@ uint8_t sensorIndex = 0;
 DeviceInfoExt selfInfoExt, sensorInfoExt[30];
 QueueHandle_t ipc2ManagerDeviceInfoQueue;
 TimerHandle_t ipcDeviceUpdateTimer;
+
+
 bool updateDevice = false;
 void ipcDeviceUpdateCallback(TimerHandle_t ipcDeviceUpdateTimer)
 {
   updateDevice = true;
+  Serial.println("Updated");
 }
 
 void firebaseTask(void *pvParameters)
@@ -53,25 +56,44 @@ void managerTask(void *pvParameters)
   xTimerStart(ipcDeviceUpdateTimer, 0);
   while (1)
   {
+    
     if (uxQueueMessagesWaiting(ipc2ManagerDeviceInfoQueue) > 0)
     {
       DeviceInfoExt tmpInfo;
       if (xQueueReceive(ipc2ManagerDeviceInfoQueue, (void *)&tmpInfo, 1) == pdPASS)
       {
-        sensorInfo[tmpInfo.id].hw = tmpInfo.info.hw;
-        sensorInfo[tmpInfo.id].state = tmpInfo.info.state;
-        sensorInfo[tmpInfo.id].battery_voltage = tmpInfo.info.battery_voltage;
-        sensorInfo[tmpInfo.id].node_type = tmpInfo.info.node_type;
-        sensorInfo[tmpInfo.id].central_id = tmpInfo.info.central_id;
-        sensorInfo[tmpInfo.id].self_id = tmpInfo.info.self_id;
-        sensorInfo[tmpInfo.id].endpoint = tmpInfo.info.endpoint;
-        sensorInfo[tmpInfo.id].trigd = tmpInfo.info.trigd;
-        sensorInfo[tmpInfo.id].rssi = tmpInfo.info.rssi;
-        sensorInfo[tmpInfo.id].lqi = tmpInfo.info.lqi;
+        uint16_t index = tmpInfo.DeviceInfoChangeIndex;
+        if (~index & 1)
+          sensorInfo[tmpInfo.id].hw = tmpInfo.info.hw;
+        if (~index & 2)
+          sensorInfo[tmpInfo.id].state = tmpInfo.info.state;
+        if (~index & 4)
+          sensorInfo[tmpInfo.id].battery_voltage = tmpInfo.info.battery_voltage;
+        if (~index & 8)
+          sensorInfo[tmpInfo.id].node_type = tmpInfo.info.node_type;
+        if (~index & 16)
+          sensorInfo[tmpInfo.id].central_id = tmpInfo.info.central_id;
+        if (~index & 32)
+          sensorInfo[tmpInfo.id].self_id = tmpInfo.info.self_id;
+        if (~index & 64)
+          sensorInfo[tmpInfo.id].endpoint = tmpInfo.info.endpoint;
+        if (~index & 128)
+          sensorInfo[tmpInfo.id].trigd = tmpInfo.info.trigd;
+        if (~index & 256)
+          sensorInfo[tmpInfo.id].rssi = tmpInfo.info.rssi;
+        if (~index & 512)
+          sensorInfo[tmpInfo.id].lqi = tmpInfo.info.lqi;
         sensorInfoExt[tmpInfo.id].guiUpdatePending = tmpInfo.guiUpdatePending;
-        Serial.println(tmpInfo.id);
+        if (uxQueueSpacesAvailable(manager2GuiDeviceIndexQueue) == 0)
+        {
+          xQueueReset(manager2GuiDeviceIndexQueue);
+        }
+        xQueueSend(manager2GuiDeviceIndexQueue, (void *)&tmpInfo.id, 0);
       }
     }
-    vTaskDelay(10);
+    else
+    {
+      vTaskDelay(1);
+    }
   }
 }

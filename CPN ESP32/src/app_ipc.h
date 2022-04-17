@@ -32,6 +32,7 @@ typedef enum
   IPC_REQUEST_ACK,  // (C -> EXT) ack IPC_REQUEST
   IPC_REQUEST_DONE, // (C -> EXT) finished IPC_REQUEST
   IPC_LIST_CTS,     // (C <- EXT) ack IPC_CHANGE and request IPC_LIST
+  IPC_REPORT,
   IPC_ERR,
 } ipc_message_pid_t;
 
@@ -41,7 +42,6 @@ extern bool FLAGipcResponsePending;
 extern uint8_t ipc_get_list[3];
 extern uint8_t ipc_set_sensor_state[6];
 extern TimerHandle_t ipcDeviceResponseTimer;
-
 extern uint16_t tmpTimerId;
 extern uint8_t tmpTimerState;
 

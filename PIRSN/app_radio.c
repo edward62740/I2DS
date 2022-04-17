@@ -183,14 +183,16 @@ bool applicationSensorRxMsg(EmberIncomingMessage *message)
                 {
                   if (message->payload[2] == (uint8_t) S_ACTIVE)
                     {
-                      success = (message->payload[2] != selfInfo.state) ? true : false;
                       selfInfo.state = S_ACTIVE;
+                      success = (message->payload[2] != selfInfo.state) ? true : false;
+
                       startSensorMonitor();
                     }
                   else if (message->payload[2] == (uint8_t) S_INACTIVE)
                     {
-                      success = (message->payload[2] != selfInfo.state) ? true : false;
                       selfInfo.state = S_INACTIVE;
+                      success = (message->payload[2] != selfInfo.state) ? true : false;
+
                       endSensorMonitor();
                     }
                   break;

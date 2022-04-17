@@ -6,15 +6,16 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="RequestDone"/>
+		<item key="selection" value="rssi"/>
 		<list key="findhistory">
+			<item value="rssi"/>
+			<item value="notify"/>
 			<item value="requestdone"/>
 			<item value="done"/>
 			<item value="offset"/>
 			<item value="comms"/>
 			<item value="stat"/>
 			<item value="state"/>
-			<item value="rssi"/>
 			<item value="startipc"/>
 			<item value="ipc"/>
 			<item value="txo"/>
@@ -22,7 +23,6 @@
 			<item value="cooldown"/>
 			<item value="key"/>
 			<item value="alert"/>
-			<item value="notify"/>
 		</list>
 		<list key="replacehistory">
 		</list>

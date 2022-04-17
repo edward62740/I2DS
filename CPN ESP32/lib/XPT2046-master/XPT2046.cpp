@@ -12,8 +12,7 @@
 #include <SPI.h>
 
 #include "XPT2046.h"
-
-
+SPIClass spi2 = SPIClass(HSPI);
 inline static void swap(uint16_t &a, uint16_t &b) {
   uint16_t tmp = a;
   a = b;
@@ -85,8 +84,9 @@ void XPT2046::begin(uint16_t width, uint16_t height) {
   );
   // TODO(?) Use the following empirical calibration instead? -- Does it depend on VCC??
   // touch.setCalibration(209, 1759, 1775, 273);
-
-  SPI.begin(14, 12, 13, 15);
+  
+  spi2.begin(14, 12, 13, 16);
+  spi2.setFrequency(2500000);
 
   powerDown();  // Make sure PENIRQ is enabled
 }
@@ -112,8 +112,8 @@ uint16_t XPT2046::_readLoop(uint8_t ctrl, uint8_t max_samples) const {
   uint8_t i = 0;
   do {
     prev = cur;
-    cur = SPI.transfer(0);
-    cur = (cur << 4) | (SPI.transfer(ctrl) >> 4);  // 16 clocks -> 12-bits (zero-padded at end)
+    cur = spi2.transfer(0);
+    cur = (cur << 4) | (spi2.transfer(ctrl) >> 4);  // 16 clocks -> 12-bits (zero-padded at end)
   } while ((prev != cur) && (++i < max_samples));
 //Serial.print("RL i: "); Serial.println(i); Serial.flush();  // DEBUG
   return cur;
@@ -127,17 +127,17 @@ void XPT2046::getRaw (uint16_t &vi, uint16_t &vj, adc_ref_t mode, uint8_t max_sa
   uint8_t ctrl_lo = ((mode == MODE_DFR) ? CTRL_LO_DFR : CTRL_LO_SER);
   
   digitalWrite(_cs_pin, LOW);
-  SPI.transfer(CTRL_HI_X | ctrl_lo);  // Send first control byte
+  spi2.transfer(CTRL_HI_X | ctrl_lo);  // Send first control byte
   vi = _readLoop(CTRL_HI_X | ctrl_lo, max_samples);
   vj = _readLoop(CTRL_HI_Y | ctrl_lo, max_samples);
 
   if (mode == MODE_DFR) {
     // Turn off ADC by issuing one more read (throwaway)
     // This needs to be done, because PD=0b11 (needed for MODE_DFR) will disable PENIRQ
-    SPI.transfer(0);  // Maintain 16-clocks/conversion; _readLoop always ends after issuing a control byte
-    SPI.transfer(CTRL_HI_Y | CTRL_LO_SER);
+    spi2.transfer(0);  // Maintain 16-clocks/conversion; _readLoop always ends after issuing a control byte
+    spi2.transfer(CTRL_HI_Y | CTRL_LO_SER);
   }
-  SPI.transfer16(0);  // Flush last read, just to be sure
+  spi2.transfer16(0);  // Flush last read, just to be sure
   
   digitalWrite(_cs_pin, HIGH);
 }
@@ -186,8 +186,8 @@ void XPT2046::powerDown() const {
   digitalWrite(_cs_pin, LOW);
   // Issue a throw-away read, with power-down enabled (PD{1,0} == 0b00)
   // Otherwise, ADC is disabled
-  SPI.transfer(CTRL_HI_Y | CTRL_LO_SER);
-  SPI.transfer16(0);  // Flush, just to be sure
+  spi2.transfer(CTRL_HI_Y | CTRL_LO_SER);
+  spi2.transfer16(0);  // Flush, just to be sure
   digitalWrite(_cs_pin, HIGH);
 }
 

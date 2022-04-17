@@ -98,7 +98,7 @@ void ipcReplyHandler(void){
             ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) sensorInfo[i].self_id;
             ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) sensorInfo[i].endpoint;
             ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) sensorInfo[i].trigd;
-            ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) sensorInfo[i].rssi;
+            ipcTxBuffer[tmpTxIndex++] = 0xFF & (int8_t) sensorInfo[i].rssi;
             ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) sensorInfo[i].lqi;
         }
         break;
@@ -149,6 +149,26 @@ void ipcNotify(EmberNodeId id, sensor_state_t state, uint8_t alert, uint8_t coun
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) state;
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) alert;
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) count;
+  ipcTxBuffer[tmpTxIndex] = (uint8_t) tmpTxIndex;
+  ipcTxLen = tmpTxIndex + 1;
+  ipcRespReady = true;
+  EUSART_IntEnable (EUSART1, EUSART_IEN_TXFL);
+}
+
+void ipcReport(EmberNodeId id, uint32_t battery, sensor_state_t state, int8_t rssi, uint8_t lqi)
+{
+  EUSART_IntDisable (EUSART1, EUSART_IEN_RXFL);
+  uint8_t tmpTxIndex = 0;
+  ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) IPC_REPORT;
+  ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) (id >> 8);
+  ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) id;
+  ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) (battery >> 24);
+  ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) (battery >> 16);
+  ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) (battery >> 8);
+  ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) battery;
+  ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) state;
+  ipcTxBuffer[tmpTxIndex++] = 0xFF & (int8_t) rssi;
+  ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) lqi;
   ipcTxBuffer[tmpTxIndex] = (uint8_t) tmpTxIndex;
   ipcTxLen = tmpTxIndex + 1;
   ipcRespReady = true;

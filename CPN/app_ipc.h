@@ -35,6 +35,7 @@ typedef enum {     /* IPC message identification byte */
   IPC_REQUEST_ACK,     // (C -> EXT) ack IPC_REQUEST
   IPC_REQUEST_DONE,    // (C -> EXT) finished IPC_REQUEST
   IPC_LIST_CTS,        // (C <- EXT) ack IPC_CHANGE and request IPC_LIST
+  IPC_REPORT,
   IPC_ERR,
 } ipc_message_pid_t;
 
@@ -42,6 +43,7 @@ typedef enum {     /* IPC message identification byte */
 void ipcReplyHandler(void);
 void ipcRequestDone(uint8_t ret, EmberNodeId id, sensor_state_t state);
 bool ipcRequestHandler(EmberNodeId id, sensor_state_t state);
+void ipcReport(EmberNodeId id, uint32_t battery, sensor_state_t state, int8_t rssi, uint8_t lqi);
 void ipcNotify(EmberNodeId id, sensor_state_t state, uint8_t alert, uint8_t count);
 void ipcInitThread(void);
 void ipcRtosTask(void *p_arg);

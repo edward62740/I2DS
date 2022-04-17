@@ -4,6 +4,8 @@
 #include "app_manager.h"
 #include "app_common.h"
 
+
+
 /* Task Handles */
 static TaskHandle_t ipc;
 static TaskHandle_t firebase;
@@ -12,6 +14,7 @@ static TaskHandle_t manager;
 void setup()
 {
     ipc2ManagerDeviceInfoQueue = xQueueCreate(MAX_PENDING_DEVICEINFO_QUEUE, sizeof(DeviceInfoExt));
+    manager2GuiDeviceIndexQueue = xQueueCreate(MAX_PENDING_DEVICEINFO_QUEUE, sizeof(uint8_t));
     pinMode(LED_1, OUTPUT);
     pinMode(LED_2, OUTPUT);
     Serial.begin(115200);
