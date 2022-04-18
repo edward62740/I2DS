@@ -17,6 +17,7 @@ uint8_t tmpTimerState = 0;
 uint8_t tmpResendCount = 0;
 uint8_t tmpRetryCount = 0;
 TimerHandle_t ipcDeviceResponseTimer;
+TimerHandle_t managerDeviceTimer[30];
 
 void ipcRespTimerCallback(TimerHandle_t ipcDeviceResponseTimer)
 {
@@ -44,15 +45,18 @@ void ipcTask(void *pvParameters)
 {
     ipcDeviceResponseTimer = xTimerCreate("ipcResp", MAX_IPC_RESPONSE_TIMEOUT_MS, pdTRUE, (void *)0, ipcRespTimerCallback);
     delay(100);
+    pinMode(ACT_LED, OUTPUT);
     while (1)
     {
         if (Serial1.available())
         {
+            digitalWrite(ACT_LED, HIGH);
             size_t ret = 0;
             ret = Serial1.readBytesUntil(IPC_END, (char *)ipc_recv_buffer, sizeof(ipc_recv_buffer));
             // Serial.write(ipc_recv_buffer, ret);
 
             ipcParser(ipc_recv_buffer, ret);
+            digitalWrite(ACT_LED, LOW);
         }
         if (updateDevice)
         {
@@ -141,8 +145,10 @@ bool ipcParser(char *buffer, size_t len)
                 queueSend.DeviceInfoChangeIndex = 0;
                 queueSend.info = tmpInfo;
                 queueSend.id = i;
+                queueSend.alive = true;
+                managerDeviceTimer[i] = xTimerCreate("managerDevice", MANAGER_MAX_DEVICE_NOMSG_MS, pdTRUE, (void *)((uint32_t)i), managerDeviceTimerCallback);
+                xTimerStart(managerDeviceTimer[i], 0);
                 queueSend.guiUpdatePending = true;
-                queueSend.dead = false;
                 Serial.println(queueSend.id);
                 if (uxQueueSpacesAvailable(ipc2ManagerDeviceInfoQueue) == 0)
                 {
@@ -176,8 +182,10 @@ bool ipcParser(char *buffer, size_t len)
                 queueSend.info.rssi = tmpInfo.rssi;
                 queueSend.info.lqi = tmpInfo.lqi;
                 queueSend.id = i;
+                queueSend.alive = true;
                 queueSend.DeviceInfoChangeIndex = 249;
                 queueSend.guiUpdatePending = true;
+                xTimerReset(managerDeviceTimer[i], 0);
                 if (uxQueueSpacesAvailable(ipc2ManagerDeviceInfoQueue) == 0)
                 {
                     xQueueReset(ipc2ManagerDeviceInfoQueue);
@@ -207,6 +215,7 @@ bool ipcParser(char *buffer, size_t len)
                     state = S_ALERTING;
                 if (tmpBuf[5] == 0x01) // ended
                     state = S_ACTIVE;
+
                 queueSend.info.state = state;
                 queueSend.info.trigd = count;
                 queueSend.id = i;

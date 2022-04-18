@@ -10,8 +10,20 @@ DeviceInfoExt selfInfoExt, sensorInfoExt[30];
 QueueHandle_t ipc2ManagerDeviceInfoQueue;
 TimerHandle_t ipcDeviceUpdateTimer;
 
-
 bool updateDevice = false;
+
+void managerDeviceTimerCallback(TimerHandle_t managerDeviceTimer)
+{
+  uint8_t id = (uint32_t)pvTimerGetTimerID(managerDeviceTimer);
+  sensorInfoExt[id].alive = false;
+  Serial.print("EXPIRED: ");
+  Serial.println(id);
+  if (uxQueueSpacesAvailable(manager2GuiDeviceIndexQueue) == 0)
+  {
+    xQueueReset(manager2GuiDeviceIndexQueue);
+  }
+  xQueueSend(manager2GuiDeviceIndexQueue, (void *)&id, 0);
+}
 void ipcDeviceUpdateCallback(TimerHandle_t ipcDeviceUpdateTimer)
 {
   updateDevice = true;
@@ -54,11 +66,12 @@ void managerTask(void *pvParameters)
 {
   ipcDeviceUpdateTimer = xTimerCreate("ipcUpdate", 5000, pdTRUE, (void *)0, ipcDeviceUpdateCallback);
   xTimerStart(ipcDeviceUpdateTimer, 0);
+
   while (1)
   {
-    
     if (uxQueueMessagesWaiting(ipc2ManagerDeviceInfoQueue) > 0)
     {
+
       DeviceInfoExt tmpInfo;
       if (xQueueReceive(ipc2ManagerDeviceInfoQueue, (void *)&tmpInfo, 1) == pdPASS)
       {
@@ -83,6 +96,7 @@ void managerTask(void *pvParameters)
           sensorInfo[tmpInfo.id].rssi = tmpInfo.info.rssi;
         if (~index & 512)
           sensorInfo[tmpInfo.id].lqi = tmpInfo.info.lqi;
+        sensorInfoExt[tmpInfo.id].alive = tmpInfo.alive;
         sensorInfoExt[tmpInfo.id].guiUpdatePending = tmpInfo.guiUpdatePending;
         if (uxQueueSpacesAvailable(manager2GuiDeviceIndexQueue) == 0)
         {

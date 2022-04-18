@@ -2,6 +2,7 @@
 #define APP_MANAGER_H
 #include <Arduino.h>
 
+void managerDeviceTimerCallback(TimerHandle_t managerDeviceTimer);
 void firebaseTask(void *pvParameters);
 void managerTask(void *pvParameters);
 typedef uint32_t err_count_t;
@@ -28,9 +29,10 @@ typedef struct
   int16_t touchArea[4]; // x, y, w, h
   bool guiUpdatePending;
   bool ipcResponsePending;
-  bool dead;
+  bool alive;
   uint16_t DeviceInfoChangeIndex;
 } DeviceInfoExt;
+
 
 extern DeviceInfoExt selfInfoExt, sensorInfoExt[30];
 extern TimerHandle_t ipcDeviceUpdateTimer;
