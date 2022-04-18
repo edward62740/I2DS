@@ -6,7 +6,6 @@ void ipcSender(uint16_t id, uint8_t state);
 bool ipcParser(char *buffer, size_t len);
 
 
-
 typedef enum
 {                    /* Sensor state byte */
   S_ACTIVE = 0x05,   // Sensor element active
@@ -44,6 +43,5 @@ extern uint8_t ipc_set_sensor_state[6];
 extern TimerHandle_t ipcDeviceResponseTimer;
 extern uint16_t tmpTimerId;
 extern uint8_t tmpTimerState;
-
-
+extern TimerHandle_t managerDeviceTimer[30];
 #endif  // APP_IPC_H

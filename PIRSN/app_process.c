@@ -113,6 +113,7 @@ void BURTC_IRQHandler(void)
       BURTC_Enable (false);
       BURTC_IntClear (BURTC_IF_COMP);
       NVIC_ClearPendingIRQ (GPIO_ODD_IRQn);
+      NVIC_SetPriority(GPIO_ODD_IRQn, 5);
       NVIC_EnableIRQ (GPIO_ODD_IRQn);
     }
 }

@@ -73,15 +73,15 @@ void applicationCoordinatorRxMsg(EmberIncomingMessage *message)
         break;
         }
       case MSG_REPLY:
-        {
-          for (uint8_t i = 0; i < (uint8_t) MAX_CONNECTED_DEVICES; i++)
-                    {
-                      if (sensorInfo[i].self_id == message->source)
-                        {
-                          sensorInfo[i].state = message->payload[3];
-                          break;
-                        }
-                    }
+      {
+        for (uint8_t i = 0; i < (uint8_t) MAX_CONNECTED_DEVICES; i++)
+          {
+            if (sensorInfo[i].self_id == message->source)
+              {
+                sensorInfo[i].state = message->payload[2];
+                break;
+              }
+          }
           ipcRequestDone(message->payload[1],message->source,message->payload[2]);
         app_log_info(" Ack \n");
         break;
