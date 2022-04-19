@@ -1,4 +1,6 @@
 #include <Arduino.h>
+#include <WiFi.h>
+#include <Firebase.h>
 #include "app_gui.h"
 #include "app_ipc.h"
 #include "app_manager.h"
@@ -16,7 +18,7 @@ void setup()
     ipc2ManagerDeviceInfoQueue = xQueueCreate(MAX_PENDING_DEVICEINFO_QUEUE, sizeof(DeviceInfoExt));
     manager2GuiDeviceIndexQueue = xQueueCreate(MAX_PENDING_DEVICEINFO_QUEUE, sizeof(uint8_t));
     Serial.begin(115200);
-    Serial1.begin(115200, SERIAL_8N1, IPC_RX, IPC_TX);
+    Serial1.begin(921600, SERIAL_8O1, IPC_RX, IPC_TX);
 
     xTaskCreatePinnedToCore( // Use xTaskCreate()
         managerTask,         // Function to be called
