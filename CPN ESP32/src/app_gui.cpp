@@ -240,21 +240,29 @@ void displayTask(void *pvParameters)
                     tft.fillRect(40 + xsp, 123 + ysp - batt * 3, 15, 2, ILI9341_BLACK);
                 }
                 Serial.println(sensorInfoExt[i].alive);
-                if (!sensorInfoExt[i].alive && (sensorInfo[i].state == S_INACTIVE))
+                if (sensorInfoExt[i].alive && (sensorInfo[i].state == S_INACTIVE))
                 {
                     tft.setSwapBytes(true);
-                    tft.pushImage(62 + xsp, 108 + ysp, 20, 20, loc);
-                    tft.setCursor(64 + xsp, 114 + ysp);
-                    tft.setTextColor(ILI9341_RED);
-                    tft.print("LOC");
+                    tft.pushImage(60 + xsp, 110 + ysp, 16, 16, loc);
+                    tft.setCursor(60 + xsp, 110 + ysp);
+                    tft.setTextColor(ILI9341_ORANGE);
+                    tft.print("S");
                 }
-                else if (!sensorInfoExt[i].alive && (sensorInfo[i].state == S_ACTIVE))
+                else if (sensorInfoExt[i].alive && (sensorInfo[i].state == S_ACTIVE))
                 {
                     tft.setSwapBytes(true);
-                    tft.pushImage(62 + xsp, 108 + ysp, 20, 20, loc2);
-                    tft.setCursor(64 + xsp, 114 + ysp);
-                    tft.setTextColor(ILI9341_RED);
-                    tft.print("LOC");
+                    tft.pushImage(60 + xsp, 110 + ysp, 16, 16, loc2);
+                    tft.setCursor(60 + xsp, 110 + ysp);
+                    tft.setTextColor(ILI9341_ORANGE);
+                    tft.print("S");
+                }
+                else if (sensorInfoExt[i].alive && (sensorInfo[i].state == S_ALERTING))
+                {
+                    tft.setSwapBytes(true);
+                    tft.pushImage(60 + xsp, 110 + ysp, 16, 16, loc3);
+                    tft.setCursor(60 + xsp, 110 + ysp);
+                    tft.setTextColor(ILI9341_BLUE);
+                    tft.print("S");
                 }
             }
         }

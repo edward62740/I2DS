@@ -6,8 +6,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="RequestDone"/>
+		<item key="selection" value="Baudrate"/>
 		<list key="findhistory">
+			<item value="baudrate"/>
+			<item value="warn"/>
 			<item value="RequestDone"/>
 			<item value="requestdone"/>
 			<item value="rssi"/>
@@ -21,8 +23,6 @@
 			<item value="ipc"/>
 			<item value="txo"/>
 			<item value="tx"/>
-			<item value="cooldown"/>
-			<item value="key"/>
 		</list>
 		<list key="replacehistory">
 		</list>

@@ -236,6 +236,8 @@ void startIPC(void)
   // Configure the EUSART RX pin to the board controller as an input
   GPIO_PinModeSet (gpioPortC, 6, gpioModeInput, 0);
   EUSART_UartInit_TypeDef init = EUSART_UART_INIT_DEFAULT_HF;
+  init.baudrate = 921600;
+  init.parity = EUSART_FRAMECFG_PARITY_ODD;
 
   // Route EUSART1 TX and RX to the board controller TX and RX pins
   GPIO->EUSARTROUTE[1].TXROUTE = (gpioPortC << _GPIO_EUSART_TXROUTE_PORT_SHIFT)

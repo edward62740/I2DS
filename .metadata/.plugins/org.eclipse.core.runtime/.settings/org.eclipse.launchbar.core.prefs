@@ -1,7 +1,7 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.launchbar.core.descriptorType.default\:testPIRSN GNU ARM v10.2.1 - Default,org.eclipse.launchbar.core.descriptorType.default\:PIRSN GNU ARM v10.2.1 - Default (Exx32 energy profile),org.eclipse.launchbar.core.descriptorType.default\:connect_empty GNU ARM v10.2.1 - Default,org.eclipse.launchbar.core.descriptorType.default\:ACSN GNU ARM v10.2.1 - Default,org.eclipse.launchbar.core.descriptorType.default\:CPN GNU ARM v10.2.1 - Default,org.eclipse.launchbar.core.descriptorType.default\:PIRSN GNU ARM v10.2.1 - Default
+configDescList=org.eclipse.launchbar.core.descriptorType.default\:testPIRSN GNU ARM v10.2.1 - Default,org.eclipse.launchbar.core.descriptorType.default\:PIRSN GNU ARM v10.2.1 - Default (Exx32 energy profile),org.eclipse.launchbar.core.descriptorType.default\:connect_empty GNU ARM v10.2.1 - Default,org.eclipse.launchbar.core.descriptorType.default\:PIRSN GNU ARM v10.2.1 - Default,org.eclipse.launchbar.core.descriptorType.default\:ACSN GNU ARM v10.2.1 - Default,org.eclipse.launchbar.core.descriptorType.default\:CPN GNU ARM v10.2.1 - Default
 eclipse.preferences.version=1
 org.eclipse.launchbar.core.descriptorType.default\:ACSN\ GNU\ ARM\ v10.2.1\ -\ Default/activeLaunchMode=run
 org.eclipse.launchbar.core.descriptorType.default\:ACSN\ GNU\ ARM\ v10.2.1\ -\ Default/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
