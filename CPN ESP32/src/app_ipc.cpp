@@ -50,6 +50,8 @@ void ipcTask(void *pvParameters)
     {
         if (Serial1.available())
         {
+              Serial.print("ipc watermark: ");
+  Serial.println(uxTaskGetStackHighWaterMark(NULL));
             digitalWrite(ACT_LED, HIGH);
             size_t ret = 0;
             ret = Serial1.readBytesUntil(IPC_END, (char *)ipc_recv_buffer, sizeof(ipc_recv_buffer));
@@ -220,7 +222,6 @@ bool ipcParser(char *buffer, size_t len)
                 queueSend.info.trigd = count;
                 queueSend.id = i;
                 queueSend.guiUpdatePending = true;
-                Serial.print("TRIG STATE: ");
                 Serial.println((int)queueSend.info.state);
                 if (uxQueueSpacesAvailable(ipc2ManagerDeviceInfoQueue) == 0)
                 {

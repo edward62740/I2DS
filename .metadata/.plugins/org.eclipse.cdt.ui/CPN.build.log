@@ -1,6 +1,6 @@
-19:36:51 **** Incremental Build of configuration GNU ARM v10.2.1 - Default for project CPN ****
+09:29:08 **** Incremental Build of configuration GNU ARM v10.2.1 - Default for project CPN ****
 make -j8 all 
 make: Nothing to be done for 'all'.
 
-19:36:53 Build Finished. 0 errors, 0 warnings. (took 1s.202ms)
+09:29:08 Build Finished. 0 errors, 0 warnings. (took 520ms)
 

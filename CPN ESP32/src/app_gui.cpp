@@ -9,7 +9,8 @@
 
 TimerHandle_t guiHeadUpdateTimer;
 bool guiHeadUpdateFlag = true;
-
+bool FLAGwifiIsConnected = false;
+bool FLAGfirebaseActive = false;
 extern "C"
 {
     uint8_t temprature_sens_read();
@@ -23,16 +24,39 @@ QueueHandle_t manager2GuiDeviceIndexQueue;
 TFT_eSPI tft = TFT_eSPI();
 bool massActivate = false;
 uint8_t massActivateIndex = 0;
+
 void guiHeadUpdateTimerCallback(TimerHandle_t guiHeadUpdateTimer)
 {
     guiHeadUpdateFlag = true;
 }
-
 void displayTask(void *pvParameters)
 {
     touch.begin(240, 320); // Must be done before setting rotation
     tft.begin();
     pinMode(STAT_LED, OUTPUT);
+    tft.setTextWrap(true, true);
+    tft.setTextSize(7);
+    tft.println("I2DS");
+    tft.setTextSize(1);
+    tft.println("boot..");
+    tft.println("Initializing I2DS Control Panel Node");
+    tft.println("Starting Manager");
+    tft.println("Initializing IPC");
+    tft.println("/tbd SE/");
+    tft.println("Starting Power Reserve Subsystem");
+    tft.println("Allocating stack");
+    tft.println("Connecting to Wi-Fi...");
+    while (!FLAGwifiIsConnected)
+    {
+        vTaskDelay(100);
+        digitalWrite(STAT_LED, !digitalRead(STAT_LED));
+    }
+    tft.println("Authenticating Firebase Database...");
+    while (!FLAGfirebaseActive)
+    {
+        vTaskDelay(100);
+        digitalWrite(STAT_LED, !digitalRead(STAT_LED));
+    }
     tft.fillScreen(ILI9341_BLACK);
     touch.setRotation(touch.ROT180);
     // Replace these for your screen module
@@ -42,7 +66,7 @@ void displayTask(void *pvParameters)
     selfInfoExt.touchArea[1] = 0;
     selfInfoExt.touchArea[2] = 240;
     selfInfoExt.touchArea[3] = 54;
-    selfInfo.state = (uint8_t) S_INACTIVE;
+    selfInfo.state = (uint8_t)S_INACTIVE;
     bool swflag = false;
     guiHeadUpdateTimer = xTimerCreate("guiHead", GUI_HEAD_UPDATE_INTERVAL_MS, pdTRUE, (void *)0, guiHeadUpdateTimerCallback);
     xTimerStart(guiHeadUpdateTimer, 0);
@@ -51,6 +75,8 @@ void displayTask(void *pvParameters)
 
         if (guiHeadUpdateFlag)
         {
+            Serial.print("gui watermark: ");
+            Serial.println(uxTaskGetStackHighWaterMark(NULL));
             digitalWrite(STAT_LED, !digitalRead(STAT_LED));
             tft.setFreeFont(&FreeSansBold12pt7b);
             tft.setTextDatum(MC_DATUM);
@@ -58,17 +84,27 @@ void displayTask(void *pvParameters)
             tft.fillRectHGradient(0, 0, 240, 50, ILI9341_ORANGE, ILI9341_RED);
             // tft.fillSmoothRoundRect(2, 2, 236, 50, 5, ILI9341_ORANGE);
             // tft.drawFastHLine(5, 25, 230, ILI9341_BLACK);
-            tft.setTextColor(ILI9341_BLUE);
-            tft.setCursor(11, 23);
-            tft.print("I2DS Control Panel");
-            tft.setCursor(9, 21);
-            tft.print("I2DS Control Panel");
-            tft.setCursor(11, 21);
-            tft.print("I2DS Control Panel");
-            tft.setCursor(9, 23);
-            tft.print("I2DS Control Panel");
-            tft.setCursor(10, 22);
-            tft.setTextColor(ILI9341_BLACK);
+
+            if (selfInfo.state == (uint8_t)S_ACTIVE)
+            {
+                tft.setTextColor(ILI9341_BLUE);
+                tft.setCursor(11, 23);
+                tft.print("I2DS Control Panel");
+                tft.setCursor(9, 21);
+                tft.print("I2DS Control Panel");
+                tft.setCursor(11, 21);
+                tft.print("I2DS Control Panel");
+                tft.setCursor(9, 23);
+                tft.print("I2DS Control Panel");
+                tft.setCursor(10, 22);
+                tft.setTextColor(ILI9341_BLACK);
+            }
+            else if (selfInfo.state == (uint8_t)S_INACTIVE)
+            {
+                tft.setCursor(10, 22);
+                tft.setTextColor(ILI9341_DARKGREY);
+            }
+
             tft.print("I2DS Control Panel");
             tft.setTextFont(1);
             tft.setTextColor(ILI9341_RED);
@@ -80,9 +116,9 @@ void displayTask(void *pvParameters)
                 tft.setTextColor(ILI9341_GREEN);
                 tft.print("DC");
             }
-            else if (prPowerFail)
+            else if (!prPowerDc)
             {
-                tft.print("WARNING");
+                tft.print("CHG");
             }
             tft.setTextColor(ILI9341_WHITE);
             tft.setCursor(10, 40);
@@ -94,9 +130,9 @@ void displayTask(void *pvParameters)
             tft.pushImage(210, 295, 20, 20, reload);
             tft.setSwapBytes(true);
             // tft.pushImage();
-            tft.pushImage(210, 26, 30, 22, wifi);
+            tft.pushImage(210, 26, 30, 22, wifilogo);
             tft.setCursor(212, 30);
-            tft.print("name");
+            tft.print((const char *)WIFI_SSID);
             guiHeadUpdateFlag = false;
         }
         if (FLAGipcResponsePending || swflag)

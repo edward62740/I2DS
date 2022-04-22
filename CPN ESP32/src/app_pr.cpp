@@ -13,7 +13,7 @@ void powerReserve(void *pvParameters)
     {
         if (!digitalRead(PR_PGOOD) && !digitalRead(PR_CHG))
         {
-            prPowerDc = true;
+            prPowerDc = false;
             prPowerFail = false;
         }
         else if (!digitalRead(PR_PGOOD) && digitalRead(PR_CHG))
@@ -23,8 +23,8 @@ void powerReserve(void *pvParameters)
         }
         else if (digitalRead(PR_PGOOD))
         {
-            prPowerDc = false;
-            prPowerFail = true;
+            prPowerDc = true;
+            prPowerFail = false;
         }
         vTaskDelay(250);
     }
