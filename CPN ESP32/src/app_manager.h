@@ -34,6 +34,7 @@ typedef struct
 } DeviceInfoExt;
 
 
+
 extern DeviceInfoExt selfInfoExt, sensorInfoExt[30];
 extern TimerHandle_t ipcDeviceUpdateTimer;
 extern QueueHandle_t ipc2ManagerDeviceInfoQueue;

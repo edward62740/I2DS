@@ -1,13 +1,22 @@
-#ifndef APP_CFG_H
-#define APP_CFG_H
+#ifndef APP_COMMON_H
+#define APP_COMMON_H
 #include <Arduino.h>
+
+#define DATABASE_URL "█████████" 
+#define API_KEY "█████████"
 
 #define EUSART_IPC_BAUD 115200
 #define SPI_DISPLAY_FREQ 48000000
 
+
+#define WIFI_SSID "█████████"
+#define WIFI_PASSWORD "█████████"
+
+/* Timer constants */
 #define MAX_IPC_RESPONSE_TIMEOUT_MS 1000
 #define GUI_HEAD_UPDATE_INTERVAL_MS 5000
 #define MANAGER_MAX_DEVICE_NOMSG_MS 10000
+#define FIREBASE_UPDATE_INTERVAL_MS 5000 
 
 #define MAX_IPC_REQUEST_RETRY 5
 #define MAX_IPC_REQUEST_RESEND 2
@@ -41,7 +50,7 @@
 #define GUI_PANEL_REL_X_SPACING 120
 #define GUI_PANEL_REL_Y_SPACING 80
 
-const unsigned short wifi[0x294] PROGMEM ={
+const unsigned short wifilogo[0x294] PROGMEM ={
 0xF800, 0xF800, 0xF800, 0xF800, 0xF800, 0xF800, 0xF800, 0xF800, 0xF800, 0xF800, 0xF800, 0xF800, 0x0316, 0x0A74, 0x0A74, 0x0A73,   // 0x0010 (16)
 0x0A74, 0x0A75, 0x12D6, 0xF800, 0xF800, 0xF800, 0xF800, 0xF800, 0xF800, 0xF800, 0xF800, 0xF800, 0xF800, 0xF800, 0xF800, 0xF800,   // 0x0020 (32)
 0xF800, 0xF800, 0xF800, 0xF800, 0xF800, 0xF800, 0x03EF, 0x1233, 0x1233, 0x1233, 0x1233, 0x1233, 0x1253, 0x1253, 0x1253, 0x1233,   // 0x0030 (48)
@@ -171,4 +180,4 @@ const unsigned short reload[0x190] PROGMEM ={
 };
 
 
-#endif  // APP_CFG_H
+#endif  // APP_COMMON_H
