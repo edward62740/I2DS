@@ -1,17 +1,6 @@
 app_init.o: ../app_init.c \
  c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\common\toolchain\inc\sl_gcc_preinclude.h \
  ../app_init.h \
- c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\app\common\util\app_log\app_log.h \
- c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\iostream\inc\sl_iostream.h \
- C\:\Users\EXTR\ 1\Desktop\I2DS\PIRSN\autogen/sl_component_catalog.h \
- c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\common\inc\sl_status.h \
- c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\common\inc\sl_enum.h \
- C\:\Users\EXTR\ 1\Desktop\I2DS\PIRSN\autogen/sl_iostream_handles.h \
- c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\iostream\inc\sl_iostream_debug.h \
- c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\iostream\inc\sl_iostream.h \
- c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\iostream\inc\sl_iostream_swo_itm_8.h \
- C\:\Users\EXTR\ 1\Desktop\I2DS\PIRSN\config/app_log_config.h \
- c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\app\flex\component\connect\sl_sensor_sink\sl_app_common.h \
  c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\legacy_hal\inc\platform-header.h \
  c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\emlib\inc\em_core.h \
  c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\device\siliconlabs\efr32fg23\include\em_device.h \
@@ -82,7 +71,18 @@ app_init.o: ../app_init.c \
  c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\device\siliconlabs\efr32fg23\include\efr32fg23_ldmaxbar_defines.h \
  c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\emlib\inc\em_common.h \
  c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\emlib\inc\em_assert.h \
+ C\:\Users\EXTR\ 1\Desktop\I2DS\PIRSN\autogen/sl_component_catalog.h \
  C\:\Users\EXTR\ 1\Desktop\I2DS\PIRSN\config/emlib_core_debug_config.h \
+ c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\app\common\util\app_log\app_log.h \
+ c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\iostream\inc\sl_iostream.h \
+ c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\common\inc\sl_status.h \
+ c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\common\inc\sl_enum.h \
+ C\:\Users\EXTR\ 1\Desktop\I2DS\PIRSN\autogen/sl_iostream_handles.h \
+ c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\iostream\inc\sl_iostream_debug.h \
+ c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\iostream\inc\sl_iostream.h \
+ c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\iostream\inc\sl_iostream_swo_itm_8.h \
+ C\:\Users\EXTR\ 1\Desktop\I2DS\PIRSN\config/app_log_config.h \
+ c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\app\flex\component\connect\sl_sensor_sink\sl_app_common.h \
  c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\protocol\flex\stack\include\ember.h \
  c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\protocol\flex\stack\include\api-rename.h \
  c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\protocol\flex\stack\include\ember-types.h \
@@ -150,17 +150,6 @@ app_init.o: ../app_init.c \
  c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\emlib\inc\em_pcnt.h
 c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\common\toolchain\inc\sl_gcc_preinclude.h:
 ../app_init.h:
-c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\app\common\util\app_log\app_log.h:
-c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\iostream\inc\sl_iostream.h:
-C\:\Users\EXTR\ 1\Desktop\I2DS\PIRSN\autogen/sl_component_catalog.h:
-c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\common\inc\sl_status.h:
-c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\common\inc\sl_enum.h:
-C\:\Users\EXTR\ 1\Desktop\I2DS\PIRSN\autogen/sl_iostream_handles.h:
-c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\iostream\inc\sl_iostream_debug.h:
-c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\iostream\inc\sl_iostream.h:
-c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\iostream\inc\sl_iostream_swo_itm_8.h:
-C\:\Users\EXTR\ 1\Desktop\I2DS\PIRSN\config/app_log_config.h:
-c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\app\flex\component\connect\sl_sensor_sink\sl_app_common.h:
 c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\legacy_hal\inc\platform-header.h:
 c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\emlib\inc\em_core.h:
 c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\device\siliconlabs\efr32fg23\include\em_device.h:
@@ -231,7 +220,18 @@ c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\device\siliconlabs\e
 c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\device\siliconlabs\efr32fg23\include\efr32fg23_ldmaxbar_defines.h:
 c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\emlib\inc\em_common.h:
 c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\emlib\inc\em_assert.h:
+C\:\Users\EXTR\ 1\Desktop\I2DS\PIRSN\autogen/sl_component_catalog.h:
 C\:\Users\EXTR\ 1\Desktop\I2DS\PIRSN\config/emlib_core_debug_config.h:
+c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\app\common\util\app_log\app_log.h:
+c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\iostream\inc\sl_iostream.h:
+c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\common\inc\sl_status.h:
+c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\common\inc\sl_enum.h:
+C\:\Users\EXTR\ 1\Desktop\I2DS\PIRSN\autogen/sl_iostream_handles.h:
+c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\iostream\inc\sl_iostream_debug.h:
+c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\iostream\inc\sl_iostream.h:
+c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\iostream\inc\sl_iostream_swo_itm_8.h:
+C\:\Users\EXTR\ 1\Desktop\I2DS\PIRSN\config/app_log_config.h:
+c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\app\flex\component\connect\sl_sensor_sink\sl_app_common.h:
 c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\protocol\flex\stack\include\ember.h:
 c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\protocol\flex\stack\include\api-rename.h:
 c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\protocol\flex\stack\include\ember-types.h:

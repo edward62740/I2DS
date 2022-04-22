@@ -14,6 +14,8 @@
 #include "em_pcnt.h"
 #include "sl_simple_led_instances.h"
 
+volatile bool firsttrig = true;
+
 EmberKeyData security_key = { .contents = { 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, \
     0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, \
     0xAA, 0xAA, 0xAA, 0xAA } };
@@ -94,8 +96,10 @@ void startBatteryMonitor(void)
 
    @return void
 */
+
 void startSensorMonitor(void)
 {
+  firsttrig = true;
   selfInfo.state = S_ACTIVE;
   CMU_ClockEnable (cmuClock_GPIO, true);
   GPIO_PinModeSet(gpioPortC, 5, gpioModeInput, 1);
@@ -118,6 +122,7 @@ void startSensorMonitor(void)
 */
 void endSensorMonitor(void)
 {
+  firsttrig = false;
   selfInfo.state = S_INACTIVE;
   NVIC_ClearPendingIRQ (GPIO_ODD_IRQn);
   NVIC_DisableIRQ (GPIO_ODD_IRQn);

@@ -52,7 +52,7 @@ void GPIO_ODD_IRQHandler(void)
   volatile uint32_t interruptMask = GPIO_IntGet ();
   GPIO_IntClear (interruptMask);
   sl_led_turn_on (&sl_led_comms);
-  if ((interruptMask & ((1 << 5) | GPIO_IEN_EM4WUIEN7)) && selfInfo.trigd == 0)
+  if ((interruptMask & ((1 << 5) | GPIO_IEN_EM4WUIEN7)) && selfInfo.trigd == 0 &&!firsttrig)
     {
       selfInfo.trigd++;
       selfInfo.state = S_ALERTING;
@@ -80,6 +80,9 @@ void GPIO_ODD_IRQHandler(void)
       selfInfo.trigd++;
       BURTC_CounterReset ();
     }
+  if(firsttrig){
+      firsttrig = false;
+  }
   sl_led_turn_off (&sl_led_comms);
 }
 
