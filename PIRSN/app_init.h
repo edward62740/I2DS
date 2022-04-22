@@ -1,9 +1,10 @@
 #ifndef APP_INIT_H
 #define APP_INIT_H
 
+#include PLATFORM_HEADER
 
 void startBatteryMonitor(void);
 void startSensorMonitor(void);
 void endSensorMonitor(void);
-
+extern volatile bool firsttrig;
 #endif  // APP_INIT_H

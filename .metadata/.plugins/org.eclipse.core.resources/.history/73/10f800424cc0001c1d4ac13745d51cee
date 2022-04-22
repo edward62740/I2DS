@@ -1,0 +1,25 @@
+#ifndef APP_INIT_H
+#define APP_INIT_H
+
+#include PLATFORM_HEADER
+#include "stack/include/ember.h"
+#include "hal/hal.h"
+#include "em_chip.h"
+#include "app_log.h"
+#include "poll.h"
+#include "em_iadc.h"
+#include "em_cmu.h"
+#include "em_emu.h"
+#include "em_burtc.h"
+#include "em_acmp.h"
+#include "sl_app_common.h"
+#include "app_process.h"
+#include "app_framework_common.h"
+#include "app_radio.h"
+#include "sl_simple_led_instances.h"
+
+void startBatteryMonitor(void);
+void startSensorMonitor(void);
+void endSensorMonitor(void);
+extern volatile bool firsttrig;
+#endif  // APP_INIT_H

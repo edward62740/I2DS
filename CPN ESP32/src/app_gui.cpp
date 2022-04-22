@@ -21,7 +21,8 @@ XPT2046 touch(16, 17);
 uint8_t selection = 0;
 QueueHandle_t manager2GuiDeviceIndexQueue;
 TFT_eSPI tft = TFT_eSPI();
-
+bool massActivate = false;
+uint8_t massActivateIndex = 0;
 void guiHeadUpdateTimerCallback(TimerHandle_t guiHeadUpdateTimer)
 {
     guiHeadUpdateFlag = true;
@@ -41,6 +42,7 @@ void displayTask(void *pvParameters)
     selfInfoExt.touchArea[1] = 0;
     selfInfoExt.touchArea[2] = 240;
     selfInfoExt.touchArea[3] = 54;
+    selfInfo.state = (uint8_t) S_INACTIVE;
     bool swflag = false;
     guiHeadUpdateTimer = xTimerCreate("guiHead", GUI_HEAD_UPDATE_INTERVAL_MS, pdTRUE, (void *)0, guiHeadUpdateTimerCallback);
     xTimerStart(guiHeadUpdateTimer, 0);
@@ -119,7 +121,7 @@ void displayTask(void *pvParameters)
             swflag = !swflag;
             vTaskDelay(50);
         }
-        if (touch.isTouching() & !FLAGipcResponsePending)
+        if (touch.isTouching() && !FLAGipcResponsePending && !massActivate)
         {
             Serial.println("TOUCHING");
 
@@ -127,28 +129,60 @@ void displayTask(void *pvParameters)
             touch.getPosition(x, y);
             Serial.println(x);
             Serial.print(y);
-
-            for (uint8_t i = 0; i < sensorIndex; i++)
+            if ((int16_t)x > selfInfoExt.touchArea[0] && (int16_t)x < (selfInfoExt.touchArea[0] + selfInfoExt.touchArea[2]) &&
+                (int16_t)y > selfInfoExt.touchArea[1] && (int16_t)y < (selfInfoExt.touchArea[1] + selfInfoExt.touchArea[3]))
             {
-                if ((int16_t)x > sensorInfoExt[i].touchArea[0] && (int16_t)x < (sensorInfoExt[i].touchArea[0] + sensorInfoExt[i].touchArea[2]) &&
-                    (int16_t)y > sensorInfoExt[i].touchArea[1] && (int16_t)y < (sensorInfoExt[i].touchArea[1] + sensorInfoExt[i].touchArea[3]))
+                massActivate = true;
+            }
+            else
+            {
+                for (uint8_t i = 0; i < sensorIndex; i++)
                 {
-                    if (sensorInfo[i].state == (uint8_t)S_ALERTING)
+                    if ((int16_t)x > sensorInfoExt[i].touchArea[0] && (int16_t)x < (sensorInfoExt[i].touchArea[0] + sensorInfoExt[i].touchArea[2]) &&
+                        (int16_t)y > sensorInfoExt[i].touchArea[1] && (int16_t)y < (sensorInfoExt[i].touchArea[1] + sensorInfoExt[i].touchArea[3]))
                     {
+                        if (sensorInfo[i].state == (uint8_t)S_ALERTING)
+                        {
 
-                        tft.drawWideLine(sensorInfoExt[i].touchArea[0] + 10, sensorInfoExt[i].touchArea[1] + 10, sensorInfoExt[i].touchArea[0] + 100, sensorInfoExt[i].touchArea[1] + 60, 4, ILI9341_MAGENTA);
-                        tft.drawWideLine(sensorInfoExt[i].touchArea[0] + 100, sensorInfoExt[i].touchArea[1] + 10, sensorInfoExt[i].touchArea[0] + 10, sensorInfoExt[i].touchArea[1] + 60, 4, ILI9341_MAGENTA);
-                    }
-                    else
-                    {
-                        tft.drawRoundRect(sensorInfoExt[i].touchArea[0] - 1, sensorInfoExt[i].touchArea[1] - 1, sensorInfoExt[i].touchArea[2] + 2, sensorInfoExt[i].touchArea[3] + 2, 5, ILI9341_YELLOW);
-                        if (sensorInfo[i].state == (uint8_t)S_INACTIVE)
-                            ipcSender(sensorInfo[i].self_id, (uint8_t)S_ACTIVE);
-                        else if (sensorInfo[i].state == (uint8_t)S_ACTIVE)
-                            ipcSender(sensorInfo[i].self_id, (uint8_t)S_INACTIVE);
-                        selection = i;
+                            tft.drawWideLine(sensorInfoExt[i].touchArea[0] + 10, sensorInfoExt[i].touchArea[1] + 10, sensorInfoExt[i].touchArea[0] + 100, sensorInfoExt[i].touchArea[1] + 60, 4, ILI9341_MAGENTA);
+                            tft.drawWideLine(sensorInfoExt[i].touchArea[0] + 100, sensorInfoExt[i].touchArea[1] + 10, sensorInfoExt[i].touchArea[0] + 10, sensorInfoExt[i].touchArea[1] + 60, 4, ILI9341_MAGENTA);
+                        }
+                        else
+                        {
+                            tft.drawRoundRect(sensorInfoExt[i].touchArea[0] - 1, sensorInfoExt[i].touchArea[1] - 1, sensorInfoExt[i].touchArea[2] + 2, sensorInfoExt[i].touchArea[3] + 2, 5, ILI9341_YELLOW);
+                            if (sensorInfo[i].state == (uint8_t)S_INACTIVE)
+                                ipcSender(sensorInfo[i].self_id, (uint8_t)S_ACTIVE);
+                            else if (sensorInfo[i].state == (uint8_t)S_ACTIVE)
+                                ipcSender(sensorInfo[i].self_id, (uint8_t)S_INACTIVE);
+                            selection = i;
+                            swflag = true;
+                        }
                     }
                 }
+            }
+        }
+        if ((massActivate && massActivateIndex == 0) || (massActivate && massActivateIndex > 0 && !sensorInfoExt[massActivateIndex - 1].ipcResponsePending))
+        {
+            Serial.print("NEXT;");
+            Serial.println(massActivateIndex);
+            tft.drawRoundRect(sensorInfoExt[massActivateIndex].touchArea[0] - 1, sensorInfoExt[massActivateIndex].touchArea[1] - 1, sensorInfoExt[massActivateIndex].touchArea[2] + 2, sensorInfoExt[massActivateIndex].touchArea[3] + 2, 5, ILI9341_YELLOW);
+            if (selfInfo.state == (uint8_t)S_INACTIVE)
+                ipcSender(sensorInfo[massActivateIndex].self_id, (uint8_t)S_ACTIVE);
+            else if (selfInfo.state == (uint8_t)S_ACTIVE)
+                ipcSender(sensorInfo[massActivateIndex].self_id, (uint8_t)S_INACTIVE);
+            selection = massActivateIndex;
+            swflag = true;
+            massActivateIndex++;
+            if (massActivateIndex == sensorIndex)
+            {
+                Serial.print("overflow;");
+                if (selfInfo.state == (uint8_t)S_INACTIVE)
+                    selfInfo.state = (uint8_t)S_ACTIVE;
+                else if (selfInfo.state == (uint8_t)S_ACTIVE)
+                    selfInfo.state = (uint8_t)S_INACTIVE;
+                Serial.println(massActivateIndex);
+                massActivateIndex = 0;
+                massActivate = false;
             }
         }
 

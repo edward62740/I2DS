@@ -82,8 +82,9 @@ main.o: ../main.c \
  c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\emlib\inc\em_emu.h \
  c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\emlib\inc\em_bus.h \
  c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\emlib\inc\em_core.h \
- ../app_init.h ../app_process.h \
+ ../app_init.h \
  c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\legacy_hal\inc\platform-header.h \
+ ../app_process.h \
  c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\protocol\flex\stack\include\ember.h \
  c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\protocol\flex\stack\include\api-rename.h \
  c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\protocol\flex\stack\include\ember-types.h \
@@ -233,8 +234,8 @@ c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\emlib\inc\em_emu.h:
 c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\emlib\inc\em_bus.h:
 c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\emlib\inc\em_core.h:
 ../app_init.h:
-../app_process.h:
 c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\platform\service\legacy_hal\inc\platform-header.h:
+../app_process.h:
 c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\protocol\flex\stack\include\ember.h:
 c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\protocol\flex\stack\include\api-rename.h:
 c\:\users\extr\ 1\simplicitystudio\sdks\gecko_sdk1\protocol\flex\stack\include\ember-types.h:

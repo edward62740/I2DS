@@ -98,6 +98,7 @@ void managerTask(void *pvParameters)
           sensorInfo[tmpInfo.id].lqi = tmpInfo.info.lqi;
         sensorInfoExt[tmpInfo.id].alive = tmpInfo.alive;
         sensorInfoExt[tmpInfo.id].guiUpdatePending = tmpInfo.guiUpdatePending;
+        sensorInfoExt[tmpInfo.id].ipcResponsePending = tmpInfo.ipcResponsePending;
         if (uxQueueSpacesAvailable(manager2GuiDeviceIndexQueue) == 0)
         {
           xQueueReset(manager2GuiDeviceIndexQueue);
