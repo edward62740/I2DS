@@ -17,7 +17,7 @@ void setup()
 {
     ipc2ManagerDeviceInfoQueue = xQueueCreate(MAX_PENDING_DEVICEINFO_QUEUE, sizeof(DeviceInfoExt));
     manager2GuiDeviceIndexQueue = xQueueCreate(MAX_PENDING_DEVICEINFO_QUEUE, sizeof(uint8_t));
-    Serial.begin(115200);
+    APP_LOG_START();
     Serial1.begin(921600, SERIAL_8O1, IPC_RX, IPC_TX);
     xTaskCreatePinnedToCore( // Use xTaskCreate()
         displayTask,         // Function to be called

@@ -11,6 +11,7 @@ void powerReserve(void *pvParameters)
     pinMode(PR_CHG, INPUT);
     while (1)
     {
+        APP_LOG_INFO("testlog");
         if (!digitalRead(PR_PGOOD) && !digitalRead(PR_CHG))
         {
             prPowerDc = false;
