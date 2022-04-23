@@ -1,7 +1,7 @@
 #ifndef APP_COMMON_H
 #define APP_COMMON_H
 #include <Arduino.h>
-
+#define DEBUG
 #define DATABASE_URL "█████████" 
 #define API_KEY "█████████"
 
@@ -11,6 +11,15 @@
 
 #define WIFI_SSID "█████████"
 #define WIFI_PASSWORD "█████████"
+#ifdef DEBUG
+#define DEBUG_LOGS 1
+#else
+#define DEBUG_LOGS 0
+#endif
+
+#define APP_LOG_START()           Serial.begin(115200);
+#define APP_LOG_INFO(...) \
+            do { if (DEBUG_LOGS)  Serial.println(__VA_ARGS__); } while (0)
 
 /* Timer constants */
 #define MAX_IPC_RESPONSE_TIMEOUT_MS 1000

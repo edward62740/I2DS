@@ -25,6 +25,7 @@ FirebaseConfig config;
 bool updateDevice = false;
 bool FLAGfirebaseRegularUpdate = true;
 bool FLAGfirebaseForceUpdate = false;
+uint8_t firebaseForceUpdateDeviceId = 0;
 TimerHandle_t firebaseUpdateTimer;
 
 void firebaseUpdateTimerCallback(TimerHandle_t firebaseUpdateTimer)
@@ -36,7 +37,7 @@ void managerDeviceTimerCallback(TimerHandle_t managerDeviceTimer)
   uint8_t id = (uint32_t)pvTimerGetTimerID(managerDeviceTimer);
   sensorInfoExt[id].alive = false;
   Serial.print("EXPIRED: ");
-  Serial.println(id);
+  APP_LOG_INFO(id);
   if (uxQueueSpacesAvailable(manager2GuiDeviceIndexQueue) == 0)
   {
     xQueueReset(manager2GuiDeviceIndexQueue);
@@ -46,9 +47,34 @@ void managerDeviceTimerCallback(TimerHandle_t managerDeviceTimer)
 void ipcDeviceUpdateCallback(TimerHandle_t ipcDeviceUpdateTimer)
 {
   updateDevice = true;
-  Serial.println("Updated");
+  APP_LOG_INFO("Updated");
 }
 
+void firebaseErrorQueueCallback(QueueInfo errorQueue)
+{
+
+  if (errorQueue.isQueueFull())
+  {
+    APP_LOG_INFO("Queue is full");
+  }
+
+  APP_LOG_INFO("Remaining queues: ");
+  APP_LOG_INFO(errorQueue.totalQueues());
+
+  APP_LOG_INFO("Being processed queue ID: ");
+  APP_LOG_INFO(errorQueue.currentQueueID());
+
+  APP_LOG_INFO("Data type:");
+  APP_LOG_INFO(errorQueue.dataType());
+
+  APP_LOG_INFO("Method: ");
+  APP_LOG_INFO(errorQueue.firebaseMethod());
+
+  APP_LOG_INFO("Path: ");
+  APP_LOG_INFO(errorQueue.dataType());
+
+  APP_LOG_INFO();
+}
 void firebaseTask(void *pvParameters)
 {
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -56,41 +82,53 @@ void firebaseTask(void *pvParameters)
   WiFi.setHostname(devicename.c_str()); // define hostname
   while (WiFi.status() != WL_CONNECTED)
   {
-    Serial.println("[INIT] ERROR CONNECTING TO WIFI");
+    APP_LOG_INFO("[INIT] ERROR CONNECTING TO WIFI");
     WiFi.disconnect();
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
     vTaskDelay(3000);
   }
   FLAGwifiIsConnected = true;
-  Serial.printf("Firebase Client v%s\n\n", FIREBASE_CLIENT_VERSION);
   /* Assign the API key (required) */
   config.api_key = API_KEY;
   /* Assign the RTDB URL */
   config.database_url = DATABASE_URL;
+  // Optional, set AP reconnection in setup()
   Firebase.reconnectWiFi(true);
+  Firebase.setMaxRetry(fbdo, 3);
+  Firebase.setMaxErrorQueue(fbdo, 10);
+  Firebase.beginAutoRunErrorQueue(fbdo, firebaseErrorQueueCallback);
+  fbdo.setResponseSize(8192);
 
-  Serial.print("Sign up new user... ");
+  APP_LOG_INFO("Sign up new user... ");
 
   /* Sign up */
   if (Firebase.signUp(&config, &auth, "", ""))
   {
-    Serial.println("ok");
+    APP_LOG_INFO("ok");
   }
-  else
-    Serial.printf("%s\n", config.signer.signupError.message.c_str());
   config.token_status_callback = tokenStatusCallback;
   Firebase.begin(&config, &auth);
   FLAGfirebaseActive = true;
-
   firebaseUpdateTimer = xTimerCreate("firebaseUpdate", FIREBASE_UPDATE_INTERVAL_MS, pdTRUE, (void *)0, firebaseUpdateTimerCallback);
   xTimerStart(firebaseUpdateTimer, 0);
   while (1)
   {
-    if (FLAGfirebaseForceUpdate || FLAGfirebaseRegularUpdate)
+    if (FLAGfirebaseForceUpdate)
     {
-      Serial.print("Firebase watermark: ");
-      Serial.println(uxTaskGetStackHighWaterMark(NULL));
-      Serial.println(ESP.getFreeHeap());
+      FirebaseJson deviceinfoJson;
+      String device = "/dev" + (String)firebaseForceUpdateDeviceId;
+      deviceinfoJson.add("state", sensorInfo[firebaseForceUpdateDeviceId].state);
+      deviceinfoJson.add("trigd", sensorInfo[firebaseForceUpdateDeviceId].trigd);
+      if (Firebase.updateNode(fbdo, device, deviceinfoJson))
+      {
+      }
+      else
+      {
+      }
+      FLAGfirebaseForceUpdate = false;
+    }
+    else if (FLAGfirebaseRegularUpdate)
+    {
       FirebaseJson sensorinfoJson;
       for (uint8_t i = 0; i < sensorIndex; i++)
       {
@@ -110,14 +148,28 @@ void firebaseTask(void *pvParameters)
         deviceinfoJson.add("alive", sensorInfoExt[i].alive);
         sensorinfoJson.set(device, deviceinfoJson);
       }
-      sensorinfoJson.add("HEAD", "test");
+      FirebaseJson errJson;
+      errJson.add("IPC_REQUEST_SEND_NOACK", count.IPC_REQUEST_SEND_NOACK);
+      errJson.add("IPC_REQUEST_SEND_FAIL", count.IPC_REQUEST_SEND_FAIL);
+      errJson.add("IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW", count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW);
+      errJson.add("IPC_QUEUE_SEND_DEVICEINFO_FAIL", count.IPC_QUEUE_SEND_DEVICEINFO_FAIL);
+      errJson.add("IPC_CHANGE_INVALID", count.IPC_CHANGE_INVALID);
+      errJson.add("IPC_CHANGE_INDEX_OUT_OF_BOUNDS", count.IPC_CHANGE_INDEX_OUT_OF_BOUNDS);
+      errJson.add("MANAGER_QUEUE_SEND_DEVICEINDEX_OVERFLOW", count.MANAGER_QUEUE_SEND_DEVICEINDEX_OVERFLOW);
+      errJson.add("MANAGER_QUEUE_SEND_DEVICEINDEX_FAIL", count.MANAGER_QUEUE_SEND_DEVICEINDEX_FAIL);
+      errJson.add("MANAGER_QUEUE_RECEIVE_OUT_OF_BOUNDS", count.MANAGER_QUEUE_RECEIVE_OUT_OF_BOUNDS);
+      errJson.add("FIREBASE_AUTH_ERR", count.FIREBASE_AUTH_ERR);
+      errJson.add("FIREBASE_REGULAR_UPDATE_FAIL", count.FIREBASE_REGULAR_UPDATE_FAIL);
+      errJson.add("FIREBASE_FORCED_UPDATE_FAIL", count.FIREBASE_FORCED_UPDATE_FAIL);
+      errJson.add("FIREBASE_ERR_QUEUE_OVERFLOW", count.FIREBASE_ERR_QUEUE_OVERFLOW);
+      errJson.add("FIREBASE_NETWORK_FAIL", count.FIREBASE_NETWORK_FAIL);
+      sensorinfoJson.set("/errors", errJson);
       if (Firebase.updateNode(fbdo, "/", sensorinfoJson))
       {
       }
       else
       {
       }
-      FLAGfirebaseForceUpdate = false;
       FLAGfirebaseRegularUpdate = false;
       vTaskDelay(250);
     }
@@ -135,8 +187,8 @@ void managerTask(void *pvParameters)
   {
     if (uxQueueMessagesWaiting(ipc2ManagerDeviceInfoQueue) > 0)
     {
-      Serial.print("manager watermark: ");
-      Serial.println(uxTaskGetStackHighWaterMark(NULL));
+      APP_LOG_INFO("manager watermark: ");
+      APP_LOG_INFO(uxTaskGetStackHighWaterMark(NULL));
       DeviceInfoExt tmpInfo;
       if (xQueueReceive(ipc2ManagerDeviceInfoQueue, (void *)&tmpInfo, 1) == pdPASS)
       {
@@ -171,6 +223,7 @@ void managerTask(void *pvParameters)
         xQueueSend(manager2GuiDeviceIndexQueue, (void *)&tmpInfo.id, 0);
         if (sensorInfo[tmpInfo.id].state == S_ALERTING)
           FLAGfirebaseForceUpdate = true;
+        firebaseForceUpdateDeviceId = tmpInfo.id;
       }
     }
     else

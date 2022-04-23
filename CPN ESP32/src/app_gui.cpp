@@ -39,12 +39,19 @@ void displayTask(void *pvParameters)
     tft.println("I2DS");
     tft.setTextSize(1);
     tft.println("boot..");
+    vTaskDelay(50);
     tft.println("Initializing I2DS Control Panel Node");
+    vTaskDelay(50);
     tft.println("Starting Manager");
+    vTaskDelay(50);
     tft.println("Initializing IPC");
+    vTaskDelay(50);
     tft.println("/tbd SE/");
+    vTaskDelay(50);
     tft.println("Starting Power Reserve Subsystem");
+    vTaskDelay(50);
     tft.println("Allocating stack");
+    vTaskDelay(50);
     tft.println("Connecting to Wi-Fi...");
     while (!FLAGwifiIsConnected)
     {
@@ -75,8 +82,6 @@ void displayTask(void *pvParameters)
 
         if (guiHeadUpdateFlag)
         {
-            Serial.print("gui watermark: ");
-            Serial.println(uxTaskGetStackHighWaterMark(NULL));
             digitalWrite(STAT_LED, !digitalRead(STAT_LED));
             tft.setFreeFont(&FreeSansBold12pt7b);
             tft.setTextDatum(MC_DATUM);
@@ -151,20 +156,14 @@ void displayTask(void *pvParameters)
                 color = ILI9341_DARKGREY;
                 break;
             }
-            Serial.print("BLINK:");
-            Serial.println(sensorInfo[selection].self_id);
             tft.drawRoundRect(sensorInfoExt[selection].touchArea[0] - 1, sensorInfoExt[selection].touchArea[1] - 1, sensorInfoExt[selection].touchArea[2] + 2, sensorInfoExt[selection].touchArea[3] + 2, 5, swflag ? ILI9341_BLACK : color);
             swflag = !swflag;
             vTaskDelay(50);
         }
         if (touch.isTouching() && !FLAGipcResponsePending && !massActivate)
         {
-            Serial.println("TOUCHING");
-
             uint16_t x, y;
             touch.getPosition(x, y);
-            Serial.println(x);
-            Serial.print(y);
             if ((int16_t)x > selfInfoExt.touchArea[0] && (int16_t)x < (selfInfoExt.touchArea[0] + selfInfoExt.touchArea[2]) &&
                 (int16_t)y > selfInfoExt.touchArea[1] && (int16_t)y < (selfInfoExt.touchArea[1] + selfInfoExt.touchArea[3]))
             {
@@ -199,24 +198,20 @@ void displayTask(void *pvParameters)
         }
         if ((massActivate && massActivateIndex == 0) || (massActivate && massActivateIndex > 0 && !sensorInfoExt[massActivateIndex - 1].ipcResponsePending))
         {
-            Serial.print("NEXT;");
-            Serial.println(massActivateIndex);
             tft.drawRoundRect(sensorInfoExt[massActivateIndex].touchArea[0] - 1, sensorInfoExt[massActivateIndex].touchArea[1] - 1, sensorInfoExt[massActivateIndex].touchArea[2] + 2, sensorInfoExt[massActivateIndex].touchArea[3] + 2, 5, ILI9341_YELLOW);
             if (selfInfo.state == (uint8_t)S_INACTIVE)
                 ipcSender(sensorInfo[massActivateIndex].self_id, (uint8_t)S_ACTIVE);
             else if (selfInfo.state == (uint8_t)S_ACTIVE)
                 ipcSender(sensorInfo[massActivateIndex].self_id, (uint8_t)S_INACTIVE);
             selection = massActivateIndex;
-            swflag = true;
+            //swflag = true;
             massActivateIndex++;
             if (massActivateIndex == sensorIndex)
             {
-                Serial.print("overflow;");
                 if (selfInfo.state == (uint8_t)S_INACTIVE)
                     selfInfo.state = (uint8_t)S_ACTIVE;
                 else if (selfInfo.state == (uint8_t)S_ACTIVE)
                     selfInfo.state = (uint8_t)S_INACTIVE;
-                Serial.println(massActivateIndex);
                 massActivateIndex = 0;
                 massActivate = false;
             }
@@ -286,10 +281,6 @@ void displayTask(void *pvParameters)
                 default:
                     break;
                 }
-                // tft.setCursor(5 + xsp, 105 + ysp);
-                // String battery = "Battery: " + (String)sensorInfo[i].battery_voltage + "%";
-                // tft.print(battery);
-                // Serial.println(sensorInfo[i].lqi);
                 tft.drawRect(5 + xsp, 110 + ysp, 30, 15, ILI9341_BLACK);
                 tft.fillRect(5 + xsp, 110 + ysp, (int16_t)(sensorInfo[i].lqi / 8), 15, ILI9341_BLACK);
                 tft.fillTriangle(5 + xsp, 110 + ysp, 5 + xsp, 110 + ysp + 15, 5 + xsp + 30, 110 + ysp, bg);
@@ -309,7 +300,6 @@ void displayTask(void *pvParameters)
                     }
                     tft.fillRect(40 + xsp, 123 + ysp - batt * 3, 15, 2, ILI9341_BLACK);
                 }
-                Serial.println(sensorInfoExt[i].alive);
                 if (sensorInfoExt[i].alive && (sensorInfo[i].state == S_INACTIVE))
                 {
                     tft.setSwapBytes(true);

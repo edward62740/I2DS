@@ -33,8 +33,6 @@ typedef struct
   uint16_t DeviceInfoChangeIndex;
 } DeviceInfoExt;
 
-
-
 extern DeviceInfoExt selfInfoExt, sensorInfoExt[30];
 extern TimerHandle_t ipcDeviceUpdateTimer;
 extern QueueHandle_t ipc2ManagerDeviceInfoQueue;
@@ -51,6 +49,11 @@ struct
   err_count_t MANAGER_QUEUE_SEND_DEVICEINDEX_OVERFLOW = 0;
   err_count_t MANAGER_QUEUE_SEND_DEVICEINDEX_FAIL = 0;
   err_count_t MANAGER_QUEUE_RECEIVE_OUT_OF_BOUNDS = 0;
-} self;
+  err_count_t FIREBASE_AUTH_ERR = 0;
+  err_count_t FIREBASE_REGULAR_UPDATE_FAIL = 0;
+  err_count_t FIREBASE_FORCED_UPDATE_FAIL = 0;
+  err_count_t FIREBASE_ERR_QUEUE_OVERFLOW = 0;
+  err_count_t FIREBASE_NETWORK_FAIL = 0;
+} count;
 
 #endif // APP_MANAGER_H
