@@ -22,11 +22,11 @@ void setup()
     xTaskCreatePinnedToCore( // Use xTaskCreate()
         displayTask,         // Function to be called
         "Display Task",      // Name of task
-        32768,               // Stack size
+        16384,               // Stack size
         NULL,                // Parameter to pass
         0,                   // Task priority
         &display,            // Task handle
-        0);                  // CPU Core
+        1);                  // CPU Core
     xTaskCreatePinnedToCore( // Use xTaskCreate()
         managerTask,         // Function to be called
         "Manager Task",      // Name of task
@@ -38,7 +38,7 @@ void setup()
     xTaskCreatePinnedToCore( // Use xTaskCreate()
         ipcTask,             // Function to be called
         "IPC Task",          // Name of task
-        32768,               // Stack size
+        16384,               // Stack size
         NULL,                // Parameter to pass
         1,                   // Task priority
         &ipc,                // Task handle

@@ -98,7 +98,19 @@ void firebaseTask(void *pvParameters)
   Firebase.setMaxErrorQueue(fbdo, 10);
   Firebase.beginAutoRunErrorQueue(fbdo, firebaseErrorQueueCallback);
   fbdo.setResponseSize(8192);
-
+  //WiFi reconnect timeout (interval) in ms (10 sec - 5 min) when WiFi disconnected.
+  config.timeout.wifiReconnect = 10 * 1000;
+  //Socket connection and SSL handshake timeout in ms (1 sec - 1 min).
+  config.timeout.socketConnection = 10 * 1000;
+  //Server response read timeout in ms (1 sec - 1 min).
+  config.timeout.serverResponse = 10 * 1000;
+  //RTDB Stream keep-alive timeout in ms (20 sec - 2 min) when no server's keep-alive event data received.
+  config.timeout.rtdbKeepAlive = 45 * 1000;
+  //RTDB Stream reconnect timeout (interval) in ms (1 sec - 1 min) when RTDB Stream closed and want to resume.
+  config.timeout.rtdbStreamReconnect = 1 * 1000;
+  //RTDB Stream error notification timeout (interval) in ms (3 sec - 30 sec). It determines how often the readStream
+  //will return false (error) when it called repeatedly in loop.
+  config.timeout.rtdbStreamError = 3 * 1000;
   APP_LOG_INFO("Sign up new user... ");
 
   /* Sign up */
@@ -113,7 +125,7 @@ void firebaseTask(void *pvParameters)
   xTimerStart(firebaseUpdateTimer, 0);
   while (1)
   {
-    if (FLAGfirebaseForceUpdate)
+    if (Firebase.ready() && FLAGfirebaseForceUpdate)
     {
       FirebaseJson deviceinfoJson;
       String device = "/dev" + (String)firebaseForceUpdateDeviceId;
@@ -127,9 +139,12 @@ void firebaseTask(void *pvParameters)
       }
       FLAGfirebaseForceUpdate = false;
     }
-    else if (FLAGfirebaseRegularUpdate)
+    else if (Firebase.ready() && FLAGfirebaseRegularUpdate )
     {
+            APP_LOG_INFO("free heap: ");
+      APP_LOG_INFO(xPortGetFreeHeapSize());
       FirebaseJson sensorinfoJson;
+      APP_LOG_INFO(Firebase.authenticated());
       for (uint8_t i = 0; i < sensorIndex; i++)
       {
 
@@ -171,7 +186,6 @@ void firebaseTask(void *pvParameters)
       {
       }
       FLAGfirebaseRegularUpdate = false;
-      vTaskDelay(250);
     }
     vTaskDelay(5);
   }
@@ -187,8 +201,7 @@ void managerTask(void *pvParameters)
   {
     if (uxQueueMessagesWaiting(ipc2ManagerDeviceInfoQueue) > 0)
     {
-      APP_LOG_INFO("manager watermark: ");
-      APP_LOG_INFO(uxTaskGetStackHighWaterMark(NULL));
+
       DeviceInfoExt tmpInfo;
       if (xQueueReceive(ipc2ManagerDeviceInfoQueue, (void *)&tmpInfo, 1) == pdPASS)
       {
