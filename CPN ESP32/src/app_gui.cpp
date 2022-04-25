@@ -24,7 +24,7 @@ QueueHandle_t manager2GuiDeviceIndexQueue;
 TFT_eSPI tft = TFT_eSPI();
 bool massActivate = false;
 uint8_t massActivateIndex = 0;
-
+bool swflag = false;
 void guiHeadUpdateTimerCallback(TimerHandle_t guiHeadUpdateTimer)
 {
     guiHeadUpdateFlag = true;
@@ -74,7 +74,7 @@ void displayTask(void *pvParameters)
     selfInfoExt.touchArea[2] = 240;
     selfInfoExt.touchArea[3] = 54;
     selfInfo.state = (uint8_t)S_INACTIVE;
-    bool swflag = false;
+
     guiHeadUpdateTimer = xTimerCreate("guiHead", GUI_HEAD_UPDATE_INTERVAL_MS, pdTRUE, (void *)0, guiHeadUpdateTimerCallback);
     xTimerStart(guiHeadUpdateTimer, 0);
     while (1)
@@ -160,7 +160,7 @@ void displayTask(void *pvParameters)
             swflag = !swflag;
             vTaskDelay(50);
         }
-        if (touch.isTouching() && !FLAGipcResponsePending && !massActivate)
+        if (touch.isTouching() && !FLAGipcResponsePending)
         {
             uint16_t x, y;
             touch.getPosition(x, y);
@@ -204,7 +204,7 @@ void displayTask(void *pvParameters)
             else if (selfInfo.state == (uint8_t)S_ACTIVE)
                 ipcSender(sensorInfo[massActivateIndex].self_id, (uint8_t)S_INACTIVE);
             selection = massActivateIndex;
-            //swflag = true;
+            // swflag = true;
             massActivateIndex++;
             if (massActivateIndex == sensorIndex)
             {
@@ -281,6 +281,7 @@ void displayTask(void *pvParameters)
                 default:
                     break;
                 }
+
                 tft.drawRect(5 + xsp, 110 + ysp, 30, 15, ILI9341_BLACK);
                 tft.fillRect(5 + xsp, 110 + ysp, (int16_t)(sensorInfo[i].lqi / 8), 15, ILI9341_BLACK);
                 tft.fillTriangle(5 + xsp, 110 + ysp, 5 + xsp, 110 + ysp + 15, 5 + xsp + 30, 110 + ysp, bg);
