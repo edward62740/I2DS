@@ -98,18 +98,18 @@ void firebaseTask(void *pvParameters)
   Firebase.setMaxErrorQueue(fbdo, 10);
   Firebase.beginAutoRunErrorQueue(fbdo, firebaseErrorQueueCallback);
   fbdo.setResponseSize(8192);
-  //WiFi reconnect timeout (interval) in ms (10 sec - 5 min) when WiFi disconnected.
+  // WiFi reconnect timeout (interval) in ms (10 sec - 5 min) when WiFi disconnected.
   config.timeout.wifiReconnect = 10 * 1000;
-  //Socket connection and SSL handshake timeout in ms (1 sec - 1 min).
+  // Socket connection and SSL handshake timeout in ms (1 sec - 1 min).
   config.timeout.socketConnection = 10 * 1000;
-  //Server response read timeout in ms (1 sec - 1 min).
+  // Server response read timeout in ms (1 sec - 1 min).
   config.timeout.serverResponse = 10 * 1000;
-  //RTDB Stream keep-alive timeout in ms (20 sec - 2 min) when no server's keep-alive event data received.
+  // RTDB Stream keep-alive timeout in ms (20 sec - 2 min) when no server's keep-alive event data received.
   config.timeout.rtdbKeepAlive = 45 * 1000;
-  //RTDB Stream reconnect timeout (interval) in ms (1 sec - 1 min) when RTDB Stream closed and want to resume.
+  // RTDB Stream reconnect timeout (interval) in ms (1 sec - 1 min) when RTDB Stream closed and want to resume.
   config.timeout.rtdbStreamReconnect = 1 * 1000;
-  //RTDB Stream error notification timeout (interval) in ms (3 sec - 30 sec). It determines how often the readStream
-  //will return false (error) when it called repeatedly in loop.
+  // RTDB Stream error notification timeout (interval) in ms (3 sec - 30 sec). It determines how often the readStream
+  // will return false (error) when it called repeatedly in loop.
   config.timeout.rtdbStreamError = 3 * 1000;
   APP_LOG_INFO("Sign up new user... ");
 
@@ -123,12 +123,17 @@ void firebaseTask(void *pvParameters)
   FLAGfirebaseActive = true;
   firebaseUpdateTimer = xTimerCreate("firebaseUpdate", FIREBASE_UPDATE_INTERVAL_MS, pdTRUE, (void *)0, firebaseUpdateTimerCallback);
   xTimerStart(firebaseUpdateTimer, 0);
+  // Firebase.deleteNode(fbdo, "/");
+  if (!Firebase.beginStream(fbdo, "/req/send"))
+  {
+    APP_LOG_INFO(fbdo.errorReason());
+  }
   while (1)
   {
     if (Firebase.ready() && FLAGfirebaseForceUpdate)
     {
       FirebaseJson deviceinfoJson;
-      String device = "/dev" + (String)firebaseForceUpdateDeviceId;
+      String device = "/devices/dev" + (String)firebaseForceUpdateDeviceId;
       deviceinfoJson.add("state", sensorInfo[firebaseForceUpdateDeviceId].state);
       deviceinfoJson.add("trigd", sensorInfo[firebaseForceUpdateDeviceId].trigd);
       if (Firebase.updateNode(fbdo, device, deviceinfoJson))
@@ -139,9 +144,9 @@ void firebaseTask(void *pvParameters)
       }
       FLAGfirebaseForceUpdate = false;
     }
-    else if (Firebase.ready() && FLAGfirebaseRegularUpdate )
+    else if (Firebase.ready() && FLAGfirebaseRegularUpdate)
     {
-            APP_LOG_INFO("free heap: ");
+      APP_LOG_INFO("free heap: ");
       APP_LOG_INFO(xPortGetFreeHeapSize());
       FirebaseJson sensorinfoJson;
       APP_LOG_INFO(Firebase.authenticated());
@@ -149,7 +154,7 @@ void firebaseTask(void *pvParameters)
       {
 
         FirebaseJson deviceinfoJson;
-        String device = "dev" + (String)i;
+        String device = "/devices/dev" + (String)i;
         deviceinfoJson.add("hw", sensorInfo[i].hw);
         deviceinfoJson.add("state", sensorInfo[i].state);
         deviceinfoJson.add("battery_voltage", sensorInfo[i].battery_voltage);
@@ -187,6 +192,53 @@ void firebaseTask(void *pvParameters)
       }
       FLAGfirebaseRegularUpdate = false;
     }
+
+    if (!Firebase.readStream(fbdo))
+    {
+      APP_LOG_INFO(fbdo.errorReason());
+    }
+
+    if (fbdo.streamTimeout())
+    {
+      APP_LOG_INFO("Stream timeout, resume streaming...");
+    }
+//Serial.println("loop");
+    if (fbdo.streamAvailable() && !FLAGipcResponsePending)
+    {
+      
+      if (fbdo.dataTypeEnum() == fb_esp_rtdb_data_type_array)
+      {
+        FirebaseJsonData result;
+        FirebaseJsonArray *arr = fbdo.to<FirebaseJsonArray *>();
+        for (size_t i = 0; i < arr->size(); i++)
+        {
+          arr->get(result, i);
+          Serial.println(arr->size());
+          Serial.print("Array index: ");
+          Serial.print(i);
+          Serial.print(", type: ");
+          Serial.print(result.type);
+          Serial.print(", value: ");
+          Serial.println(result.to<int>());
+          if (result.to<int>() != 0)
+          {
+            if (i >= 0 && i < sensorIndex && (result.to<int>() == (int)S_ACTIVE || result.to<int>() == (int)S_INACTIVE))
+            {
+              ipcSender(sensorInfo[i].self_id, (uint8_t)result.to<int>());
+              selection = i;
+              swflag = true;
+            }
+            String node = "/req/send/" + (String)i;
+            FirebaseJson tmp;
+            tmp.set("ack", 1);
+            Firebase.updateNode(fbdo, "/req", tmp);
+            Firebase.deleteNode(fbdo, node);
+            break;
+          }
+        }
+      }
+    }
+
     vTaskDelay(5);
   }
 }
@@ -201,7 +253,6 @@ void managerTask(void *pvParameters)
   {
     if (uxQueueMessagesWaiting(ipc2ManagerDeviceInfoQueue) > 0)
     {
-
       DeviceInfoExt tmpInfo;
       if (xQueueReceive(ipc2ManagerDeviceInfoQueue, (void *)&tmpInfo, 1) == pdPASS)
       {
@@ -239,9 +290,6 @@ void managerTask(void *pvParameters)
         firebaseForceUpdateDeviceId = tmpInfo.id;
       }
     }
-    else
-    {
-      vTaskDelay(1);
-    }
+    vTaskDelay(5);
   }
 }
