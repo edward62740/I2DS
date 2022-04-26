@@ -128,6 +128,12 @@ void firebaseTask(void *pvParameters)
   {
     APP_LOG_INFO(fbdo.errorReason());
   }
+  FirebaseJson errataJson;
+  for (uint8_t i = 30 + 1; i < 30 * 3; i++)
+  {
+    errataJson.add((String)i, 7);
+  }
+  Firebase.updateNode(fbdo, "/req/send", errataJson);
   while (1)
   {
     if (Firebase.ready() && FLAGfirebaseForceUpdate)
@@ -144,6 +150,38 @@ void firebaseTask(void *pvParameters)
       }
       FLAGfirebaseForceUpdate = false;
     }
+    else if (fbdo.streamAvailable() && !FLAGipcResponsePending)
+    {
+
+      if (fbdo.dataTypeEnum() == fb_esp_rtdb_data_type_array)
+      {
+        FirebaseJsonData result;
+        FirebaseJsonArray *arr = fbdo.to<FirebaseJsonArray *>();
+        for (size_t i = 0; i < sensorIndex; i++)
+        {
+          arr->get(result, i);
+          Serial.print("Array index: ");
+          Serial.print(i);
+          Serial.print(", type: ");
+          Serial.print(result.type);
+          Serial.print(", value: ");
+          Serial.println(result.to<int>());
+          if (result.to<int>() != 0 && i < sensorIndex)
+          {
+            if (i >= 0 && i <= sensorIndex && (result.to<int>() == (int)S_ACTIVE || result.to<int>() == (int)S_INACTIVE))
+            {
+              ipcSender(sensorInfo[i].self_id, (uint8_t)result.to<int>());
+              selection = i;
+              swflag = true;
+            }
+            String node = "/req/send/" + (String)i;
+            Firebase.deleteNode(fbdo, node);
+            break;
+          }
+        }
+      }
+    }
+
     else if (Firebase.ready() && FLAGfirebaseRegularUpdate)
     {
       APP_LOG_INFO("free heap: ");
@@ -184,6 +222,7 @@ void firebaseTask(void *pvParameters)
       errJson.add("FIREBASE_ERR_QUEUE_OVERFLOW", count.FIREBASE_ERR_QUEUE_OVERFLOW);
       errJson.add("FIREBASE_NETWORK_FAIL", count.FIREBASE_NETWORK_FAIL);
       sensorinfoJson.set("/errors", errJson);
+
       if (Firebase.updateNode(fbdo, "/", sensorinfoJson))
       {
       }
@@ -201,42 +240,6 @@ void firebaseTask(void *pvParameters)
     if (fbdo.streamTimeout())
     {
       APP_LOG_INFO("Stream timeout, resume streaming...");
-    }
-//Serial.println("loop");
-    if (fbdo.streamAvailable() && !FLAGipcResponsePending)
-    {
-      
-      if (fbdo.dataTypeEnum() == fb_esp_rtdb_data_type_array)
-      {
-        FirebaseJsonData result;
-        FirebaseJsonArray *arr = fbdo.to<FirebaseJsonArray *>();
-        for (size_t i = 0; i < arr->size(); i++)
-        {
-          arr->get(result, i);
-          Serial.println(arr->size());
-          Serial.print("Array index: ");
-          Serial.print(i);
-          Serial.print(", type: ");
-          Serial.print(result.type);
-          Serial.print(", value: ");
-          Serial.println(result.to<int>());
-          if (result.to<int>() != 0)
-          {
-            if (i >= 0 && i < sensorIndex && (result.to<int>() == (int)S_ACTIVE || result.to<int>() == (int)S_INACTIVE))
-            {
-              ipcSender(sensorInfo[i].self_id, (uint8_t)result.to<int>());
-              selection = i;
-              swflag = true;
-            }
-            String node = "/req/send/" + (String)i;
-            FirebaseJson tmp;
-            tmp.set("ack", 1);
-            Firebase.updateNode(fbdo, "/req", tmp);
-            Firebase.deleteNode(fbdo, node);
-            break;
-          }
-        }
-      }
     }
 
     vTaskDelay(5);
