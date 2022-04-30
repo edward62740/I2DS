@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "staging": "i2ds-db"
+  },
+  "targets": {}
+}
