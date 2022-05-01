@@ -35,7 +35,6 @@ typedef enum
   IPC_ERR,
 } ipc_message_pid_t;
 
-
 extern bool FLAGguiUpdatePending;
 extern bool FLAGipcResponsePending;
 extern uint8_t ipc_get_list[3];
