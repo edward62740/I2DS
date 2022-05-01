@@ -27,6 +27,7 @@ bool FLAGfirebaseRegularUpdate = true;
 bool FLAGfirebaseForceUpdate = false;
 uint8_t firebaseForceUpdateDeviceId = 0;
 TimerHandle_t firebaseUpdateTimer;
+ErrCount err_count = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 void firebaseUpdateTimerCallback(TimerHandle_t firebaseUpdateTimer)
 {
@@ -188,11 +189,21 @@ void firebaseTask(void *pvParameters)
       APP_LOG_INFO(xPortGetFreeHeapSize());
       FirebaseJson sensorinfoJson;
       APP_LOG_INFO(Firebase.authenticated());
+      // Firebase.setTimestamp(fbdo, "/info/timestamp");
       for (uint8_t i = 0; i < sensorIndex; i++)
       {
 
         FirebaseJson deviceinfoJson;
         String device = "/devices/dev" + (String)i;
+        
+        if (sensorInfoExt[i].alive)
+        {
+          deviceinfoJson.set("timestamp/.sv", "timestamp");
+        }
+        else{
+          Firebase.getDouble(fbdo, device + "/timestamp");
+           deviceinfoJson.add("timestamp", fbdo.to<uint64_t>());
+        }
         deviceinfoJson.add("hw", sensorInfo[i].hw);
         deviceinfoJson.add("state", sensorInfo[i].state);
         deviceinfoJson.add("battery_voltage", sensorInfo[i].battery_voltage);
@@ -207,22 +218,34 @@ void firebaseTask(void *pvParameters)
         sensorinfoJson.set(device, deviceinfoJson);
       }
       FirebaseJson errJson;
-      errJson.add("IPC_REQUEST_SEND_NOACK", count.IPC_REQUEST_SEND_NOACK);
-      errJson.add("IPC_REQUEST_SEND_FAIL", count.IPC_REQUEST_SEND_FAIL);
-      errJson.add("IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW", count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW);
-      errJson.add("IPC_QUEUE_SEND_DEVICEINFO_FAIL", count.IPC_QUEUE_SEND_DEVICEINFO_FAIL);
-      errJson.add("IPC_CHANGE_INVALID", count.IPC_CHANGE_INVALID);
-      errJson.add("IPC_CHANGE_INDEX_OUT_OF_BOUNDS", count.IPC_CHANGE_INDEX_OUT_OF_BOUNDS);
-      errJson.add("MANAGER_QUEUE_SEND_DEVICEINDEX_OVERFLOW", count.MANAGER_QUEUE_SEND_DEVICEINDEX_OVERFLOW);
-      errJson.add("MANAGER_QUEUE_SEND_DEVICEINDEX_FAIL", count.MANAGER_QUEUE_SEND_DEVICEINDEX_FAIL);
-      errJson.add("MANAGER_QUEUE_RECEIVE_OUT_OF_BOUNDS", count.MANAGER_QUEUE_RECEIVE_OUT_OF_BOUNDS);
-      errJson.add("FIREBASE_AUTH_ERR", count.FIREBASE_AUTH_ERR);
-      errJson.add("FIREBASE_REGULAR_UPDATE_FAIL", count.FIREBASE_REGULAR_UPDATE_FAIL);
-      errJson.add("FIREBASE_FORCED_UPDATE_FAIL", count.FIREBASE_FORCED_UPDATE_FAIL);
-      errJson.add("FIREBASE_ERR_QUEUE_OVERFLOW", count.FIREBASE_ERR_QUEUE_OVERFLOW);
-      errJson.add("FIREBASE_NETWORK_FAIL", count.FIREBASE_NETWORK_FAIL);
+      errJson.add("IPC_REQUEST_SEND_NOACK", err_count.IPC_REQUEST_SEND_NOACK);
+      errJson.add("IPC_REQUEST_SEND_FAIL", err_count.IPC_REQUEST_SEND_FAIL);
+      errJson.add("IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW", err_count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW);
+      errJson.add("IPC_QUEUE_SEND_DEVICEINFO_FAIL", err_count.IPC_QUEUE_SEND_DEVICEINFO_FAIL);
+      errJson.add("IPC_CHANGE_INVALID", err_count.IPC_CHANGE_INVALID);
+      errJson.add("IPC_CHANGE_INDEX_OUT_OF_BOUNDS", err_count.IPC_CHANGE_INDEX_OUT_OF_BOUNDS);
+      errJson.add("MANAGER_QUEUE_SEND_DEVICEINDEX_OVERFLOW", err_count.MANAGER_QUEUE_SEND_DEVICEINDEX_OVERFLOW);
+      errJson.add("MANAGER_QUEUE_SEND_DEVICEINDEX_FAIL", err_count.MANAGER_QUEUE_SEND_DEVICEINDEX_FAIL);
+      errJson.add("MANAGER_QUEUE_RECEIVE_OUT_OF_BOUNDS", err_count.MANAGER_QUEUE_RECEIVE_OUT_OF_BOUNDS);
+      errJson.add("FIREBASE_AUTH_ERR", err_count.FIREBASE_AUTH_ERR);
+      errJson.add("FIREBASE_REGULAR_UPDATE_FAIL", err_count.FIREBASE_REGULAR_UPDATE_FAIL);
+      errJson.add("FIREBASE_FORCED_UPDATE_FAIL", err_count.FIREBASE_FORCED_UPDATE_FAIL);
+      errJson.add("FIREBASE_ERR_QUEUE_OVERFLOW", err_count.FIREBASE_ERR_QUEUE_OVERFLOW);
+      errJson.add("FIREBASE_NETWORK_FAIL", err_count.FIREBASE_NETWORK_FAIL);
       sensorinfoJson.set("/errors", errJson);
-
+      FirebaseJson iJson;
+      iJson.add("con", sensorIndex);
+      uint8_t tmpcount = 0;
+      for (uint8_t i = 0; i < sensorIndex; i++)
+      {
+        if (sensorInfoExt[i].alive)
+          tmpcount++;
+      }
+      iJson.add("devs", tmpcount);
+      iJson.add("wifi", WIFI_SSID);
+      iJson.add("sec", "true");
+      iJson.add("pr", "true");
+      sensorinfoJson.set("/info", iJson);
       if (Firebase.updateNode(fbdo, "/", sensorinfoJson))
       {
       }

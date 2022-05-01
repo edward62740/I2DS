@@ -24,7 +24,9 @@ void ipcRespTimerCallback(TimerHandle_t ipcDeviceResponseTimer)
 
     if (FLAGipcInternalAckPending)
     {
+        err_count.IPC_REQUEST_SEND_NOACK++;
     }
+    err_count.IPC_REQUEST_SEND_FAIL++;
     sensorInfoExt[tmpTimerId].ipcResponsePending = false;
     FLAGipcResponsePending = false;
     xTimerStop(ipcDeviceResponseTimer, 0);
@@ -119,8 +121,11 @@ bool ipcParser(char *buffer, size_t len)
                         if (uxQueueSpacesAvailable(ipc2ManagerDeviceInfoQueue) == 0)
                         {
                             xQueueReset(ipc2ManagerDeviceInfoQueue);
+                            err_count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW++;
                         }
-                        xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0);
+
+                        if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) != 0)
+                            err_count.IPC_QUEUE_SEND_DEVICEINFO_FAIL++;
                     }
                     break;
                 }
@@ -140,8 +145,11 @@ bool ipcParser(char *buffer, size_t len)
                 if (uxQueueSpacesAvailable(ipc2ManagerDeviceInfoQueue) == 0)
                 {
                     xQueueReset(ipc2ManagerDeviceInfoQueue);
+                    err_count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW++;
                 }
-                xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0);
+
+                if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) != 0)
+                    err_count.IPC_QUEUE_SEND_DEVICEINFO_FAIL++;
                 sensorIndex++;
             }
             sensorIndex = tmpBuf[2];
@@ -174,9 +182,11 @@ bool ipcParser(char *buffer, size_t len)
                 if (uxQueueSpacesAvailable(ipc2ManagerDeviceInfoQueue) == 0)
                 {
                     xQueueReset(ipc2ManagerDeviceInfoQueue);
+                    err_count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW++;
                 }
-                xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0);
 
+                if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) != 0)
+                    err_count.IPC_QUEUE_SEND_DEVICEINFO_FAIL++;
                 break;
             }
         }
@@ -200,7 +210,6 @@ bool ipcParser(char *buffer, size_t len)
                     state = S_ALERTING;
                 if (tmpBuf[5] == 0x01) // ended
                     state = S_ACTIVE;
-
                 queueSend.info.state = state;
                 queueSend.info.trigd = count;
                 queueSend.id = i;
@@ -208,8 +217,12 @@ bool ipcParser(char *buffer, size_t len)
                 if (uxQueueSpacesAvailable(ipc2ManagerDeviceInfoQueue) == 0)
                 {
                     xQueueReset(ipc2ManagerDeviceInfoQueue);
+                    err_count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW++;
+                    
                 }
-                xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0);
+
+                if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) != 0)
+                    err_count.IPC_QUEUE_SEND_DEVICEINFO_FAIL++;
                 break;
             }
             else
@@ -219,6 +232,7 @@ bool ipcParser(char *buffer, size_t len)
         {
             if ((uint8_t)tmpBuf[5] == 2)
             {
+                err_count.IPC_CHANGE_INDEX_OUT_OF_BOUNDS++;
                 Serial1.write(ipc_get_list, sizeof(ipc_get_list));
             }
         }
@@ -252,8 +266,11 @@ bool ipcParser(char *buffer, size_t len)
                     if (uxQueueSpacesAvailable(ipc2ManagerDeviceInfoQueue) == 0)
                     {
                         xQueueReset(ipc2ManagerDeviceInfoQueue);
+                        err_count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW++;
                     }
-                    xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0);
+
+                    if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) != 0)
+                        err_count.IPC_QUEUE_SEND_DEVICEINFO_FAIL++;
 
                     FLAGipcResponsePending = false;
                     break;

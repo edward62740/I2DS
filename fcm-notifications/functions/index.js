@@ -1,109 +1,234 @@
-/**
- * Copyright 2016 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 'use strict';
-
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp();
 
 /**
- * Triggers when a user gets a new follower and sends a notification.
- *
- * Followers add a flag to `/followers/{followedUid}/{followerUid}`.
- * Users save their device notification tokens to `/users/{followedUid}/notificationTokens/{notificationToken}`.
+ * Triggers when the state of a sensor changes.
+ * Sends an alert message for S_ALERTING and a notification for other state changes.
  */
-exports.sendFollowerNotification = functions.database.ref('/devices/{devId}/state')
-    .onWrite(async (change, context) => {
-      const devId = context.params.devId;
-      // If un-follow we exit the function.
-      if (!change.after.val()) {
-        return functions.logger.log(
-          'User ',
-          devId,
-          'un-followed user',
-          '1'
-        );
+exports.I2DSstateChangeNotification = functions.region('asia-southeast1').database.ref('/devices/{devId}/state')
+  .onWrite(async (change, context) => {
+    const devId = (context.params.devId).replace(/\D/g, '');
+
+    const getTokensPromise = admin.database()
+      .ref(`/notificationTokens`).once('value');
+
+    const getDeviceInfoPromise = admin.database()
+      .ref(`/devices`).once('value');
+
+    let tokensSnapshot;
+    let deviceSnapshot;
+    let tokens;
+    let devices;
+
+    tokensSnapshot = await Promise.resolve(getTokensPromise);
+    deviceSnapshot = await Promise.resolve(getDeviceInfoPromise);
+
+    devices = Object.values(deviceSnapshot.val());
+
+    let hw_string;
+    switch (devices[devId].hw) {
+      case 136:
+        hw_string = 'CPN';
+        break;
+      case 137:
+        hw_string = 'PIRSN';
+        break;
+      case 138:
+        hw_string = 'ACSN';
+        break;
+      default:
+        hw_string = 'unknown';
+        break;
+    }
+    let state_string;
+    switch (devices[devId].state) {
+      case 5:
+        state_string = 'activated';
+        break;
+      case 6:
+        state_string = 'deactivated';
+        break;
+      default:
+        state_string = 'unknown';
+        break;
+    }
+    const warning_payload = {
+      notification: {
+        title: 'I²DS Messaging Service',
+        body: 'WARNING! ' + hw_string + ' (ID ' + devices[devId].self_id + ') detected an intruder.',
       }
-      functions.logger.log(
-        'We have a new follower UID:',
-        devId,
-        'for user:',
-        '1'
-      );
-
-      // Get the list of device notification tokens.
-      const getDeviceTokensPromise = admin.database()
-          .ref(`/notificationTokens`).once('value');
-
-      // Get the follower profile.
-      const getDeviceInfoPromise = admin.database()
-          .ref('/devices/' + devId)
-
-      // The snapshot to the user's tokens.
-      let tokensSnapshot;
-
-      // The array containing all the user's tokens.
-      let tokens;
-
-      const results = await Promise.all([getDeviceTokensPromise,getDeviceInfoPromise]);
-      tokensSnapshot = results[0];
-      const device = results[1];
-
-      // Check if there are any device tokens.
-      if (!tokensSnapshot.hasChildren()) {
-        return functions.logger.log(
-          'There are no notification tokens to send to.'
-        );
+    };
+    const info_payload = {
+      notification: {
+        title: 'I²DS Messaging Service',
+        body: '' + hw_string + ' (ID ' + devices[devId].self_id + ') has been ' + state_string + '.',
       }
-      functions.logger.log(
-        'There are',
-        tokensSnapshot.numChildren(),
-        'tokens to send notifications to.'
-      );
-      functions.logger.log('Fetched device profile', device);
+    };
+    const priority = {
+      android: {
+        priority: 'high',
+      }
+    };
 
-      // Notification details.
-      const payload = {
+    // Listing all tokens as an array.
+    tokens = Object.keys(tokensSnapshot.val());
+    // Send notifications to all tokens.
+    const response = (devices[devId].state === 204) ? await admin.messaging().sendToDevice(tokens, warning_payload, priority) : await admin.messaging().sendToDevice(tokens, info_payload, priority);
+    // For each message check if there was an error.
+    const tokensToRemove = [];
+    response.results.forEach((result, index) => {
+      const error = result.error;
+      if (error) {
+        functions.logger.error(
+          'Failure sending notification to',
+          tokens[index],
+          error
+        );
+        // Cleanup the tokens who are not registered anymore.
+        if (error.code === 'messaging/invalid-registration-token' ||
+          error.code === 'messaging/registration-token-not-registered') {
+          tokensToRemove.push(tokensSnapshot.ref.child(tokens[index]).remove());
+        }
+      }
+    });
+    return Promise.all(tokensToRemove);
+  });
+
+/**
+ * Triggers when a new sensor is added to the database.
+ * Sends a message to indicate the new device.
+ */
+exports.I2DSdeviceAddedNotification = functions.region('asia-southeast1').database.ref('/devices/{devId}')
+  .onCreate(async (change, context) => {
+    const devId = (context.params.devId).replace(/\D/g, '');
+
+    const getTokensPromise = admin.database()
+      .ref(`/notificationTokens`).once('value');
+
+    const getDeviceInfoPromise = admin.database()
+      .ref(`/devices`).once('value');
+
+    let tokensSnapshot;
+    let deviceSnapshot;
+    let tokens;
+    let devices;
+
+    tokensSnapshot = await Promise.resolve(getTokensPromise);
+    deviceSnapshot = await Promise.resolve(getDeviceInfoPromise);
+
+    devices = Object.values(deviceSnapshot.val());
+
+    let hw_string;
+    switch (devices[devId].hw) {
+      case 136:
+        hw_string = 'CPN';
+        break;
+      case 137:
+        hw_string = 'PIRSN';
+        break;
+      case 138:
+        hw_string = 'ACSN';
+        break;
+      default:
+        hw_string = 'unknown';
+        break;
+    }
+
+    const new_payload = {
+      notification: {
+        title: 'I²DS Messaging Service',
+        body: '' + hw_string + ' (ID ' + devices[devId].self_id + ') has joined the system.',
+      }
+    };
+    // Listing all tokens as an array.
+    tokens = Object.keys(tokensSnapshot.val());
+    // Send notifications to all tokens.
+    const response = await admin.messaging().sendToDevice(tokens, new_payload);
+    // For each message check if there was an error.
+    const tokensToRemove = [];
+    response.results.forEach((result, index) => {
+      const error = result.error;
+      if (error) {
+        functions.logger.error(
+          'Failure sending notification to',
+          tokens[index],
+          error
+        );
+        // Cleanup the tokens who are not registered anymore.
+        if (error.code === 'messaging/invalid-registration-token' ||
+          error.code === 'messaging/registration-token-not-registered') {
+          tokensToRemove.push(tokensSnapshot.ref.child(tokens[index]).remove());
+        }
+      }
+    });
+    return Promise.all(tokensToRemove);
+  });
+
+/**
+ * Triggers when the cpn info data changes.
+ * Sends a message informing the user of either a PR or security failure.
+ */
+exports.I2DSinfoNotification = functions.region('asia-southeast1').database.ref('/info')
+  .onUpdate(async (change, context) => {
+
+    const getTokensPromise = admin.database()
+      .ref(`/notificationTokens`).once('value');
+
+    const getInfoPromise = admin.database()
+      .ref(`/info`).once('value');
+
+    let tokensSnapshot;
+    let infoSnapshot;
+    let tokens;
+    let info;
+
+    tokensSnapshot = await Promise.resolve(getTokensPromise);
+    infoSnapshot = await Promise.resolve(getInfoPromise);
+
+    info = Object.values(infoSnapshot.val());
+    let payload;
+    if (info.pr === 'false') {
+      payload = {
         notification: {
           title: 'I²DS Messaging Service',
-          body: `WARNING! ${device.hw} with ID ${device.self_id} detected an intruder.`,
-          icon: "https://www.gstatic.com/devrel-devsite/prod/vcf74735f7c06cd017eb0bfd91ed83c965bdd5f0cbef3dc678f0e1f5f31be7e67/firebase/images/touchicon-180.png"
+          body: 'Power failure detected.',
         }
       };
-
-      // Listing all tokens as an array.
-      tokens = Object.keys(tokensSnapshot.val());
-      // Send notifications to all tokens.
-      const response = await admin.messaging().sendToDevice(tokens, payload);
-      // For each message check if there was an error.
-      const tokensToRemove = [];
-      response.results.forEach((result, index) => {
-        const error = result.error;
-        if (error) {
-          functions.logger.error(
-            'Failure sending notification to',
-            tokens[index],
-            error
-          );
-          // Cleanup the tokens who are not registered anymore.
-          if (error.code === 'messaging/invalid-registration-token' ||
-              error.code === 'messaging/registration-token-not-registered') {
-            tokensToRemove.push(tokensSnapshot.ref.child(tokens[index]).remove());
-          }
+    }
+    else if (info.sec === 'false')
+    {
+      payload = {
+        notification: {
+          title: 'I²DS Messaging Service',
+          body: 'Security breach detected.',
         }
-      });
-      return Promise.all(tokensToRemove);
+      };
+    }
+
+
+
+    // Listing all tokens as an array.
+    tokens = Object.keys(tokensSnapshot.val());
+    // Send notifications to all tokens.
+    const response = await admin.messaging().sendToDevice(tokens, payload);
+    // For each message check if there was an error.
+    const tokensToRemove = [];
+    response.results.forEach((result, index) => {
+      const error = result.error;
+      if (error) {
+        functions.logger.error(
+          'Failure sending notification to',
+          tokens[index],
+          error
+        );
+        // Cleanup the tokens who are not registered anymore.
+        if (error.code === 'messaging/invalid-registration-token' ||
+          error.code === 'messaging/registration-token-not-registered') {
+          tokensToRemove.push(tokensSnapshot.ref.child(tokens[index]).remove());
+        }
+      }
     });
+    return Promise.all(tokensToRemove);
+  });

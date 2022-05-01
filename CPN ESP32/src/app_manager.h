@@ -38,22 +38,22 @@ extern TimerHandle_t ipcDeviceUpdateTimer;
 extern QueueHandle_t ipc2ManagerDeviceInfoQueue;
 extern bool updateDevice;
 
-struct
+typedef struct
 {
-  err_count_t IPC_REQUEST_SEND_NOACK = 0;
-  err_count_t IPC_REQUEST_SEND_FAIL = 0;
-  err_count_t IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW = 0;
-  err_count_t IPC_QUEUE_SEND_DEVICEINFO_FAIL = 0;
-  err_count_t IPC_CHANGE_INVALID = 0;
-  err_count_t IPC_CHANGE_INDEX_OUT_OF_BOUNDS = 0;
-  err_count_t MANAGER_QUEUE_SEND_DEVICEINDEX_OVERFLOW = 0;
-  err_count_t MANAGER_QUEUE_SEND_DEVICEINDEX_FAIL = 0;
-  err_count_t MANAGER_QUEUE_RECEIVE_OUT_OF_BOUNDS = 0;
-  err_count_t FIREBASE_AUTH_ERR = 0;
-  err_count_t FIREBASE_REGULAR_UPDATE_FAIL = 0;
-  err_count_t FIREBASE_FORCED_UPDATE_FAIL = 0;
-  err_count_t FIREBASE_ERR_QUEUE_OVERFLOW = 0;
-  err_count_t FIREBASE_NETWORK_FAIL = 0;
-} count;
-
+  err_count_t IPC_REQUEST_SEND_NOACK;
+  err_count_t IPC_REQUEST_SEND_FAIL;
+  err_count_t IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW;
+  err_count_t IPC_QUEUE_SEND_DEVICEINFO_FAIL;
+  err_count_t IPC_CHANGE_INVALID;
+  err_count_t IPC_CHANGE_INDEX_OUT_OF_BOUNDS;
+  err_count_t MANAGER_QUEUE_SEND_DEVICEINDEX_OVERFLOW;
+  err_count_t MANAGER_QUEUE_SEND_DEVICEINDEX_FAIL;
+  err_count_t MANAGER_QUEUE_RECEIVE_OUT_OF_BOUNDS;
+  err_count_t FIREBASE_AUTH_ERR;
+  err_count_t FIREBASE_REGULAR_UPDATE_FAIL;
+  err_count_t FIREBASE_FORCED_UPDATE_FAIL;
+  err_count_t FIREBASE_ERR_QUEUE_OVERFLOW;
+  err_count_t FIREBASE_NETWORK_FAIL;
+} ErrCount;
+extern ErrCount err_count;
 #endif // APP_MANAGER_H
