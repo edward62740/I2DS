@@ -8161,3 +8161,544 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64
 
 !ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-05-01 19:13:39.933
 !MESSAGE Deleted Shared Daemon Version File: C:\Users\█████████\.uc\cli\mainstudio.running.version
+!SESSION 2022-05-02 08:45:56.323 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.5
+java.vendor=Amazon.com Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.silabs.ss.platform.jetty.server 1 0 2022-05-02 08:45:59.582
+!MESSAGE ContentServer started at: 127.0.0.1, 50550
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-05-02 08:45:59.613
+!MESSAGE com.silabs.ss.tool.launcher.product found! Writing main studio shared file
+
+!ENTRY com.silabs.ss.tool.installer.core 1 0 2022-05-02 08:46:19.947
+!MESSAGE realFeaturesSet is null or empty for com.silabs.wireless.app_connect.feature.metadata.resource
+
+!ENTRY com.silabs.ss.tool.installer.core 1 0 2022-05-02 08:46:19.947
+!MESSAGE realFeaturesSet is null or empty for com.silabs.apack.em3xx.feature.metadata.resource
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-05-02 08:46:20.025
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.tool.installer.core 2 0 2022-05-02 08:46:21.040
+!MESSAGE Problem getting package resources: changelog
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-05-02 08:46:22.509
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.support.browser.html 1 0 2022-05-02 09:06:55.470
+!MESSAGE Browser workarea set to: C:\Users\█████████\Desktop\I2DS\.browser
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-02 09:10:19.328
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-05-02 09:10:40.278
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-05-02 09:10:49.770
+!MESSAGE Unknown context [rc.root.000440240220] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-05-02 09:10:50.534
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440240220 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-05-02 09:10:50.534
+!MESSAGE Fail to get TCF context for process: rc.root.000440240220
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-05-02 09:12:43.428
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-05-02 09:12:52.829
+!MESSAGE Unknown context [rc.root.000440240220] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-05-02 09:12:53.590
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440240220 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-05-02 09:12:53.590
+!MESSAGE Fail to get TCF context for process: rc.root.000440240220
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-05-02 09:16:21.726
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-05-02 09:16:27.956
+!MESSAGE Unknown context [rc.root.000440240220] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-05-02 09:16:28.727
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440240220 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-05-02 09:16:28.727
+!MESSAGE Fail to get TCF context for process: rc.root.000440240220
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-05-02 09:17:16.819
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-05-02 09:17:26.199
+!MESSAGE Unknown context [rc.root.000440240220] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-05-02 09:17:26.963
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440240220 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-05-02 09:17:26.963
+!MESSAGE Fail to get TCF context for process: rc.root.000440240220
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-05-02 09:19:44.254
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-05-02 09:19:53.832
+!MESSAGE Unknown context [rc.root.000440240220] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-05-02 09:19:54.538
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440240220 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-05-02 09:19:54.538
+!MESSAGE Fail to get TCF context for process: rc.root.000440240220
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-05-02 09:21:50.462
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-05-02 09:21:59.777
+!MESSAGE Unknown context [rc.root.000440240220] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-05-02 09:22:00.536
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440240220 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-05-02 09:22:00.536
+!MESSAGE Fail to get TCF context for process: rc.root.000440240220
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-02 18:41:03.859
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-05-02 18:41:36.604
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-05-02 18:41:46.070
+!MESSAGE Unknown context [rc.root.000440240220] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-05-02 18:41:46.829
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440240220 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-05-02 18:41:46.829
+!MESSAGE Fail to get TCF context for process: rc.root.000440240220
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-02 18:42:07.453
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-05-02 18:44:25.382
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-05-02 18:44:34.734
+!MESSAGE Unknown context [rc.root.000440240220] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-05-02 18:44:35.495
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440240220 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-05-02 18:44:35.495
+!MESSAGE Fail to get TCF context for process: rc.root.000440240220
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-05-02 18:46:25.587
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-05-02 18:46:34.927
+!MESSAGE Unknown context [rc.root.000440240220] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-05-02 18:46:35.690
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440240220 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-05-02 18:46:35.690
+!MESSAGE Fail to get TCF context for process: rc.root.000440240220
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-05-02 18:53:38.371
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-05-02 18:53:47.684
+!MESSAGE Unknown context [rc.root.000440240220] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-05-02 18:53:48.445
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440240220 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-05-02 18:53:48.445
+!MESSAGE Fail to get TCF context for process: rc.root.000440240220
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-05-02 18:58:05.110
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-05-02 18:58:14.565
+!MESSAGE Unknown context [rc.root.000440240220] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-05-02 18:58:15.322
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440240220 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-05-02 18:58:15.322
+!MESSAGE Fail to get TCF context for process: rc.root.000440240220
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-05-02 19:00:36.157
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-05-02 19:00:44.095
+!MESSAGE Unknown context [rc.root.000440240220] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-05-02 19:00:44.852
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440240220 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-05-02 19:00:44.852
+!MESSAGE Fail to get TCF context for process: rc.root.000440240220
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-05-02 19:05:25.776
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 4 0 2022-05-02 19:05:35.661
+!MESSAGE Lost connection to agent
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:186)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.io.BufferedInputStream.read1(BufferedInputStream.java:290)
+	at java.base/java.io.BufferedInputStream.read(BufferedInputStream.java:351)
+	at java.base/java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:185)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:327)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-05-02 19:05:35.661
+!MESSAGE Lost connection to debugger agent "Silicon Labs TCF Agent". It's usually because the agent died abnormally.
+
+The debug session "PIRSN GNU ARM v10.2.1 - Default" will be terminated.
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:186)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.io.BufferedInputStream.read1(BufferedInputStream.java:290)
+	at java.base/java.io.BufferedInputStream.read(BufferedInputStream.java:351)
+	at java.base/java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:185)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:327)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-05-02 19:05:39.952
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.concurrent.RequestMonitorWithProgress@4aeab1f4): Status ERROR: com.silabs.ss.framework.debugger.tcf.agent code=0 Failed to connect to device java.lang.Exception: java.lang.Error: Channel is closed' resulted in an error.
+!SUBENTRY 1 com.silabs.ss.framework.debugger.tcf.agent 4 0 2022-05-02 19:05:39.952
+!MESSAGE Failed to connect to device
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at com.silabs.ss.framework.debugger.internal.api.tcf.services.DebugAdapterProxy$1.<init>(DebugAdapterProxy.java:38)
+	at com.silabs.ss.framework.debugger.internal.api.tcf.services.DebugAdapterProxy.connect(DebugAdapterProxy.java:38)
+	at com.silabs.ss.framework.debugger.api.tcf.services.TCFTaskFactory$1.run(TCFTaskFactory.java:54)
+	at org.eclipse.tcf.util.TCFTask$1.run(TCFTask.java:55)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 6 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 4 0 2022-05-02 19:05:39.959
+!MESSAGE Failed to connect to device
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at com.silabs.ss.framework.debugger.internal.api.tcf.services.DebugAdapterProxy$1.<init>(DebugAdapterProxy.java:38)
+	at com.silabs.ss.framework.debugger.internal.api.tcf.services.DebugAdapterProxy.connect(DebugAdapterProxy.java:38)
+	at com.silabs.ss.framework.debugger.api.tcf.services.TCFTaskFactory$1.run(TCFTaskFactory.java:54)
+	at org.eclipse.tcf.util.TCFTask$1.run(TCFTask.java:55)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 6 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-05-02 19:06:36.479
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-05-02 19:06:47.648
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.concurrent.RequestMonitorWithProgress@39525dc1): Status ERROR: com.silabs.ss.framework.debugger.tcf.agent code=0 Failed to connect to device org.eclipse.tcf.core.ErrorReport: TCF error report:
+  Error text: Failed to connect to target system
+  Error code: 131073
+' resulted in an error.
+!SUBENTRY 1 com.silabs.ss.framework.debugger.tcf.agent 4 0 2022-05-02 19:06:47.648
+!MESSAGE Failed to connect to device
+!STACK 0
+org.eclipse.tcf.core.ErrorReport: TCF error report:
+  Error text: Failed to connect to target system
+  Error code: 131073
+
+	at org.eclipse.tcf.core.Command.toError(Command.java:266)
+	at com.silabs.ss.framework.debugger.internal.api.tcf.services.DebugAdapterProxy$1.done(DebugAdapterProxy.java:43)
+	at org.eclipse.tcf.core.Command.result(Command.java:121)
+	at org.eclipse.tcf.core.AbstractChannel.handleInput(AbstractChannel.java:1116)
+	at org.eclipse.tcf.core.AbstractChannel.access$0(AbstractChannel.java:1058)
+	at org.eclipse.tcf.core.AbstractChannel$1$1.run(AbstractChannel.java:369)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 4 0 2022-05-02 19:06:47.653
+!MESSAGE Failed to connect to device
+!STACK 0
+org.eclipse.tcf.core.ErrorReport: TCF error report:
+  Error text: Failed to connect to target system
+  Error code: 131073
+
+	at org.eclipse.tcf.core.Command.toError(Command.java:266)
+	at com.silabs.ss.framework.debugger.internal.api.tcf.services.DebugAdapterProxy$1.done(DebugAdapterProxy.java:43)
+	at org.eclipse.tcf.core.Command.result(Command.java:121)
+	at org.eclipse.tcf.core.AbstractChannel.handleInput(AbstractChannel.java:1116)
+	at org.eclipse.tcf.core.AbstractChannel.access$0(AbstractChannel.java:1058)
+	at org.eclipse.tcf.core.AbstractChannel$1$1.run(AbstractChannel.java:369)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-05-02 19:07:50.942
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-05-02 19:08:00.271
+!MESSAGE Unknown context [rc.root.000440240220] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-05-02 19:08:01.030
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440240220 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-05-02 19:08:01.030
+!MESSAGE Fail to get TCF context for process: rc.root.000440240220
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-05-02 19:18:06.390
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 4 0 2022-05-02 19:18:16.011
+!MESSAGE Lost connection to agent
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:186)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.io.BufferedInputStream.read1(BufferedInputStream.java:290)
+	at java.base/java.io.BufferedInputStream.read(BufferedInputStream.java:351)
+	at java.base/java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:185)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:327)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-05-02 19:18:16.012
+!MESSAGE Lost connection to debugger agent "Silicon Labs TCF Agent". It's usually because the agent died abnormally.
+
+The debug session "PIRSN GNU ARM v10.2.1 - Default" will be terminated.
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:186)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.io.BufferedInputStream.read1(BufferedInputStream.java:290)
+	at java.base/java.io.BufferedInputStream.read(BufferedInputStream.java:351)
+	at java.base/java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:185)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:327)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-05-02 19:19:13.044
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.concurrent.RequestMonitorWithProgress@17c6df82): Status ERROR: com.silabs.ss.framework.debugger.tcf.agent code=0 Failed to connect to device java.lang.Exception: java.lang.Error: Channel is closed' resulted in an error.
+!SUBENTRY 1 com.silabs.ss.framework.debugger.tcf.agent 4 0 2022-05-02 19:19:13.044
+!MESSAGE Failed to connect to device
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at com.silabs.ss.framework.debugger.internal.api.tcf.services.DebugAdapterProxy$1.<init>(DebugAdapterProxy.java:38)
+	at com.silabs.ss.framework.debugger.internal.api.tcf.services.DebugAdapterProxy.connect(DebugAdapterProxy.java:38)
+	at com.silabs.ss.framework.debugger.api.tcf.services.TCFTaskFactory$1.run(TCFTaskFactory.java:54)
+	at org.eclipse.tcf.util.TCFTask$1.run(TCFTask.java:55)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 6 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 4 0 2022-05-02 19:19:13.048
+!MESSAGE Failed to connect to device
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at com.silabs.ss.framework.debugger.internal.api.tcf.services.DebugAdapterProxy$1.<init>(DebugAdapterProxy.java:38)
+	at com.silabs.ss.framework.debugger.internal.api.tcf.services.DebugAdapterProxy.connect(DebugAdapterProxy.java:38)
+	at com.silabs.ss.framework.debugger.api.tcf.services.TCFTaskFactory$1.run(TCFTaskFactory.java:54)
+	at org.eclipse.tcf.util.TCFTask$1.run(TCFTask.java:55)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 6 more
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-05-02 19:19:20.360
+!MESSAGE Deleted Shared Daemon File: C:\Users\█████████\.uc\cli\mainstudio.running
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-05-02 19:19:20.360
+!MESSAGE Deleted Shared Daemon Version File: C:\Users\█████████\.uc\cli\mainstudio.running.version
+
+!ENTRY org.eclipse.tcf 4 0 2022-05-02 19:19:20.471
+!MESSAGE Failed to shutdown TCF event dispatch thread
+!STACK 0
+java.lang.InterruptedException
+	at java.base/java.lang.Object.wait(Native Method)
+	at java.base/java.lang.Thread.join(Thread.java:1305)
+	at java.base/java.lang.Thread.join(Thread.java:1379)
+	at org.eclipse.tcf.EventQueue.shutdown(EventQueue.java:76)
+	at org.eclipse.tcf.Activator.stop(Activator.java:154)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:899)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:1)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.stop(BundleContextImpl.java:891)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.stopWorker0(EquinoxBundle.java:1029)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.stopWorker(EquinoxBundle.java:370)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:658)
+	at org.eclipse.osgi.container.Module.stop(Module.java:520)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.decStartLevel(ModuleContainer.java:1885)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1760)
+	at org.eclipse.osgi.container.SystemModule.stopWorker(SystemModule.java:275)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule.stopWorker(EquinoxBundle.java:202)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:658)
+	at org.eclipse.osgi.container.Module.stop(Module.java:520)
+	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:207)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:220)
+	at java.base/java.lang.Thread.run(Thread.java:834)

@@ -24,32 +24,32 @@ sdk: {id: gecko_sdk, version: 4.0.2}
 toolchain_settings:
 - {value: debug, option: optimize}
 component:
+- {id: emlib_iadc}
 - {id: connect_parent_support}
+- {id: legacy_hal}
+- {id: app_log}
 - {id: connect_debug_print}
+- {id: connect_stack_common}
 - {id: iostream_retarget_stdio}
+- {id: sl_system}
 - {id: connect_frequency_hopping}
 - {id: sl_sensor_sink_core}
 - {id: emlib_pcnt}
 - {id: mpu}
-- {id: iostream_recommended_stream}
-- {id: emlib_acmp}
-- instance: [comms, stat]
-  id: simple_led
-- {id: restrictions_profile_connect}
-- {id: device_init}
-- {id: emlib_iadc}
-- {id: legacy_hal}
-- {id: app_log}
-- {id: connect_stack_common}
-- {id: sl_system}
 - {id: radio_config_simple_connect_singlephy}
 - {id: connect_aes_security}
 - {id: emlib_lesense}
+- {id: iostream_recommended_stream}
 - {id: restrictions_profile_long_range}
 - {id: emlib_letimer}
+- {id: emlib_acmp}
+- instance: [comms, stat]
+  id: simple_led
 - {id: printf}
 - {id: token_manager}
+- {id: restrictions_profile_connect}
 - {id: connect_mac_queue}
+- {id: device_init}
 - {id: connect_poll}
 - {id: iostream_debug}
 - {id: app_assert}

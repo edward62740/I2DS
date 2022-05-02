@@ -31,6 +31,16 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>gecko_sdk_4.0.2/platform/driver/debug/inc/sl_debug_swo.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/driver/debug/inc/sl_debug_swo.h</locationURI>
+		</link>
+		<link>
+			<name>gecko_sdk_4.0.2/platform/driver/debug/src/sl_debug_swo.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/driver/debug/src/sl_debug_swo.c</locationURI>
+		</link>
+		<link>
 			<name>gecko_sdk_4.0.2/platform/service/iostream/inc/sl_iostream_debug.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/inc/sl_iostream_debug.h</locationURI>

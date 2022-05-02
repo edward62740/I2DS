@@ -27,7 +27,7 @@ bool FLAGfirebaseRegularUpdate = true;
 bool FLAGfirebaseForceUpdate = false;
 uint8_t firebaseForceUpdateDeviceId = 0;
 TimerHandle_t firebaseUpdateTimer;
-ErrCount err_count = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+ErrCount err_count = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 void firebaseUpdateTimerCallback(TimerHandle_t firebaseUpdateTimer)
 {
@@ -37,7 +37,6 @@ void managerDeviceTimerCallback(TimerHandle_t managerDeviceTimer)
 {
   uint8_t id = (uint32_t)pvTimerGetTimerID(managerDeviceTimer);
   sensorInfoExt[id].alive = false;
-  Serial.print("EXPIRED: ");
   APP_LOG_INFO(id);
   if (uxQueueSpacesAvailable(manager2GuiDeviceIndexQueue) == 0)
   {
@@ -137,6 +136,8 @@ void firebaseTask(void *pvParameters)
   Firebase.updateNode(fbdo, "/req/send", errataJson);
   while (1)
   {
+    if (!Firebase.authenticated())
+      err_count.FIREBASE_AUTH_ERR++;
     if (Firebase.ready() && FLAGfirebaseForceUpdate)
     {
       FirebaseJson deviceinfoJson;
@@ -161,12 +162,6 @@ void firebaseTask(void *pvParameters)
         for (size_t i = 0; i < sensorIndex; i++)
         {
           arr->get(result, i);
-          Serial.print("Array index: ");
-          Serial.print(i);
-          Serial.print(", type: ");
-          Serial.print(result.type);
-          Serial.print(", value: ");
-          Serial.println(result.to<int>());
           if (result.to<int>() != 0 && i < sensorIndex)
           {
             if (i >= 0 && i <= sensorIndex && (result.to<int>() == (int)S_ACTIVE || result.to<int>() == (int)S_INACTIVE))
@@ -188,21 +183,22 @@ void firebaseTask(void *pvParameters)
       APP_LOG_INFO("free heap: ");
       APP_LOG_INFO(xPortGetFreeHeapSize());
       FirebaseJson sensorinfoJson;
-      APP_LOG_INFO(Firebase.authenticated());
+
       // Firebase.setTimestamp(fbdo, "/info/timestamp");
       for (uint8_t i = 0; i < sensorIndex; i++)
       {
 
         FirebaseJson deviceinfoJson;
         String device = "/devices/dev" + (String)i;
-        
+
         if (sensorInfoExt[i].alive)
         {
           deviceinfoJson.set("timestamp/.sv", "timestamp");
         }
-        else{
+        else
+        {
           Firebase.getDouble(fbdo, device + "/timestamp");
-           deviceinfoJson.add("timestamp", fbdo.to<uint64_t>());
+          deviceinfoJson.add("timestamp", fbdo.to<uint64_t>());
         }
         deviceinfoJson.add("hw", sensorInfo[i].hw);
         deviceinfoJson.add("state", sensorInfo[i].state);
@@ -232,6 +228,7 @@ void firebaseTask(void *pvParameters)
       errJson.add("FIREBASE_FORCED_UPDATE_FAIL", err_count.FIREBASE_FORCED_UPDATE_FAIL);
       errJson.add("FIREBASE_ERR_QUEUE_OVERFLOW", err_count.FIREBASE_ERR_QUEUE_OVERFLOW);
       errJson.add("FIREBASE_NETWORK_FAIL", err_count.FIREBASE_NETWORK_FAIL);
+      errJson.add("IPC_TOTAL_EXCHANGES", err_count.IPC_TOTAL_EXCHANGES);
       sensorinfoJson.set("/errors", errJson);
       FirebaseJson iJson;
       iJson.add("con", sensorIndex);
@@ -247,7 +244,7 @@ void firebaseTask(void *pvParameters)
       iJson.add("pr", "true");
       sensorinfoJson.set("/info", iJson);
       if (Firebase.updateNode(fbdo, "/", sensorinfoJson))
-      {
+      { 
       }
       else
       {
@@ -309,8 +306,12 @@ void managerTask(void *pvParameters)
         if (uxQueueSpacesAvailable(manager2GuiDeviceIndexQueue) == 0)
         {
           xQueueReset(manager2GuiDeviceIndexQueue);
+          err_count.MANAGER_QUEUE_SEND_DEVICEINDEX_OVERFLOW++;
         }
-        xQueueSend(manager2GuiDeviceIndexQueue, (void *)&tmpInfo.id, 0);
+        if (xQueueSend(manager2GuiDeviceIndexQueue, (void *)&tmpInfo.id, 0) == 0)
+        {
+          err_count.MANAGER_QUEUE_SEND_DEVICEINDEX_FAIL++;
+        }
         if (sensorInfo[tmpInfo.id].state == S_ALERTING)
           FLAGfirebaseForceUpdate = true;
         firebaseForceUpdateDeviceId = tmpInfo.id;
