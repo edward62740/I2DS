@@ -275,6 +275,9 @@ void displayTask(void *pvParameters)
                 case S_ALERTING:
                     tft.print("ALERTING");
                     break;
+                case S_FAULT_HW:
+                    tft.print("WARMUP");
+                    break;
                 case S_INACTIVE:
                     tft.print("INACTIVE");
                     break;

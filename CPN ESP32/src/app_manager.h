@@ -54,6 +54,7 @@ typedef struct
   err_count_t FIREBASE_FORCED_UPDATE_FAIL;
   err_count_t FIREBASE_ERR_QUEUE_OVERFLOW;
   err_count_t FIREBASE_NETWORK_FAIL;
+  err_count_t IPC_TOTAL_EXCHANGES;
 } ErrCount;
 extern ErrCount err_count;
 #endif // APP_MANAGER_H

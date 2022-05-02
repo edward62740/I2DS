@@ -81,6 +81,7 @@ void ipcSender(uint16_t id, uint8_t state)
 }
 bool ipcParser(char *buffer, size_t len)
 {
+    err_count.IPC_TOTAL_EXCHANGES++;
     if (len > 255)
         return false;
     char tmpBuf[len];
@@ -123,8 +124,8 @@ bool ipcParser(char *buffer, size_t len)
                             xQueueReset(ipc2ManagerDeviceInfoQueue);
                             err_count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW++;
                         }
-
-                        if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) != 0)
+                        
+                        if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) == 0)
                             err_count.IPC_QUEUE_SEND_DEVICEINFO_FAIL++;
                     }
                     break;
@@ -148,7 +149,7 @@ bool ipcParser(char *buffer, size_t len)
                     err_count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW++;
                 }
 
-                if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) != 0)
+                if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) == 0)
                     err_count.IPC_QUEUE_SEND_DEVICEINFO_FAIL++;
                 sensorIndex++;
             }
@@ -170,6 +171,7 @@ bool ipcParser(char *buffer, size_t len)
             if (sensorInfo[i].self_id == tmpInfo.self_id)
             {
                 DeviceInfoExt queueSend;
+                APP_LOG_INFO(tmpInfo.state);
                 queueSend.info.battery_voltage = tmpInfo.battery_voltage;
                 queueSend.info.state = tmpInfo.state;
                 queueSend.info.rssi = tmpInfo.rssi;
@@ -185,7 +187,7 @@ bool ipcParser(char *buffer, size_t len)
                     err_count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW++;
                 }
 
-                if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) != 0)
+                if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) == 0)
                     err_count.IPC_QUEUE_SEND_DEVICEINFO_FAIL++;
                 break;
             }
@@ -221,7 +223,7 @@ bool ipcParser(char *buffer, size_t len)
                     
                 }
 
-                if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) != 0)
+                if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) == 0)
                     err_count.IPC_QUEUE_SEND_DEVICEINFO_FAIL++;
                 break;
             }
@@ -234,6 +236,9 @@ bool ipcParser(char *buffer, size_t len)
             {
                 err_count.IPC_CHANGE_INDEX_OUT_OF_BOUNDS++;
                 Serial1.write(ipc_get_list, sizeof(ipc_get_list));
+            }
+            else{
+                err_count.IPC_CHANGE_INVALID++;
             }
         }
 
@@ -269,7 +274,7 @@ bool ipcParser(char *buffer, size_t len)
                         err_count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW++;
                     }
 
-                    if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) != 0)
+                    if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) == 0)
                         err_count.IPC_QUEUE_SEND_DEVICEINFO_FAIL++;
 
                     FLAGipcResponsePending = false;
