@@ -244,7 +244,7 @@ void firebaseTask(void *pvParameters)
       iJson.add("pr", "true");
       sensorinfoJson.set("/info", iJson);
       if (Firebase.updateNode(fbdo, "/", sensorinfoJson))
-      { 
+      {
       }
       else
       {
@@ -283,7 +283,11 @@ void managerTask(void *pvParameters)
         if (~index & 1)
           sensorInfo[tmpInfo.id].hw = tmpInfo.info.hw;
         if (~index & 2)
+        {
+          if ((sensorInfo[tmpInfo.id].state != tmpInfo.info.state) && (tmpInfo.info.state == S_ACTIVE || tmpInfo.info.state == S_ALERTING || tmpInfo.info.state == S_INACTIVE))
           sensorInfo[tmpInfo.id].state = tmpInfo.info.state;
+        }
+
         if (~index & 4)
           sensorInfo[tmpInfo.id].battery_voltage = tmpInfo.info.battery_voltage;
         if (~index & 8)

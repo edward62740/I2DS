@@ -1,6 +1,6 @@
-19:17:18 **** Incremental Build of configuration GNU ARM v10.2.1 - Default for project PIRSN ****
+15:48:20 **** Build of configuration GNU ARM v10.2.1 - Default for project PIRSN ****
 make -j8 all 
 make: Nothing to be done for 'all'.
 
-19:17:18 Build Finished. 0 errors, 0 warnings. (took 404ms)
+15:48:23 Build Finished. 0 errors, 0 warnings. (took 3s.41ms)
 
