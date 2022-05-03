@@ -20,7 +20,7 @@ exports.I2DSstateChangeNotification = functions.region('asia-southeast1').databa
     let tokensSnapshot;
     let deviceSnapshot;
     let tokens;
-    let devices;
+    let devices, levels;
 
     tokensSnapshot = await Promise.resolve(getTokensPromise);
     deviceSnapshot = await Promise.resolve(getDeviceInfoPromise);
@@ -39,31 +39,44 @@ exports.I2DSstateChangeNotification = functions.region('asia-southeast1').databa
         hw_string = 'ACSN';
         break;
       default:
-        hw_string = 'unknown';
+        hw_string = 'Unknown device';
         break;
     }
     let state_string;
     switch (devices[devId].state) {
       case 5:
-        state_string = 'activated';
+        state_string = 'been activated';
         break;
       case 6:
-        state_string = 'deactivated';
+        state_string = 'been deactivated';
+        break;
+      case 202:
+        state_string = 'detected a hardware fault';
+        break;
+      case 203:
+        state_string = 'detected an operational fault';
         break;
       default:
-        state_string = 'unknown';
+        state_string = 'encountered an unknown error';
         break;
     }
-    const warning_payload = {
+    const warning_payload_pirsn = {
       notification: {
         title: 'I²DS Messaging Service',
-        body: 'WARNING! ' + hw_string + ' (ID ' + devices[devId].self_id + ') detected an intruder.',
+        body: 'WARNING! ' + hw_string + ' (ID ' + devices[devId].self_id + ') has detected motion.',
+      }
+    };
+    const warning_payload_acsn = {
+      notification: {
+        title: 'I²DS Messaging Service',
+        body: 'WARNING! ' + hw_string + ' (ID ' + devices[devId].self_id + ') has detected that a door has been opened. Refer to the tagged location of this sensor.',
       }
     };
     const info_payload = {
       notification: {
         title: 'I²DS Messaging Service',
-        body: '' + hw_string + ' (ID ' + devices[devId].self_id + ') has been ' + state_string + '.',
+        body: '' + hw_string + ' (ID ' + devices[devId].self_id + ') has ' + state_string + '.',
+        icon: 'https://github.com/edward62740/Wireless-Mesh-Network-System/blob/master/Documentation/ltsn.png',
       }
     };
     const priority = {
@@ -74,16 +87,18 @@ exports.I2DSstateChangeNotification = functions.region('asia-southeast1').databa
 
     // Listing all tokens as an array.
     tokens = Object.keys(tokensSnapshot.val());
-    // Send notifications to all tokens.
-    const response = (devices[devId].state === 204) ? await admin.messaging().sendToDevice(tokens, warning_payload, priority) : await admin.messaging().sendToDevice(tokens, info_payload, priority);
-    // For each message check if there was an error.
+    levels = Object.values(tokensSnapshot.val());
     const tokensToRemove = [];
-    response.results.forEach((result, index) => {
-      const error = result.error;
+    await Promise.all(tokens.map(async (token, index) => {
+      let response = (devices[devId].state === 204) ?
+        ((devices[devId].hw == 137) ? await admin.messaging().sendToDevice(token, warning_payload_pirsn, priority)
+          : await admin.messaging().sendToDevice(token, warning_payload_acsn, priority))
+        : (levels[index] == 1 || levels[index] == 3) ? await admin.messaging().sendToDevice(token, info_payload, priority) : null;
+      const error = response.results[0].error;
       if (error) {
         functions.logger.error(
           'Failure sending notification to',
-          tokens[index],
+          token,
           error
         );
         // Cleanup the tokens who are not registered anymore.
@@ -92,7 +107,7 @@ exports.I2DSstateChangeNotification = functions.region('asia-southeast1').databa
           tokensToRemove.push(tokensSnapshot.ref.child(tokens[index]).remove());
         }
       }
-    });
+    }));
     return Promise.all(tokensToRemove);
   });
 
@@ -132,7 +147,7 @@ exports.I2DSdeviceAddedNotification = functions.region('asia-southeast1').databa
         hw_string = 'ACSN';
         break;
       default:
-        hw_string = 'unknown';
+        hw_string = 'Unknown device';
         break;
     }
 
@@ -183,13 +198,19 @@ exports.I2DSinfoNotification = functions.region('asia-southeast1').database.ref(
     let infoSnapshot;
     let tokens;
     let info;
+    let levels;
 
     tokensSnapshot = await Promise.resolve(getTokensPromise);
     infoSnapshot = await Promise.resolve(getInfoPromise);
 
     info = Object.values(infoSnapshot.val());
+    functions.logger.error(
+      'INFO',
+      info[0].pr,
+      info[0].sec
+    );
     let payload;
-    if (info.pr === 'false') {
+    if (info.pr == "false") {
       payload = {
         notification: {
           title: 'I²DS Messaging Service',
@@ -197,8 +218,7 @@ exports.I2DSinfoNotification = functions.region('asia-southeast1').database.ref(
         }
       };
     }
-    else if (info.sec === 'false')
-    {
+    else if (info.sec == "false") {
       payload = {
         notification: {
           title: 'I²DS Messaging Service',
@@ -206,29 +226,37 @@ exports.I2DSinfoNotification = functions.region('asia-southeast1').database.ref(
         }
       };
     }
-
-
+    else  {
+      payload = {
+        notification: {
+          title: 'I²DS Messaging Service',
+          body: 'no.',
+        }
+      };
+    }
 
     // Listing all tokens as an array.
     tokens = Object.keys(tokensSnapshot.val());
-    // Send notifications to all tokens.
-    const response = await admin.messaging().sendToDevice(tokens, payload);
-    // For each message check if there was an error.
+    levels = Object.values(tokensSnapshot.val());
     const tokensToRemove = [];
-    response.results.forEach((result, index) => {
-      const error = result.error;
-      if (error) {
-        functions.logger.error(
-          'Failure sending notification to',
-          tokens[index],
-          error
-        );
-        // Cleanup the tokens who are not registered anymore.
-        if (error.code === 'messaging/invalid-registration-token' ||
-          error.code === 'messaging/registration-token-not-registered') {
-          tokensToRemove.push(tokensSnapshot.ref.child(tokens[index]).remove());
+    await Promise.all(tokens.map(async (token, index) => {
+      if (levels[index] == 0 || levels[index] == 2) {
+        let response = await admin.messaging().sendToDevice(tokens, payload);
+        const error = response.results[0].error;
+        if (error) {
+          functions.logger.error(
+            'Failure sending notification to',
+            token,
+            error
+          );
+          // Cleanup the tokens who are not registered anymore.
+          if (error.code === 'messaging/invalid-registration-token' ||
+            error.code === 'messaging/registration-token-not-registered') {
+            tokensToRemove.push(tokensSnapshot.ref.child(tokens[index]).remove());
+          }
         }
       }
-    });
+
+    }));
     return Promise.all(tokensToRemove);
   });

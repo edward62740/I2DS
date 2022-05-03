@@ -8702,3 +8702,1534 @@ java.lang.InterruptedException
 	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:207)
 	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:220)
 	at java.base/java.lang.Thread.run(Thread.java:834)
+!SESSION 2022-05-03 12:56:42.728 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.5
+java.vendor=Amazon.com Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.silabs.ss.platform.jetty.server 1 0 2022-05-03 12:56:45.895
+!MESSAGE ContentServer started at: 127.0.0.1, 49815
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-05-03 12:56:45.915
+!MESSAGE com.silabs.ss.tool.launcher.product found! Writing main studio shared file
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-03 12:57:04.562
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-05-03 12:57:05.717
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.tool.installer.core 2 0 2022-05-03 12:57:08.625
+!MESSAGE Problem getting package resources: changelog
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-05-03 12:57:10.121
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.support.browser.html 1 0 2022-05-03 12:57:10.949
+!MESSAGE Browser workarea set to: C:\Users\█████████\Desktop\I2DS\.browser
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 12:57:15.605
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 12:57:15.660
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 12:57:15.668
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.tool.launcher.ui 4 0 2022-05-03 12:57:19.288
+!MESSAGE Error getting document links from docs.silabs.com
+!STACK 0
+java.util.concurrent.CompletionException: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:645)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)
+	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:840)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:479)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+Caused by: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at org.json.JSONTokener.syntaxError(JSONTokener.java:433)
+	at org.json.JSONObject.<init>(JSONObject.java:195)
+	at org.json.JSONObject.<init>(JSONObject.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)
+	... 9 more
+
+!ENTRY com.silabs.ss.tool.launcher.ui 4 0 2022-05-03 12:57:19.609
+!MESSAGE Error getting document links from docs.silabs.com
+!STACK 0
+java.util.concurrent.CompletionException: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:645)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)
+	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:840)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:479)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+Caused by: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at org.json.JSONTokener.syntaxError(JSONTokener.java:433)
+	at org.json.JSONObject.<init>(JSONObject.java:195)
+	at org.json.JSONObject.<init>(JSONObject.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)
+	... 9 more
+
+!ENTRY com.silabs.ss.tool.launcher.ui 4 0 2022-05-03 12:57:19.876
+!MESSAGE Error getting document links from docs.silabs.com
+!STACK 0
+java.util.concurrent.CompletionException: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:645)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)
+	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:840)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:479)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+Caused by: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at org.json.JSONTokener.syntaxError(JSONTokener.java:433)
+	at org.json.JSONObject.<init>(JSONObject.java:195)
+	at org.json.JSONObject.<init>(JSONObject.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)
+	... 9 more
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 12:57:37.313
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 12:57:37.753
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 12:57:38.661
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 12:57:38.882
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 12:57:39.099
+!MESSAGE The connected device does not have a Secure Element (ID Code 3041202e)
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 12:57:39.319
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 12:57:43.234
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 12:57:43.675
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 12:57:44.555
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 12:57:44.775
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 12:57:44.996
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 12:57:45.219
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 12:59:14.676
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 12:59:21.888
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 12:59:25.729
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-03 12:59:26.449
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 12:59:27.586
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 12:59:27.614
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 12:59:29.652
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 12:59:29.653
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 12:59:29.675
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 12:59:33.884
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 12:59:34.216
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 12:59:35.091
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 12:59:35.309
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 12:59:35.530
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 12:59:35.751
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 12:59:45.603
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-03 12:59:46.342
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 12:59:49.656
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 13:02:51.086
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-03 13:02:51.831
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:02:52.471
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:02:53.018
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:02:54.006
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:02:54.223
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:02:54.445
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:02:54.664
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:02:57.060
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:02:57.393
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:02:58.264
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:02:58.483
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:02:58.701
+!MESSAGE The connected device does not have a Secure Element (ID Code 3041202e)
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:02:58.925
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 13:03:03.965
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:04:06.241
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:04:06.572
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:04:07.459
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:04:07.680
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:04:07.896
+!MESSAGE The connected device does not have a Secure Element (ID Code 3041202e)
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:04:08.117
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:04:32.971
+!MESSAGE Writing AP defaults failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:04:34.177
+!MESSAGE Writing DCISTATUS address to AP failed
+Could not get certificate chain: (OK)
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:04:34.399
+!MESSAGE Writing AP defaults failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:04:34.617
+!MESSAGE Writing DCISTATUS address to AP failed
+Could not get certificate chain: (OK)
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:04:34.839
+!MESSAGE Writing DCISTATUS address to AP failed
+Could not get certificate chain: (OK)
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:04:37.797
+!MESSAGE Writing DCISTATUS address to AP failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:04:38.677
+!MESSAGE Writing DCISTATUS address to AP failed
+Could not get certificate chain: (OK)
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:04:38.897
+!MESSAGE Writing DCISTATUS address to AP failed
+Could not get certificate chain: (OK)
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:04:39.228
+!MESSAGE Writing DCISTATUS address to AP failed
+Could not get certificate chain: (OK)
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:04:39.448
+!MESSAGE Writing DCISTATUS address to AP failed
+Could not get certificate chain: (OK)
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:04:43.283
+!MESSAGE Reading DCISTATUS from AP failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:04:43.616
+!MESSAGE Writing DCISTATUS address to AP failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:04:44.507
+!MESSAGE Writing DCISTATUS address to AP failed
+Could not get certificate chain: (OK)
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:04:44.729
+!MESSAGE Writing DCISTATUS address to AP failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:04:44.946
+!MESSAGE The connected device does not have a Secure Element (ID Code ffffffff)
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:04:45.168
+!MESSAGE Writing DCISTATUS address to AP failed
+Could not get certificate chain: (OK)
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:05:02.920
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:05:03.263
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:05:04.137
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:05:04.358
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:05:04.578
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:05:04.796
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 13:07:20.566
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-03 13:07:21.339
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:07:25.282
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:07:25.611
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:07:26.491
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:07:26.708
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:07:26.929
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:07:27.147
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 13:07:30.025
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 13:11:31.489
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-03 13:11:32.186
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 13:11:33.559
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 13:11:33.577
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 13:11:35.380
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 13:11:35.381
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 13:11:35.400
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:12:33.715
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:12:34.046
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:12:34.928
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:12:35.147
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:12:35.366
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:12:35.586
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:15:33.529
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:15:33.856
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:15:34.729
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:15:34.949
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:15:35.170
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:15:35.388
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 13:25:52.303
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-03 13:25:53.054
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:25:53.854
+!MESSAGE Writing DCISTATUS address to AP failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:25:54.305
+!MESSAGE Reading DCISTATUS from AP failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:25:55.287
+!MESSAGE The connected device does not have a Secure Element (ID Code 3041202e)
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:25:55.504
+!MESSAGE Writing DCISTATUS address to AP failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:25:55.723
+!MESSAGE Reading DCISTATUS from AP failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:25:55.940
+!MESSAGE Writing AP defaults failed
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 13:26:02.739
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.tool.launcher.ui 4 0 2022-05-03 13:26:03.005
+!MESSAGE Error getting document links from docs.silabs.com
+!STACK 0
+java.util.concurrent.CompletionException: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:645)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)
+	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:840)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:479)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+Caused by: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at org.json.JSONTokener.syntaxError(JSONTokener.java:433)
+	at org.json.JSONObject.<init>(JSONObject.java:195)
+	at org.json.JSONObject.<init>(JSONObject.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)
+	... 9 more
+
+!ENTRY com.silabs.ss.tool.launcher.ui 4 0 2022-05-03 13:26:03.282
+!MESSAGE Error getting document links from docs.silabs.com
+!STACK 0
+java.util.concurrent.CompletionException: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:645)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)
+	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:840)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:479)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+Caused by: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at org.json.JSONTokener.syntaxError(JSONTokener.java:433)
+	at org.json.JSONObject.<init>(JSONObject.java:195)
+	at org.json.JSONObject.<init>(JSONObject.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)
+	... 9 more
+
+!ENTRY com.silabs.ss.tool.launcher.ui 4 0 2022-05-03 13:26:03.553
+!MESSAGE Error getting document links from docs.silabs.com
+!STACK 0
+java.util.concurrent.CompletionException: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:645)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)
+	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:840)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:479)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+Caused by: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at org.json.JSONTokener.syntaxError(JSONTokener.java:433)
+	at org.json.JSONObject.<init>(JSONObject.java:195)
+	at org.json.JSONObject.<init>(JSONObject.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)
+	... 9 more
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:26:14.086
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:26:14.417
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:26:15.296
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:26:15.516
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:26:15.737
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:26:15.958
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:27:48.636
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 13:27:48.965
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:27:49.838
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:27:50.055
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:27:50.277
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 13:27:50.497
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 13:30:20.071
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1001 reason=null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 13:30:20.073
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1001 reason=null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 13:30:20.074
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1001 reason=null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 13:30:20.075
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1001 reason=null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 13:30:20.075
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1001 reason=null
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-05-03 13:30:20.549
+!MESSAGE Deleted Shared Daemon File: C:\Users\█████████\.uc\cli\mainstudio.running
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-05-03 13:30:20.549
+!MESSAGE Deleted Shared Daemon Version File: C:\Users\█████████\.uc\cli\mainstudio.running.version
+!SESSION 2022-05-03 15:26:13.089 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.5
+java.vendor=Amazon.com Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.silabs.ss.platform.jetty.server 1 0 2022-05-03 15:26:14.244
+!MESSAGE ContentServer started at: 127.0.0.1, 51105
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-05-03 15:26:14.252
+!MESSAGE com.silabs.ss.tool.launcher.product found! Writing main studio shared file
+
+!ENTRY com.silabs.ss.support.browser.html 1 0 2022-05-03 15:26:20.303
+!MESSAGE Browser workarea set to: C:\Users\█████████\Desktop\I2DS\.browser
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-05-03 15:26:23.767
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.tool.installer.core 2 0 2022-05-03 15:26:25.794
+!MESSAGE Problem getting package resources: changelog
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-05-03 15:26:27.104
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-03 15:35:09.044
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 15:35:10.594
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 15:35:12.605
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 15:35:12.607
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 15:35:12.639
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 15:35:12.753
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.platform.rcp.core 4 0 2022-05-03 15:35:12.852
+!MESSAGE Demo information file is empty at C:\SiliconLabs\SimplicityStudio\v5\configuration\org.eclipse.osgi\661\0\.cp\demos\demos.xml
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-03 15:35:13.627
+!MESSAGE Unknown architecture(s) [efm32~series[2]~device_configuration[3], efm32~series[2]~device_configuration[4]] in sample app Internal Storage Bootloader (single image on 512kB device with 131072k flash base)
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-03 15:35:13.630
+!MESSAGE Unknown architecture(s) [efm32~series[2]~device_configuration[4]] in sample app Internal Storage Bootloader (single image on 1536kB device with 131072k flash base)
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-03 15:35:13.634
+!MESSAGE Unknown architecture(s) [efm32~series[2]~device_configuration[2]~flash[352K]] in sample app Internal Storage Bootloader (single image on 352kB device)
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-03 15:35:13.637
+!MESSAGE Unknown architecture(s) [efm32~series[2]~device_configuration[3], efm32~series[2]~device_configuration[4]] in sample app Internal Storage Bootloader (single image on 352kB device with 131072k flash base)
+
+!ENTRY com.silabs.ss.tool.launcher.ui 4 0 2022-05-03 15:35:16.126
+!MESSAGE Error getting document links from docs.silabs.com
+!STACK 0
+java.util.concurrent.CompletionException: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:645)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)
+	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:840)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:479)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+Caused by: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at org.json.JSONTokener.syntaxError(JSONTokener.java:433)
+	at org.json.JSONObject.<init>(JSONObject.java:195)
+	at org.json.JSONObject.<init>(JSONObject.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)
+	... 9 more
+
+!ENTRY com.silabs.ss.tool.launcher.ui 4 0 2022-05-03 15:35:16.381
+!MESSAGE Error getting document links from docs.silabs.com
+!STACK 0
+java.util.concurrent.CompletionException: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:645)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)
+	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:840)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:479)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+Caused by: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at org.json.JSONTokener.syntaxError(JSONTokener.java:433)
+	at org.json.JSONObject.<init>(JSONObject.java:195)
+	at org.json.JSONObject.<init>(JSONObject.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)
+	... 9 more
+
+!ENTRY com.silabs.ss.tool.launcher.ui 4 0 2022-05-03 15:35:16.650
+!MESSAGE Error getting document links from docs.silabs.com
+!STACK 0
+java.util.concurrent.CompletionException: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:645)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)
+	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:840)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:479)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+Caused by: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at org.json.JSONTokener.syntaxError(JSONTokener.java:433)
+	at org.json.JSONObject.<init>(JSONObject.java:195)
+	at org.json.JSONObject.<init>(JSONObject.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)
+	... 9 more
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 15:35:23.383
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:35:39.545
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:35:39.873
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:35:40.771
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:35:40.987
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:35:41.219
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:35:41.439
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:35:49.231
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:35:49.559
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:35:50.435
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:35:50.655
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:35:50.876
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:35:51.093
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:36:05.935
+!MESSAGE Writing DCIRDATA address to AP failed
+Could not get batch certificate (OK)
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:36:06.156
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:36:06.378
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:36:06.600
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:42:22.624
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:42:22.951
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:42:23.834
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:42:24.054
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:42:24.273
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:42:24.493
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:42:26.931
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:42:27.263
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:42:28.144
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:42:28.363
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:42:28.581
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:42:28.801
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 15:42:34.626
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-03 15:42:35.362
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:42:36.686
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:42:37.017
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:42:37.898
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:42:38.113
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:42:38.331
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:42:38.551
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-03 15:43:00.918
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 15:43:23.170
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:43:27.494
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:43:27.820
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:43:28.700
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:43:28.917
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:43:29.136
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:43:29.359
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:43:40.471
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:43:40.801
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:43:41.681
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:43:41.902
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:43:42.122
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:43:42.343
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-05-03 15:48:29.893
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-05-03 15:48:37.958
+!MESSAGE Unknown context [rc.root.000440240220] is reported in suspended event. Make sure TCF agent has reported contextAdded event first.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-05-03 15:48:38.728
+!MESSAGE Request for monitor: 'CountingRequestMonitor: Status ERROR: org.eclipse.cdt.dsf code=0  null children=[Status ERROR: org.eclipse.cdt.debug.edc code=0 Fail to get TCF context for process: rc.root.000440240220 java.lang.Exception: java.lang.Error: Channel is closed]' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 0 2022-05-03 15:48:38.728
+!MESSAGE Fail to get TCF context for process: rc.root.000440240220
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:90)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy$3.<init>(ProcessesProxy.java:167)
+	at org.eclipse.tcf.internal.services.remote.ProcessesProxy.getContext(ProcessesProxy.java:167)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Processes$2.run(Processes.java:221)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:960)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:86)
+	... 5 more
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:49:45.581
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:49:45.910
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:49:46.795
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:49:47.012
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:49:47.235
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:49:47.458
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 15:49:52.819
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-03 15:49:53.598
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 15:49:55.274
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 15:49:55.292
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 15:49:56.783
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 15:49:56.783
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 15:49:56.808
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:49:59.866
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:50:00.191
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:50:01.071
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:50:01.289
+!MESSAGE DP write failed
+
+!ENTRY org.eclipse.ui 4 0 2022-05-03 15:50:01.289
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.swt.SWTException: Widget is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:4720)
+	at org.eclipse.swt.SWT.error(SWT.java:4635)
+	at org.eclipse.swt.SWT.error(SWT.java:4606)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:452)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:351)
+	at org.eclipse.swt.widgets.Label.setText(Label.java:394)
+	at com.silabs.ss.support.dci.internal.configuration.part.ui.CertificateStatusComposite.setValidationResult(CertificateStatusComposite.java:57)
+	at com.silabs.ss.support.dci.internal.configuration.part.ui.SecureDeviceInfoTab$22.run(SecureDeviceInfoTab.java:1358)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:185)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3963)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3590)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at com.silabs.ss.platform.internal.product.Application.start(Application.java:38)
+	at com.silabs.ss.tool.launcher.internal.product.StudioV5Application.start(StudioV5Application.java:36)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+
+!ENTRY org.eclipse.ui 4 0 2022-05-03 15:50:01.290
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.swt.SWTException: Widget is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:4720)
+	at org.eclipse.swt.SWT.error(SWT.java:4635)
+	at org.eclipse.swt.SWT.error(SWT.java:4606)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:452)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:351)
+	at org.eclipse.swt.widgets.Label.setText(Label.java:394)
+	at com.silabs.ss.support.dci.internal.configuration.part.ui.CertificateStatusComposite.setValidationResult(CertificateStatusComposite.java:57)
+	at com.silabs.ss.support.dci.internal.configuration.part.ui.SecureDeviceInfoTab$21.run(SecureDeviceInfoTab.java:1346)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:185)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3963)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3590)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at com.silabs.ss.platform.internal.product.Application.start(Application.java:38)
+	at com.silabs.ss.tool.launcher.internal.product.StudioV5Application.start(StudioV5Application.java:36)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:50:01.512
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:50:01.728
+!MESSAGE DP write failed
+
+!ENTRY org.eclipse.ui 4 0 2022-05-03 15:50:01.728
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.swt.SWTException: Widget is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:4720)
+	at org.eclipse.swt.SWT.error(SWT.java:4635)
+	at org.eclipse.swt.SWT.error(SWT.java:4606)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:452)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:351)
+	at org.eclipse.swt.widgets.Label.setText(Label.java:394)
+	at com.silabs.ss.support.dci.internal.configuration.part.ui.CertificateStatusComposite.setValidationResult(CertificateStatusComposite.java:57)
+	at com.silabs.ss.support.dci.internal.configuration.part.ui.SecureDeviceInfoTab$22.run(SecureDeviceInfoTab.java:1358)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:185)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3963)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3590)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at com.silabs.ss.platform.internal.product.Application.start(Application.java:38)
+	at com.silabs.ss.tool.launcher.internal.product.StudioV5Application.start(StudioV5Application.java:36)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:54:23.040
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 15:54:23.496
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:54:24.380
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:54:24.599
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:54:24.818
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 15:54:25.039
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 15:55:01.969
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 15:55:06.016
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1001 reason=null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 15:55:06.017
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1001 reason=null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 15:55:06.018
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1001 reason=null
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-05-03 15:55:06.428
+!MESSAGE Deleted Shared Daemon File: C:\Users\█████████\.uc\cli\mainstudio.running
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-05-03 15:55:06.429
+!MESSAGE Deleted Shared Daemon Version File: C:\Users\█████████\.uc\cli\mainstudio.running.version
+
+!ENTRY org.eclipse.tcf 4 0 2022-05-03 15:55:06.527
+!MESSAGE Failed to shutdown TCF event dispatch thread
+!STACK 0
+java.lang.InterruptedException
+	at java.base/java.lang.Object.wait(Native Method)
+	at java.base/java.lang.Thread.join(Thread.java:1305)
+	at java.base/java.lang.Thread.join(Thread.java:1379)
+	at org.eclipse.tcf.EventQueue.shutdown(EventQueue.java:76)
+	at org.eclipse.tcf.Activator.stop(Activator.java:154)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:899)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:1)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.stop(BundleContextImpl.java:891)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.stopWorker0(EquinoxBundle.java:1029)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.stopWorker(EquinoxBundle.java:370)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:658)
+	at org.eclipse.osgi.container.Module.stop(Module.java:520)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.decStartLevel(ModuleContainer.java:1885)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1760)
+	at org.eclipse.osgi.container.SystemModule.stopWorker(SystemModule.java:275)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule.stopWorker(EquinoxBundle.java:202)
+	at org.eclipse.osgi.container.Module.doStop(Module.java:658)
+	at org.eclipse.osgi.container.Module.stop(Module.java:520)
+	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:207)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:220)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+!SESSION 2022-05-03 16:49:30.614 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.5
+java.vendor=Amazon.com Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.silabs.ss.platform.jetty.server 1 0 2022-05-03 16:49:31.812
+!MESSAGE ContentServer started at: 127.0.0.1, 64373
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-05-03 16:49:31.820
+!MESSAGE com.silabs.ss.tool.launcher.product found! Writing main studio shared file
+
+!ENTRY com.silabs.ss.support.browser.html 1 0 2022-05-03 16:49:38.355
+!MESSAGE Browser workarea set to: C:\Users\█████████\Desktop\I2DS\.browser
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-03 16:49:40.825
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-05-03 16:49:43.213
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.tool.installer.core 2 0 2022-05-03 16:49:45.392
+!MESSAGE Problem getting package resources: changelog
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-05-03 16:49:46.772
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-05-03 16:53:39.978
+!MESSAGE Deleted Shared Daemon File: C:\Users\█████████\.uc\cli\mainstudio.running
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-05-03 16:53:39.978
+!MESSAGE Deleted Shared Daemon Version File: C:\Users\█████████\.uc\cli\mainstudio.running.version
+!SESSION 2022-05-03 20:01:01.111 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.5
+java.vendor=Amazon.com Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.silabs.ss.platform.jetty.server 1 0 2022-05-03 20:01:02.262
+!MESSAGE ContentServer started at: 127.0.0.1, 60406
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-05-03 20:01:02.270
+!MESSAGE com.silabs.ss.tool.launcher.product found! Writing main studio shared file
+
+!ENTRY com.silabs.ss.support.browser.html 1 0 2022-05-03 20:01:08.884
+!MESSAGE Browser workarea set to: C:\Users\█████████\Desktop\I2DS\.browser
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-05-03 20:01:11.307
+!MESSAGE Invalid discovery key: null
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-05-03 20:01:12.349
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 20:01:13.999
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.tool.installer.core 2 0 2022-05-03 20:01:14.401
+!MESSAGE Problem getting package resources: changelog
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 20:01:15.311
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 20:01:15.316
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 20:01:15.393
+!MESSAGE Job status in detectpartjob websocket connect: {"isRunning":false,"resultIsOk":false,"message":"ERROR: Detect part job status is unknown."}
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 20:01:15.395
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1005 reason=null
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-05-03 20:01:16.809
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.tool.launcher.ui 4 0 2022-05-03 20:01:19.242
+!MESSAGE Error getting document links from docs.silabs.com
+!STACK 0
+java.util.concurrent.CompletionException: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:645)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)
+	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:840)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:479)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+Caused by: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at org.json.JSONTokener.syntaxError(JSONTokener.java:433)
+	at org.json.JSONObject.<init>(JSONObject.java:195)
+	at org.json.JSONObject.<init>(JSONObject.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)
+	... 9 more
+
+!ENTRY com.silabs.ss.tool.launcher.ui 4 0 2022-05-03 20:01:19.561
+!MESSAGE Error getting document links from docs.silabs.com
+!STACK 0
+java.util.concurrent.CompletionException: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:645)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)
+	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:840)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:479)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+Caused by: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at org.json.JSONTokener.syntaxError(JSONTokener.java:433)
+	at org.json.JSONObject.<init>(JSONObject.java:195)
+	at org.json.JSONObject.<init>(JSONObject.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)
+	... 9 more
+
+!ENTRY com.silabs.ss.tool.launcher.ui 4 0 2022-05-03 20:01:19.844
+!MESSAGE Error getting document links from docs.silabs.com
+!STACK 0
+java.util.concurrent.CompletionException: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:645)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)
+	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:840)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:479)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+Caused by: org.json.JSONException: A JSONObject text must begin with '{' at 1 [character 2 line 1]
+	at org.json.JSONTokener.syntaxError(JSONTokener.java:433)
+	at org.json.JSONObject.<init>(JSONObject.java:195)
+	at org.json.JSONObject.<init>(JSONObject.java:319)
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)
+	... 9 more
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 20:01:25.831
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 20:01:26.271
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:01:27.177
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:01:27.395
+!MESSAGE DP write failed
+
+!ENTRY org.eclipse.ui 4 0 2022-05-03 20:01:27.512
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.swt.SWTException: Widget is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:4720)
+	at org.eclipse.swt.SWT.error(SWT.java:4635)
+	at org.eclipse.swt.SWT.error(SWT.java:4606)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:452)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:351)
+	at org.eclipse.swt.widgets.Label.setText(Label.java:394)
+	at com.silabs.ss.support.dci.internal.configuration.part.ui.CertificateStatusComposite.setValidationResult(CertificateStatusComposite.java:57)
+	at com.silabs.ss.support.dci.internal.configuration.part.ui.SecureDeviceInfoTab$22.run(SecureDeviceInfoTab.java:1358)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:185)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3963)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3590)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at com.silabs.ss.platform.internal.product.Application.start(Application.java:38)
+	at com.silabs.ss.tool.launcher.internal.product.StudioV5Application.start(StudioV5Application.java:36)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+
+!ENTRY org.eclipse.ui 4 0 2022-05-03 20:01:27.514
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.swt.SWTException: Widget is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:4720)
+	at org.eclipse.swt.SWT.error(SWT.java:4635)
+	at org.eclipse.swt.SWT.error(SWT.java:4606)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:452)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:351)
+	at org.eclipse.swt.widgets.Label.setText(Label.java:394)
+	at com.silabs.ss.support.dci.internal.configuration.part.ui.CertificateStatusComposite.setValidationResult(CertificateStatusComposite.java:57)
+	at com.silabs.ss.support.dci.internal.configuration.part.ui.SecureDeviceInfoTab$21.run(SecureDeviceInfoTab.java:1346)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:185)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3963)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3590)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at com.silabs.ss.platform.internal.product.Application.start(Application.java:38)
+	at com.silabs.ss.tool.launcher.internal.product.StudioV5Application.start(StudioV5Application.java:36)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:01:27.737
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:01:28.393
+!MESSAGE DP write failed
+
+!ENTRY org.eclipse.ui 4 0 2022-05-03 20:01:28.394
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.swt.SWTException: Widget is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:4720)
+	at org.eclipse.swt.SWT.error(SWT.java:4635)
+	at org.eclipse.swt.SWT.error(SWT.java:4606)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:452)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:351)
+	at org.eclipse.swt.widgets.Label.setText(Label.java:394)
+	at com.silabs.ss.support.dci.internal.configuration.part.ui.CertificateStatusComposite.setValidationResult(CertificateStatusComposite.java:57)
+	at com.silabs.ss.support.dci.internal.configuration.part.ui.SecureDeviceInfoTab$22.run(SecureDeviceInfoTab.java:1358)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:185)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3963)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3590)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1160)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1049)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:660)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:559)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:154)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:150)
+	at com.silabs.ss.platform.internal.product.Application.start(Application.java:38)
+	at com.silabs.ss.tool.launcher.internal.product.StudioV5Application.start(StudioV5Application.java:36)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 20:02:14.233
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 20:02:14.563
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:02:15.457
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:02:15.677
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:02:15.898
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:02:16.116
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 20:02:18.055
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 20:02:18.383
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:02:19.257
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:02:19.478
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:02:19.697
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:02:19.917
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 20:02:22.482
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 20:02:22.922
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:02:23.843
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:02:24.062
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:02:24.282
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:02:24.497
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 20:02:32.427
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 4 0 2022-05-03 20:02:32.755
+!MESSAGE DP write failed
+Could not access Debug challenge interface
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:02:33.627
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:02:33.844
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:02:34.059
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.dci.part.core 2 0 2022-05-03 20:02:34.281
+!MESSAGE DP write failed
+
+!ENTRY com.silabs.ss.support.hwtools.ui 1 0 2022-05-03 20:02:45.023
+!MESSAGE DRR: DetectPart onWebSocketClose CALLED statusCode=1001 reason=null
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-05-03 20:02:45.447
+!MESSAGE Deleted Shared Daemon File: C:\Users\█████████\.uc\cli\mainstudio.running
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-05-03 20:02:45.447
+!MESSAGE Deleted Shared Daemon Version File: C:\Users\█████████\.uc\cli\mainstudio.running.version
