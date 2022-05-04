@@ -11,11 +11,17 @@ This is a sub-GHz proprietary security sensor system. The sensors listed below w
 
 ## System Structure
 ![](https://github.com/edward62740/i2ds/blob/master/Documentation/functional.png)
-### Subnetwork
+#### Subnetwork
 All network management and communication between sensors is restricted to this region. Some management functions are exposed to the Wi-Fi/GUI co-processor via USART.
-### Local Sensor Network
+#### Local Sensor Network
 Includes the subnetwork, as well as the CPN Wi-Fi section, which is used to communicate with Firebase RTDB.
-### Mobile App
+#### Mobile App
 Used to control the active/inactive state of the sensors, receive status updates.
-### FCM
+#### FCM
 Used to detect certain changes to the RTDB (i.e sensor triggered), and notify the user even if the app is not running.
+
+## Security
+Security is taken seriously in this system.
+* The sensor HW is built around the EFR32xG23 series, industry-leading at the time of this release, with PSA 3 level security qualifications. Anti-tamper functions are configured such that the sensor will automatically raise a warning and drop out of the network if tamper is detected.
+* Sensor OTA communication is AES encrypted.
+* Only necessary state control functions are exposed outside of the subnetwork.
