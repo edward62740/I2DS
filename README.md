@@ -1,6 +1,7 @@
 # Internal Intruder Detection System (I<sup>2</sup>DS)
 
-This is a sub-GHz proprietary security sensor system.
+### Overview
+This is a sub-GHz proprietary security sensor system. The sensors listed below will enter sensing mode once enabled through the CPN GUI or the mobile app. Any detected intrusion will then trigger a FCM background notification on the smartphones of the users with the mobile app installed.
  
 # Current progress
 ## CPN
