@@ -6,5 +6,4 @@
 void startBatteryMonitor(void);
 void startSensorMonitor(void);
 void endSensorMonitor(void);
-extern volatile bool firsttrig;
 #endif  // APP_INIT_H

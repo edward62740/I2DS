@@ -1,4 +1,0 @@
-protectFromDetectionUpdates=false
-label=CP2102N USB to UART Bridge Controller (ID:0) (a22246f8f19feb1197e7cdacdf749906)
-boardOverrides {
-}

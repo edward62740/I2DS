@@ -240,6 +240,10 @@ void displayTask(void *pvParameters)
                     head = ILI9341_BLUE;
                     bg = ILI9341_RED;
                     break;
+                case S_COLDSTART:
+                    head = ILI9341_RED;
+                    bg = ILI9341_ORANGE;
+                    break;
                 default:
                     head = ILI9341_BLUE;
                     bg = ILI9341_DARKGREEN;
@@ -275,11 +279,14 @@ void displayTask(void *pvParameters)
                 case S_ALERTING:
                     tft.print("ALERTING");
                     break;
-                case S_FAULT_HW:
+                case S_COLDSTART:
                     tft.print("WARMUP");
                     break;
                 case S_INACTIVE:
                     tft.print("INACTIVE");
+                    break;
+                case S_FAULT_HW:
+                    tft.print("HW FAULT");
                     break;
                 default:
                     break;
@@ -330,6 +337,6 @@ void displayTask(void *pvParameters)
                 }
             }
         }
-        vTaskDelay(5);
+        vTaskDelay(1);
     }
 }

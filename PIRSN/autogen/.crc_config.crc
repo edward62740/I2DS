@@ -1,6 +1,9 @@
 #CRC Codes for initially generated config files -- do not modify!
 app_assert_config.h=1351236558
 app_log_config.h=854633757
+app_properties_config.h=-763091270
+btl_core_cfg.h=-553491331
+btl_debug_cfg.h=1736398931
 cmsis-rtos-ipc-config.h=1595584381
 common_cfg.h=1943625275
 cpu_cfg.h=-1735116855

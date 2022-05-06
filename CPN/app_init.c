@@ -8,9 +8,9 @@
 #include "em_emu.h"
 #include "em_eusart.h"
 
-EmberKeyData security_key = { .contents = { 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, \
-    0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, \
-    0xAA, 0xAA, 0xAA, 0xAA } };
+EmberKeyData security_key = { .contents = { █████████
+    █████████
+    █████████ } };
 
 void emberAfInitCallback(void)
 {

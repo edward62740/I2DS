@@ -56,6 +56,10 @@
 // [PRS.SYNCH3]$
 
 // $[GPIO]
+// GPIO SWV on PA03
+#define GPIO_SWV_PORT                            gpioPortA
+#define GPIO_SWV_PIN                             3
+
 // [GPIO]$
 
 // $[TIMER0]

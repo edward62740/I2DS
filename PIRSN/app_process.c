@@ -51,12 +51,12 @@ void GPIO_ODD_IRQHandler(void)
 {
   volatile uint32_t interruptMask = GPIO_IntGet ();
   GPIO_IntClear (interruptMask);
-  sl_led_turn_on (&sl_led_comms);
   if ((interruptMask & ((1 << 5) | GPIO_IEN_EM4WUIEN7)) && selfInfo.trigd == 0 &&!firsttrig)
     {
       selfInfo.trigd++;
       selfInfo.state = S_ALERTING;
       sl_led_turn_on (&sl_led_comms);
+      sl_led_turn_on (&sl_led_stat);
       starttx = true;
 
       CMU_ClockSelectSet (cmuClock_EM4GRPACLK, cmuSelect_ULFRCO);
@@ -77,13 +77,15 @@ void GPIO_ODD_IRQHandler(void)
   else if ((interruptMask & ((1 << 5) | GPIO_IEN_EM4WUIEN7))
       && selfInfo.trigd > 0)
     {
+      sl_led_toggle (&sl_led_comms);
+      sl_led_toggle (&sl_led_stat);
       selfInfo.trigd++;
       BURTC_CounterReset ();
     }
   if(firsttrig){
       firsttrig = false;
   }
-  sl_led_turn_off (&sl_led_comms);
+
 }
 
 /*!       BURTC_IRQHandler :: ISR
@@ -99,6 +101,8 @@ void BURTC_IRQHandler(void)
   NVIC_DisableIRQ (GPIO_ODD_IRQn);
   if (selfInfo.trigd > 0)
     {
+      sl_led_toggle (&sl_led_comms);
+      sl_led_toggle (&sl_led_stat);
       BURTC_CounterReset ();
       BURTC_CompareSet (0, 1300);
       BURTC_IntEnable (BURTC_IEN_COMP);
@@ -107,6 +111,8 @@ void BURTC_IRQHandler(void)
       BURTC_Enable (true);
       selfInfo.state = S_ACTIVE;
       endtx = true;
+      sl_led_turn_off (&sl_led_comms);
+      sl_led_turn_off (&sl_led_stat);
     }
   else
     {
@@ -118,7 +124,13 @@ void BURTC_IRQHandler(void)
       NVIC_ClearPendingIRQ (GPIO_ODD_IRQn);
       NVIC_SetPriority(GPIO_ODD_IRQn, 5);
       NVIC_EnableIRQ (GPIO_ODD_IRQn);
+
     }
+  if(coldstart){
+     coldstart = false;
+
+     selfInfo.state = S_INACTIVE;
+  }
 }
 
 /*!       report_handler :: HANDLER
@@ -168,7 +180,7 @@ void emberAfStackStatusCallback(EmberStatus status)
   switch (status)
     {
     case EMBER_NETWORK_UP:
-      initSensorInfo (&selfInfo, HW_PIRSN, S_INACTIVE, 0, emberGetNodeType(),
+      initSensorInfo (&selfInfo, HW_PIRSN, S_COLDSTART, 0, emberGetNodeType(),
       EMBER_COORDINATOR_ADDRESS,
                       emberGetNodeId(), SENSOR_SINK_ENDPOINT, 0);
       emberEventControlSetDelayMS(*report_control, sensor_report_period_ms);

@@ -4,7 +4,8 @@
 #include PLATFORM_HEADER
 
 void startBatteryMonitor(void);
-void startSensorMonitor(void);
+bool startSensorMonitor(void);
 void endSensorMonitor(void);
 extern volatile bool firsttrig;
+extern volatile bool coldstart;
 #endif  // APP_INIT_H

@@ -61,7 +61,7 @@ void ipcTask(void *pvParameters)
             updateDevice = false;
         }
 
-        vTaskDelay(5);
+        vTaskDelay(10);
     }
 }
 
