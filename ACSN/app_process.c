@@ -51,14 +51,19 @@ void GPIO_ODD_IRQHandler(void)
 {
   volatile uint32_t interruptMask = GPIO_IntGet ();
   GPIO_IntClear (interruptMask);
-  sl_led_turn_on (&sl_led_comms);
-  if ((interruptMask & ((1 << 5) | GPIO_IEN_EM4WUIEN7)) && selfInfo.trigd == 0 &&!firsttrig)
+
+  if ((interruptMask & ((1 << 5) | GPIO_IEN_EM4WUIEN7)) && GPIO_PinInGet(gpioPortC, 5))
     {
+      sl_led_turn_on (&sl_led_comms);
+      sl_led_turn_on (&sl_led_stat);
       selfInfo.trigd++;
       selfInfo.state = S_ALERTING;
-      sl_led_turn_on (&sl_led_comms);
       starttx = true;
-
+      GPIO_EM4EnablePinWakeup(GPIO_IEN_EM4WUIEN7, 0 << _GPIO_IEN_EM4WUIEN7_SHIFT);
+    }
+  else if ((interruptMask & ((1 << 5) | GPIO_IEN_EM4WUIEN7)) && !GPIO_PinInGet(gpioPortC, 5))
+    {
+      GPIO_EM4DisablePinWakeup (GPIO_IEN_EM4WUIEN7);
       CMU_ClockSelectSet (cmuClock_EM4GRPACLK, cmuSelect_ULFRCO);
       CMU_ClockEnable (cmuClock_BURTC, true);
       CMU_ClockEnable (cmuClock_BURAM, true);
@@ -68,23 +73,15 @@ void GPIO_ODD_IRQHandler(void)
       burtcInit.em4comp = false; // BURTC compare interrupt wakes from EM4 (causes reset)
       BURTC_Init (&burtcInit);
       BURTC_CounterReset ();
-      BURTC_CompareSet (0, 2600);
+      BURTC_CompareSet (0, 50);
       BURTC_IntEnable (BURTC_IEN_COMP);    // compare match
       NVIC_SetPriority (BURTC_IRQn, 4);
       NVIC_EnableIRQ (BURTC_IRQn);
       BURTC_Enable (true);
     }
-  else if ((interruptMask & ((1 << 5) | GPIO_IEN_EM4WUIEN7))
-      && selfInfo.trigd > 0)
-    {
-      selfInfo.trigd++;
-      BURTC_CounterReset ();
-    }
-  if(firsttrig){
-      firsttrig = false;
-  }
-  sl_led_turn_off (&sl_led_comms);
+ // sl_led_turn_off (&sl_led_comms);
 }
+
 
 /*!       BURTC_IRQHandler :: ISR
    @brief BURTC interrupt handler, used for sensor timeout masking
@@ -95,32 +92,24 @@ void GPIO_ODD_IRQHandler(void)
 */
 void BURTC_IRQHandler(void)
 {
-  NVIC_ClearPendingIRQ (GPIO_ODD_IRQn);
-  NVIC_DisableIRQ (GPIO_ODD_IRQn);
-  if (selfInfo.trigd > 0)
+  if (!GPIO_PinInGet (gpioPortC, 5))
     {
-      BURTC_CounterReset ();
-      BURTC_CompareSet (0, 1300);
-      BURTC_IntEnable (BURTC_IEN_COMP);
-      BURTC_IntClear (BURTC_IntGet ());
-      NVIC_EnableIRQ (BURTC_IRQn);
-      BURTC_Enable (true);
+      sl_led_turn_on (&sl_led_comms);
+      sl_led_turn_on (&sl_led_stat);
+      selfInfo.trigd = 0;
       selfInfo.state = S_ACTIVE;
       endtx = true;
-    }
-  else
-    {
-      BURTC_CounterReset ();
-      BURTC_CompareSet (0, 2600);
-      NVIC_DisableIRQ (BURTC_IRQn);
-      BURTC_Enable (false);
-      BURTC_IntClear (BURTC_IF_COMP);
-      NVIC_ClearPendingIRQ (GPIO_ODD_IRQn);
-      NVIC_SetPriority(GPIO_ODD_IRQn, 5);
-      NVIC_EnableIRQ (GPIO_ODD_IRQn);
-    }
+      GPIO_EM4EnablePinWakeup (GPIO_IEN_EM4WUIEN7,
+                               1 << _GPIO_IEN_EM4WUIEN7_SHIFT);
+  }
+  else{
+      GPIO_EM4EnablePinWakeup(GPIO_IEN_EM4WUIEN7, 0 << _GPIO_IEN_EM4WUIEN7_SHIFT);
+  }
+  BURTC_CounterReset ();
+  NVIC_DisableIRQ (BURTC_IRQn);
+  BURTC_Enable (false);
+  BURTC_IntClear (BURTC_IF_COMP);
 }
-
 /*!       report_handler :: HANDLER
    @brief tx routine every sensor_report_period_ms
 

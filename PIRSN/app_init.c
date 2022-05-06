@@ -15,11 +15,10 @@
 #include "sl_simple_led_instances.h"
 
 volatile bool firsttrig = true;
-
-EmberKeyData security_key = { .contents = { 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, \
-    0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, \
-    0xAA, 0xAA, 0xAA, 0xAA } };
-
+volatile bool coldstart = true;
+EmberKeyData security_key = { .contents = { █████████
+    █████████
+    █████████ } };
 
 void emberAfInitCallback(void)
 {
@@ -47,6 +46,18 @@ void emberAfInitCallback(void)
   app_log_info("Network status 0x%02X\n", status);
 
  emberAfPluginPollEnableShortPolling (true);
+ CMU_ClockSelectSet (cmuClock_EM4GRPACLK, cmuSelect_ULFRCO);
+ CMU_ClockEnable (cmuClock_BURTC, true);
+ CMU_ClockEnable (cmuClock_BURAM, true);
+ BURTC_Init_TypeDef burtcInit = BURTC_INIT_DEFAULT;
+ burtcInit.compare0Top = true; // reset counter when counter reaches compare value
+ BURTC_Init (&burtcInit);
+ BURTC_CompareSet (0, 15000);
+ BURTC_IntEnable (BURTC_IEN_COMP);    // compare match
+ NVIC_SetPriority (BURTC_IRQn, 4);
+ NVIC_EnableIRQ (BURTC_IRQn);
+ BURTC_Enable (true);
+ coldstart = true;
 }
 
 /*!       startBatteryMonitor :: FUNCTION
@@ -97,8 +108,12 @@ void startBatteryMonitor(void)
    @return void
 */
 
-void startSensorMonitor(void)
+bool startSensorMonitor(void)
 {
+  if(coldstart) {
+      selfInfo.state = S_FAULT_HW;
+      return false;
+  }
   firsttrig = true;
   selfInfo.state = S_ACTIVE;
   CMU_ClockEnable (cmuClock_GPIO, true);
@@ -111,6 +126,7 @@ void startSensorMonitor(void)
   NVIC_ClearPendingIRQ(GPIO_ODD_IRQn);
   NVIC_SetPriority(GPIO_ODD_IRQn, 5);
   NVIC_EnableIRQ(GPIO_ODD_IRQn);
+  return true;
 }
 
 /*!       endSensorMonitor :: FUNCTION

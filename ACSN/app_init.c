@@ -14,11 +14,9 @@
 #include "em_pcnt.h"
 #include "sl_simple_led_instances.h"
 
-volatile bool firsttrig = true;
-
-EmberKeyData security_key = { .contents = { 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, \
-    0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, \
-    0xAA, 0xAA, 0xAA, 0xAA } };
+EmberKeyData security_key = { .contents = { █████████
+    █████████
+    █████████ } };
 
 
 void emberAfInitCallback(void)
@@ -99,11 +97,9 @@ void startBatteryMonitor(void)
 
 void startSensorMonitor(void)
 {
-  firsttrig = true;
   selfInfo.state = S_ACTIVE;
   CMU_ClockEnable (cmuClock_GPIO, true);
   GPIO_PinModeSet(gpioPortC, 5, gpioModeInput, 1);
-
   GPIO_EM4EnablePinWakeup(GPIO_IEN_EM4WUIEN7, 1 << _GPIO_IEN_EM4WUIEN7_SHIFT);
   GPIO->IEN = 1 << _GPIO_IEN_EM4WUIEN7_SHIFT;
   GPIO->EM4WUEN = 1 << _GPIO_IEN_EM4WUIEN7_SHIFT;
@@ -122,7 +118,6 @@ void startSensorMonitor(void)
 */
 void endSensorMonitor(void)
 {
-  firsttrig = false;
   selfInfo.state = S_INACTIVE;
   NVIC_ClearPendingIRQ (GPIO_ODD_IRQn);
   NVIC_DisableIRQ (GPIO_ODD_IRQn);

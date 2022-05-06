@@ -136,6 +136,7 @@ void firebaseTask(void *pvParameters)
   Firebase.updateNode(fbdo, "/req/send", errataJson);
   while (1)
   {
+  
     if (!Firebase.authenticated())
       err_count.FIREBASE_AUTH_ERR++;
     if (Firebase.ready() && FLAGfirebaseForceUpdate)
@@ -284,7 +285,7 @@ void managerTask(void *pvParameters)
           sensorInfo[tmpInfo.id].hw = tmpInfo.info.hw;
         if (~index & 2)
         {
-          if ((sensorInfo[tmpInfo.id].state != tmpInfo.info.state) && (tmpInfo.info.state == S_ACTIVE || tmpInfo.info.state == S_ALERTING || tmpInfo.info.state == S_INACTIVE))
+          if ((sensorInfo[tmpInfo.id].state != tmpInfo.info.state) && (tmpInfo.info.state == S_ACTIVE || tmpInfo.info.state == S_ALERTING || tmpInfo.info.state == S_INACTIVE || tmpInfo.info.state == S_FAULT_HW || tmpInfo.info.state == S_COLDSTART))
           sensorInfo[tmpInfo.id].state = tmpInfo.info.state;
         }
 

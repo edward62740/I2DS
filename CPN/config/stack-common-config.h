@@ -45,7 +45,7 @@
 // <o EMBER_MAC_ACK_TIMEOUT_MS> MAC ACK timeout in milliseconds <1-65>
 // <i> Default: 25
 // <i> This parameter should be fine-tuned to reduce energy consumption for sleepy devices and depends on the data rate of the PHY configuration used.
-#define EMBER_MAC_ACK_TIMEOUT_MS    (25)
+#define EMBER_MAC_ACK_TIMEOUT_MS    5
 
 // <o EMBER_SECURITY_SHORT_TO_LONG_MAPPING_TABLE_SIZE> Size of the short-to-long address mapping table <1-64>
 // <i> Default: 10

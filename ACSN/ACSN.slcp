@@ -41,8 +41,8 @@ component:
 - {id: emlib_lesense}
 - {id: iostream_recommended_stream}
 - {id: restrictions_profile_long_range}
-- {id: emlib_letimer}
 - {id: emlib_acmp}
+- {id: emlib_letimer}
 - instance: [comms, stat]
   id: simple_led
 - {id: printf}
