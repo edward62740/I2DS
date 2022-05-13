@@ -11,6 +11,9 @@
 #
 name: "CodeQL"
 
+defaults:
+  run:
+    working-directory: "CPN"
 on:
   push:
     branches: [ master ]
