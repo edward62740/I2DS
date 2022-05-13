@@ -179,6 +179,12 @@ bool ipcParser(char *buffer, size_t len)
                 queueSend.id = i;
                 queueSend.alive = true;
                 queueSend.DeviceInfoChangeIndex = 249;
+                if(tmpInfo.state != (uint8_t)S_ALERTING)
+                {
+                    queueSend.info.trigd = 0;
+                    queueSend.DeviceInfoChangeIndex = 377;
+                }
+                
                 queueSend.guiUpdatePending = true;
                 xTimerReset(managerDeviceTimer[i], 0);
                 if (uxQueueSpacesAvailable(ipc2ManagerDeviceInfoQueue) == 0)

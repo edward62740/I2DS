@@ -95,8 +95,10 @@ void startBatteryMonitor(void)
    @return void
 */
 
-void startSensorMonitor(void)
+bool startSensorMonitor(void)
 {
+  if(selfInfo.state != S_INACTIVE)
+    return false;
   selfInfo.state = S_ACTIVE;
   CMU_ClockEnable (cmuClock_GPIO, true);
   GPIO_PinModeSet(gpioPortC, 5, gpioModeInput, 1);
@@ -107,6 +109,7 @@ void startSensorMonitor(void)
   NVIC_ClearPendingIRQ(GPIO_ODD_IRQn);
   NVIC_SetPriority(GPIO_ODD_IRQn, 5);
   NVIC_EnableIRQ(GPIO_ODD_IRQn);
+  return true;
 }
 
 /*!       endSensorMonitor :: FUNCTION

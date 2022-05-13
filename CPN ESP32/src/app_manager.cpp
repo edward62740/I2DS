@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "app_gui.h"
 #include "app_ipc.h"
+#include "app_pr.h"
 #include "app_manager.h"
 #include "app_common.h"
 #include <FirebaseESP32.h>
@@ -23,6 +24,9 @@ FirebaseConfig config;
 // Assign the project host and api key (required)
 
 bool updateDevice = false;
+bool flashGUIAlert = false;
+bool skipUpdate = false;
+volatile uint8_t skipUpdateCleaner = 0;
 bool FLAGfirebaseRegularUpdate = true;
 bool FLAGfirebaseForceUpdate = false;
 uint8_t firebaseForceUpdateDeviceId = 0;
@@ -32,12 +36,18 @@ ErrCount err_count = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 void firebaseUpdateTimerCallback(TimerHandle_t firebaseUpdateTimer)
 {
   FLAGfirebaseRegularUpdate = true;
+  if (skipUpdate)
+    skipUpdateCleaner++;
+  if (skipUpdateCleaner > (FIREBASE_MAX_COMBINED_REQUEST_DURATION / FIREBASE_UPDATE_INTERVAL_MS))
+  {
+    skipUpdateCleaner = 0;
+    skipUpdate = false;
+  }
 }
 void managerDeviceTimerCallback(TimerHandle_t managerDeviceTimer)
 {
   uint8_t id = (uint32_t)pvTimerGetTimerID(managerDeviceTimer);
   sensorInfoExt[id].alive = false;
-  APP_LOG_INFO(id);
   if (uxQueueSpacesAvailable(manager2GuiDeviceIndexQueue) == 0)
   {
     xQueueReset(manager2GuiDeviceIndexQueue);
@@ -47,33 +57,14 @@ void managerDeviceTimerCallback(TimerHandle_t managerDeviceTimer)
 void ipcDeviceUpdateCallback(TimerHandle_t ipcDeviceUpdateTimer)
 {
   updateDevice = true;
-  APP_LOG_INFO("Updated");
 }
 
 void firebaseErrorQueueCallback(QueueInfo errorQueue)
 {
-
   if (errorQueue.isQueueFull())
   {
-    APP_LOG_INFO("Queue is full");
+    err_count.FIREBASE_ERR_QUEUE_OVERFLOW++;
   }
-
-  APP_LOG_INFO("Remaining queues: ");
-  APP_LOG_INFO(errorQueue.totalQueues());
-
-  APP_LOG_INFO("Being processed queue ID: ");
-  APP_LOG_INFO(errorQueue.currentQueueID());
-
-  APP_LOG_INFO("Data type:");
-  APP_LOG_INFO(errorQueue.dataType());
-
-  APP_LOG_INFO("Method: ");
-  APP_LOG_INFO(errorQueue.firebaseMethod());
-
-  APP_LOG_INFO("Path: ");
-  APP_LOG_INFO(errorQueue.dataType());
-
-  APP_LOG_INFO();
 }
 void firebaseTask(void *pvParameters)
 {
@@ -85,7 +76,7 @@ void firebaseTask(void *pvParameters)
     APP_LOG_INFO("[INIT] ERROR CONNECTING TO WIFI");
     WiFi.disconnect();
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-    vTaskDelay(3000);
+    vTaskDelay(3500);
   }
   FLAGwifiIsConnected = true;
   /* Assign the API key (required) */
@@ -111,8 +102,6 @@ void firebaseTask(void *pvParameters)
   // RTDB Stream error notification timeout (interval) in ms (3 sec - 30 sec). It determines how often the readStream
   // will return false (error) when it called repeatedly in loop.
   config.timeout.rtdbStreamError = 3 * 1000;
-  APP_LOG_INFO("Sign up new user... ");
-
   /* Sign up */
   if (Firebase.signUp(&config, &auth, "", ""))
   {
@@ -134,42 +123,49 @@ void firebaseTask(void *pvParameters)
     errataJson.add((String)i, 7);
   }
   Firebase.updateNode(fbdo, "/req/send", errataJson);
+  FirebaseJson initTsJson;
+  initTsJson.set("timestamp/.sv", "timestamp");
+  Firebase.updateNode(fbdo, "/boot", initTsJson);
   while (1)
   {
-  
     if (!Firebase.authenticated())
       err_count.FIREBASE_AUTH_ERR++;
     if (Firebase.ready() && FLAGfirebaseForceUpdate)
     {
+      skipUpdate = false;
       FirebaseJson deviceinfoJson;
       String device = "/devices/dev" + (String)firebaseForceUpdateDeviceId;
       deviceinfoJson.add("state", sensorInfo[firebaseForceUpdateDeviceId].state);
       deviceinfoJson.add("trigd", sensorInfo[firebaseForceUpdateDeviceId].trigd);
-      if (Firebase.updateNode(fbdo, device, deviceinfoJson))
+      if (!Firebase.updateNode(fbdo, device, deviceinfoJson))
       {
-      }
-      else
-      {
+        err_count.FIREBASE_FORCED_UPDATE_FAIL++;
       }
       FLAGfirebaseForceUpdate = false;
     }
     else if (fbdo.streamAvailable() && !FLAGipcResponsePending)
     {
-
+      skipUpdate = false;
       if (fbdo.dataTypeEnum() == fb_esp_rtdb_data_type_array)
       {
         FirebaseJsonData result;
+        FirebaseJsonData next;
         FirebaseJsonArray *arr = fbdo.to<FirebaseJsonArray *>();
         for (size_t i = 0; i < sensorIndex; i++)
         {
           arr->get(result, i);
-          if (result.to<int>() != 0 && i < sensorIndex)
+          arr->get(next, i + 1);
+          if (result.to<int>() != 0 && i <= sensorIndex)
           {
             if (i >= 0 && i <= sensorIndex && (result.to<int>() == (int)S_ACTIVE || result.to<int>() == (int)S_INACTIVE))
             {
               ipcSender(sensorInfo[i].self_id, (uint8_t)result.to<int>());
               selection = i;
               swflag = true;
+            }
+            if (next.to<int>() != 0 && (i + 1) < sensorIndex)
+            {
+              skipUpdate = true;
             }
             String node = "/req/send/" + (String)i;
             Firebase.deleteNode(fbdo, node);
@@ -179,12 +175,12 @@ void firebaseTask(void *pvParameters)
       }
     }
 
-    else if (Firebase.ready() && FLAGfirebaseRegularUpdate)
+    else if (Firebase.ready() && FLAGfirebaseRegularUpdate && !skipUpdate && !FLAGfirebaseForceUpdate)
     {
-      APP_LOG_INFO("free heap: ");
-      APP_LOG_INFO(xPortGetFreeHeapSize());
+      Firebase.getBool(fbdo, "/req/warn");
+      flashGUIAlert = (bool)fbdo.to<bool>();
       FirebaseJson sensorinfoJson;
-
+      APP_LOG_INFO("REGULAR UPDATE RUNNING");
       // Firebase.setTimestamp(fbdo, "/info/timestamp");
       for (uint8_t i = 0; i < sensorIndex; i++)
       {
@@ -242,17 +238,23 @@ void firebaseTask(void *pvParameters)
       iJson.add("devs", tmpcount);
       iJson.add("wifi", WIFI_SSID);
       iJson.add("sec", "true");
-      iJson.add("pr", "true");
-      sensorinfoJson.set("/info", iJson);
-      if (Firebase.updateNode(fbdo, "/", sensorinfoJson))
+      if (prPowerDc)
       {
+        iJson.add("pr", "true");
       }
       else
       {
+       iJson.add("pr", "false");
       }
+      
+      sensorinfoJson.set("/info", iJson);
+      if (!Firebase.updateNode(fbdo, "/", sensorinfoJson))
+      {
+        err_count.FIREBASE_REGULAR_UPDATE_FAIL++;
+      }
+      APP_LOG_INFO("REGULAR UPDATE DONE");
       FLAGfirebaseRegularUpdate = false;
-    }
-
+    } 
     if (!Firebase.readStream(fbdo))
     {
       APP_LOG_INFO(fbdo.errorReason());
@@ -285,8 +287,9 @@ void managerTask(void *pvParameters)
           sensorInfo[tmpInfo.id].hw = tmpInfo.info.hw;
         if (~index & 2)
         {
-          if ((sensorInfo[tmpInfo.id].state != tmpInfo.info.state) && (tmpInfo.info.state == S_ACTIVE || tmpInfo.info.state == S_ALERTING || tmpInfo.info.state == S_INACTIVE || tmpInfo.info.state == S_FAULT_HW || tmpInfo.info.state == S_COLDSTART))
-          sensorInfo[tmpInfo.id].state = tmpInfo.info.state;
+          if ((sensorInfo[tmpInfo.id].state != tmpInfo.info.state) && (tmpInfo.info.state == S_ACTIVE || tmpInfo.info.state == S_ALERTING ||
+           tmpInfo.info.state == S_INACTIVE || tmpInfo.info.state == S_FAULT_HW || tmpInfo.info.state == S_COLDSTART || tmpInfo.info.state == S_FAULT_OPN))
+            sensorInfo[tmpInfo.id].state = tmpInfo.info.state;
         }
 
         if (~index & 4)

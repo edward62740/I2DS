@@ -18,7 +18,6 @@
 #include "app_init.h"
 #include "sl_simple_led_instances.h"
 
-
 volatile DeviceInfo selfInfo;
 volatile bool starttx = false;
 volatile bool endtx = false;
