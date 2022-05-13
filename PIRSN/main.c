@@ -10,7 +10,6 @@
 int main(void)
 {
   sl_system_init();
-
   while (1) {
     sl_system_process_action();
     sl_power_manager_sleep();

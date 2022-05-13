@@ -122,6 +122,14 @@ void report_handler(void)
   if (!emberStackIsUp()) {
     emberEventControlSetInactive(*report_control);
   } else {
+      if(selfInfo.state == S_INACTIVE || selfInfo.state == S_FAULT_OPN){
+      GPIO_PinModeSet (gpioPortC, 5, gpioModeInput, 1);
+      if(GPIO_PinInGet(gpioPortC, 5) == 1)
+        selfInfo.state = S_FAULT_OPN;
+      else
+        selfInfo.state = S_INACTIVE;
+      GPIO_PinModeSet (gpioPortC, 5, gpioModeDisabled, 1);
+      }
       sl_led_turn_on (&sl_led_stat);
       applicationSensorTxRoutine();
       emberEventControlSetDelayMS(*report_control, sensor_report_period_ms);

@@ -37,7 +37,7 @@ extern DeviceInfoExt selfInfoExt, sensorInfoExt[30];
 extern TimerHandle_t ipcDeviceUpdateTimer;
 extern QueueHandle_t ipc2ManagerDeviceInfoQueue;
 extern bool updateDevice;
-
+extern bool flashGUIAlert;
 typedef struct
 {
   err_count_t IPC_REQUEST_SEND_NOACK;

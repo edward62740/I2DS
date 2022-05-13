@@ -111,7 +111,7 @@ void startBatteryMonitor(void)
 bool startSensorMonitor(void)
 {
   if(coldstart) {
-      selfInfo.state = S_FAULT_HW;
+      selfInfo.state = S_COLDSTART;
       return false;
   }
   firsttrig = true;

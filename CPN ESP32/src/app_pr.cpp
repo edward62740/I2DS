@@ -2,7 +2,7 @@
 #include "app_pr.h"
 #include "app_common.h"
 
-bool prPowerFail = false;
+bool prPowerChg = false;
 bool prPowerDc = true;
 
 void powerReserve(void *pvParameters)
@@ -11,21 +11,20 @@ void powerReserve(void *pvParameters)
     pinMode(PR_CHG, INPUT);
     while (1)
     {
-        APP_LOG_INFO("testlog");
         if (!digitalRead(PR_PGOOD) && !digitalRead(PR_CHG))
         {
-            prPowerDc = false;
-            prPowerFail = false;
+            prPowerDc = true;
+            prPowerChg = true;
         }
         else if (!digitalRead(PR_PGOOD) && digitalRead(PR_CHG))
         {
             prPowerDc = true;
-            prPowerFail = false;
+            prPowerChg = false;
         }
-        else if (digitalRead(PR_PGOOD))
+        else
         {
-            prPowerDc = true;
-            prPowerFail = false;
+            prPowerDc = false;
+            prPowerChg = false;
         }
         vTaskDelay(250);
     }

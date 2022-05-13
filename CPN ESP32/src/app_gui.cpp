@@ -9,6 +9,8 @@
 
 TimerHandle_t guiHeadUpdateTimer;
 bool guiHeadUpdateFlag = true;
+bool guiIsAlerting = false;
+bool guiClean = false;
 bool FLAGwifiIsConnected = false;
 bool FLAGfirebaseActive = false;
 extern "C"
@@ -36,7 +38,10 @@ void displayTask(void *pvParameters)
     pinMode(STAT_LED, OUTPUT);
     tft.setTextWrap(true, true);
     tft.setTextSize(7);
-    tft.println("I2DS");
+    tft.print("I2DS");
+    tft.setTextSize(4);
+    tft.println("CPN");
+    tft.setCursor(0, 60);
     tft.setTextSize(1);
     tft.println("boot..");
     vTaskDelay(50);
@@ -80,11 +85,27 @@ void displayTask(void *pvParameters)
     while (1)
     {
 
-        if (guiHeadUpdateFlag)
+        if (guiHeadUpdateFlag && !guiIsAlerting)
         {
+            uint8_t tmp = 0;
+            for (uint8_t i = 0; i < sensorIndex; i++)
+            {
+                if (sensorInfo[i].state == (uint8_t)S_ACTIVE)
+                    tmp++;
+            }
+            if (tmp > (sensorIndex / 2))
+                selfInfo.state = (uint8_t)S_ACTIVE;
+            else
+                selfInfo.state = (uint8_t)S_INACTIVE;
             digitalWrite(STAT_LED, !digitalRead(STAT_LED));
             tft.setFreeFont(&FreeSansBold12pt7b);
             tft.setTextDatum(MC_DATUM);
+            if (guiClean)
+            {
+                tft.fillScreen(ILI9341_BLACK);
+                guiClean = false;
+                APP_LOG_INFO("CLEARED");
+            }
 
             tft.fillRectHGradient(0, 0, 240, 50, ILI9341_ORANGE, ILI9341_RED);
             // tft.fillSmoothRoundRect(2, 2, 236, 50, 5, ILI9341_ORANGE);
@@ -116,14 +137,20 @@ void displayTask(void *pvParameters)
             tft.setCursor(10, 30);
             tft.print("PRS: ");
             tft.setCursor(35, 30);
-            if (prPowerDc)
+            if (!prPowerChg && prPowerDc)
             {
                 tft.setTextColor(ILI9341_GREEN);
-                tft.print("DC");
+                tft.print("CONNECTED TO USB POWER");
             }
-            else if (!prPowerDc)
+            else if (prPowerChg && prPowerDc)
             {
-                tft.print("CHG");
+                tft.setTextColor(ILI9341_ORANGE);
+                tft.print("CHARGING BATTERY RESERVES");
+            }
+            else
+            {
+                tft.setTextColor(ILI9341_RED);
+                tft.print("USB POWER FAILURE");
             }
             tft.setTextColor(ILI9341_WHITE);
             tft.setCursor(10, 40);
@@ -140,23 +167,31 @@ void displayTask(void *pvParameters)
             tft.print((const char *)WIFI_SSID);
             guiHeadUpdateFlag = false;
         }
-        if (FLAGipcResponsePending || swflag)
+        if (FLAGipcResponsePending || swflag || guiIsAlerting)
         {
-            digitalWrite(STAT_LED, !digitalRead(STAT_LED));
-            uint16_t color;
-            switch (sensorInfo[selection].state)
+            if (flashGUIAlert && guiIsAlerting)
             {
-            case S_INACTIVE:
-                color = ILI9341_GREEN;
-                break;
-            case S_ALERTING:
-                color = ILI9341_MAGENTA;
-                break;
-            default:
-                color = ILI9341_DARKGREY;
-                break;
+                tft.fillScreen(swflag ? ILI9341_BLUE : ILI9341_RED);
+                vTaskDelay(100);
             }
-            tft.drawRoundRect(sensorInfoExt[selection].touchArea[0] - 1, sensorInfoExt[selection].touchArea[1] - 1, sensorInfoExt[selection].touchArea[2] + 2, sensorInfoExt[selection].touchArea[3] + 2, 5, swflag ? ILI9341_BLACK : color);
+            else
+            {
+                uint16_t color;
+                switch (sensorInfo[selection].state)
+                {
+                case S_INACTIVE:
+                    color = ILI9341_GREEN;
+                    break;
+                case S_ALERTING:
+                    color = ILI9341_MAGENTA;
+                    break;
+                default:
+                    color = ILI9341_DARKGREY;
+                    break;
+                }
+                tft.drawRoundRect(sensorInfoExt[selection].touchArea[0] - 1, sensorInfoExt[selection].touchArea[1] - 1, sensorInfoExt[selection].touchArea[2] + 2, sensorInfoExt[selection].touchArea[3] + 2, 5, swflag ? ILI9341_BLACK : color);
+            }
+            digitalWrite(STAT_LED, !digitalRead(STAT_LED));
             swflag = !swflag;
             vTaskDelay(50);
         }
@@ -168,6 +203,15 @@ void displayTask(void *pvParameters)
                 (int16_t)y > selfInfoExt.touchArea[1] && (int16_t)y < (selfInfoExt.touchArea[1] + selfInfoExt.touchArea[3]))
             {
                 massActivate = true;
+            }
+            else if (((int16_t)x > 200 && (int16_t)x < 240) && (int16_t)y > 290 && (int16_t)y < 320)
+            {
+                tft.begin();
+                tft.setTextSize(1);
+                tft.setTextColor(ILI9341_BLUE);
+                tft.setCursor(0, 160);
+                tft.print("Restarting GUI service...");
+                guiClean = true;
             }
             else
             {
@@ -216,11 +260,30 @@ void displayTask(void *pvParameters)
                 massActivate = false;
             }
         }
-
+        if (guiIsAlerting)
+        {
+            APP_LOG_INFO("ALERTING");
+        }
         if (uxQueueMessagesWaiting(manager2GuiDeviceIndexQueue) > 0)
         {
             digitalWrite(STAT_LED, !digitalRead(STAT_LED));
-            uint8_t i;
+            uint8_t i = 0;
+            uint8_t cnt = 0;
+            for (uint8_t n = 0; n < sensorIndex; n++)
+            {
+                if (sensorInfo[n].state == (uint8_t)S_ALERTING)
+                {
+                    guiIsAlerting = true;
+                    guiClean = true;
+                    break;
+                }
+                else
+                    cnt++;
+            }
+            if (cnt == sensorIndex)
+            {
+                guiIsAlerting = false;
+            }
             if (xQueueReceive(manager2GuiDeviceIndexQueue, (void *)&i, 1) == pdPASS)
             {
                 uint16_t xsp = ((i % 2) * GUI_PANEL_REL_X_SPACING);
@@ -243,6 +306,10 @@ void displayTask(void *pvParameters)
                 case S_COLDSTART:
                     head = ILI9341_RED;
                     bg = ILI9341_ORANGE;
+                    break;
+                case S_FAULT_OPN:
+                    head = ILI9341_YELLOW;
+                    bg = ILI9341_MAGENTA;
                     break;
                 default:
                     head = ILI9341_BLUE;
@@ -283,11 +350,23 @@ void displayTask(void *pvParameters)
                     tft.print("WARMUP");
                     break;
                 case S_INACTIVE:
-                    tft.print("INACTIVE");
+                    if (sensorInfo[i].hw == HW_ACSN)
+                        tft.print("INACTIVE-CLOSED");
+                    else
+                        tft.print("INACTIVE");
                     break;
                 case S_FAULT_HW:
                     tft.print("HW FAULT");
                     break;
+                case S_FAULT_OPN:
+                {
+                    if (sensorInfo[i].hw == HW_ACSN)
+
+                        tft.print("INACTIVE - OPEN");
+                    else
+                        tft.print("INVALID");
+                    break;
+                }
                 default:
                     break;
                 }
@@ -315,6 +394,14 @@ void displayTask(void *pvParameters)
                 {
                     tft.setSwapBytes(true);
                     tft.pushImage(60 + xsp, 110 + ysp, 16, 16, loc);
+                    tft.setCursor(60 + xsp, 110 + ysp);
+                    tft.setTextColor(ILI9341_ORANGE);
+                    tft.print("S");
+                }
+                if (sensorInfoExt[i].alive && (sensorInfo[i].state == S_FAULT_OPN))
+                {
+                    tft.setSwapBytes(true);
+                    tft.pushImage(60 + xsp, 110 + ysp, 16, 16, loc4);
                     tft.setCursor(60 + xsp, 110 + ysp);
                     tft.setTextColor(ILI9341_ORANGE);
                     tft.print("S");
