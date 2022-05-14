@@ -11,7 +11,10 @@ All network management and communication between sensors is restricted to this r
 #### Local Sensor Network
 Includes the subnetwork, as well as the CPN Wi-Fi section, which is used to communicate with Firebase RTDB.
 #### Mobile App
-Used to control the active/inactive state of the sensors, receive status updates.
+Used to control the active/inactive state of the sensors, receive status updates.<br><br>
+<img src="https://github.com/edward62740/i2ds/blob/master/Documentation/App-main.jpg" alt="App" width="200"/>
+<img src="https://github.com/edward62740/i2ds/blob/master/Documentation/App-settings.jpg" alt="App" width="200"/>
+<img src="https://github.com/edward62740/i2ds/blob/master/Documentation/App-errors.jpg" alt="App" width="200"/>
 #### FCM
 Used to detect certain changes to the RTDB (i.e sensor triggered), and notify the user even if the app is not running.
 
@@ -25,9 +28,11 @@ Used to detect certain changes to the RTDB (i.e sensor triggered), and notify th
 ### PIRSN
 * This sensor uses EKMB1110112 PIR sensor to detect motion up to a distance of 7m (indoors).
 * Typical 5.5uA in sleep, avg 19uA with 2s polling and 5s reporting interval.
+
 ### ACSN
 * This sensor uses the SM353LT hall effect sensor to detect when the sensor's magnet moves away (door opens).
 * Typical 5.3uA in sleep, avg 19uA with 2s polling and 5s reporting interval.
+
 ### CPN
 * This device contains two microcontrollers, for the sensor network [(EFR32xG23)](https://www.silabs.com/wireless/proprietary/efr32fg23-sub-ghz-wireless-soc) and Wi-Fi/GUI (ESP32). Sensor network functions are exposed to the Wi-Fi processor via USART. While there is significant traffic, in effect the only change that can be made to the sensor network is to activate/inactivate the sensors. Doing so also requires the relevant Firebase auth credentials. This provides some protection from attacks based on injecting false data into the system to incapacitate the sensor network.
 * This device also provides internal battery backup with FCM notification when triggered. It is assumed that physical security beyond debug lock, encryption etc. is not crucial as the sensors would have already triggered warnings before the CPN can be tampered with. This functionality is mostly to keep the system afloat during a power outage (but this must be used with a backup 4G network or other such systems).
