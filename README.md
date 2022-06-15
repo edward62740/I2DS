@@ -28,10 +28,13 @@ Used to detect certain changes to the RTDB (i.e sensor triggered), and notify th
 ### PIRSN
 * This sensor uses EKMB1110112 PIR sensor to detect motion up to a distance of 7m (indoors).
 * Typical 5.5uA in sleep, avg 19uA with 2s polling and 5s reporting interval.
+<img src="https://github.com/edward62740/I2DS/blob/master/Documentation/prod-pirsn.jpg" alt="pirsn" width="200"/>
+
 
 ### ACSN
 * This sensor uses the SM353LT hall effect sensor to detect when the sensor's magnet moves away (door opens).
 * Typical 5.3uA in sleep, avg 19uA with 2s polling and 5s reporting interval.
+<img src="https://github.com/edward62740/I2DS/blob/master/Documentation/prod-acsn.jpg" alt="pirsn" width="200"/>
 
 ### CPN
 * This device contains two microcontrollers, for the sensor network [(EFR32xG23)](https://www.silabs.com/wireless/proprietary/efr32fg23-sub-ghz-wireless-soc) and Wi-Fi/GUI (ESP32). Sensor network functions are exposed to the Wi-Fi processor via USART. While there is significant traffic, in effect the only change that can be made to the sensor network is to activate/inactivate the sensors. Doing so also requires the relevant Firebase auth credentials. This provides some protection from attacks based on injecting false data into the system to incapacitate the sensor network.
