@@ -5,9 +5,9 @@ This is a sub-GHz proprietary security sensor system. The sensors listed below w
 Used in conjunction with [WMNS](https://github.com/edward62740/Wireless-Mesh-Network-System) for integrated data collection and security.
 
 ## Related/Parallel Development
-[Firebase Cloud Messaging](https://github.com/edward62740/i2ds-fcm)<br>
-[Google Actions + Dialogflow](https://github.com/edward62740/i2ds-assistant)<br>
-[Camera + tflite Person Detector](https://github.com/edward62740/i2ds-sentinel)<br>
+[Firebase Cloud Messaging](https://github.com/edward62740/i2ds-fcm) for providing mobile notifications of security events<br>
+[Google Actions + Dialogflow](https://github.com/edward62740/i2ds-assistant) to integrate with Google Home systems<br>
+[Camera + tflite Person Detector](https://github.com/edward62740/i2ds-sentinel) to provide image capture and continuous on-device person detection with tensorflow lite <br>
 
 ## System Structure
 ![](https://github.com/edward62740/i2ds/blob/master/Documentation/functional.png)
