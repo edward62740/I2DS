@@ -4,6 +4,11 @@
 This is a sub-GHz proprietary security sensor system. The sensors listed below will enter sensing mode once enabled through the [CPN GUI](https://github.com/edward62740/i2ds/blob/master/CPN%20ESP32/src/app_gui.cpp) or the [mobile app](https://github.com/edward62740/i2ds/tree/master/App). Any detected intrusion will then trigger a [FCM](https://github.com/edward62740/i2ds-fcm) background notification on the smartphones of the users with the mobile app installed.
 Used in conjunction with [WMNS](https://github.com/edward62740/Wireless-Mesh-Network-System) for integrated data collection and security.
 
+## Related/Parallel Development
+[Firebase Cloud Messaging](https://github.com/edward62740/i2ds-fcm)<br>
+[Google Actions + Dialogflow](https://github.com/edward62740/i2ds-assistant)<br>
+[Camera + tflite Person Detector](https://github.com/edward62740/i2ds-sentinel)<br>
+
 ## System Structure
 ![](https://github.com/edward62740/i2ds/blob/master/Documentation/functional.png)
 #### Subnetwork
