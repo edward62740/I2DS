@@ -2,7 +2,7 @@
 #define APP_IPC_H
 
 void ipcTask(void *pvParameters);
-void ipcSender(uint16_t id, uint8_t state);
+bool ipcSender(uint16_t id, uint8_t state);
 bool ipcParser(char *buffer, size_t len);
 
 
@@ -15,6 +15,7 @@ typedef enum
   S_ALERTING,        // Sensor element triggering
   S_COLDSTART = 0xE0,
   S_CALIBRATING,
+  S_WATCHING = 0xFA, // Reserved
 } sensor_state_t;
 
 typedef enum
@@ -22,6 +23,7 @@ typedef enum
   HW_CPN = 0x88, // Control Panel Node (Coordinator)
   HW_PIRSN,      // PIR Sensor Node (Sensor)
   HW_ACSN,       // Access Control Sensor Node (Sensor)
+  HW_SENTINEL, 
 } device_hw_t;
 
 /* IPC Information */

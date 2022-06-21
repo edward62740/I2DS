@@ -8,6 +8,10 @@
 //   run without the need to make any more changes for a particular hardware setup!
 //   Note that some sketches are designed for a particular TFT pixel width/height
 
+#define USER_SETUP_ID 0xFFFFFFFF
+
+// Define to disable all #warnings in library (can be put in User_Setup_Select.h)
+//#define DISABLE_ALL_LIBRARY_WARNINGS
 
 // ##################################################################################
 //
@@ -31,17 +35,21 @@
 
 // Tell the library to use 8 bit parallel mode (otherwise SPI is assumed)
 //#define TFT_PARALLEL_8_BIT
-
+//#define TFT_PARALLEL_16_BIT // **** 16 bit parallel ONLY with RP2040 processor ****
+ 
 // Display type -  only define if RPi display
 //#define RPI_DISPLAY_TYPE // 20MHz maximum SPI
 
 // Only define one driver, the other ones must be commented out
 #define ILI9341_DRIVER       // Generic driver for common displays
-//#define ILI9341_2_DRIVER     // Alternative ILI9341 driver, see https://github.com/Bodmer/TFT_eSPI/issues/1172
+//#define ILI9341_2_DRIVER   // Alternative ILI9341 driver, see https://github.com/Bodmer/TFT_eSPI/issues/1172
+//#define ILI9342_DRIVER     // Landscape default orientation variant of ILI9341
 //#define ST7735_DRIVER      // Define additional parameters below for this display
 //#define ILI9163_DRIVER     // Define additional parameters below for this display
 //#define S6D02A1_DRIVER
 //#define RPI_ILI9486_DRIVER // 20MHz maximum SPI
+//#define HX8357B_DRIVER
+//#define HX8357C_DRIVER
 //#define HX8357D_DRIVER
 //#define ILI9481_DRIVER
 //#define ILI9486_DRIVER
@@ -49,6 +57,7 @@
 //#define ST7789_DRIVER      // Full configuration option, define additional parameters below for this display
 //#define ST7789_2_DRIVER    // Minimal configuration option, define additional parameters below for this display
 //#define R61581_DRIVER
+//#define RM68120_DRIVER     // Untested
 //#define RM68140_DRIVER
 //#define ST7796_DRIVER
 //#define SSD1351_DRIVER

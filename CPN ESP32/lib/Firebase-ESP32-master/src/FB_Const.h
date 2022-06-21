@@ -1,6 +1,6 @@
 
 /**
- * Created February 28, 2022
+ * Created June 3, 2022
  *
  * This work is a part of Firebase ESP Client library
  * Copyright (c) 2022 K. Suwatchai (Mobizt)
@@ -100,12 +100,15 @@ class QueryFilter;
 
 #define MIN_TOKEN_GENERATION_ERROR_INTERVAL 5 * 1000
 
+#define MIN_NTP_SERVER_SYNC_TIME_OUT 15 * 1000
+
+#define FB_TIME_SYNC_INTERVAL 1500
+
 #define SD_CS_PIN 15
 
 #define STREAM_TASK_STACK_SIZE 8192
 #define QUEUE_TASK_STACK_SIZE 8192
 #define MAX_BLOB_PAYLOAD_SIZE 1024
-#define MAX_EXCHANGE_TOKEN_ATTEMPTS 5
 #define ESP_DEFAULT_TS 1618971013
 #define ESP_REPORT_PROGRESS_INTERVAL 2
 
@@ -751,7 +754,6 @@ struct fb_esp_auth_signin_provider_t
 struct fb_esp_token_signer_resources_t
 {
     int step = 0;
-    int attempts = 0;
     bool test_mode = false;
     bool signup = false;
     bool anonymous = false;
@@ -824,8 +826,10 @@ struct fb_esp_cfg_int_t
     unsigned long fb_last_jwt_generation_error_cb_millis = 0;
     unsigned long fb_last_request_token_cb_millis = 0;
     unsigned long fb_last_stream_timeout_cb_millis = 0;
+    unsigned long fb_last_time_sync_millis = 0;
+    unsigned long fb_last_ntp_sync_timeout_millis = 0;
     bool fb_clock_rdy = false;
-    bool fb_clock_checked = false;
+    bool fb_clock_synched = false;
     float fb_gmt_offset = 0;
     uint8_t fb_float_digits = 5;
     uint8_t fb_double_digits = 9;
@@ -1024,6 +1028,9 @@ struct fb_esp_client_timeout_t
     uint16_t tokenGenerationBeginStep = MIN_TOKEN_GENERATION_BEGIN_STEP_INTERVAL;
 
     uint16_t tokenGenerationError = MIN_TOKEN_GENERATION_ERROR_INTERVAL;
+
+    // NTP server sync timeout in ms
+    uint16_t ntpServerRequest = MIN_NTP_SERVER_SYNC_TIME_OUT;
 };
 
 struct fb_esp_cfg_t
@@ -1040,7 +1047,8 @@ struct fb_esp_cfg_t
     struct fb_esp_token_signer_resources_t signer;
     struct fb_esp_cfg_int_t internal;
     TokenStatusCallback token_status_callback = NULL;
-    int8_t max_token_generation_retry = MAX_EXCHANGE_TOKEN_ATTEMPTS;
+    // deprecated
+    int8_t max_token_generation_retry = 0;
     struct fb_esp_rtdb_config_t rtdb;
 #if defined(ENABLE_GC_STORAGE)
     struct fb_esp_gcs_config_t gcs;
@@ -1170,6 +1178,9 @@ struct fb_esp_functions_info_t
     fb_esp_functions_operation_status last_status = fb_esp_functions_operation_status_unknown;
     FunctionsOperationStatusInfo cbInfo;
     MB_String payload;
+    MB_String filepath;
+    fb_esp_mem_storage_type storageType = mem_storage_type_undefined;
+    uint32_t fileSize = 0;
 };
 
 struct fb_esp_functions_https_trigger_t
@@ -1745,8 +1756,8 @@ static const char fb_esp_pgm_str_24[] PROGMEM = "POST";
 static const char fb_esp_pgm_str_25[] PROGMEM = "GET";
 static const char fb_esp_pgm_str_26[] PROGMEM = "PATCH";
 static const char fb_esp_pgm_str_27[] PROGMEM = "DELETE";
-static const char fb_esp_pgm_str_28[] PROGMEM = "&download=";
-static const char fb_esp_pgm_str_29[] PROGMEM = "&print=silent";
+static const char fb_esp_pgm_str_28[] PROGMEM = "download=";
+static const char fb_esp_pgm_str_29[] PROGMEM = "print=silent";
 static const char fb_esp_pgm_str_30[] PROGMEM = " HTTP/1.1\r\n";
 static const char fb_esp_pgm_str_31[] PROGMEM = "Host: ";
 static const char fb_esp_pgm_str_32[] PROGMEM = "User-Agent: ESP\r\n";
@@ -1801,7 +1812,7 @@ static const char fb_esp_pgm_str_80[] PROGMEM = "Content-Disposition: ";
 static const char fb_esp_pgm_str_81[] PROGMEM = "application/octet-stream";
 static const char fb_esp_pgm_str_82[] PROGMEM = "attachment";
 static const char fb_esp_pgm_str_83[] PROGMEM = "unknown error";
-// static const char fb_esp_pgm_str_84[] PROGMEM = "";
+static const char fb_esp_pgm_str_84[] PROGMEM = "operations/[0]/error/code";
 static const char fb_esp_pgm_str_85[] PROGMEM = "The SD card is not available";
 static const char fb_esp_pgm_str_86[] PROGMEM = "Could not read/write the backup file";
 static const char fb_esp_pgm_str_87[] PROGMEM = "Transmission error, ";
@@ -1813,7 +1824,7 @@ static const char fb_esp_pgm_str_92[] PROGMEM = "\"blob,base64,";
 static const char fb_esp_pgm_str_93[] PROGMEM = "\"file,base64,";
 static const char fb_esp_pgm_str_94[] PROGMEM = "http connection was used by other processes";
 static const char fb_esp_pgm_str_95[] PROGMEM = "Location: ";
-static const char fb_esp_pgm_str_96[] PROGMEM = "&orderBy=";
+static const char fb_esp_pgm_str_96[] PROGMEM = "orderBy=";
 static const char fb_esp_pgm_str_97[] PROGMEM = "&limitToFirst=";
 static const char fb_esp_pgm_str_98[] PROGMEM = "&limitToLast=";
 static const char fb_esp_pgm_str_99[] PROGMEM = "&startAt=";
@@ -1872,14 +1883,14 @@ static const char fb_esp_pgm_str_151[] PROGMEM = "null_etag";
 static const char fb_esp_pgm_str_152[] PROGMEM = "Precondition Failed (ETag does not match)";
 static const char fb_esp_pgm_str_153[] PROGMEM = "X-HTTP-Method-Override: ";
 static const char fb_esp_pgm_str_154[] PROGMEM = "{\".sv\": \"timestamp\"}";
-static const char fb_esp_pgm_str_155[] PROGMEM = "&shallow=true";
+static const char fb_esp_pgm_str_155[] PROGMEM = "shallow=true";
 static const char fb_esp_pgm_str_156[] PROGMEM = "/.priority";
 static const char fb_esp_pgm_str_157[] PROGMEM = ".priority";
-static const char fb_esp_pgm_str_158[] PROGMEM = "&timeout=";
+static const char fb_esp_pgm_str_158[] PROGMEM = "timeout=";
 static const char fb_esp_pgm_str_159[] PROGMEM = "ms";
-static const char fb_esp_pgm_str_160[] PROGMEM = "&writeSizeLimit=";
+static const char fb_esp_pgm_str_160[] PROGMEM = "writeSizeLimit=";
 static const char fb_esp_pgm_str_161[] PROGMEM = ".value";
-static const char fb_esp_pgm_str_162[] PROGMEM = "&format=export";
+static const char fb_esp_pgm_str_162[] PROGMEM = "format=export";
 static const char fb_esp_pgm_str_163[] PROGMEM = "{";
 static const char fb_esp_pgm_str_164[] PROGMEM = "Flash memory was not ready";
 static const char fb_esp_pgm_str_165[] PROGMEM = "array";
@@ -1887,8 +1898,8 @@ static const char fb_esp_pgm_str_166[] PROGMEM = "\".sv\"";
 static const char fb_esp_pgm_str_167[] PROGMEM = "Transfer-Encoding: ";
 static const char fb_esp_pgm_str_168[] PROGMEM = "chunked";
 static const char fb_esp_pgm_str_169[] PROGMEM = "Maximum Redirection reached";
-static const char fb_esp_pgm_str_170[] PROGMEM = "?auth=";
-static const char fb_esp_pgm_str_171[] PROGMEM = "&auth=";
+// static const char fb_esp_pgm_str_170[] PROGMEM = "";
+// static const char fb_esp_pgm_str_171[] PROGMEM = "";
 static const char fb_esp_pgm_str_172[] PROGMEM = "&";
 static const char fb_esp_pgm_str_173[] PROGMEM = "?";
 static const char fb_esp_pgm_str_174[] PROGMEM = "#";
@@ -1947,7 +1958,7 @@ static const char fb_esp_pgm_str_226[] PROGMEM = "firestore";
 static const char fb_esp_pgm_str_227[] PROGMEM = "grant_type";
 static const char fb_esp_pgm_str_228[] PROGMEM = "urn:ietf:params:oauth:grant-type:jwt-bearer";
 static const char fb_esp_pgm_str_229[] PROGMEM = "assertion";
-static const char fb_esp_pgm_str_230[] PROGMEM = "could not get time from NTP server";
+static const char fb_esp_pgm_str_230[] PROGMEM = "NTP server time synching failed";
 static const char fb_esp_pgm_str_231[] PROGMEM = "/google.identity.identitytoolkit.v1.IdentityToolkit";
 static const char fb_esp_pgm_str_232[] PROGMEM = "verifyCustomToken?key=";
 static const char fb_esp_pgm_str_233[] PROGMEM = "token";
@@ -2173,7 +2184,7 @@ static const char fb_esp_pgm_str_446[] PROGMEM = "%[^&]";
 #if defined(FIREBASE_ESP_CLIENT)
 static const char fb_esp_pgm_str_447[] PROGMEM = "application/zip";
 static const char fb_esp_pgm_str_448[] PROGMEM = "x-goog-content-length-range: 0,104857600";
-// static const char fb_esp_pgm_str_449[] PROGMEM = "";
+static const char fb_esp_pgm_str_449[] PROGMEM = "GCLOUD_PROJECT";
 static const char fb_esp_pgm_str_450[] PROGMEM = "Archive not found";
 static const char fb_esp_pgm_str_451[] PROGMEM = "iam";
 static const char fb_esp_pgm_str_452[] PROGMEM = "autozip";
@@ -2187,7 +2198,7 @@ static const char fb_esp_pgm_str_459[] PROGMEM = "nodejs12";
 static const char fb_esp_pgm_str_460[] PROGMEM = "ALLOW_ALL";
 static const char fb_esp_pgm_str_461[] PROGMEM = "roles/cloudfunctions.invoker";
 static const char fb_esp_pgm_str_462[] PROGMEM = "allUsers";
-static const char fb_esp_pgm_str_463[] PROGMEM = "\"sourceUploadUrl\":";
+// static const char fb_esp_pgm_str_463[] PROGMEM = "\"sourceUploadUrl\":";
 static const char fb_esp_pgm_str_464[] PROGMEM = "\",";
 static const char fb_esp_pgm_str_465[] PROGMEM = ":getIamPolicy";
 static const char fb_esp_pgm_str_466[] PROGMEM = "options.requestedPolicyVersion";
@@ -2272,7 +2283,7 @@ static const char fb_esp_pgm_str_543[] PROGMEM = "The ID token or registration t
 
 static const char fb_esp_pgm_str_545[] PROGMEM = "create message digest";
 static const char fb_esp_pgm_str_546[] PROGMEM = "tokenProcessingTask";
-static const char fb_esp_pgm_str_547[] PROGMEM = "max token generation retry reached";
+// static const char fb_esp_pgm_str_547[] PROGMEM = "";
 static const char fb_esp_pgm_str_548[] PROGMEM = "0.0.0.0";
 static const char fb_esp_pgm_str_549[] PROGMEM = "error";
 static const char fb_esp_pgm_str_550[] PROGMEM = "rules";

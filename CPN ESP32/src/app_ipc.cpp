@@ -4,28 +4,45 @@
 #include "app_manager.h"
 #include "app_common.h"
 
+// Timer for IPC response timeout
+TimerHandle_t ipcDeviceResponseTimer;
+// Timer array for device alive tracking
+TimerHandle_t managerDeviceTimer[MAX_I2DS_DEVICE_COUNT];
+
+// IPC consts
 uint8_t IPC_START = 0xAF;
 uint8_t IPC_END = 0xAC;
-char ipc_recv_buffer[255];
+
+// Fixed tx msg array
 uint8_t ipc_get_list[3] = {IPC_START, (uint8_t)IPC_LIST_CTS, IPC_END};
 uint8_t ipc_set_sensor_state[6] = {IPC_START, (uint8_t)IPC_REQUEST, 0x00, 0x00, 0x00, IPC_END};
+
+// IPC rx buffer
+char ipc_recv_buffer[255];
+
+// Flags to keep track of ipc status
 bool FLAGguiUpdatePending = false;
 bool FLAGipcResponsePending = false;
 bool FLAGipcInternalAckPending = false;
+
+// Variables for ipc timeout handling
 uint16_t tmpTimerId = 0;
 uint8_t tmpTimerState = 0;
 uint8_t tmpResendCount = 0;
 uint8_t tmpRetryCount = 0;
-TimerHandle_t ipcDeviceResponseTimer;
-TimerHandle_t managerDeviceTimer[30];
 
+/*! ipcRespTimerCallback()
+   @brief callback for IPC timer timeout
+
+   @note called if no IPC_REQUEST_DONE within IPC_RESPONSE_TIMEOUT_MS
+
+   @param ipcDeviceResponseTimer FreeRTOS timer handle
+*/
 void ipcRespTimerCallback(TimerHandle_t ipcDeviceResponseTimer)
 {
-
     if (FLAGipcInternalAckPending)
-    {
         err_count.IPC_REQUEST_SEND_NOACK++;
-    }
+
     err_count.IPC_REQUEST_SEND_FAIL++;
     sensorInfoExt[tmpTimerId].ipcResponsePending = false;
     FLAGipcResponsePending = false;
@@ -36,61 +53,84 @@ void ipcRespTimerCallback(TimerHandle_t ipcDeviceResponseTimer)
         ipcSender(tmpTimerId, tmpTimerState);
     }
     else
-    {
         tmpResendCount = 0;
-    }
 }
 
+/*! ipcTask()
+   @brief task to handle ipc communication with efr32fg23
+
+   @note
+
+   @param void
+*/
 void ipcTask(void *pvParameters)
 {
-    ipcDeviceResponseTimer = xTimerCreate("ipcResp", MAX_IPC_RESPONSE_TIMEOUT_MS, pdTRUE, (void *)0, ipcRespTimerCallback);
+    ipcDeviceResponseTimer = xTimerCreate("ipcResp", IPC_RESPONSE_TIMEOUT_MS, pdTRUE, (void *)0, ipcRespTimerCallback);
     delay(100);
     pinMode(ACT_LED, OUTPUT);
     while (1)
     {
-        if (Serial1.available())
+        if (Serial1.available()) // receive bytes if avail and parse
         {
             digitalWrite(ACT_LED, HIGH);
             size_t ret = 0;
-            ret = Serial1.readBytesUntil(IPC_END, (char *)ipc_recv_buffer, sizeof(ipc_recv_buffer));
+            ret = Serial1.readBytesUntil(IPC_END, (char *)ipc_recv_buffer, sizeof(ipc_recv_buffer)); // read until end byte
             ipcParser(ipc_recv_buffer, ret);
             digitalWrite(ACT_LED, LOW);
         }
-        if (updateDevice)
-        {
-            updateDevice = false;
-        }
-
         vTaskDelay(10);
     }
 }
 
-void ipcSender(uint16_t id, uint8_t state)
-{
+/*! ipcSender()
+   @brief function called by gui/firebase task to send commands to devices
 
+   @note returns false if awaiting another request, at most MAX_IPC_REQUEST_RETRY * IPC_RESPONSE_TIMEOUT_MS from previous call
+
+   @param id device ID to change *NOT uint8_t INDEX*
+   @param state requested state
+   @return bool success
+*/
+bool ipcSender(uint16_t id, uint8_t state)
+{
+    if (FLAGipcResponsePending)
+        return false;
     sensorInfoExt[id].ipcResponsePending = true;
     FLAGipcResponsePending = true;
     ipc_set_sensor_state[2] = 0xFF & (uint8_t)id >> 8;
     ipc_set_sensor_state[3] = 0xFF & (uint8_t)id;
     ipc_set_sensor_state[4] = 0xFF & (uint8_t)state;
+    err_count.IPC_TOTAL_BYTES_EXCHANGED += static_cast<uint32_t>(sizeof(ipc_set_sensor_state));
     Serial1.write(ipc_set_sensor_state, sizeof(ipc_set_sensor_state));
     FLAGipcInternalAckPending = true;
     tmpTimerId = id;
     tmpTimerState = state;
     xTimerStart(ipcDeviceResponseTimer, 0);
+    return true;
 }
+
+/*! ipcParser()
+   @brief parses incoming IPC messages and acts appropriately
+
+   @note
+
+   @param buffer pointer to rx serial buffer
+   @param len size of rxed buffer
+   @return bool success
+*/
 bool ipcParser(char *buffer, size_t len)
 {
     err_count.IPC_TOTAL_EXCHANGES++;
+    err_count.IPC_TOTAL_BYTES_EXCHANGED += (uint32_t)len;
     if (len > 255)
         return false;
     char tmpBuf[len];
     memcpy(tmpBuf, buffer, len * sizeof(char));
-    if (tmpBuf[0] != (char)IPC_START)
+    if (tmpBuf[0] != (char)IPC_START) // dump message if incorrect start byte
         return false;
-    switch (tmpBuf[1])
+    switch (tmpBuf[1]) // determine message type
     {
-        // Response to IPC_LIST_CTS
+    // Response to IPC_LIST_CTS, done at startup
     case IPC_LIST:
     {
         for (uint8_t i = 0; i < (uint8_t)(tmpBuf[2]); i++)
@@ -124,7 +164,7 @@ bool ipcParser(char *buffer, size_t len)
                             xQueueReset(ipc2ManagerDeviceInfoQueue);
                             err_count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW++;
                         }
-                        
+
                         if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) == 0)
                             err_count.IPC_QUEUE_SEND_DEVICEINFO_FAIL++;
                     }
@@ -133,7 +173,7 @@ bool ipcParser(char *buffer, size_t len)
                 else
                     tmpIndex++;
             }
-            if (tmpIndex == sensorIndex)
+            if (tmpIndex == sensorIndex && (tmpInfo.self_id < 255) && (tmpInfo.self_id != 0))
             {
                 DeviceInfoExt queueSend;
                 queueSend.DeviceInfoChangeIndex = 0;
@@ -158,6 +198,7 @@ bool ipcParser(char *buffer, size_t len)
 
         break;
     }
+    // regular report fmt
     case IPC_REPORT:
     {
         DeviceInfo tmpInfo;
@@ -179,12 +220,12 @@ bool ipcParser(char *buffer, size_t len)
                 queueSend.id = i;
                 queueSend.alive = true;
                 queueSend.DeviceInfoChangeIndex = 249;
-                if(tmpInfo.state != (uint8_t)S_ALERTING)
+                if (tmpInfo.state != (uint8_t)S_ALERTING)
                 {
                     queueSend.info.trigd = 0;
-                    queueSend.DeviceInfoChangeIndex = 377;
+                    queueSend.DeviceInfoChangeIndex = 121;
                 }
-                
+
                 queueSend.guiUpdatePending = true;
                 xTimerReset(managerDeviceTimer[i], 0);
                 if (uxQueueSpacesAvailable(ipc2ManagerDeviceInfoQueue) == 0)
@@ -201,7 +242,8 @@ bool ipcParser(char *buffer, size_t len)
 
         break;
     }
-    // Message upon change of device status
+
+    // message upon change of device status
     case IPC_CHANGE:
     {
         uint16_t id = (tmpBuf[2] << 8) | tmpBuf[3];
@@ -226,7 +268,6 @@ bool ipcParser(char *buffer, size_t len)
                 {
                     xQueueReset(ipc2ManagerDeviceInfoQueue);
                     err_count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW++;
-                    
                 }
 
                 if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) == 0)
@@ -243,14 +284,15 @@ bool ipcParser(char *buffer, size_t len)
                 err_count.IPC_CHANGE_INDEX_OUT_OF_BOUNDS++;
                 Serial1.write(ipc_get_list, sizeof(ipc_get_list));
             }
-            else{
+            else
+            {
                 err_count.IPC_CHANGE_INVALID++;
             }
         }
 
         break;
     }
-    // Response upon completion of IPC_REQUEST
+    // response upon completion of IPC_REQUEST
     case IPC_REQUEST_DONE:
     {
         if (FLAGipcResponsePending)
@@ -274,6 +316,7 @@ bool ipcParser(char *buffer, size_t len)
                     queueSend.id = i;
                     queueSend.guiUpdatePending = true;
                     queueSend.ipcResponsePending = false;
+                    queueSend.alive = true;
                     if (uxQueueSpacesAvailable(ipc2ManagerDeviceInfoQueue) == 0)
                     {
                         xQueueReset(ipc2ManagerDeviceInfoQueue);
@@ -290,6 +333,7 @@ bool ipcParser(char *buffer, size_t len)
         }
         break;
     }
+    // response upon rx of IPC_REQUEST
     case IPC_REQUEST_ACK:
     {
         if (FLAGipcResponsePending)
@@ -301,6 +345,14 @@ bool ipcParser(char *buffer, size_t len)
     }
     return true;
 }
+/*! cmpDeviceInfo()
+   @brief compares the two param and returns the difference
+
+   @note
+   @param s1 pointer to DeviceInfo struct
+   @param s2 pointer to DeviceInfo struct
+   @return uint16_t to indicate binary pos of changed items in struct
+*/
 uint16_t cmpDeviceInfo(DeviceInfo *s1, DeviceInfo *s2)
 {
     uint16_t ret = 0;
