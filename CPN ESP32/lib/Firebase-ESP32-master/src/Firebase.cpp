@@ -1,7 +1,7 @@
 /**
- * The Firebase class, Firebase.cpp v1.0.20
+ * The Firebase class, Firebase.cpp v1.1.0
  *
- *  Created February 28, 2022
+ *  Created May 17, 2022
  *
  * The MIT License (MIT)
  * Copyright (c) 2022 K. Suwatchai (Mobizt)
@@ -132,12 +132,14 @@ bool Firebase_ESP_Client::mSendResetPassword(FirebaseConfig *config, MB_StringPt
     return Signer.handleEmailSending(email, fb_esp_user_email_sending_type_reset_psw);
 }
 
-void Firebase_ESP_Client::mSetIdToken(FirebaseConfig *config, MB_StringPtr idToken, size_t expire)
+void Firebase_ESP_Client::mSetIdToken(FirebaseConfig *config, MB_StringPtr idToken, size_t expire, MB_StringPtr refreshToken)
 {
     if (!config)
         return;
 
     MB_String _idToken = idToken;
+    config->internal.refresh_token.clear();
+    config->internal.refresh_token = refreshToken;
 
     if (_idToken.length() > 0)
     {
@@ -156,7 +158,6 @@ void Firebase_ESP_Client::mSetIdToken(FirebaseConfig *config, MB_StringPtr idTok
         config->signer.tokens.expires += Signer.getTime() + expire;
 
         config->signer.tokens.status = token_status_ready;
-        config->signer.attempts = 0;
         config->signer.step = fb_esp_jwt_generation_step_begin;
         config->internal.fb_last_jwt_generation_error_cb_millis = 0;
         config->signer.tokens.token_type = token_type_id_token;
@@ -270,9 +271,9 @@ void Firebase_ESP_Client::setDoubleDigits(uint8_t digits)
 
 #if defined(MBFS_SD_FS) && defined(MBFS_CARD_TYPE_SD)
 
-bool Firebase_ESP_Client::sdBegin(int8_t ss, int8_t sck, int8_t miso, int8_t mosi)
+bool Firebase_ESP_Client::sdBegin(int8_t ss, int8_t sck, int8_t miso, int8_t mosi, uint32_t frequency)
 {
-    return mbfs->sdBegin(ss, sck, miso, mosi);
+    return mbfs->sdBegin(ss, sck, miso, mosi, frequency);
 }
 
 #if defined(ESP8266)
@@ -284,9 +285,9 @@ bool Firebase_ESP_Client::sdBegin(SDFSConfig *sdFSConfig)
 
 #if defined(ESP32)
 
-bool Firebase_ESP_Client::sdBegin(int8_t ss, SPIClass *spiConfig)
+bool Firebase_ESP_Client::sdBegin(int8_t ss, SPIClass *spiConfig, uint32_t frequency)
 {
-    return mbfs->sdSPIBegin(ss, spiConfig);
+    return mbfs->sdSPIBegin(ss, spiConfig, frequency);
 }
 #endif
 
@@ -299,7 +300,7 @@ bool Firebase_ESP_Client::sdBegin(SdSpiConfig *sdFatSPIConfig, int8_t ss, int8_t
 
 #endif
 
-#if defined(ESP8266) && defined(MBFS_SD_FS) && defined(MBFS_CARD_TYPE_SD_MMC)
+#if defined(ESP32) && defined(MBFS_SD_FS) && defined(MBFS_CARD_TYPE_SD_MMC)
 
 bool Firebase_ESP_Client::sdMMCBegin(const char *mountpoint, bool mode1bit, bool format_if_mount_failed)
 {
@@ -429,12 +430,14 @@ bool FIREBASE_CLASS::mSendResetPassword(FirebaseConfig *config, MB_StringPtr ema
     return Signer.handleEmailSending(email, fb_esp_user_email_sending_type_reset_psw);
 }
 
-void FIREBASE_CLASS::mSetIdToken(FirebaseConfig *config, MB_StringPtr idToken, size_t expire)
+void FIREBASE_CLASS::mSetIdToken(FirebaseConfig *config, MB_StringPtr idToken, size_t expire, MB_StringPtr refreshToken)
 {
     if (!config)
         return;
 
     MB_String _idToken = idToken;
+    config->internal.refresh_token.clear();
+    config->internal.refresh_token = refreshToken;
 
     if (_idToken.length() > 0)
     {
@@ -453,7 +456,6 @@ void FIREBASE_CLASS::mSetIdToken(FirebaseConfig *config, MB_StringPtr idToken, s
         config->signer.tokens.expires += Signer.getTime() + expire;
 
         config->signer.tokens.status = token_status_ready;
-        config->signer.attempts = 0;
         config->signer.step = fb_esp_jwt_generation_step_begin;
         config->internal.fb_last_jwt_generation_error_cb_millis = 0;
         config->signer.tokens.token_type = token_type_id_token;
@@ -632,9 +634,9 @@ bool FIREBASE_CLASS::sendTopic(FirebaseData &fbdo)
 
 #if defined(MBFS_SD_FS) && defined(MBFS_CARD_TYPE_SD)
 
-bool FIREBASE_CLASS::sdBegin(int8_t ss, int8_t sck, int8_t miso, int8_t mosi)
+bool FIREBASE_CLASS::sdBegin(int8_t ss, int8_t sck, int8_t miso, int8_t mosi, uint32_t frequency)
 {
-    return mbfs->sdBegin(ss, sck, miso, mosi);
+    return mbfs->sdBegin(ss, sck, miso, mosi, frequency);
 }
 
 #if defined(ESP8266)
@@ -646,9 +648,9 @@ bool FIREBASE_CLASS::sdBegin(SDFSConfig *sdFSConfig)
 
 #if defined(ESP32)
 
-bool FIREBASE_CLASS::sdBegin(int8_t ss, SPIClass *spiConfig)
+bool FIREBASE_CLASS::sdBegin(int8_t ss, SPIClass *spiConfig, uint32_t frequency)
 {
-    return mbfs->sdSPIBegin(ss, spiConfig);
+    return mbfs->sdSPIBegin(ss, spiConfig, frequency);
 }
 #endif
 

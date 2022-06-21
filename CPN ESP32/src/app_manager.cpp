@@ -6,14 +6,25 @@
 #include "app_common.h"
 #include <FirebaseESP32.h>
 #include "WiFi.h"
-// Provide the token generation process info.
 #include <addons/TokenHelper.h>
+#include <esp_task_wdt.h>
+#include <EEPROM.h>
 
-DeviceInfo selfInfo, sensorInfo[30];
+// Struct to keep all device info passed over IPC
+DeviceInfo selfInfo, sensorInfo[MAX_I2DS_DEVICE_COUNT];
+
+// Sensor count high watermark
 uint8_t sensorIndex = 0;
-DeviceInfoExt selfInfoExt, sensorInfoExt[30];
+
+// Struct for CPN device tracking
+DeviceInfoExt selfInfoExt, sensorInfoExt[MAX_I2DS_DEVICE_COUNT];
+
+// Queue to pass updated info from ipc to manager to update structs
 QueueHandle_t ipc2ManagerDeviceInfoQueue;
-TimerHandle_t ipcDeviceUpdateTimer;
+
+// Queue to hold all pending firebase requests before ipc
+QueueHandle_t app2ManagerDeviceReqQueue;
+
 String devicename = "I2DS CONTROL PANEL";
 // Define the Firebase Data object
 FirebaseData fbdo;
@@ -23,27 +34,56 @@ FirebaseAuth auth;
 FirebaseConfig config;
 // Assign the project host and api key (required)
 
-bool updateDevice = false;
-bool flashGUIAlert = false;
-bool skipUpdate = false;
-volatile uint8_t skipUpdateCleaner = 0;
+// inform GUI to flash on alert
+bool guiFlashOnAlert = false;
+
 bool FLAGfirebaseRegularUpdate = true;
+TimerHandle_t firebaseUpdateTimer;
+
+TimerHandle_t firebaseConnectionTimer;
+
 bool FLAGfirebaseForceUpdate = false;
 uint8_t firebaseForceUpdateDeviceId = 0;
-TimerHandle_t firebaseUpdateTimer;
-ErrCount err_count = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
+time_t guiCurrentTime = 0;
+
+ErrCount err_count;
+
+uint8_t last_reset_reason = 0x00;
+
+/*! firebaseConnectionTimerCallback()
+   @brief callback for no connection timer
+
+   @note restarts the processor if connection cannot be re-established within FIREBASE_WIFI_MAX_NO_CONNECTION_MS
+
+   @param firebaseConnectionTimer FreeRTOS timer handle
+*/
+void firebaseConnectionTimerCallback(TimerHandle_t firebaseConnectionTimer)
+{
+  EEPROM.write(0, RST_CONN);
+  EEPROM.commit();
+  ESP.restart();
+}
+
+/*! firebaseUpdateTimerCallback()
+   @brief callback for Firebase regular updates
+
+   @note sets flag at interval FIREBASE_UPDATE_INTERVAL_MS, aborted if request in progress
+
+   @param firebaseUpdateTimer FreeRTOS timer handle
+*/
 void firebaseUpdateTimerCallback(TimerHandle_t firebaseUpdateTimer)
 {
   FLAGfirebaseRegularUpdate = true;
-  if (skipUpdate)
-    skipUpdateCleaner++;
-  if (skipUpdateCleaner > (FIREBASE_MAX_COMBINED_REQUEST_DURATION / FIREBASE_UPDATE_INTERVAL_MS))
-  {
-    skipUpdateCleaner = 0;
-    skipUpdate = false;
-  }
 }
+
+/*! managerDeviceTimerCallback()
+   @brief callback for Manager alive tracker
+
+   @note clears alive flag if no msg from device within MANAGER_MAX_DEVICE_NOMSG_MS
+
+   @param managerDeviceTimer FreeRTOS timer handle
+*/
 void managerDeviceTimerCallback(TimerHandle_t managerDeviceTimer)
 {
   uint8_t id = (uint32_t)pvTimerGetTimerID(managerDeviceTimer);
@@ -54,11 +94,14 @@ void managerDeviceTimerCallback(TimerHandle_t managerDeviceTimer)
   }
   xQueueSend(manager2GuiDeviceIndexQueue, (void *)&id, 0);
 }
-void ipcDeviceUpdateCallback(TimerHandle_t ipcDeviceUpdateTimer)
-{
-  updateDevice = true;
-}
 
+/*! firebaseErrorQueueCallback()
+   @brief callback on firebase error
+
+   @note increments FIREBASE_ERR_QUEUE_OVERFLOW counter if queue is full
+
+   @param errorQueue Firebase QueueInfo class
+*/
 void firebaseErrorQueueCallback(QueueInfo errorQueue)
 {
   if (errorQueue.isQueueFull())
@@ -66,8 +109,20 @@ void firebaseErrorQueueCallback(QueueInfo errorQueue)
     err_count.FIREBASE_ERR_QUEUE_OVERFLOW++;
   }
 }
+
+/*! firebaseTask()
+   @brief updates Firebase RTDB reguarly and when forced to by manager,
+   listens to requests from firebase and passes them to IPC
+
+   @note
+
+   @param void
+*/
 void firebaseTask(void *pvParameters)
 {
+  esp_task_wdt_init(15, true);
+  EEPROM.begin(1); // Reset reason byte
+  last_reset_reason = EEPROM.read(0);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE, INADDR_NONE);
   WiFi.setHostname(devicename.c_str()); // define hostname
@@ -76,63 +131,56 @@ void firebaseTask(void *pvParameters)
     APP_LOG_INFO("[INIT] ERROR CONNECTING TO WIFI");
     WiFi.disconnect();
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-    vTaskDelay(3500);
+    vTaskDelay(FIREBASE_WIFI_RETRY_INTERVAL_MS);
   }
   FLAGwifiIsConnected = true;
-  /* Assign the API key (required) */
+
   config.api_key = API_KEY;
-  /* Assign the RTDB URL */
   config.database_url = DATABASE_URL;
-  // Optional, set AP reconnection in setup()
+
+  // Firebase configs
   Firebase.reconnectWiFi(true);
-  Firebase.setMaxRetry(fbdo, 3);
-  Firebase.setMaxErrorQueue(fbdo, 10);
+  Firebase.setMaxRetry(fbdo, MAX_FIREBASE_SET_RETRY);
+  Firebase.setMaxErrorQueue(fbdo, MAX_FIREBASE_ERROR_QUEUE);
   Firebase.beginAutoRunErrorQueue(fbdo, firebaseErrorQueueCallback);
-  fbdo.setResponseSize(8192);
-  // WiFi reconnect timeout (interval) in ms (10 sec - 5 min) when WiFi disconnected.
+  fbdo.setResponseSize(FIREBASE_DATA_OBJECT_PAYLOAD_SIZE_BYTES);
   config.timeout.wifiReconnect = 10 * 1000;
-  // Socket connection and SSL handshake timeout in ms (1 sec - 1 min).
-  config.timeout.socketConnection = 10 * 1000;
-  // Server response read timeout in ms (1 sec - 1 min).
-  config.timeout.serverResponse = 10 * 1000;
-  // RTDB Stream keep-alive timeout in ms (20 sec - 2 min) when no server's keep-alive event data received.
-  config.timeout.rtdbKeepAlive = 45 * 1000;
-  // RTDB Stream reconnect timeout (interval) in ms (1 sec - 1 min) when RTDB Stream closed and want to resume.
+  config.timeout.socketConnection = 6 * 1000;
+  config.timeout.serverResponse = 8 * 1000;
+  config.timeout.rtdbKeepAlive = 30 * 1000;
   config.timeout.rtdbStreamReconnect = 1 * 1000;
-  // RTDB Stream error notification timeout (interval) in ms (3 sec - 30 sec). It determines how often the readStream
-  // will return false (error) when it called repeatedly in loop.
   config.timeout.rtdbStreamError = 3 * 1000;
-  /* Sign up */
-  if (Firebase.signUp(&config, &auth, "", ""))
-  {
-    APP_LOG_INFO("ok");
-  }
+  Firebase.signUp(&config, &auth, "", "");
   config.token_status_callback = tokenStatusCallback;
   Firebase.begin(&config, &auth);
   FLAGfirebaseActive = true;
   firebaseUpdateTimer = xTimerCreate("firebaseUpdate", FIREBASE_UPDATE_INTERVAL_MS, pdTRUE, (void *)0, firebaseUpdateTimerCallback);
+  firebaseConnectionTimer = xTimerCreate("firebaseConnection", FIREBASE_WIFI_MAX_NO_CONNECTION_MS, pdTRUE, (void *)0, firebaseConnectionTimerCallback);
   xTimerStart(firebaseUpdateTimer, 0);
-  // Firebase.deleteNode(fbdo, "/");
   if (!Firebase.beginStream(fbdo, "/req/send"))
   {
     APP_LOG_INFO(fbdo.errorReason());
   }
+  /* ERRATA => FIREBASE DOES NOT RETURN AS ARRAYS UNLESS MORE THAN HALF OF THE MAX VALUES ARE NON-NULL
+     WORKAROUND => MAX DEVICE COUNT IS MAX_I2DS_DEVICE_COUNT; FILL UNUSED ARRAYS MAX_I2DS_DEVICE_COUNT + 1 to MAX_I2DS_DEVICE_COUNT * 3 WITH VALUES
+  */
   FirebaseJson errataJson;
-  for (uint8_t i = 30 + 1; i < 30 * 3; i++)
+  for (uint8_t i = MAX_I2DS_DEVICE_COUNT + 1; i < MAX_I2DS_DEVICE_COUNT * 3; i++)
   {
     errataJson.add((String)i, 7);
   }
+
   Firebase.updateNode(fbdo, "/req/send", errataJson);
+  // start timestamp
   FirebaseJson initTsJson;
   initTsJson.set("timestamp/.sv", "timestamp");
   Firebase.updateNode(fbdo, "/boot", initTsJson);
+
   while (1)
   {
-    if (!Firebase.authenticated())
-      err_count.FIREBASE_AUTH_ERR++;
+
     if (Firebase.ready() && FLAGfirebaseForceUpdate)
     {
-      skipUpdate = false;
       FirebaseJson deviceinfoJson;
       String device = "/devices/dev" + (String)firebaseForceUpdateDeviceId;
       deviceinfoJson.add("state", sensorInfo[firebaseForceUpdateDeviceId].state);
@@ -143,45 +191,63 @@ void firebaseTask(void *pvParameters)
       }
       FLAGfirebaseForceUpdate = false;
     }
+
     else if (fbdo.streamAvailable() && !FLAGipcResponsePending)
     {
-      skipUpdate = false;
       if (fbdo.dataTypeEnum() == fb_esp_rtdb_data_type_array)
       {
+        bool tmpAccessed = false;
+        uint8_t tmpClearList[MAX_FIREBASE_REQUEST_QUEUE];
+        uint8_t tmpClearIndex = 0;
         FirebaseJsonData result;
-        FirebaseJsonData next;
         FirebaseJsonArray *arr = fbdo.to<FirebaseJsonArray *>();
-        for (size_t i = 0; i < sensorIndex; i++)
+        for (uint8_t i = 0; i < sensorIndex; i++)
         {
           arr->get(result, i);
-          arr->get(next, i + 1);
-          if (result.to<int>() != 0 && i <= sensorIndex)
+          if (result.to<int>() != 0 && i >= 0 && i <= sensorIndex && (result.to<int>() == (int)S_ACTIVE || result.to<int>() == (int)S_INACTIVE))
           {
-            if (i >= 0 && i <= sensorIndex && (result.to<int>() == (int)S_ACTIVE || result.to<int>() == (int)S_INACTIVE))
+            FirebaseReq_t tmpReq;
+            tmpReq.id = sensorInfo[i].self_id;
+            tmpReq.state = (uint8_t)result.to<int>();
+            tmpReq.index = i;
+            tmpClearList[tmpClearIndex] = i;
+            tmpClearIndex++;
+            if (uxQueueSpacesAvailable(app2ManagerDeviceReqQueue) == 0)
             {
-              ipcSender(sensorInfo[i].self_id, (uint8_t)result.to<int>());
-              selection = i;
-              swflag = true;
+              xQueueReset(app2ManagerDeviceReqQueue);
+              err_count.MANAGER_QUEUE_REQ_OVERFLOW++;
+              APP_LOG_INFO("NO SPACE QUEUE");
             }
-            if (next.to<int>() != 0 && (i + 1) < sensorIndex)
+            if (xQueueSend(app2ManagerDeviceReqQueue, (void *)&tmpReq, 0) == 0)
             {
-              skipUpdate = true;
+              err_count.MANAGER_QUEUE_REQ_FAIL++;
+              APP_LOG_INFO("ERROR QUEUE");
             }
-            String node = "/req/send/" + (String)i;
-            Firebase.deleteNode(fbdo, node);
-            break;
+            tmpAccessed = true;
           }
         }
+        /* ERRATA => DELETING NODE ENDS THE STREAM
+           WORKAROUND => DELETE ONLY AFTER ALL ARRAY VALUES ARE ADDED TO THE QUEUE
+        */
+        if (tmpAccessed && tmpClearIndex != 0)
+          for (uint8_t i = 0; i < tmpClearIndex; i++)
+          {
+            String node = "/req/send/" + (String)tmpClearList[i];
+            Firebase.deleteNode(fbdo, node);
+          }
       }
     }
 
-    else if (Firebase.ready() && FLAGfirebaseRegularUpdate && !skipUpdate && !FLAGfirebaseForceUpdate)
+    else if (Firebase.ready() && FLAGfirebaseRegularUpdate && !FLAGfirebaseForceUpdate)
     {
+      FLAGwifiIsConnected = true;
+      if (!Firebase.authenticated())
+        err_count.FIREBASE_AUTH_ERR++;
+      guiCurrentTime = Firebase.getCurrentTime();
       Firebase.getBool(fbdo, "/req/warn");
-      flashGUIAlert = (bool)fbdo.to<bool>();
+      guiFlashOnAlert = (bool)fbdo.to<bool>();
       FirebaseJson sensorinfoJson;
       APP_LOG_INFO("REGULAR UPDATE RUNNING");
-      // Firebase.setTimestamp(fbdo, "/info/timestamp");
       for (uint8_t i = 0; i < sensorIndex; i++)
       {
 
@@ -211,6 +277,7 @@ void firebaseTask(void *pvParameters)
         sensorinfoJson.set(device, deviceinfoJson);
       }
       FirebaseJson errJson;
+      errJson.add("IPC_TOTAL_BYTES_EXCHANGED", err_count.IPC_TOTAL_BYTES_EXCHANGED);
       errJson.add("IPC_REQUEST_SEND_NOACK", err_count.IPC_REQUEST_SEND_NOACK);
       errJson.add("IPC_REQUEST_SEND_FAIL", err_count.IPC_REQUEST_SEND_FAIL);
       errJson.add("IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW", err_count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW);
@@ -220,12 +287,15 @@ void firebaseTask(void *pvParameters)
       errJson.add("MANAGER_QUEUE_SEND_DEVICEINDEX_OVERFLOW", err_count.MANAGER_QUEUE_SEND_DEVICEINDEX_OVERFLOW);
       errJson.add("MANAGER_QUEUE_SEND_DEVICEINDEX_FAIL", err_count.MANAGER_QUEUE_SEND_DEVICEINDEX_FAIL);
       errJson.add("MANAGER_QUEUE_RECEIVE_OUT_OF_BOUNDS", err_count.MANAGER_QUEUE_RECEIVE_OUT_OF_BOUNDS);
+      errJson.add("MANAGER_QUEUE_REQ_OVERFLOW", err_count.MANAGER_QUEUE_REQ_OVERFLOW);
+      errJson.add("MANAGER_QUEUE_REQ_FAIL", err_count.MANAGER_QUEUE_REQ_FAIL);
       errJson.add("FIREBASE_AUTH_ERR", err_count.FIREBASE_AUTH_ERR);
       errJson.add("FIREBASE_REGULAR_UPDATE_FAIL", err_count.FIREBASE_REGULAR_UPDATE_FAIL);
       errJson.add("FIREBASE_FORCED_UPDATE_FAIL", err_count.FIREBASE_FORCED_UPDATE_FAIL);
       errJson.add("FIREBASE_ERR_QUEUE_OVERFLOW", err_count.FIREBASE_ERR_QUEUE_OVERFLOW);
       errJson.add("FIREBASE_NETWORK_FAIL", err_count.FIREBASE_NETWORK_FAIL);
       errJson.add("IPC_TOTAL_EXCHANGES", err_count.IPC_TOTAL_EXCHANGES);
+      errJson.add("FREE HEAP SIZE", xPortGetFreeHeapSize());
       sensorinfoJson.set("/errors", errJson);
       FirebaseJson iJson;
       iJson.add("con", sensorIndex);
@@ -238,28 +308,31 @@ void firebaseTask(void *pvParameters)
       iJson.add("devs", tmpcount);
       iJson.add("wifi", WIFI_SSID);
       iJson.add("sec", "true");
-      if (prPowerDc)
-      {
-        iJson.add("pr", "true");
-      }
-      else
-      {
-       iJson.add("pr", "false");
-      }
-      
+      prPowerDc ? iJson.add("pr", "true") : iJson.add("pr", "false");
+      iJson.add("rst", last_reset_reason);
+
       sensorinfoJson.set("/info", iJson);
+
       if (!Firebase.updateNode(fbdo, "/", sensorinfoJson))
       {
         err_count.FIREBASE_REGULAR_UPDATE_FAIL++;
+        xTimerStart(firebaseConnectionTimer, 0);
+        FLAGwifiIsConnected = false;
       }
+      else
+      {
+        xTimerStop(firebaseConnectionTimer, 0);
+        xTimerReset(firebaseConnectionTimer, 0);
+      }
+
       APP_LOG_INFO("REGULAR UPDATE DONE");
       FLAGfirebaseRegularUpdate = false;
-    } 
+    }
+
     if (!Firebase.readStream(fbdo))
     {
       APP_LOG_INFO(fbdo.errorReason());
     }
-
     if (fbdo.streamTimeout())
     {
       APP_LOG_INFO("Stream timeout, resume streaming...");
@@ -269,29 +342,47 @@ void firebaseTask(void *pvParameters)
   }
 }
 
+/*! managerTask()
+   @brief manages and tracks device info, alive etc. Receives updates from IPC via ipc2ManagerDeviceInfoQueue,
+   informs GUI of pending updates via manager2GuiDeviceIndexQueue and forces Firebase to update on S_ALERTING on any device.
+
+   @note
+
+   @param void
+*/
 void managerTask(void *pvParameters)
 {
+  delay(50);
   Serial1.write(ipc_get_list, sizeof(ipc_get_list));
-  ipcDeviceUpdateTimer = xTimerCreate("ipcUpdate", 5000, pdTRUE, (void *)0, ipcDeviceUpdateCallback);
-  xTimerStart(ipcDeviceUpdateTimer, 0);
-
   while (1)
   {
+    if ((uxQueueMessagesWaiting(app2ManagerDeviceReqQueue) > 0) && !FLAGipcResponsePending)
+    {
+      FirebaseReq_t tmpReq;
+      if (xQueueReceive(app2ManagerDeviceReqQueue, (void *)&tmpReq, 1) == pdPASS)
+      {
+        APP_LOG_INFO("REMOVED FROM QUEUE");
+        ipcSender(tmpReq.id, tmpReq.state);
+        guiDeviceSelectedIndex = tmpReq.index;
+        guiDeviceSelectedSw = true;
+      }
+    }
     if (uxQueueMessagesWaiting(ipc2ManagerDeviceInfoQueue) > 0)
     {
+      APP_LOG_INFO(ESP.getFreeHeap());
       DeviceInfoExt tmpInfo;
       if (xQueueReceive(ipc2ManagerDeviceInfoQueue, (void *)&tmpInfo, 1) == pdPASS)
       {
+        /* PARSE INCOMING CHANGES BASED ON VALUE RETURNED BY cmpDeviceInfo() */
         uint16_t index = tmpInfo.DeviceInfoChangeIndex;
         if (~index & 1)
           sensorInfo[tmpInfo.id].hw = tmpInfo.info.hw;
         if (~index & 2)
         {
           if ((sensorInfo[tmpInfo.id].state != tmpInfo.info.state) && (tmpInfo.info.state == S_ACTIVE || tmpInfo.info.state == S_ALERTING ||
-           tmpInfo.info.state == S_INACTIVE || tmpInfo.info.state == S_FAULT_HW || tmpInfo.info.state == S_COLDSTART || tmpInfo.info.state == S_FAULT_OPN))
+                                                                       tmpInfo.info.state == S_INACTIVE || tmpInfo.info.state == S_FAULT_HW || tmpInfo.info.state == S_COLDSTART || tmpInfo.info.state == S_FAULT_OPN))
             sensorInfo[tmpInfo.id].state = tmpInfo.info.state;
         }
-
         if (~index & 4)
           sensorInfo[tmpInfo.id].battery_voltage = tmpInfo.info.battery_voltage;
         if (~index & 8)
@@ -316,15 +407,19 @@ void managerTask(void *pvParameters)
           xQueueReset(manager2GuiDeviceIndexQueue);
           err_count.MANAGER_QUEUE_SEND_DEVICEINDEX_OVERFLOW++;
         }
+        // Informs GUI to update based on device INDEX
         if (xQueueSend(manager2GuiDeviceIndexQueue, (void *)&tmpInfo.id, 0) == 0)
         {
           err_count.MANAGER_QUEUE_SEND_DEVICEINDEX_FAIL++;
         }
+
+        // If alerting, force firebase to update
         if (sensorInfo[tmpInfo.id].state == S_ALERTING)
           FLAGfirebaseForceUpdate = true;
         firebaseForceUpdateDeviceId = tmpInfo.id;
       }
     }
-    vTaskDelay(5);
+
+    vTaskDelay(10);
   }
 }

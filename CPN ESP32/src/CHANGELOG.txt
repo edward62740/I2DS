@@ -1,0 +1,11 @@
+v1.0 (2/5/22)
+- Initial
+
+v1.1 (18/5/22) [Stability and performance update]
+- Added device change request async queue
+- Added anti-aliasing to GUI text
+- Changed GUI color scheme
+- Added GUI sleep function
+- Modified IPC for deterministic failure
+- Added GUI RSSI indicator
+- Added GUI device overflow indicator

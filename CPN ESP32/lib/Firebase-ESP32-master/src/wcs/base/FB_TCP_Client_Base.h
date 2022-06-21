@@ -1,7 +1,7 @@
 /*
- * TCP Client Base class, version 1.0.2
+ * TCP Client Base class, version 1.0.4
  *
- * Created February 28, 2022
+ * Created May 22, 2022
  *
  * The MIT License (MIT)
  * Copyright (c) 2022 K. Suwatchai (Mobizt)
@@ -136,7 +136,6 @@ public:
 
             if (!ret)
             {
-                setError(FIREBASE_ERROR_TCP_ERROR_CONNECTION_REFUSED);
                 client->stop();
                 client->flush();
             }
@@ -155,7 +154,10 @@ public:
         if (len == 0)
             return setError(FIREBASE_ERROR_TCP_ERROR_SEND_REQUEST_FAILED);
 
-        // call base or derved connect.
+        if (!networkReady())
+            return setError(FIREBASE_ERROR_TCP_ERROR_NOT_CONNECTED);
+
+        // call base or derived connect.
         if (!connect())
             return setError(FIREBASE_ERROR_TCP_ERROR_CONNECTION_REFUSED);
 
@@ -165,7 +167,7 @@ public:
         {
             if (sent + toSend > len)
                 toSend = len - sent;
-                
+
 #if defined(ESP8266)
             delay(0);
 #endif
@@ -685,7 +687,7 @@ protected:
     // In esp8266, this is actually Arduino base Stream (char read) timeout.
     //  This will override internally by WiFiClientSecureCtx::_connectSSL
     //  to 5000 after SSL handshake was done with success.
-    int timeoutMs = 40000; // 40 sec
+    int timeoutMs = 120000; // 120 sec
     bool clockReady = false;
     time_t now = 0;
     int *response_code = nullptr;

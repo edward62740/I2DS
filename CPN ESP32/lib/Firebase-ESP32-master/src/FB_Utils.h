@@ -1,9 +1,9 @@
 /**
- * Google's Firebase Util class, FB_Utils.h version 1.1.16
+ * Google's Firebase Util class, FB_Utils.h version 1.1.18
  *
  * This library supports Espressif ESP8266 and ESP32
  *
- * Created March 7, 2022
+ * Created April 22, 2022
  *
  * This work is a part of Firebase ESP Client library
  * Copyright (c) 2022 K. Suwatchai (Mobizt)
@@ -35,6 +35,9 @@
 
 #include <Arduino.h>
 #include "FB_Const.h"
+#if defined(ESP8266)
+#include <Schedule.h>
+#endif
 using namespace mb_string;
 
 class UtilsClass
@@ -43,13 +46,12 @@ class UtilsClass
     friend class Firebase_ESP_Client;
 
 public:
-    unsigned long default_ts = ESP_DEFAULT_TS;
-    uint16_t ntpTimeout = 20;
 #if defined(ESP8266)
     callback_function_t _callback_function = nullptr;
 #endif
     FirebaseConfig *config = nullptr;
     MB_FS *mbfs = nullptr;
+    time_t ts = 0;
 
     ~UtilsClass(){};
 
@@ -1146,50 +1148,53 @@ public:
         return ret;
     }
 
-    bool setClock(float gmtOffset)
+    time_t getTime()
+    {
+
+        time_t tm = ts;
+
+#if defined(ESP8266) || defined(ESP32)
+        if (tm < ESP_DEFAULT_TS)
+            tm = time(nullptr);
+#else
+        tm += millis() / 1000;
+#endif
+
+        return tm;
+    }
+
+    bool syncClock(float gmtOffset)
     {
 
         if (!config)
             return false;
 
-#if defined(ESP32) || defined(ESP8266)
+        time_t now = getTime();
 
-        if (time(nullptr) > default_ts && gmtOffset == config->internal.fb_gmt_offset)
+        config->internal.fb_clock_rdy = (unsigned long)now > ESP_DEFAULT_TS;
+
+        if (config->internal.fb_clock_rdy && gmtOffset == config->internal.fb_gmt_offset)
             return true;
-
-        time_t now = time(nullptr);
-
-        config->internal.fb_clock_rdy = now > default_ts;
 
         if (!config->internal.fb_clock_rdy || gmtOffset != config->internal.fb_gmt_offset)
         {
             if (config->internal.fb_clock_rdy && gmtOffset != config->internal.fb_gmt_offset)
-                config->internal.fb_clock_checked = false;
+                config->internal.fb_clock_synched = false;
 
-            if (!config->internal.fb_clock_checked)
+#if defined(ESP32) || defined(ESP8266)
+            if (!config->internal.fb_clock_synched)
             {
-                config->internal.fb_clock_checked = true;
+                config->internal.fb_clock_synched = true;
                 configTime(gmtOffset * 3600, 0, "pool.ntp.org", "time.nist.gov");
             }
-
-            now = time(nullptr);
-            unsigned long timeout = millis();
-            while (now < default_ts)
-            {
-                now = time(nullptr);
-                if (now > default_ts || millis() - timeout > ntpTimeout)
-                    break;
-                delay(0);
-            }
-
-            idle();
+#endif
         }
 
-        config->internal.fb_clock_rdy = now > default_ts;
+        now = getTime();
+
+        config->internal.fb_clock_rdy = (unsigned long)now > ESP_DEFAULT_TS;
         if (config->internal.fb_clock_rdy)
             config->internal.fb_gmt_offset = gmtOffset;
-
-#endif
 
         return config->internal.fb_clock_rdy;
     }
