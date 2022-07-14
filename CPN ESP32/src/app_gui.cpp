@@ -453,6 +453,10 @@ void displayTask(void *pvParameters)
                         head = ILI9341_YELLOW;
                         bg = ILI9341_MAGENTA;
                         break;
+                    case S_WATCHING:
+                        head = ILI9341_RED;
+                        bg = 0x000A;
+                        break;
                     default:
                         head = ILI9341_BLUE;
                         bg = ILI9341_DARKGREEN;
@@ -476,6 +480,9 @@ void displayTask(void *pvParameters)
                     case HW_ACSN:
                         tft.print("ACSN");
                         break;
+                    case HW_SENTINEL:
+                        tft.print("SENTINEL");
+                        break;
                     default:
                         tft.print("?");
                         break;
@@ -497,6 +504,9 @@ void displayTask(void *pvParameters)
                             break;
                         case S_COLDSTART:
                             tft.print("WARMUP");
+                            break;
+                        case S_WATCHING:
+                            tft.print("WATCHING");
                             break;
                         case S_INACTIVE:
                             (sensorInfo[i].hw == HW_ACSN) ? tft.print("INACTIVE-CLOSED") : tft.print("INACTIVE");

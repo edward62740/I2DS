@@ -12,6 +12,22 @@
 
 EmberMessageOptions tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SECURITY_ENABLED;
 
+
+EmberStatus applicationCoordinatorTxSentinel(EmberNodeId source, EmberNodeId dest)
+{
+  uint8_t buffer[4];
+  buffer[0] = 0xFF & (uint8_t) MSG_WARN;
+  buffer[1] = 0xFF & (uint8_t) 1;
+  buffer[2] = 0xFF & (uint8_t) source << 8;
+  buffer[3] = 0xFF & (uint8_t) source;
+
+  return emberMessageSend (dest,
+  SENSOR_SINK_ENDPOINT, // endpoint
+                    0, // messageTag
+                    sizeof(buffer), buffer, tx_options);
+}
+
+
 bool applicationCoordinatorTxRequest(EmberNodeId id, message_request_t type, uint8_t val)
 {
   EmberStatus status;
@@ -27,6 +43,7 @@ bool applicationCoordinatorTxRequest(EmberNodeId id, message_request_t type, uin
 
 bool applicationCoordinatorTxIdentify(EmberNodeId id)
 {
+  app_log_info("request init device %d", id);
   EmberStatus status;
   uint8_t buffer[1];
   buffer[0] = 0xFF & (uint8_t) MSG_SYNC;
@@ -35,6 +52,8 @@ bool applicationCoordinatorTxIdentify(EmberNodeId id)
                     0, // messageTag
                     sizeof(buffer), buffer, tx_options) == 0x00) ? true : false;
 }
+
+
 
 void applicationCoordinatorRxMsg(EmberIncomingMessage *message)
 {
@@ -104,6 +123,14 @@ void applicationCoordinatorRxMsg(EmberIncomingMessage *message)
                 sensorInfo[i].state = message->payload[3];
                 sensorInfo[i].rssi = message->rssi;
                 sensorInfo[i].lqi = message->lqi;
+                break;
+              }
+          }
+        for (uint8_t i = 0; i < (uint8_t) MAX_CONNECTED_DEVICES; i++)
+          {
+            if (sensorInfo[i].hw == (uint8_t)HW_SENTINEL)
+              {
+                applicationCoordinatorTxSentinel(message->source, sensorInfo[i].self_id);
                 break;
               }
           }

@@ -21,26 +21,32 @@ typedef enum {     /* Packet identifier byte */
   MSG_SYNC = 0xFF,     // (S <- C) request INIT
 } message_pid_t;
 
-typedef enum {     /* Sensor state byte */
+typedef enum
+{                    /* Sensor state byte */
   S_ACTIVE = 0x05,   // Sensor element active
   S_INACTIVE,        // Sensor element inactive
   S_FAULT_HW = 0xCA, // Hardware fault detected
   S_FAULT_OPN,       // Operational fault detected
   S_ALERTING,        // Sensor element triggering
+  S_COLDSTART = 0xE0,
+  S_CALIBRATING,
+  S_WATCHING = 0xFA, // Reserved
 } sensor_state_t;
 
-typedef enum {     /* Hardware identification byte */
-  HW_CPN = 0x88,      // Control Panel Node (Coordinator)
-  HW_PIRSN,           // PIR Sensor Node (Sensor)
-  HW_ACSN,            // Access Control Sensor Node (Sensor)
-} device_hw_t ;
+typedef enum
+{                /* Hardware identification byte */
+  HW_CPN = 0x88, // Control Panel Node (Coordinator)
+  HW_PIRSN,      // PIR Sensor Node (Sensor)
+  HW_ACSN,       // Access Control Sensor Node (Sensor)
+  HW_SENTINEL,
+} device_hw_t;
 
 typedef enum {     /* Request identifier byte */
   REQ_STATE,       // Request state change
   REQ_TXPWR,       // Request change of radio transmit power in positive deci-dbm
   REQ_REPORT,      // Request REPORT packet
   REQ_LED,         // Request enable/disable LEDs
-}  message_request_t;
+} message_request_t;
 
 typedef struct {   /* Sensor info */
   device_hw_t hw;
