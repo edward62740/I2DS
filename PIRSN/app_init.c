@@ -39,7 +39,7 @@ void emberAfInitCallback(void)
   app_log_info("Network status 0x%02X\n", status);
   EmberNetworkParameters parameters;
   MEMSET(&parameters, 0, sizeof(EmberNetworkParameters));
-  parameters.radioTxPower = 0;
+  parameters.radioTxPower = 100;
   parameters.radioChannel = 11;
   parameters.panId = 0x01FF;
   status = emberJoinNetwork(EMBER_STAR_SLEEPY_END_DEVICE, &parameters);

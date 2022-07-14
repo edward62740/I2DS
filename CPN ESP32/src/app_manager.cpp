@@ -352,7 +352,7 @@ void firebaseTask(void *pvParameters)
 */
 void managerTask(void *pvParameters)
 {
-  delay(50);
+  delay(100);
   Serial1.write(ipc_get_list, sizeof(ipc_get_list));
   while (1)
   {
@@ -380,7 +380,7 @@ void managerTask(void *pvParameters)
         if (~index & 2)
         {
           if ((sensorInfo[tmpInfo.id].state != tmpInfo.info.state) && (tmpInfo.info.state == S_ACTIVE || tmpInfo.info.state == S_ALERTING ||
-                                                                       tmpInfo.info.state == S_INACTIVE || tmpInfo.info.state == S_FAULT_HW || tmpInfo.info.state == S_COLDSTART || tmpInfo.info.state == S_FAULT_OPN))
+                                                                       tmpInfo.info.state == S_INACTIVE || tmpInfo.info.state == S_FAULT_HW || tmpInfo.info.state == S_COLDSTART || tmpInfo.info.state == S_FAULT_OPN || tmpInfo.info.state == S_WATCHING))
             sensorInfo[tmpInfo.id].state = tmpInfo.info.state;
         }
         if (~index & 4)
