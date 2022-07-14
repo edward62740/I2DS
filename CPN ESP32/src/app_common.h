@@ -11,7 +11,7 @@
 #define SPI_DISPLAY_FREQ 48000000
 #define WIFI_SSID "█████████"
 #define WIFI_PASSWORD "█████████"
-
+#define DEBUG 1
 #ifdef DEBUG
 #define DEBUG_LOGS 1
 #else
