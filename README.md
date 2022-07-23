@@ -1,4 +1,4 @@
-# Internal Intruder Detection System (I<sup>2</sup>DS) [IN PROGRESS]
+# Internal Intruder Detection System (I<sup>2</sup>DS)
 
 ## Overview
 This is a sub-GHz proprietary security sensor system. The sensors listed below will enter sensing mode once enabled through the [CPN GUI](https://github.com/edward62740/i2ds/blob/master/CPN%20ESP32/src/app_gui.cpp) or the [mobile app](https://github.com/edward62740/i2ds/tree/master/App). Any detected intrusion will then trigger a [FCM](https://github.com/edward62740/i2ds-fcm) background notification on the smartphones of the users with the mobile app installed.
