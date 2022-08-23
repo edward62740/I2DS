@@ -8,6 +8,7 @@ Used in conjunction with [WMNS](https://github.com/edward62740/Wireless-Mesh-Net
 [Firebase Cloud Messaging](https://github.com/edward62740/i2ds-fcm) for providing mobile notifications of security events<br>
 [Google Actions + Dialogflow](https://github.com/edward62740/i2ds-assistant) to integrate with Google Home systems<br>
 [Camera + tflite Person Detector](https://github.com/edward62740/i2ds-sentinel) to provide image capture and continuous on-device person detection with tensorflow lite <br>
+[Firebase Responder](https://github.com/edward62740/firebase-responder) to trigger other IoT devices' actions <br>
 
 ## System Structure
 ![](https://github.com/edward62740/i2ds/blob/master/Documentation/functional.png)
@@ -44,10 +45,13 @@ Used to detect certain changes to the RTDB (i.e sensor triggered), and notify th
 ### CPN
 * This device contains two microcontrollers, for the sensor network [(EFR32xG23)](https://www.silabs.com/wireless/proprietary/efr32fg23-sub-ghz-wireless-soc) and Wi-Fi/GUI (ESP32). Sensor network functions are exposed to the Wi-Fi processor via USART. While there is significant traffic, in effect the only change that can be made to the sensor network is to activate/inactivate the sensors. Doing so also requires the relevant Firebase auth credentials. This provides some protection from attacks based on injecting false data into the system to incapacitate the sensor network.
 * This device also provides internal battery backup with FCM notification when triggered. It is assumed that physical security beyond debug lock, encryption etc. is not crucial as the sensors would have already triggered warnings before the CPN can be tampered with. This functionality is mostly to keep the system afloat during a power outage (but this must be used with a backup 4G network or other such systems).
+<img src="https://github.com/edward62740/I2DS/blob/master/Documentation/prod-cpn.jpg" alt="pirsn" width="200"/>
+
 ### Overall System
 * From testing, there was a net delay of 3-4s from sensor triggered to receiving FCM notification on client smartphone. Results will vary based on Internet speeds.
 * Sensors are capable of receiving messages to implement the aforementioned enabling/disabling feature. This is necessary to prevent constant triggering of the sensor when not in use, and is much more energy efficient than letting the sensor trigger all the time and filter on the coordinator side.
 * The subnetwork communicates in the 915MHz ISM band, but a simple hardware swap of the chip antenna (W3211 -> W3214) allows for reconfiguration to 868MHz band. RF matching is optimized for both. Modulation/frequency is set to OQPSK 500kbps, to increase operational range set to DSSS with lower bitrate, enable FEC.
+* For increased network size, where >2 hops are expected, the ACK timeout should be increased.
 
 ## Security
 * The sensor HW is built around the [EFR32xG23](https://www.silabs.com/wireless/proprietary/efr32fg23-sub-ghz-wireless-soc) series, industry-leading at the time of this release, with PSA 3 level security qualifications. Anti-tamper functions are configured such that the sensor will automatically raise a warning and drop out of the network if tamper is detected.
