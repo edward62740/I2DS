@@ -10,7 +10,6 @@ v1.1 (18/5/22) [Stability and performance update]
 - Added GUI RSSI indicator
 - Added GUI device overflow indicator
 
-v2.0 (26/7/22) [Feature update]
-- Added i2ds-sentinel integrations
-- Improved IPC communication reliability
-- Improved Firebase error handling
+v1.2 (29/9/22) [Feature + stability update]
+- Improved IPC reliability and error detection
+- Added feature: device state changes asynchronously

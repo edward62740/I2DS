@@ -145,7 +145,7 @@ void firebaseTask(void *pvParameters)
   Firebase.beginAutoRunErrorQueue(fbdo, firebaseErrorQueueCallback);
   fbdo.setResponseSize(FIREBASE_DATA_OBJECT_PAYLOAD_SIZE_BYTES);
   config.timeout.wifiReconnect = 10 * 1000;
-  config.timeout.socketConnection = 6 * 1000;
+  config.timeout.socketConnection = 3 * 1000;
   config.timeout.serverResponse = 8 * 1000;
   config.timeout.rtdbKeepAlive = 30 * 1000;
   config.timeout.rtdbStreamReconnect = 1 * 1000;
@@ -169,7 +169,6 @@ void firebaseTask(void *pvParameters)
   {
     errataJson.add((String)i, 7);
   }
-
   Firebase.updateNode(fbdo, "/req/send", errataJson);
   // start timestamp
   FirebaseJson initTsJson;
@@ -178,6 +177,7 @@ void firebaseTask(void *pvParameters)
 
   while (1)
   {
+
 
     if (Firebase.ready() && FLAGfirebaseForceUpdate)
     {
@@ -189,10 +189,13 @@ void firebaseTask(void *pvParameters)
       {
         err_count.FIREBASE_FORCED_UPDATE_FAIL++;
       }
+      FirebaseJson alertingJson;
+      alertingJson.set("IS_ALERTING", (int)1);
+      Firebase.updateNode(fbdo, "/errors", alertingJson);
       FLAGfirebaseForceUpdate = false;
     }
 
-    else if (fbdo.streamAvailable() && !FLAGipcResponsePending)
+    else if (fbdo.streamAvailable())
     {
       if (fbdo.dataTypeEnum() == fb_esp_rtdb_data_type_array)
       {
@@ -296,6 +299,7 @@ void firebaseTask(void *pvParameters)
       errJson.add("FIREBASE_NETWORK_FAIL", err_count.FIREBASE_NETWORK_FAIL);
       errJson.add("IPC_TOTAL_EXCHANGES", err_count.IPC_TOTAL_EXCHANGES);
       errJson.add("FREE HEAP SIZE", xPortGetFreeHeapSize());
+      errJson.add("IS_ALERTING", (int)0);
       sensorinfoJson.set("/errors", errJson);
       FirebaseJson iJson;
       iJson.add("con", sensorIndex);
@@ -323,6 +327,7 @@ void firebaseTask(void *pvParameters)
       {
         xTimerStop(firebaseConnectionTimer, 0);
         xTimerReset(firebaseConnectionTimer, 0);
+        FLAGwifiIsConnected = true;
       }
 
       APP_LOG_INFO("REGULAR UPDATE DONE");
@@ -333,9 +338,19 @@ void firebaseTask(void *pvParameters)
     {
       APP_LOG_INFO(fbdo.errorReason());
     }
+    else
+    {
+      xTimerStop(firebaseConnectionTimer, 0);
+      xTimerReset(firebaseConnectionTimer, 0);
+      FLAGwifiIsConnected = true;
+    }
     if (fbdo.streamTimeout())
     {
       APP_LOG_INFO("Stream timeout, resume streaming...");
+      if (!Firebase.beginStream(fbdo, "/req/send"))
+      {
+        APP_LOG_INFO(fbdo.errorReason());
+      }
     }
 
     vTaskDelay(5);
@@ -356,7 +371,7 @@ void managerTask(void *pvParameters)
   Serial1.write(ipc_get_list, sizeof(ipc_get_list));
   while (1)
   {
-    if ((uxQueueMessagesWaiting(app2ManagerDeviceReqQueue) > 0) && !FLAGipcResponsePending)
+    if ((uxQueueMessagesWaiting(app2ManagerDeviceReqQueue) > 0) )
     {
       FirebaseReq_t tmpReq;
       if (xQueueReceive(app2ManagerDeviceReqQueue, (void *)&tmpReq, 1) == pdPASS)
@@ -365,6 +380,7 @@ void managerTask(void *pvParameters)
         ipcSender(tmpReq.id, tmpReq.state);
         guiDeviceSelectedIndex = tmpReq.index;
         guiDeviceSelectedSw = true;
+        vTaskDelay(1);
       }
     }
     if (uxQueueMessagesWaiting(ipc2ManagerDeviceInfoQueue) > 0)

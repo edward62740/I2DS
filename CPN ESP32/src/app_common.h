@@ -6,7 +6,7 @@
 /* GLOBAL CONFIG */
 #define DATABASE_URL "█████████" 
 #define API_KEY "█████████"
-#define FW_VERSION "v1.1"
+#define FW_VERSION "v1.2"
 #define EUSART_IPC_BAUD 115200
 #define SPI_DISPLAY_FREQ 48000000
 #define WIFI_SSID "█████████"
@@ -18,13 +18,13 @@
 #define DEBUG_LOGS 0
 #endif
 
-#define APP_LOG_START()           do { if (DEBUG_LOGS)  Serial.begin(115200); } while (0)
+#define APP_LOG_START()           do { if (DEBUG_LOGS)  Serial.begin(57600); } while (0)
 #define APP_LOG_INFO(...) \
             do { if (DEBUG_LOGS)  Serial.println(__VA_ARGS__); } while (0)
 
 /* TIMER DURATIONS */
 #define IPC_RESPONSE_TIMEOUT_MS 2000 // Sensor poll interval
-#define GUI_HEAD_UPDATE_INTERVAL_MS 5000 // Sensor report interval
+#define GUI_HEAD_UPDATE_INTERVAL_MS 2500 // Sensor report interval
 #define GUI_SLEEP_IF_NO_TOUCH_MS 600000 // Put display to sleep if no user interaction after this interval
 #define GUI_TOUCH_DEBOUNCE_MS 250
 #define MANAGER_MAX_DEVICE_NOMSG_MS 15000 // Timeout for device 'alive' status

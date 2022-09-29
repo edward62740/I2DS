@@ -22,7 +22,6 @@ char ipc_recv_buffer[255];
 
 // Flags to keep track of ipc status
 bool FLAGguiUpdatePending = false;
-bool FLAGipcResponsePending = false;
 bool FLAGipcInternalAckPending = false;
 
 // Variables for ipc timeout handling
@@ -45,7 +44,6 @@ void ipcRespTimerCallback(TimerHandle_t ipcDeviceResponseTimer)
 
     err_count.IPC_REQUEST_SEND_FAIL++;
     sensorInfoExt[tmpTimerId].ipcResponsePending = false;
-    FLAGipcResponsePending = false;
     xTimerStop(ipcDeviceResponseTimer, 0);
     if (tmpResendCount < MAX_IPC_REQUEST_RETRY)
     {
@@ -93,10 +91,7 @@ void ipcTask(void *pvParameters)
 */
 bool ipcSender(uint16_t id, uint8_t state)
 {
-    if (FLAGipcResponsePending)
-        return false;
     sensorInfoExt[id].ipcResponsePending = true;
-    FLAGipcResponsePending = true;
     ipc_set_sensor_state[2] = 0xFF & (uint8_t)id >> 8;
     ipc_set_sensor_state[3] = 0xFF & (uint8_t)id;
     ipc_set_sensor_state[4] = 0xFF & (uint8_t)state;
@@ -122,100 +117,108 @@ bool ipcParser(char *buffer, size_t len)
 {
     err_count.IPC_TOTAL_EXCHANGES++;
     err_count.IPC_TOTAL_BYTES_EXCHANGED += (uint32_t)len;
-    if (len > 255)
-        return false;
     char tmpBuf[len];
     memcpy(tmpBuf, buffer, len * sizeof(char));
+    APP_LOG_INFO(len);
+    APP_LOG_INFO((int)tmpBuf[1]);
+    APP_LOG_INFO((int)tmpBuf[2]);
+    APP_LOG_INFO((int)tmpBuf[3]);
     if (tmpBuf[0] != (char)IPC_START) // dump message if incorrect start byte
         return false;
-    switch (tmpBuf[1]) // determine message type
+    if (tmpBuf[1] != (len -1)) // dump message if incorrect length
+        return false;
+
+    switch (tmpBuf[2]) // determine message type
     {
     // Response to IPC_LIST_CTS, done at startup
     case IPC_LIST:
     {
-        Serial.println("MESSAGE LENGTH IS " + String(len));
-        if (((len - 4) % 15) != 0){
+        if (((len - 5) % 15) != 0)
+        {
             Serial1.write(ipc_get_list, sizeof(ipc_get_list));
             break;
         }
-            for (uint8_t i = 0; i < (uint8_t)(tmpBuf[2]); i++)
+        for (uint8_t i = 0; i < (uint8_t)(tmpBuf[3]); i++)
+        {
+            uint8_t tmpIndex = 0;
+            DeviceInfo tmpInfo;
+
+            tmpInfo.hw = (uint8_t)tmpBuf[4 + (i * 15)];
+            tmpInfo.state = (uint8_t)tmpBuf[5 + (i * 15)];
+            tmpInfo.battery_voltage = (uint32_t)((tmpBuf[6 + (i * 15)] << 24) | (tmpBuf[7 + (i * 15)] << 16) | (tmpBuf[8 + (i * 15)] << 8) | tmpBuf[9 + (i * 15)]);
+            tmpInfo.node_type = (uint8_t)tmpBuf[10 + (i * 15)];
+            tmpInfo.central_id = (uint16_t)((tmpBuf[11 + (i * 15)] << 8) | tmpBuf[12 + (i * 15)]);
+            tmpInfo.self_id = (uint16_t)((tmpBuf[13 + (i * 15)] << 8) | tmpBuf[14 + (i * 15)]);
+            tmpInfo.endpoint = (uint8_t)tmpBuf[15 + (i * 15)];
+            tmpInfo.trigd = (uint8_t)tmpBuf[16 + (i * 15)];
+            tmpInfo.rssi = (int8_t)tmpBuf[17 + (i * 15)];
+            tmpInfo.lqi = (uint8_t)tmpBuf[18 + (i * 15)];
+            Serial.println("DETECTED DEVICE WITH ID " + String(tmpInfo.self_id));
+            for (uint8_t i = 0; i < sensorIndex; i++)
             {
-                uint8_t tmpIndex = 0;
-                DeviceInfo tmpInfo;
-
-                tmpInfo.hw = (uint8_t)tmpBuf[3 + (i * 15)];
-                tmpInfo.state = (uint8_t)tmpBuf[4 + (i * 15)];
-                tmpInfo.battery_voltage = (uint32_t)((tmpBuf[5 + (i * 15)] << 24) | (tmpBuf[6 + (i * 15)] << 16) | (tmpBuf[7 + (i * 15)] << 8) | tmpBuf[8 + (i * 15)]);
-                tmpInfo.node_type = (uint8_t)tmpBuf[9 + (i * 15)];
-                tmpInfo.central_id = (uint16_t)((tmpBuf[10 + (i * 15)] << 8) | tmpBuf[11 + (i * 15)]);
-                tmpInfo.self_id = (uint16_t)((tmpBuf[12 + (i * 15)] << 8) | tmpBuf[13 + (i * 15)]);
-                tmpInfo.endpoint = (uint8_t)tmpBuf[14 + (i * 15)];
-                tmpInfo.trigd = (uint8_t)tmpBuf[15 + (i * 15)];
-                tmpInfo.rssi = (int8_t)tmpBuf[16 + (i * 15)];
-                tmpInfo.lqi = (uint8_t)tmpBuf[17 + (i * 15)];
-                Serial.println("DETECTED DEVICE WITH ID " + String(tmpInfo.self_id));
-                for (uint8_t i = 0; i < sensorIndex; i++)
-                {
-                    if (sensorInfo[i].self_id == tmpInfo.self_id)
-                    {
-                        DeviceInfoExt queueSend;
-
-                        queueSend.DeviceInfoChangeIndex = cmpDeviceInfo(&tmpInfo, &sensorInfo[i]);
-                        if (queueSend.DeviceInfoChangeIndex != 1023)
-                        {
-                            queueSend.info = tmpInfo;
-                            queueSend.id = i;
-                            queueSend.guiUpdatePending = true;
-
-                            if (uxQueueSpacesAvailable(ipc2ManagerDeviceInfoQueue) == 0)
-                            {
-                                xQueueReset(ipc2ManagerDeviceInfoQueue);
-                                err_count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW++;
-                            }
-
-                            if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) == 0)
-                                err_count.IPC_QUEUE_SEND_DEVICEINFO_FAIL++;
-                        }
-                        break;
-                    }
-                    else
-                        tmpIndex++;
-                }
-                if (tmpIndex == sensorIndex && (tmpInfo.self_id < 255) && (tmpInfo.self_id != 0))
+                if (sensorInfo[i].self_id == tmpInfo.self_id)
                 {
                     DeviceInfoExt queueSend;
-                    queueSend.DeviceInfoChangeIndex = 0;
-                    queueSend.info = tmpInfo;
-                    queueSend.id = i;
-                    queueSend.alive = true;
-                    managerDeviceTimer[i] = xTimerCreate("managerDevice", MANAGER_MAX_DEVICE_NOMSG_MS, pdTRUE, (void *)((uint32_t)i), managerDeviceTimerCallback);
-                    xTimerStart(managerDeviceTimer[i], 0);
-                    Serial.println("NEW DEVICE ADDED WITH ID: " + String(tmpInfo.self_id));
-                    queueSend.guiUpdatePending = true;
-                    if (uxQueueSpacesAvailable(ipc2ManagerDeviceInfoQueue) == 0)
-                    {
-                        xQueueReset(ipc2ManagerDeviceInfoQueue);
-                        err_count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW++;
-                    }
 
-                    if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) == 0)
-                        err_count.IPC_QUEUE_SEND_DEVICEINFO_FAIL++;
-                    sensorIndex++;
+                    queueSend.DeviceInfoChangeIndex = cmpDeviceInfo(&tmpInfo, &sensorInfo[i]);
+                    if (queueSend.DeviceInfoChangeIndex != 1023)
+                    {
+                        queueSend.info = tmpInfo;
+                        queueSend.id = i;
+                        queueSend.guiUpdatePending = true;
+
+                        if (uxQueueSpacesAvailable(ipc2ManagerDeviceInfoQueue) == 0)
+                        {
+                            xQueueReset(ipc2ManagerDeviceInfoQueue);
+                            err_count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW++;
+                        }
+
+                        if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) == 0)
+                            err_count.IPC_QUEUE_SEND_DEVICEINFO_FAIL++;
+                    }
+                    break;
                 }
-                sensorIndex = tmpBuf[2];
+                else
+                    tmpIndex++;
             }
+            if (tmpIndex == sensorIndex && (tmpInfo.self_id < 255) && (tmpInfo.self_id != 0))
+            {
+                DeviceInfoExt queueSend;
+                queueSend.DeviceInfoChangeIndex = 0;
+                queueSend.info = tmpInfo;
+                queueSend.id = i;
+                queueSend.alive = true;
+                managerDeviceTimer[i] = xTimerCreate("managerDevice", MANAGER_MAX_DEVICE_NOMSG_MS, pdTRUE, (void *)((uint32_t)i), managerDeviceTimerCallback);
+                xTimerStart(managerDeviceTimer[i], 0);
+                Serial.println("NEW DEVICE ADDED WITH ID: " + String(tmpInfo.self_id));
+                queueSend.guiUpdatePending = true;
+                if (uxQueueSpacesAvailable(ipc2ManagerDeviceInfoQueue) == 0)
+                {
+                    xQueueReset(ipc2ManagerDeviceInfoQueue);
+                    err_count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW++;
+                }
+
+                if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) == 0)
+                    err_count.IPC_QUEUE_SEND_DEVICEINFO_FAIL++;
+                sensorIndex++;
+            }
+            sensorIndex = tmpBuf[3];
+        }
 
         break;
     }
     // regular report fmt
     case IPC_REPORT:
     {
+        if (len != 13)
+            break;
+        Serial.print("REPORT");
         DeviceInfo tmpInfo;
-        tmpInfo.self_id = (uint16_t)((tmpBuf[2] << 8) | tmpBuf[3]);
-        tmpInfo.battery_voltage = (uint32_t)((tmpBuf[4] << 24) | (tmpBuf[5] << 16) | (tmpBuf[6] << 8) | tmpBuf[7]);
-        tmpInfo.state = (uint8_t)tmpBuf[8];
-        tmpInfo.rssi = (int8_t)tmpBuf[9];
-        tmpInfo.lqi = (uint8_t)tmpBuf[10];
+        tmpInfo.self_id = (uint16_t)((tmpBuf[3] << 8) | tmpBuf[4]);
+        tmpInfo.battery_voltage = (uint32_t)((tmpBuf[5] << 24) | (tmpBuf[6] << 16) | (tmpBuf[7] << 8) | tmpBuf[8]);
+        tmpInfo.state = (uint8_t)tmpBuf[9];
+        tmpInfo.rssi = (int8_t)tmpBuf[10];
+        tmpInfo.lqi = (uint8_t)tmpBuf[11];
         for (uint8_t i = 0; i < sensorIndex; i++)
         {
             if (sensorInfo[i].self_id == tmpInfo.self_id)
@@ -255,9 +258,11 @@ bool ipcParser(char *buffer, size_t len)
     // message upon change of device status
     case IPC_CHANGE:
     {
-        uint16_t id = (tmpBuf[2] << 8) | tmpBuf[3];
-        uint8_t state = tmpBuf[4];
-        uint8_t count = tmpBuf[6];
+        if (len != 9)
+            break;
+        uint16_t id = (tmpBuf[3] << 8) | tmpBuf[4];
+        uint8_t state = tmpBuf[5];
+        uint8_t count = tmpBuf[7];
         uint8_t tmpIndex = 0;
         for (uint8_t i = 0; i < sensorIndex; i++)
         {
@@ -265,9 +270,9 @@ bool ipcParser(char *buffer, size_t len)
             {
                 DeviceInfoExt queueSend;
                 queueSend.DeviceInfoChangeIndex = 893;
-                if (tmpBuf[5] == 0x00) // started
+                if (tmpBuf[6] == 0x00) // started
                     state = S_ALERTING;
-                if (tmpBuf[5] == 0x01) // ended
+                if (tmpBuf[6] == 0x01) // ended
                     state = S_ACTIVE;
                 queueSend.info.state = state;
                 queueSend.info.trigd = count;
@@ -288,7 +293,7 @@ bool ipcParser(char *buffer, size_t len)
         }
         if (tmpIndex == sensorIndex)
         {
-            if ((uint8_t)tmpBuf[5] == 2)
+            if ((uint8_t)tmpBuf[6] == 2)
             {
                 err_count.IPC_CHANGE_INDEX_OUT_OF_BOUNDS++;
                 Serial1.write(ipc_get_list, sizeof(ipc_get_list));
@@ -304,51 +309,50 @@ bool ipcParser(char *buffer, size_t len)
     // response upon completion of IPC_REQUEST
     case IPC_REQUEST_DONE:
     {
-        if (FLAGipcResponsePending)
+        if (len != 8)
+            break;
+
+        uint16_t id = ((tmpBuf[3] << 8) | tmpBuf[4]);
+        for (uint8_t i = 0; i < sensorIndex; i++)
         {
-            uint16_t id = ((tmpBuf[2] << 8) | tmpBuf[3]);
-            for (uint8_t i = 0; i < sensorIndex; i++)
+            if (sensorInfo[i].self_id == id)
             {
-                if (sensorInfo[i].self_id == id)
+                if ((tmpBuf[6] == 0x00) && MAX_IPC_REQUEST_RESEND)
                 {
-                    if ((tmpBuf[5] == 0x00) && MAX_IPC_REQUEST_RESEND)
-                    {
-                        tmpRetryCount++;
-                    }
-
-                    tmpRetryCount = 0;
-                    tmpResendCount = 0;
-                    xTimerStop(ipcDeviceResponseTimer, 0);
-                    DeviceInfoExt queueSend;
-                    queueSend.DeviceInfoChangeIndex = 1021;
-                    queueSend.info.state = tmpBuf[4];
-                    queueSend.id = i;
-                    queueSend.guiUpdatePending = true;
-                    queueSend.ipcResponsePending = false;
-                    queueSend.alive = true;
-                    if (uxQueueSpacesAvailable(ipc2ManagerDeviceInfoQueue) == 0)
-                    {
-                        xQueueReset(ipc2ManagerDeviceInfoQueue);
-                        err_count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW++;
-                    }
-
-                    if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) == 0)
-                        err_count.IPC_QUEUE_SEND_DEVICEINFO_FAIL++;
-
-                    FLAGipcResponsePending = false;
-                    break;
+                    tmpRetryCount++;
                 }
+
+                tmpRetryCount = 0;
+                tmpResendCount = 0;
+                xTimerStop(ipcDeviceResponseTimer, 0);
+                DeviceInfoExt queueSend;
+                queueSend.DeviceInfoChangeIndex = 1021;
+                queueSend.info.state = tmpBuf[5];
+                queueSend.id = i;
+                queueSend.guiUpdatePending = true;
+                queueSend.ipcResponsePending = false;
+                queueSend.alive = true;
+                if (uxQueueSpacesAvailable(ipc2ManagerDeviceInfoQueue) == 0)
+                {
+                    xQueueReset(ipc2ManagerDeviceInfoQueue);
+                    err_count.IPC_QUEUE_SEND_DEVICEINFO_OVERFLOW++;
+                }
+
+                if (xQueueSend(ipc2ManagerDeviceInfoQueue, (void *)&queueSend, 0) == 0)
+                    err_count.IPC_QUEUE_SEND_DEVICEINFO_FAIL++;
+
+                break;
             }
         }
+
         break;
     }
     // response upon rx of IPC_REQUEST
     case IPC_REQUEST_ACK:
     {
-        if (FLAGipcResponsePending)
-        {
+        if (len != 4)
+            break;
             FLAGipcInternalAckPending = false;
-        }
         break;
     }
     }

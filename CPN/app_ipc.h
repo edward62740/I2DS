@@ -19,7 +19,7 @@
 #define IPC_RX_MAX_SIZE  30
 #define IPC_TX_MAX_SIZE  255
 #define IPC_START_BYTE   0xAF
-#define IPC_END_BYTE     0xAC
+#define IPC_END_BYTE    0xAC
 
 extern volatile uint8_t ipcRxBuffer[IPC_RX_MAX_SIZE];
 extern volatile uint8_t ipcTxBuffer[IPC_TX_MAX_SIZE];

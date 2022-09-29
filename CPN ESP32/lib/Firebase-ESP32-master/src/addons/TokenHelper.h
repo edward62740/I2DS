@@ -101,10 +101,15 @@ void tokenStatusCallback(TokenInfo info)
     {
         Serial_Printf("Token info: type = %s, status = %s\n", getTokenType(info), getTokenStatus(info));
         Serial_Printf("Token error: %s\n", getTokenError(info).c_str());
+        xTimerStart(firebaseConnectionTimer, 0);
+        FLAGwifiIsConnected = false;
     }
     else
     {
         Serial_Printf("Token info: type = %s, status = %s\n", getTokenType(info), getTokenStatus(info));
+        xTimerStop(firebaseConnectionTimer, 0);
+        xTimerReset(firebaseConnectionTimer, 0);
+        FLAGwifiIsConnected = true;
     }
 }
 

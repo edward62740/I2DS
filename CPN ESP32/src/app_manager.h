@@ -33,6 +33,7 @@ typedef struct
   int16_t touchArea[4]; // x, y, w, h
   bool guiUpdatePending;
   bool ipcResponsePending;
+  bool ipcAckPending;
   bool alive;
   uint16_t DeviceInfoChangeIndex;
 } DeviceInfoExt;
@@ -82,5 +83,7 @@ typedef enum
 } reset_reason_t;
 
 extern uint8_t last_reset_reason;
+
+extern TimerHandle_t firebaseConnectionTimer;
 
 #endif // APP_MANAGER_H

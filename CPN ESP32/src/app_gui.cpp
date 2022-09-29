@@ -114,7 +114,7 @@ void displayTask(void *pvParameters)
     vTaskDelay(50);
     tft.println("Initializing IPC");
     vTaskDelay(50);
-    tft.println("/tbd SE/");
+    tft.println("SE Enabled (High)");
     vTaskDelay(50);
     tft.println("Starting Power Reserve Subsystem");
     vTaskDelay(50);
@@ -260,45 +260,24 @@ void displayTask(void *pvParameters)
             tft.setCursor(214, 32);
         }
 
-        if (FLAGipcResponsePending || guiDeviceSelectedSw || guiIsAlerting)
+        if (guiFlashOnAlert && guiIsAlerting) // if GUI flash on alert is enabled from app
         {
-            if (guiFlashOnAlert && guiIsAlerting) // if GUI flash on alert is enabled from app
+            if (guiIsSleeping)
             {
-                if (guiIsSleeping)
+                xTimerStart(guiNoTouchTimer, 0);
+                guiIsSleeping = false;
+                for (uint8_t i = 2; i < 255; i++)
                 {
-                    xTimerStart(guiNoTouchTimer, 0);
-                    guiIsSleeping = false;
-                    for (uint8_t i = 2; i < 255; i++)
-                    {
-                        ledcWrite(15, i);
-                        vTaskDelay(1);
-                    }
+                    ledcWrite(15, i);
+                    vTaskDelay(1);
                 }
-                else
-                    xTimerReset(guiNoTouchTimer, 0);
-                tft.fillScreen(guiDeviceSelectedSw ? ILI9341_BLUE : ILI9341_RED);
-                vTaskDelay(100);
             }
-            else // blink in-progress device tile
-            {
-                uint16_t color;
-                switch (sensorInfo[guiDeviceSelectedIndex].state)
-                {
-                case S_INACTIVE:
-                    color = ILI9341_GREEN;
-                    break;
-                case S_ACTIVE:
-                    color = ILI9341_DARKGREY;
-                    break;
-                default:
-                    color = ILI9341_MAGENTA;
-                    break;
-                }
-                tft.drawRoundRect(sensorInfoExt[guiDeviceSelectedIndex].touchArea[0] - 1, sensorInfoExt[guiDeviceSelectedIndex].touchArea[1] - 1, sensorInfoExt[guiDeviceSelectedIndex].touchArea[2] + 2, sensorInfoExt[guiDeviceSelectedIndex].touchArea[3] + 2, 5, guiDeviceSelectedSw ? ILI9341_BLACK : color);
-            }
+            else
+                xTimerReset(guiNoTouchTimer, 0);
+            tft.fillScreen(guiDeviceSelectedSw ? ILI9341_BLUE : ILI9341_RED);
+            vTaskDelay(100);
             digitalWrite(STAT_LED, !digitalRead(STAT_LED));
             guiDeviceSelectedSw = !guiDeviceSelectedSw;
-            vTaskDelay(50);
         }
 
         if (guiIsSleeping && touch.isTouching())
@@ -312,7 +291,7 @@ void displayTask(void *pvParameters)
             }
             APP_LOG_INFO("WAKE");
         }
-        else if (!guiIsSleeping && touch.isTouching() && !FLAGipcResponsePending && (xSemaphoreTake(xGuiTouchReady, 0) == pdTRUE)) // touch response if no ipc operation pending
+        else if (!guiIsSleeping && touch.isTouching() && (xSemaphoreTake(xGuiTouchReady, 0) == pdTRUE)) // touch response if no ipc operation pending
         {
             xTimerStart(guiTouchDebounceTimer, 0);
             xTimerReset(guiNoTouchTimer, 0);
@@ -327,6 +306,7 @@ void displayTask(void *pvParameters)
                 {
                     if (sensorInfo[i].state == (uint8_t)S_ACTIVE || sensorInfo[i].state == (uint8_t)S_INACTIVE)
                     {
+                        tft.drawRoundRect(sensorInfoExt[i].touchArea[0] - 1, sensorInfoExt[i].touchArea[1] - 1, sensorInfoExt[i].touchArea[2] + 2, sensorInfoExt[i].touchArea[3] + 2, 5, ILI9341_YELLOW);
                         FirebaseReq_t tmpReq;
                         tmpReq.id = sensorInfo[i].self_id;
                         if (selfInfo.state == (uint8_t)S_INACTIVE)
@@ -543,6 +523,12 @@ void displayTask(void *pvParameters)
                             break;
                         }
                         tft.fillRect(40 + xsp, 123 + ysp - batt * 3, 15, 2, ILI9341_BLACK);
+                    }
+                    if (sensorInfo[i].hw == HW_SENTINEL)
+                    {
+                        tft.setTextColor(ILI9341_RED);
+                        tft.setCursor(43 + xsp, 115 + ysp);
+                        tft.print("DC");
                     }
                     tft.setTextColor(ILI9341_WHITE, bg, true);
                     tft.setSwapBytes(true);

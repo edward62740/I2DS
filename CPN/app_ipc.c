@@ -77,7 +77,7 @@ void ipcReplyHandler(void){
   EUSART_IntDisable (EUSART1, EUSART_IEN_RXFL);
   ipcRxPos = 0;
   ipcDataReady = false;
-  uint8_t tmpTxIndex = 0;
+  uint8_t tmpTxIndex = 1;
   switch (ipcRxBuffer[0])
     {
     case IPC_LIST_CTS:
@@ -117,7 +117,7 @@ void ipcReplyHandler(void){
       }
     }
 
-  ipcTxBuffer[tmpTxIndex] = (uint8_t) tmpTxIndex;
+  ipcTxBuffer[0] = (uint8_t) tmpTxIndex + 1;
   ipcTxLen = tmpTxIndex + 1;
   ipcRespReady = true;
 
@@ -127,13 +127,13 @@ void ipcReplyHandler(void){
 void ipcRequestDone(uint8_t ret, EmberNodeId id, sensor_state_t state)
 {
   EUSART_IntDisable (EUSART1, EUSART_IEN_RXFL);
-  uint8_t tmpTxIndex = 0;
+  uint8_t tmpTxIndex = 1;
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) IPC_REQUEST_DONE;
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) (id >> 8);
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) id;
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) state;
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) ret;
-  ipcTxBuffer[tmpTxIndex] = (uint8_t) tmpTxIndex;
+  ipcTxBuffer[0] = (uint8_t) tmpTxIndex + 1;
   ipcTxLen = tmpTxIndex + 1;
   ipcRespReady = true;
   EUSART_IntEnable (EUSART1, EUSART_IEN_TXFL);
@@ -142,14 +142,14 @@ void ipcRequestDone(uint8_t ret, EmberNodeId id, sensor_state_t state)
 void ipcNotify(EmberNodeId id, sensor_state_t state, uint8_t alert, uint8_t count)
 {
   EUSART_IntDisable (EUSART1, EUSART_IEN_RXFL);
-  uint8_t tmpTxIndex = 0;
+  uint8_t tmpTxIndex = 1;
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) IPC_CHANGE;
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) (id >> 8);
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) id;
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) state;
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) alert;
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) count;
-  ipcTxBuffer[tmpTxIndex] = (uint8_t) tmpTxIndex;
+  ipcTxBuffer[0] = (uint8_t) tmpTxIndex + 1;
   ipcTxLen = tmpTxIndex + 1;
   ipcRespReady = true;
   EUSART_IntEnable (EUSART1, EUSART_IEN_TXFL);
@@ -158,7 +158,7 @@ void ipcNotify(EmberNodeId id, sensor_state_t state, uint8_t alert, uint8_t coun
 void ipcReport(EmberNodeId id, uint32_t battery, sensor_state_t state, int8_t rssi, uint8_t lqi)
 {
   EUSART_IntDisable (EUSART1, EUSART_IEN_RXFL);
-  uint8_t tmpTxIndex = 0;
+  uint8_t tmpTxIndex = 1;
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) IPC_REPORT;
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) (id >> 8);
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) id;
@@ -169,7 +169,7 @@ void ipcReport(EmberNodeId id, uint32_t battery, sensor_state_t state, int8_t rs
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) state;
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (int8_t) rssi;
   ipcTxBuffer[tmpTxIndex++] = 0xFF & (uint8_t) lqi;
-  ipcTxBuffer[tmpTxIndex] = (uint8_t) tmpTxIndex;
+  ipcTxBuffer[0] = (uint8_t) tmpTxIndex + 1;
   ipcTxLen = tmpTxIndex + 1;
   ipcRespReady = true;
   EUSART_IntEnable (EUSART1, EUSART_IEN_TXFL);
