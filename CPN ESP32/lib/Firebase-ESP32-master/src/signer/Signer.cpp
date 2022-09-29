@@ -1863,7 +1863,7 @@ void Firebase_Signer::errorToString(int httpCode, MB_String &buff)
     case FIREBASE_ERROR_HTTP_CODE_REQUEST_HEADER_FIELDS_TOO_LARGE:
         buff += fb_esp_pgm_str_61;
         return;
-    case FIREBASE_ERROR_HTTP_CODE_█████████_SERVER_ERROR:
+    case FIREBASE_ERROR_HTTP_CODE_MAIN_SERVER_ERROR:
         buff += fb_esp_pgm_str_62;
         return;
     case FIREBASE_ERROR_HTTP_CODE_BAD_GATEWAY:
